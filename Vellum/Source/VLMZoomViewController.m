@@ -36,7 +36,7 @@
     [self.view setFrame:bounds];
     
     CGFloat diameter = 106;
-    CGRect rect = CGRectMake(bounds.size.width/2-diameter/2, diameter/2, diameter, diameter);
+    CGRect rect = CGRectMake(bounds.size.width/2-diameter/2, diameter, diameter, diameter);
     
     UIView *circle = [[UIView alloc] initWithFrame:rect];
     
@@ -54,6 +54,7 @@
     [lbl setAdjustsFontSizeToFitWidth:YES];
     self.label = lbl;
     [self.view addSubview:lbl];
+    [self.view setUserInteractionEnabled:NO];
 }
 
 -(void)show

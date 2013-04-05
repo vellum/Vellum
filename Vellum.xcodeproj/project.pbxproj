@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD048B74170E4E4D006D6099 /* VLMTouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD048B73170E4E4D006D6099 /* VLMTouchableView.m */; };
 		BD2EE7E1170C6CFD00ECAF20 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2EE7E0170C6CFD00ECAF20 /* UIKit.framework */; };
 		BD2EE7E3170C6CFD00ECAF20 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2EE7E2170C6CFD00ECAF20 /* Foundation.framework */; };
 		BD2EE7E5170C6CFD00ECAF20 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD2EE7E4170C6CFD00ECAF20 /* CoreGraphics.framework */; };
@@ -26,9 +27,13 @@
 		BD2EE816170C6FDF00ECAF20 /* gray_header_background.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2EE812170C6FDF00ECAF20 /* gray_header_background.png */; };
 		BD2EE817170C6FDF00ECAF20 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2EE813170C6FDF00ECAF20 /* subtlenet.png */; };
 		BD2EE818170C6FDF00ECAF20 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2EE814170C6FDF00ECAF20 /* subtlenet@2X.png */; };
+		BD7691D6170C9ED800AF6CDC /* VLMAbstractBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7691D5170C9ED800AF6CDC /* VLMAbstractBrush.m */; };
+		BD7691DA170C9FDF00AF6CDC /* VLMGraphiteBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = BD7691D9170C9FDF00AF6CDC /* VLMGraphiteBrush.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD048B72170E4E4D006D6099 /* VLMTouchableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTouchableView.h; path = Source/VLMTouchableView.h; sourceTree = "<group>"; };
+		BD048B73170E4E4D006D6099 /* VLMTouchableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTouchableView.m; path = Source/VLMTouchableView.m; sourceTree = "<group>"; };
 		BD2EE7DD170C6CFD00ECAF20 /* Vellum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vellum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2EE7E0170C6CFD00ECAF20 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BD2EE7E2170C6CFD00ECAF20 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -57,6 +62,10 @@
 		BD2EE812170C6FDF00ECAF20 /* gray_header_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gray_header_background.png; path = Resources/gray_header_background.png; sourceTree = "<group>"; };
 		BD2EE813170C6FDF00ECAF20 /* subtlenet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = subtlenet.png; path = Resources/subtlenet.png; sourceTree = "<group>"; };
 		BD2EE814170C6FDF00ECAF20 /* subtlenet@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "subtlenet@2X.png"; path = "Resources/subtlenet@2X.png"; sourceTree = "<group>"; };
+		BD7691D4170C9ED800AF6CDC /* VLMAbstractBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMAbstractBrush.h; path = Source/VLMAbstractBrush.h; sourceTree = "<group>"; };
+		BD7691D5170C9ED800AF6CDC /* VLMAbstractBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMAbstractBrush.m; path = Source/VLMAbstractBrush.m; sourceTree = "<group>"; };
+		BD7691D8170C9FDF00AF6CDC /* VLMGraphiteBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMGraphiteBrush.h; path = Source/VLMGraphiteBrush.h; sourceTree = "<group>"; };
+		BD7691D9170C9FDF00AF6CDC /* VLMGraphiteBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMGraphiteBrush.m; path = Source/VLMGraphiteBrush.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +127,9 @@
 				BD2EE806170C6DDD00ECAF20 /* VLMToolViewController.m */,
 				BD2EE807170C6DDD00ECAF20 /* VLMZoomViewController.h */,
 				BD2EE808170C6DDD00ECAF20 /* VLMZoomViewController.m */,
+				BD048B72170E4E4D006D6099 /* VLMTouchableView.h */,
+				BD048B73170E4E4D006D6099 /* VLMTouchableView.m */,
+				BD7691D7170C9EE600AF6CDC /* Brushes */,
 				BD2EE7E7170C6CFD00ECAF20 /* Supporting Files */,
 			);
 			path = Vellum;
@@ -139,6 +151,17 @@
 				BD2EE814170C6FDF00ECAF20 /* subtlenet@2X.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BD7691D7170C9EE600AF6CDC /* Brushes */ = {
+			isa = PBXGroup;
+			children = (
+				BD7691D4170C9ED800AF6CDC /* VLMAbstractBrush.h */,
+				BD7691D5170C9ED800AF6CDC /* VLMAbstractBrush.m */,
+				BD7691D8170C9FDF00AF6CDC /* VLMGraphiteBrush.h */,
+				BD7691D9170C9FDF00AF6CDC /* VLMGraphiteBrush.m */,
+			);
+			name = Brushes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +240,9 @@
 				BD2EE80A170C6DDD00ECAF20 /* VLMMainViewController.m in Sources */,
 				BD2EE80B170C6DDD00ECAF20 /* VLMToolViewController.m in Sources */,
 				BD2EE80C170C6DDD00ECAF20 /* VLMZoomViewController.m in Sources */,
+				BD7691D6170C9ED800AF6CDC /* VLMAbstractBrush.m in Sources */,
+				BD7691DA170C9FDF00AF6CDC /* VLMGraphiteBrush.m in Sources */,
+				BD048B74170E4E4D006D6099 /* VLMTouchableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +359,7 @@
 				BD2EE7FC170C6CFD00ECAF20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
