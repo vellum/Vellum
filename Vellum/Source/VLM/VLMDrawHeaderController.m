@@ -188,7 +188,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"clicked:%d", buttonIndex);
+    if (buttonIndex ==0){
+        [self.delegate clearScreen];
+    }
+    
+}
+
+
 - (void)plusTapped:(id)sender{
     NSLog(@"tap");
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Start Again", nil];
+    [actionSheet showInView:self.view.superview];
+
 }
+
 @end

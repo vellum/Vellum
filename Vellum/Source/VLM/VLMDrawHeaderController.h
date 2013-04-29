@@ -10,9 +10,10 @@
 
 @protocol VLMHeaderDelegate
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title;
+- (void)clearScreen;
 @end
 
-@interface VLMDrawHeaderController : UIViewController
+@interface VLMDrawHeaderController : UIViewController<UIActionSheetDelegate>
 
 @property (nonatomic, retain) NSObject<VLMHeaderDelegate> *delegate;
 

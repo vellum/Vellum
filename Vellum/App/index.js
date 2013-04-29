@@ -158,8 +158,7 @@ var drawgraphite = function(){
 var setup = function() {
     canvas.width = w;
     canvas.height = h;
-    ctx.fillStyle = BGCOLOR;
-    ctx.fillRect( 0, 0, w, h );
+    clearScreen();
     
     ctx.globalAlpha = 1;
     ctx.lineWidth = 1;
@@ -190,6 +189,10 @@ var endStroke = function(x,y) {
 var setZoom = function( val ){
     zoomlevel = Number(val);
     console.log('setzoom:'+zoomlevel);
+}
+var clearScreen = function(){
+    ctx.fillStyle = BGCOLOR;
+    ctx.fillRect( 0, 0, w, h );
 }
 
 setup();

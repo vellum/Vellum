@@ -84,7 +84,7 @@
     [self.view addSubview:h.view];
     self.headerController = h;
     [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
-    [h setDelegate:self];
+    h.delegate = self;
     
     UIPanGestureRecognizer *twoFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
     twoFingerPan.minimumNumberOfTouches = 2;
@@ -261,6 +261,9 @@
     NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
     [self.avc callJS:s];
     
+}
+- (void)clearScreen{
+    [self.avc callJS:@"clearScreen();"];
 }
 
 @end
