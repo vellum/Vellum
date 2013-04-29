@@ -12,8 +12,12 @@ var w = window.innerWidth
   , curnib = 1
   , angle = 0
   , zoomlevel = 1
-  , drawmode = MODE_DOTS
+  , drawmode = MODE_GRAPHITE
   ;
+
+var setDrawingMode = function(mode){
+    drawmode = mode;
+};
 
 var animate = function() {
     //console.log('animate');

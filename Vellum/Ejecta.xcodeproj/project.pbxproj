@@ -107,6 +107,8 @@
 		B6F629D116F353C800F16BAC /* EJBindingCanvasStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */; };
 		B6F9AFC0169F81D400ABD91A /* EJBindingLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */; };
 		B870BDE916F2E11A00827F01 /* EJBindingWebGLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */; };
+		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; };
+		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; };
 		BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D418172B83F5004063D4 /* subtlenet.png */; };
@@ -294,6 +296,10 @@
 		B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJBindingLifecycle.m; sourceTree = "<group>"; };
 		B870BDE716F2E10400827F01 /* EJBindingWebGLExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EJBindingWebGLExtensions.h; path = WebGL/EJBindingWebGLExtensions.h; sourceTree = "<group>"; };
 		B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingWebGLExtensions.m; path = WebGL/EJBindingWebGLExtensions.m; sourceTree = "<group>"; };
+		BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMDrawHeaderController.h; path = VLM/VLMDrawHeaderController.h; sourceTree = "<group>"; };
+		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
+		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
+		BDA36CE5172E0F8B00665A50 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
 		BDBF1AC3172499D50001B908 /* VLMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMainViewController.h; path = VLM/VLMMainViewController.h; sourceTree = "<group>"; };
 		BDBF1AC4172499D50001B908 /* VLMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMainViewController.m; path = VLM/VLMMainViewController.m; sourceTree = "<group>"; };
 		BDBF1ACA1724CDC00001B908 /* VLMZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMZoomViewController.h; path = VLM/VLMZoomViewController.h; sourceTree = "<group>"; };
@@ -413,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				BDBF1AC617249DDA0001B908 /* Vellum */,
+				BDA36CE3172E034A00665A50 /* DD */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
 				B64CE64F166682700087CF94 /* Prefix.pch */,
@@ -644,6 +651,15 @@
 			name = WebGL;
 			sourceTree = "<group>";
 		};
+		BDA36CE3172E034A00665A50 /* DD */ = {
+			isa = PBXGroup;
+			children = (
+				BDA36CE4172E0F8B00665A50 /* DDPageControl.h */,
+				BDA36CE5172E0F8B00665A50 /* DDPageControl.m */,
+			);
+			name = DD;
+			sourceTree = "<group>";
+		};
 		BDBF1AC617249DDA0001B908 /* Vellum */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,6 +669,8 @@
 				BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */,
 				BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */,
 				BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */,
+				BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */,
+				BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */,
 			);
 			name = Vellum;
 			sourceTree = "<group>";
@@ -804,6 +822,8 @@
 				BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */,
 				BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */,
 				BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */,
+				BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */,
+				BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

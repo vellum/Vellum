@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate>
+#import "VLMDrawHeaderController.h"
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate,VLMHeaderDelegate>
 
 @end

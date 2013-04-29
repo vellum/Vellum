@@ -7,12 +7,14 @@
 //
 
 #import "VLMMainViewController.h"
+#import "VLMDrawHeaderController.h"
 #import "VLMZoomViewController.h"
 #import "VLMSinglePanGestureRecognizer.h"
 #import "EJAppViewController.h"
 
 @interface VLMMainViewController ()
 
+@property (strong, nonatomic) VLMDrawHeaderController *headerController;
 @property (strong, nonatomic) UIView *touchCaptureView;
 @property (strong, nonatomic) VLMZoomViewController *zoomViewController;
 @property (strong, nonatomic) EJAppViewController *avc;
@@ -24,6 +26,7 @@
 
 @implementation VLMMainViewController
 
+@synthesize headerController;
 @synthesize touchCaptureView;
 @synthesize zoomViewController;
 @synthesize avc;
@@ -72,16 +75,21 @@
     UIView *t = [[UIView alloc] initWithFrame:frame];
     [self.view addSubview:t];
     self.touchCaptureView = t;
+
+    // - - - - - - - - - - - - - - - - - - - - -
+    // add header
+    VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
+    [self.view addSubview:h.view];
+    self.headerController = h;
+    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
+    [h setDelegate:self];
     
     UIPanGestureRecognizer *twoFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
     twoFingerPan.minimumNumberOfTouches = 2;
     twoFingerPan.maximumNumberOfTouches = 2;
     twoFingerPan.delegate = self;
     
-    //UIPanGestureRecognizer *oneFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneFingerPan:)];
     VLMSinglePanGestureRecognizer *oneFingerPan = [[VLMSinglePanGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneFingerPan:)];
-    //oneFingerPan.minimumNumberOfTouches = 1;
-    //oneFingerPan.maximumNumberOfTouches = 1;
     oneFingerPan.delegate = self;
 
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
@@ -209,6 +217,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title{
+    NSString *m = @"";
+    switch (index) {
+        case 0:
+            m = @"MODE_GRAPHITE";
+            break;
+        case 1:
+            m = @"MODE_DOTS";
+            break;
+        case 2:
+            m = @"MODE_INK";
+            break;
+            
+        default:
+            m = @"0";
+            break;
+    }
+
+    NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
+    [self.avc callJS:s];
+    
 }
 
 @end
