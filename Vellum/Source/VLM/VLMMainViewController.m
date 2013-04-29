@@ -83,7 +83,7 @@
     VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
     [self.view addSubview:h.view];
     self.headerController = h;
-    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Subtract", nil]];
+    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
     [h setDelegate:self];
     
     UIPanGestureRecognizer *twoFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
@@ -100,10 +100,15 @@
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     doubleTap.numberOfTapsRequired = 2;
     
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.numberOfTapsRequired = 1;
+    //[singleTap requireGestureRecognizerToFail:doubleTap];
+    
     [t addGestureRecognizer:pinch];
     [t addGestureRecognizer:twoFingerPan];
     [t addGestureRecognizer:oneFingerPan];
     [t addGestureRecognizer:doubleTap];
+    [t addGestureRecognizer:singleTap];
 }
 
 #pragma mark - UIGestureRecco Delegate
@@ -211,7 +216,21 @@
     [self.avc.view setCenter:CGPointMake(bounds.size.width/2, bounds.size.height/2)];
     [UIView commitAnimations];
     self.pinchAccumulatedScale = 1.0f;
-    
+    [self handleSingleTap:nil];
+}
+
+- (void) handleSingleTap: (id) sender{
+    UIView *h = self.headerController.view;
+    [h setUserInteractionEnabled:!h.userInteractionEnabled];
+
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [h setAlpha: (h.userInteractionEnabled) ? 1 : 0 ];
+                 }
+                     completion:nil
+     ];
 }
 
 

@@ -9,7 +9,7 @@
 #import "VLMDrawHeaderController.h"
 #import "DDPageControl.h"
 
-#define HEADER_LABEL_WIDTH 200.0f
+#define HEADER_LABEL_WIDTH 175.0f
 
 @interface VLMDrawHeaderController ()
 @property (nonatomic, strong) NSArray *titles;
@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIView *titleview;
 @property CGRect titleframe;
 @property (nonatomic, strong) DDPageControl *pagecontrol;
+@property (nonatomic, strong) UIButton *plus;
 @end
 
 @implementation VLMDrawHeaderController
@@ -26,6 +27,7 @@
 @synthesize titleframe;
 @synthesize pagecontrol;
 @synthesize delegate;
+@synthesize plus;
 
 - (id) initWithHeadings:(NSArray *)headings{
     self = [self init];
@@ -75,8 +77,8 @@
     [self.pagecontrol setNumberOfPages:10];
     [self.pagecontrol setCurrentPage:0];
     //[self.pagecontrol setDefersCurrentPageDisplay:YES];
-    [self.pagecontrol setOnColor:[UIColor colorWithWhite:0.2f alpha:0.75f]];
-    [self.pagecontrol setOffColor:[UIColor colorWithWhite:0.2f alpha:0.2f]];
+    [self.pagecontrol setOnColor:[UIColor colorWithWhite:0.0f alpha:1.0f]];
+    [self.pagecontrol setOffColor:[UIColor colorWithWhite:0.9f alpha:1.0f]];
     [self.pagecontrol setIndicatorDiameter:5.0f];
     [self.pagecontrol setIndicatorSpace:7.0f];
     [self.pagecontrol setUserInteractionEnabled:NO];
@@ -91,8 +93,19 @@
     [titleviewmask addGestureRecognizer:sgr];
     [titleviewmask addGestureRecognizer:sgr2];
     [titleviewmask addGestureRecognizer:tgr];
+
+    UILabel *pl = [[UILabel alloc] initWithFrame:CGRectMake(0, -2, HEADER_HEIGHT*0.8 f, HEADER_HEIGHT)];
+    [pl setFont:[UIFont fontWithName:@"Helvetica-Bold" size:24.0f]];
+    [pl setTextColor:[UIColor blackColor]];
+    [pl setTextAlignment:UITextAlignmentCenter];
+    [pl setBackgroundColor:[UIColor clearColor]];
+    [pl setText:@"+"];
+    [self.view addSubview:pl];
     
-    
+    UIButton *fb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [fb setShowsTouchWhenHighlighted:YES];
+    [self.view addSubview:fb];
+    [fb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
@@ -168,13 +181,15 @@
     if (self.delegate){
         [self.delegate updateIndex:self.index AndTitle:self.titles[self.index]];
     }
-    
-
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)plusTapped:(id)sender{
+    NSLog(@"tap");
+}
 @end
