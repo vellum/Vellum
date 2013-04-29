@@ -73,7 +73,7 @@
     
     
     self.pagecontrol = [[DDPageControl alloc] init];
-    [self.pagecontrol setCenter:CGPointMake(winw/2, HEADER_HEIGHT - 14 + 2)];
+    [self.pagecontrol setCenter:CGPointMake(winw/2, HEADER_HEIGHT - 14 + 3)];
     [self.pagecontrol setNumberOfPages:10];
     [self.pagecontrol setCurrentPage:0];
     //[self.pagecontrol setDefersCurrentPageDisplay:YES];
@@ -94,19 +94,18 @@
     [titleviewmask addGestureRecognizer:sgr2];
     [titleviewmask addGestureRecognizer:tgr];
 
-    UILabel *pl = [[UILabel alloc] initWithFrame:CGRectMake(0, -2, HEADER_HEIGHT*0.8 f, HEADER_HEIGHT)];
-    [pl setFont:[UIFont fontWithName:@"Helvetica-Bold" size:24.0f]];
-    [pl setTextColor:[UIColor blackColor]];
-    [pl setTextAlignment:UITextAlignmentCenter];
-    [pl setBackgroundColor:[UIColor clearColor]];
-    [pl setText:@"+"];
-    [self.view addSubview:pl];
-    
-    UIButton *fb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-    [fb setShowsTouchWhenHighlighted:YES];
-    [self.view addSubview:fb];
-    [fb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
+    [self.view addSubview:pb];
+    [pb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
 
+    UIButton *ab = [[UIButton alloc] initWithFrame:CGRectMake(winw-HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
+    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
+    [self.view addSubview:ab];
+    
+    
 }
 
 
@@ -149,8 +148,8 @@
     if (self.delegate){
         [self.delegate updateIndex:self.index AndTitle:self.titles[self.index]];
     }
-
 }
+
 - (void) nextPage{
     self.index++;
     if (self.index > [self.titles count] - 1){
