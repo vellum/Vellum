@@ -263,6 +263,7 @@
     
 }
 - (void)clearScreen{
+    [self handleDoubleTap:nil];
     [self.avc callJS:@"clearScreen();"];
 }
 
