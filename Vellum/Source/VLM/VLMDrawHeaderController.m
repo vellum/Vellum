@@ -9,6 +9,8 @@
 #import "VLMDrawHeaderController.h"
 #import "DDPageControl.h"
 
+#define HEADER_LABEL_WIDTH 200.0f
+
 @interface VLMDrawHeaderController ()
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic) NSInteger index;
@@ -57,7 +59,7 @@
     
     
     
-    UIView *titleviewmask = [[UIView alloc] initWithFrame:CGRectMake(winw/2-75.0f, 0, 150.0f, HEADER_HEIGHT)];
+    UIView *titleviewmask = [[UIView alloc] initWithFrame:CGRectMake(winw/2-HEADER_LABEL_WIDTH/2, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     [titleviewmask setClipsToBounds:YES];
     [titleviewmask setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:titleviewmask];
@@ -103,7 +105,7 @@
 - (void) setupHeadingView{
     CGFloat HEADER_HEIGHT = 60.0f;
     int count = [self.titles count];
-    [self.titleview setFrame:CGRectMake(0, 0, count*150, HEADER_HEIGHT)];
+    [self.titleview setFrame:CGRectMake(0, 0, count*HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
 
     NSArray* subViews = self.titleview.subviews;
     for( UIView *aView in subViews ) {
@@ -112,7 +114,7 @@
     
     for ( int i = 0; i < [self.titles count]; i++ ){
         NSString *t = self.titles[i];
-        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i*150, 0, 150, HEADER_HEIGHT)];
+        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i*HEADER_LABEL_WIDTH, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
         [A setText:t];
         [A setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [A setTextColor:[UIColor blackColor]];
@@ -129,7 +131,7 @@
     if (self.index > [self.titles count] - 1){
         self.index = 0;
     }
-    [self.titleview setFrame:CGRectOffset(titleframe, -self.index*150, 0)];
+    [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
     [self.pagecontrol setCurrentPage:self.index];
     if (self.delegate){
         [self.delegate updateIndex:self.index AndTitle:self.titles[self.index]];
@@ -157,7 +159,7 @@
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
-                         [self.titleview setFrame:CGRectOffset(titleframe, -self.index*150, 0)];
+                         [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
                      }
                      completion:^(BOOL finished){
                          [self.pagecontrol setCurrentPage:self.index];

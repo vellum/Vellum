@@ -12,6 +12,8 @@
 #import "VLMSinglePanGestureRecognizer.h"
 #import "EJAppViewController.h"
 
+
+
 @interface VLMMainViewController ()
 
 @property (strong, nonatomic) VLMDrawHeaderController *headerController;
@@ -81,7 +83,7 @@
     VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
     [self.view addSubview:h.view];
     self.headerController = h;
-    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
+    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Subtract", nil]];
     [h setDelegate:self];
     
     UIPanGestureRecognizer *twoFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
@@ -233,7 +235,7 @@
             break;
             
         default:
-            m = @"0";
+            m = @"MODE_SCRATCH";
             break;
     }
 
