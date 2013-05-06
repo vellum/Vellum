@@ -19,6 +19,7 @@ var w = window.innerWidth
   ;
 
 var setDrawingMode = function(mode){
+    console.log('setdrawingmode ' + mode);
     drawmode = mode;
 };
 

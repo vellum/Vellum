@@ -339,10 +339,23 @@
 
 - (void)updateHeader{
     [self updateHeaderWithTitle:nil];
+    
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
+    NSString *m = item.javascriptvalue;
+    NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
+    [self.avc callJS:s];
+
 }
 - (void)updateHeaderWithTitle:(NSString*)title{
     NSInteger selectedindex = [[VLMToolCollection instance] getSelectedEnabledIndex];
     [self.headerController setSelectedIndex:selectedindex andTitle:title];
+
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
+    NSString *m = item.javascriptvalue;
+    NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
+    [self.avc callJS:s];
 }
 
 

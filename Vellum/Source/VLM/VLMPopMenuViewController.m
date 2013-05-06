@@ -66,17 +66,25 @@
         CGFloat y = topleft.y + floor(i/3) * (buttonsize+1);
         CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
         VLMToolData *tool = (VLMToolData *)(tools.tools[i]);
+        
         VLMMenuButton *item = [[VLMMenuButton alloc] initWithFrame:r];
-
         [item setSelected:tool.selected];
         [item setUserInteractionEnabled:!tool.selected];
         [item setText:tool.name];
         [item setTag:i];
         [back addSubview:item];
         [buttons addObject:item];
-
         [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
 
+        UIButton *onoff = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 40, 40)];
+        [onoff setBackgroundImage:[UIImage imageNamed:@"popcircle_off.png"] forState:UIControlStateNormal];
+        [onoff setBackgroundImage:[UIImage imageNamed:@"popcircle_on.png"] forState:UIControlStateSelected];
+        [onoff setSelected:tool.enabled];
+        [onoff setTag:i];
+        [back addSubview:onoff];
+        
+        [onoffbuttons addObject:onoff];
+        
     }
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
