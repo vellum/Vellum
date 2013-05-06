@@ -91,5 +91,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (BOOL)isVisible{
+    return ( self.view.alpha == 1.0f );
+}
+
 
 @end

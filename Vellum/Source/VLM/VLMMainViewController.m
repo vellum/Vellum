@@ -9,10 +9,12 @@
 #import "VLMMainViewController.h"
 #import "VLMDrawHeaderController.h"
 #import "VLMZoomViewController.h"
+#import "VLMPanGestureRecognizer.h"
+#import "VLMPinchGestureRecognizer.h"
 #import "VLMSinglePanGestureRecognizer.h"
 #import "EJAppViewController.h"
-
-
+#import "VLMTapGestureRecognizer.h"
+#import "VLMPopMenuViewController.h"
 
 @interface VLMMainViewController ()
 
@@ -20,6 +22,7 @@
 @property (strong, nonatomic) UIView *touchCaptureView;
 @property (strong, nonatomic) VLMZoomViewController *zoomViewController;
 @property (strong, nonatomic) EJAppViewController *avc;
+@property (strong, nonatomic) VLMPopMenuViewController *pop;
 @property CGFloat pinchLastScale;
 @property CGPoint pinchLastPoint;
 @property CGFloat pinchAccumulatedScale;
@@ -86,42 +89,67 @@
     [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
     h.delegate = self;
     
-    UIPanGestureRecognizer *twoFingerPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
+    VLMPanGestureRecognizer *twoFingerPan = [[VLMPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
     twoFingerPan.minimumNumberOfTouches = 2;
     twoFingerPan.maximumNumberOfTouches = 2;
     twoFingerPan.delegate = self;
     
     VLMSinglePanGestureRecognizer *oneFingerPan = [[VLMSinglePanGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneFingerPan:)];
     oneFingerPan.delegate = self;
+    
+    VLMPanGestureRecognizer *threeFingerPan = [[VLMPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleThreeFingerPan:)];
+    threeFingerPan.minimumNumberOfTouches = 3;
+    threeFingerPan.maximumNumberOfTouches = 3;
+    threeFingerPan.delegate = self;
 
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+    VLMPinchGestureRecognizer *pinch = [[VLMPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
     pinch.delegate = self;
     
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    VLMTapGestureRecognizer *doubleTap = [[VLMTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     doubleTap.numberOfTapsRequired = 2;
     
-    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    VLMTapGestureRecognizer *singleTap =[[VLMTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     singleTap.numberOfTapsRequired = 1;
-    //[singleTap requireGestureRecognizerToFail:doubleTap];
+    singleTap.cancelsTouchesInView = NO;
+    [singleTap requireGestureRecognizerToFail:doubleTap];
     
     [t addGestureRecognizer:pinch];
     [t addGestureRecognizer:twoFingerPan];
     [t addGestureRecognizer:oneFingerPan];
     [t addGestureRecognizer:doubleTap];
     [t addGestureRecognizer:singleTap];
+    [t addGestureRecognizer:threeFingerPan];
+    
+    // - - - - - -
+    VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
+    [self.view addSubview:poppy.view];
+    self.pop = poppy;
 }
 
 #pragma mark - UIGestureRecco Delegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ( [gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]){
+        UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)otherGestureRecognizer;
+        if (pgr.minimumNumberOfTouches == 3) return NO;
+    }
+    /*
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]]){
+        UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)gestureRecognizer;
+        if ( pgr.minimumNumberOfTouches == 3) return NO;
+    }*/
     return YES;
 }
 
 
 - (void)handleTwoFingerPan:(id)sender{
     
-    UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)sender;
+    VLMPanGestureRecognizer *pgr = (VLMPanGestureRecognizer *)sender;
+    if (pgr.numberOfTouches > 2) return;
+
     if ( [pgr numberOfTouches] == 1 ) {
+        return;
+    } else if ( [pgr numberOfTouches] >= 3 ) {
         return;
     } else if([pgr state] == UIGestureRecognizerStateBegan) {
         return;
@@ -134,6 +162,12 @@
     CGPoint c = self.avc.view.center;
     c.x += p.x; c.y += p.y;
     [self.avc.view setCenter:c];
+}
+
+- (void)handleThreeFingerPan:(id)sender{
+    VLMPanGestureRecognizer *pgr = (VLMPanGestureRecognizer *)sender;
+    if (pgr.numberOfTouches != 3) return;
+    NSLog(@"three");
 }
 
 - (void)handleOneFingerPan:(id)sender{
@@ -162,8 +196,10 @@
 
 - (void) handlePinch:(id)sender{
 
-    UIPinchGestureRecognizer *pgr = (UIPinchGestureRecognizer*)sender;
-    int numberOfTouches = [pgr numberOfTouches];
+    VLMPinchGestureRecognizer *pgr = (VLMPinchGestureRecognizer*)sender;
+    //if (pgr.numberOfTouches > 2) return;
+
+    int numberOfTouches = pgr.numberOfTouches;
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
     if([pgr state] == UIGestureRecognizerStateBegan) {
@@ -173,11 +209,22 @@
         [self.zoomViewController show];
         return;
     } else if([pgr state] == UIGestureRecognizerStateEnded) {
+        NSLog(@"pinch / ended / numtouches: %d", numberOfTouches);
         [self.zoomViewController hide];
         return;
     }
     if ( numberOfTouches == 1 ) {
+        NSLog(@"pinch / numtouches == 1");
+        [zoomViewController hide];
         return;
+    }
+    if ( numberOfTouches >= 3 ){
+        NSLog(@"pinch / numtouches >= 3");
+        [zoomViewController hide];
+        return;
+    }
+    if ( ![zoomViewController isVisible] ){
+        [zoomViewController show];
     }
     
     CGFloat scale = 1.0 - (self.pinchLastScale - [(UIPinchGestureRecognizer*)sender scale]);
@@ -206,7 +253,12 @@
 }
 
 - (void) handleDoubleTap: (id) sender{
+    VLMTapGestureRecognizer *tgr = (VLMTapGestureRecognizer *)sender;
+    if ( tgr.numberOfTouches > 1 ) return;
+
     [self.zoomViewController setText:100];
+    
+    
     CGRect bounds = [[UIScreen mainScreen] bounds];
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDelay:0];
@@ -216,10 +268,16 @@
     [self.avc.view setCenter:CGPointMake(bounds.size.width/2, bounds.size.height/2)];
     [UIView commitAnimations];
     self.pinchAccumulatedScale = 1.0f;
-    [self handleSingleTap:nil];
+    //[self handleSingleTap:nil];
+    
 }
 
 - (void) handleSingleTap: (id) sender{
+    if (self.headerController.isPopoverVisible) return;
+    VLMTapGestureRecognizer *tgr = (VLMTapGestureRecognizer *)sender;
+    if ( tgr.numberOfTouches > 1 ) return;
+
+    
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:!h.userInteractionEnabled];
 
@@ -239,6 +297,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - VLMHeaderDelegate
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title{
     NSString *m = @"";
@@ -262,9 +322,26 @@
     [self.avc callJS:s];
     
 }
+
 - (void)clearScreen{
     [self handleDoubleTap:nil];
     [self.avc callJS:@"clearScreen();"];
 }
 
+- (void)screenCapture:(id)screenshotdelegate{
+    EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
+    jsv.screenShotDelegate = screenshotdelegate;
+    [jsv requestScreenShot];
+}
+
+- (void)showPopover{
+    NSLog(@"showpop");
+    [self.pop show];
+    
+}
+
+- (void)hidePopover{
+    NSLog(@"hidepop");
+    [self.pop hide];
+}
 @end

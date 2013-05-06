@@ -21,5 +21,5 @@
 - (void)show;
 - (void)hide;
 - (void)setText:(int)value;
-
+- (BOOL)isVisible;
 @end

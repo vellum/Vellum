@@ -52,7 +52,7 @@
 	int touchcount = [touchesfromevent count];
     [super touchesBegan:touches withEvent:event];
 
-    if (touchcount != 1 || [[touches anyObject] tapCount] > 1) {
+    if (touchcount != 1/* || [[touches anyObject] tapCount] > 1*/) {
         NSLog(@"single pan failing with more than one touch");
         self.state = UIGestureRecognizerStateFailed;
         return;

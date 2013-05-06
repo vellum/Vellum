@@ -3,7 +3,8 @@
 #import "EJBindingBase.h"
 #import "EJClassLoader.h"
 #import <objc/runtime.h>
-
+#import "EJCanvasContext2D.h"
+#import "EJImageData.h"
 
 #pragma mark -
 #pragma mark Ejecta view Implementation
@@ -24,8 +25,10 @@
 @synthesize touchDelegate;
 @synthesize deviceMotionDelegate;
 @synthesize screenRenderingContext;
+@synthesize screenShotDelegate;
 
 @synthesize backgroundQueue;
+
 
 - (id)initWithFrame:(CGRect)frame {
 	return [self initWithFrame:frame appFolder:EJECTA_DEFAULT_APP_FOLDER];
@@ -36,6 +39,7 @@
 		appFolder = [folder retain];
 		
 		isPaused = false;
+        requestedScreenShot = NO;
 
 		// CADisplayLink (and NSNotificationCenter?) retains it's target, but this
 		// is causing a retain loop - we can't completely release the scriptView
@@ -280,6 +284,14 @@
 	
 	// Redraw the canvas
 	self.currentRenderingContext = screenRenderingContext;
+
+    // added by DL
+    if ( requestedScreenShot ){
+        requestedScreenShot = NO;
+        [self screenShot];
+    }
+    
+
 	[screenRenderingContext present];
 }
 
@@ -374,6 +386,63 @@
 	
 	[timers cancelId:JSValueToNumberFast(ctxp, argv[0])];
 	return NULL;
+}
+
+
+#pragma mark - DL
+- (void)requestScreenShot{
+    NSLog(@"request screenshot");
+    requestedScreenShot = YES;
+}
+
+- (void)screenShot{
+
+    NSLog(@"screenshot");
+    
+    if ([self.screenRenderingContext isKindOfClass:[EJCanvasContext2D class]]){
+        NSLog(@"yup this is an ejcanvascontext2d");
+        EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;
+        UIImage *image = [ctx getImageFromGL];
+        
+        
+        /*
+         EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;
+        CGFloat scalingfactor = (ctx.useRetinaResolution && [UIScreen mainScreen].scale == 2) ? 2 : 1;
+        EJImageData *imgdata = [ctx getImageDataScaled:scalingfactor flipped:YES sx:0 sy:0 sw:ctx.width sh:ctx.height];// might need to multiply for retina
+        NSInteger w = imgdata.width;
+        NSInteger h = imgdata.height;
+        NSLog(@"imgdata size: %d, %d", w, h);
+        UIImage *image = [UIImage imageWithData:imgdata.pixels];
+        NSLog(@"image created");
+        */
+        //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        /*
+        if (self.screenShotDelegate!=nil){
+            [screenShotDelegate screenShotFound:image];
+        }*/
+        
+        // Request to save the image to camera roll
+        //UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        
+    }
+
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+    // Was there an error?
+    if (error != NULL)
+    {
+        NSLog(@"error saving %@", error);
+        // Show error message...
+        
+    }
+    else  // No errors
+    {
+        
+        NSLog(@"successfully saved");
+        // Show message image successfully saved
+    }
 }
 
 @end

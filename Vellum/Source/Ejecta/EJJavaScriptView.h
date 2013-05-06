@@ -29,6 +29,11 @@
 - (void)pause;
 @end
 
+// ADDED BY DL
+@protocol VLMScreenShotDelegate
+- (void)screenShotFound:(UIImage *)found;
+@end
+
 @class EJTimerCollection;
 @class EJClassLoader;
 
@@ -39,6 +44,9 @@
 	BOOL hasScreenCanvas;
 
 	BOOL isPaused;
+
+    // ADDED BY DL
+    BOOL requestedScreenShot;
 	
 	EJNonRetainingProxy	*proxy;
 
@@ -53,6 +61,7 @@
 	
 	EJCanvasContext *currentRenderingContext;
 	EAGLContext *glCurrentContext;
+    
 	
 	CADisplayLink *displayLink;
 
@@ -60,6 +69,8 @@
 	NSObject<EJTouchDelegate> *touchDelegate;
 	NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
 	EJCanvasContext<EJPresentable> *screenRenderingContext;
+	NSObject<VLMScreenShotDelegate> *screenShotDelegate;
+    
 
 	NSOperationQueue *backgroundQueue;
 	
@@ -79,6 +90,7 @@
 @property (nonatomic, retain) NSObject<EJLifecycleDelegate> *lifecycleDelegate;
 @property (nonatomic, retain) NSObject<EJTouchDelegate> *touchDelegate;
 @property (nonatomic, retain) NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
+@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
 
 @property (nonatomic, retain) EJCanvasContext *currentRenderingContext;
 @property (nonatomic, retain) EJCanvasContext<EJPresentable> *screenRenderingContext;
@@ -98,4 +110,5 @@
 - (JSValueRef)loadModuleWithId:(NSString *)moduleId module:(JSValueRef)module exports:(JSValueRef)exports;
 - (JSValueRef)createTimer:(JSContextRef)ctxp argc:(size_t)argc argv:(const JSValueRef [])argv repeat:(BOOL)repeat;
 
+- (void)requestScreenShot;
 @end

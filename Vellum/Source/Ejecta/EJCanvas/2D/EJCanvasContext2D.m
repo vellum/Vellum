@@ -4,6 +4,7 @@
 
 #import "EJCanvasPattern.h"
 #import "EJCanvasGradient.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 
 @implementation EJCanvasContext2D
 
@@ -726,6 +727,14 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 
 - (EJImageData*)getImageDataHDSx:(short)sx sy:(short)sy sw:(short)sw sh:(short)sh {
 	return [self getImageDataScaled:1 flipped:upsideDown sx:sx sy:sy sw:sw sh:sh];
+}
+
+- (UIImage*)UIImage{
+    //EJImageData *data = [self getImageDataHDSx:0 sy:0 sw:width sh:height];
+    //NSMutableArray *pixels = data.pixels;
+
+    
+    return nil;
 }
 
 - (void)putImageData:(EJImageData*)imageData scaled:(float)scale dx:(float)dx dy:(float)dy {

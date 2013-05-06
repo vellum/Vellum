@@ -69,7 +69,7 @@
 			@"retina: %@ = %.0fx%.0f, "
 			@"msaa: %@",
 		width, height, 
-		frame.size.width, frame.size.height,
+		frame.size.width, frame.size  .height,
 		(useRetinaResolution ? @"yes" : @"no"),
 		frame.size.width * contentScale, frame.size.height * contentScale,
 		(msaaEnabled ? [NSString stringWithFormat:@"yes (%d samples)", msaaSamples] : @"no")

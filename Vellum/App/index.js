@@ -3,6 +3,7 @@ var MODE_DOTS = 1;
 var MODE_INK = 2;
 var MODE_SCRATCH = 3;
 var BGCOLOR = '#f2f2e8';
+var BRIDGE = new Ejecta.Bridge();
 
 var w = window.innerWidth
   , h = window.innerHeight
@@ -159,7 +160,6 @@ var setup = function() {
     canvas.width = w;
     canvas.height = h;
     clearScreen();
-    
     ctx.globalAlpha = 1;
     ctx.lineWidth = 1;
     setInterval( animate, 16 );
@@ -184,15 +184,34 @@ var continueStroke = function(x,y) {
 var endStroke = function(x,y) {
     mousedown = false;
     console.log( 'endStroke: ' + x + ', ' + y );
+
+	/*
+    var imagedata = ctx.getImageData(0, 0, w, h);
+
+    //console.log( 'imagedata: ' + imagedata );
+    if ( imagedata != null ){
+        var json = JSON.stringify(imagedata);
+        console.log('writing to localstorage' + json );
+        localStorage.setItem( 'lastScreen', json );
+    }
+	*/
+
 };
 
 var setZoom = function( val ){
     zoomlevel = Number(val);
     console.log('setzoom:'+zoomlevel);
-}
+};
+
 var clearScreen = function(){
     ctx.fillStyle = BGCOLOR;
     ctx.fillRect( 0, 0, w, h );
-}
+};
 
+var getScreenShot = function(){
+    //if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
+    //var data = ctx.getImageData(0, 0, w, h);
+    //BRIDGE.screendata = JSON.stringify(data.data);
+    //BRIDGE.screencapture(data.data);
+};
 setup();

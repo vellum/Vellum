@@ -17,7 +17,9 @@
 @property (nonatomic, strong) UIView *titleview;
 @property CGRect titleframe;
 @property (nonatomic, strong) DDPageControl *pagecontrol;
-@property (nonatomic, strong) UIButton *plus;
+@property (nonatomic, strong) UIButton *leftbutton;
+@property (nonatomic, strong) UIButton *rightbutton;
+@property (nonatomic, strong) UIView *cancelbutton;
 @end
 
 @implementation VLMDrawHeaderController
@@ -27,13 +29,17 @@
 @synthesize titleframe;
 @synthesize pagecontrol;
 @synthesize delegate;
-@synthesize plus;
+@synthesize leftbutton;
+@synthesize rightbutton;
+@synthesize isPopoverVisible;
+@synthesize cancelbutton;
 
 - (id) initWithHeadings:(NSArray *)headings{
     self = [self init];
     if (self){
         self.index = 0;
         self.titles = [NSArray arrayWithArray:headings];
+        self.isPopoverVisible = NO;
     }
     return self;
 }
@@ -44,6 +50,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.index = 0;
+        self.isPopoverVisible = NO;
     }
     return self;
 }
@@ -60,6 +67,33 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     
+    
+    UIButton *pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
+    [self.view addSubview:pb];
+    [pb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.leftbutton = pb;
+    
+    UIButton *ab = [[UIButton alloc] initWithFrame:CGRectMake(winw-HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
+    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
+    [ab addTarget:self action:@selector(actionTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:ab];
+    self.rightbutton = ab;
+    
+    UIView *cancel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, winw, HEADER_HEIGHT)];
+    cancel.backgroundColor = [UIColor whiteColor];
+    cancel.userInteractionEnabled = NO;
+    [self.view addSubview:cancel];
+    cancel.alpha = 0;
+    self.cancelbutton = cancel;
+    
+    UITapGestureRecognizer *canceltapped = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleCancelPopover:)];
+    [self.cancelbutton addGestureRecognizer:canceltapped];
+    
+
+    // - - - -
     
     UIView *titleviewmask = [[UIView alloc] initWithFrame:CGRectMake(winw/2-HEADER_LABEL_WIDTH/2, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     [titleviewmask setClipsToBounds:YES];
@@ -87,27 +121,31 @@
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [titleviewmask addGestureRecognizer:sgr];
+    
     UISwipeGestureRecognizer *sgr2 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(prevPage)];
     [sgr2 setDirection:UISwipeGestureRecognizerDirectionRight];
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
-    [titleviewmask addGestureRecognizer:sgr];
     [titleviewmask addGestureRecognizer:sgr2];
-    [titleviewmask addGestureRecognizer:tgr];
-
-    UIButton *pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
-    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
-    [self.view addSubview:pb];
-    [pb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
-
-    UIButton *ab = [[UIButton alloc] initWithFrame:CGRectMake(winw-HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
-    [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
-    [self.view addSubview:ab];
     
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [titleviewmask addGestureRecognizer:tgr];
+    
+    UILongPressGestureRecognizer *lpr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [lpr setNumberOfTapsRequired:0];
+    [lpr setNumberOfTouchesRequired:1];
+    [titleviewmask addGestureRecognizer:lpr];
+
     
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - ()
 
 - (void) setHeadings:(NSArray *)headings{
     self.titles = [NSArray arrayWithArray:headings];
@@ -182,10 +220,40 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)longPress:(id)sender{
+    UILongPressGestureRecognizer *lpr = (UILongPressGestureRecognizer *)sender;
+    if (lpr.state == UIGestureRecognizerStateBegan){
+        [self togglePopover];
+    }
+}
+- (void)handleCancelPopover:(id)sender{
+    [self togglePopover];
+}
+- (void)togglePopover{
+
+    self.isPopoverVisible = !self.isPopoverVisible;
+    
+    if ( self.isPopoverVisible ){
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.3];
+        [self.cancelbutton setAlpha:0.92];
+        [self.cancelbutton setUserInteractionEnabled:YES];
+        [UIView commitAnimations];
+
+        [self.delegate showPopover];
+    } else {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.3];
+        [self.cancelbutton setAlpha:0];
+        [self.cancelbutton setUserInteractionEnabled:NO];
+        [UIView commitAnimations];
+        [self.delegate hidePopover];
+    }
+    
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -198,12 +266,24 @@
     
 }
 
+#pragma mark - headerdelegate
 
 - (void)plusTapped:(id)sender{
     NSLog(@"tap");
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Start Again", nil];
     [actionSheet showInView:self.view.superview];
 
+}
+- (void)actionTapped:(id)sender{
+    NSLog(@"actiontapped");
+      //[self.delegate screenCapture:self];
+}
+
+
+#pragma mark - screenshotdelegate
+- (void)screenShotFound:(UIImage *)found{
+    NSLog(@"screenshot!!!!");
+    UIImageWriteToSavedPhotosAlbum(found, nil, nil, nil);
 }
 
 @end

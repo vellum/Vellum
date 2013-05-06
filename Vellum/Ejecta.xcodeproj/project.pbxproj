@@ -107,18 +107,33 @@
 		B6F629D116F353C800F16BAC /* EJBindingCanvasStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */; };
 		B6F9AFC0169F81D400ABD91A /* EJBindingLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */; };
 		B870BDE916F2E11A00827F01 /* EJBindingWebGLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */; };
-		BD0A8B00172EF2980066B67E /* button_action_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AF8172EF2980066B67E /* button_action_off.png */; };
-		BD0A8B01172EF2980066B67E /* button_action_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AF9172EF2980066B67E /* button_action_off@2x.png */; };
-		BD0A8B02172EF2980066B67E /* button_action_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFA172EF2980066B67E /* button_action_on.png */; };
-		BD0A8B03172EF2980066B67E /* button_action_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFB172EF2980066B67E /* button_action_on@2x.png */; };
-		BD0A8B04172EF2980066B67E /* button_plus_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFC172EF2980066B67E /* button_plus_off.png */; };
-		BD0A8B05172EF2980066B67E /* button_plus_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFD172EF2980066B67E /* button_plus_off@2x.png */; };
-		BD0A8B06172EF2980066B67E /* button_plus_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFE172EF2980066B67E /* button_plus_on.png */; };
-		BD0A8B07172EF2980066B67E /* button_plus_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8AFF172EF2980066B67E /* button_plus_on@2x.png */; };
+		BD0A8B10172F42A10066B67E /* button_action_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B08172F42A10066B67E /* button_action_off.png */; };
+		BD0A8B11172F42A10066B67E /* button_action_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B09172F42A10066B67E /* button_action_off@2x.png */; };
+		BD0A8B12172F42A10066B67E /* button_action_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0A172F42A10066B67E /* button_action_on.png */; };
+		BD0A8B13172F42A10066B67E /* button_action_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0B172F42A10066B67E /* button_action_on@2x.png */; };
+		BD0A8B14172F42A10066B67E /* button_plus_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0C172F42A10066B67E /* button_plus_off.png */; };
+		BD0A8B15172F42A10066B67E /* button_plus_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0D172F42A10066B67E /* button_plus_off@2x.png */; };
+		BD0A8B16172F42A10066B67E /* button_plus_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0E172F42A10066B67E /* button_plus_on.png */; };
+		BD0A8B17172F42A10066B67E /* button_plus_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */; };
+		BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
+		BDB88EF917373FF6006134F0 /* popcircle_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF317373FF6006134F0 /* popcircle_off.png */; };
+		BDB88EFA17373FF6006134F0 /* popcircle_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF417373FF6006134F0 /* popcircle_on.png */; };
+		BDB88EFB17373FF6006134F0 /* popcircle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */; };
+		BDB88EFC17373FF6006134F0 /* popcircle_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */; };
+		BDB88EFD17373FF6006134F0 /* popover_back.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF717373FF6006134F0 /* popover_back.png */; };
+		BDB88EFE17373FF6006134F0 /* popover_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF817373FF6006134F0 /* popover_back@2x.png */; };
+		BDB88F0117374BA7006134F0 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */; };
+		BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F03173755F0006134F0 /* VLMTriangleView.m */; };
+		BDB88F0F17377C23006134F0 /* VLMMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F0E17377C23006134F0 /* VLMMenuItem.m */; };
+		BDB88F121737841F006134F0 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F101737841F006134F0 /* clear.png */; };
+		BDB88F131737841F006134F0 /* clear50.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F111737841F006134F0 /* clear50.png */; };
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; };
+		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; };
+		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; };
+		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; };
 		BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D418172B83F5004063D4 /* subtlenet.png */; };
 		BDF5D41B172B83F5004063D4 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D419172B83F5004063D4 /* subtlenet@2X.png */; };
 		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; };
@@ -304,22 +319,44 @@
 		B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJBindingLifecycle.m; sourceTree = "<group>"; };
 		B870BDE716F2E10400827F01 /* EJBindingWebGLExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EJBindingWebGLExtensions.h; path = WebGL/EJBindingWebGLExtensions.h; sourceTree = "<group>"; };
 		B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingWebGLExtensions.m; path = WebGL/EJBindingWebGLExtensions.m; sourceTree = "<group>"; };
-		BD0A8AF8172EF2980066B67E /* button_action_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_action_off.png; sourceTree = "<group>"; };
-		BD0A8AF9172EF2980066B67E /* button_action_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_action_off@2x.png"; sourceTree = "<group>"; };
-		BD0A8AFA172EF2980066B67E /* button_action_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_action_on.png; sourceTree = "<group>"; };
-		BD0A8AFB172EF2980066B67E /* button_action_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_action_on@2x.png"; sourceTree = "<group>"; };
-		BD0A8AFC172EF2980066B67E /* button_plus_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_plus_off.png; sourceTree = "<group>"; };
-		BD0A8AFD172EF2980066B67E /* button_plus_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus_off@2x.png"; sourceTree = "<group>"; };
-		BD0A8AFE172EF2980066B67E /* button_plus_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_plus_on.png; sourceTree = "<group>"; };
-		BD0A8AFF172EF2980066B67E /* button_plus_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus_on@2x.png"; sourceTree = "<group>"; };
+		BD0A8B08172F42A10066B67E /* button_action_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_action_off.png; sourceTree = "<group>"; };
+		BD0A8B09172F42A10066B67E /* button_action_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_action_off@2x.png"; sourceTree = "<group>"; };
+		BD0A8B0A172F42A10066B67E /* button_action_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_action_on.png; sourceTree = "<group>"; };
+		BD0A8B0B172F42A10066B67E /* button_action_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_action_on@2x.png"; sourceTree = "<group>"; };
+		BD0A8B0C172F42A10066B67E /* button_plus_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_plus_off.png; sourceTree = "<group>"; };
+		BD0A8B0D172F42A10066B67E /* button_plus_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus_off@2x.png"; sourceTree = "<group>"; };
+		BD0A8B0E172F42A10066B67E /* button_plus_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_plus_on.png; sourceTree = "<group>"; };
+		BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus_on@2x.png"; sourceTree = "<group>"; };
+		BD0A8B1B172FF1B90066B67E /* EJBindingBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EJBindingBridge.h; path = VLM/EJBindingBridge.h; sourceTree = "<group>"; };
+		BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingBridge.m; path = VLM/EJBindingBridge.m; sourceTree = "<group>"; };
 		BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMDrawHeaderController.h; path = VLM/VLMDrawHeaderController.h; sourceTree = "<group>"; };
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
 		BDA36CE5172E0F8B00665A50 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
+		BDB88EF317373FF6006134F0 /* popcircle_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popcircle_off.png; sourceTree = "<group>"; };
+		BDB88EF417373FF6006134F0 /* popcircle_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popcircle_on.png; sourceTree = "<group>"; };
+		BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popcircle_off@2x.png"; sourceTree = "<group>"; };
+		BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popcircle_on@2x.png"; sourceTree = "<group>"; };
+		BDB88EF717373FF6006134F0 /* popover_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popover_back.png; sourceTree = "<group>"; };
+		BDB88EF817373FF6006134F0 /* popover_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popover_back@2x.png"; sourceTree = "<group>"; };
+		BDB88EFF17374BA7006134F0 /* VLMPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLMPopMenuViewController.h; sourceTree = "<group>"; };
+		BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMPopMenuViewController.m; sourceTree = "<group>"; };
+		BDB88F02173755F0006134F0 /* VLMTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTriangleView.h; path = VLM/VLMTriangleView.h; sourceTree = "<group>"; };
+		BDB88F03173755F0006134F0 /* VLMTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTriangleView.m; path = VLM/VLMTriangleView.m; sourceTree = "<group>"; };
+		BDB88F0D17377C23006134F0 /* VLMMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMenuItem.h; path = VLM/VLMMenuItem.h; sourceTree = "<group>"; };
+		BDB88F0E17377C23006134F0 /* VLMMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMenuItem.m; path = VLM/VLMMenuItem.m; sourceTree = "<group>"; };
+		BDB88F101737841F006134F0 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
+		BDB88F111737841F006134F0 /* clear50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear50.png; sourceTree = "<group>"; };
 		BDBF1AC3172499D50001B908 /* VLMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMainViewController.h; path = VLM/VLMMainViewController.h; sourceTree = "<group>"; };
 		BDBF1AC4172499D50001B908 /* VLMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMainViewController.m; path = VLM/VLMMainViewController.m; sourceTree = "<group>"; };
 		BDBF1ACA1724CDC00001B908 /* VLMZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMZoomViewController.h; path = VLM/VLMZoomViewController.h; sourceTree = "<group>"; };
 		BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMZoomViewController.m; path = VLM/VLMZoomViewController.m; sourceTree = "<group>"; };
+		BDF133F01734B239003B6265 /* VLMPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPanGestureRecognizer.h; path = VLM/VLMPanGestureRecognizer.h; sourceTree = "<group>"; };
+		BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPanGestureRecognizer.m; path = VLM/VLMPanGestureRecognizer.m; sourceTree = "<group>"; };
+		BDF133F317356EA0003B6265 /* VLMPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPinchGestureRecognizer.h; path = VLM/VLMPinchGestureRecognizer.h; sourceTree = "<group>"; };
+		BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPinchGestureRecognizer.m; path = VLM/VLMPinchGestureRecognizer.m; sourceTree = "<group>"; };
+		BDF133F617357747003B6265 /* VLMTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTapGestureRecognizer.h; path = VLM/VLMTapGestureRecognizer.h; sourceTree = "<group>"; };
+		BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTapGestureRecognizer.m; path = VLM/VLMTapGestureRecognizer.m; sourceTree = "<group>"; };
 		BDF5D418172B83F5004063D4 /* subtlenet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subtlenet.png; sourceTree = "<group>"; };
 		BDF5D419172B83F5004063D4 /* subtlenet@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtlenet@2X.png"; sourceTree = "<group>"; };
 		BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSinglePanGestureRecognizer.h; path = VLM/VLMSinglePanGestureRecognizer.h; sourceTree = "<group>"; };
@@ -579,14 +616,22 @@
 		B64CE683166682B10087CF94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BD0A8AF8172EF2980066B67E /* button_action_off.png */,
-				BD0A8AF9172EF2980066B67E /* button_action_off@2x.png */,
-				BD0A8AFA172EF2980066B67E /* button_action_on.png */,
-				BD0A8AFB172EF2980066B67E /* button_action_on@2x.png */,
-				BD0A8AFC172EF2980066B67E /* button_plus_off.png */,
-				BD0A8AFD172EF2980066B67E /* button_plus_off@2x.png */,
-				BD0A8AFE172EF2980066B67E /* button_plus_on.png */,
-				BD0A8AFF172EF2980066B67E /* button_plus_on@2x.png */,
+				BDB88F101737841F006134F0 /* clear.png */,
+				BDB88F111737841F006134F0 /* clear50.png */,
+				BDB88EF317373FF6006134F0 /* popcircle_off.png */,
+				BDB88EF417373FF6006134F0 /* popcircle_on.png */,
+				BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */,
+				BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */,
+				BDB88EF717373FF6006134F0 /* popover_back.png */,
+				BDB88EF817373FF6006134F0 /* popover_back@2x.png */,
+				BD0A8B08172F42A10066B67E /* button_action_off.png */,
+				BD0A8B09172F42A10066B67E /* button_action_off@2x.png */,
+				BD0A8B0A172F42A10066B67E /* button_action_on.png */,
+				BD0A8B0B172F42A10066B67E /* button_action_on@2x.png */,
+				BD0A8B0C172F42A10066B67E /* button_plus_off.png */,
+				BD0A8B0D172F42A10066B67E /* button_plus_off@2x.png */,
+				BD0A8B0E172F42A10066B67E /* button_plus_on.png */,
+				BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */,
 				B64CE684166682B10087CF94 /* Default-568h@2x.png */,
 				B64CE685166682B10087CF94 /* Default-Landscape.png */,
 				B64CE686166682B10087CF94 /* Default-Portrait.png */,
@@ -684,6 +729,36 @@
 			name = DD;
 			sourceTree = "<group>";
 		};
+		BDB88F0517377260006134F0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */,
+				BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */,
+				BDB88F02173755F0006134F0 /* VLMTriangleView.h */,
+				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
+				BDB88F0D17377C23006134F0 /* VLMMenuItem.h */,
+				BDB88F0E17377C23006134F0 /* VLMMenuItem.m */,
+				BDB88EFF17374BA7006134F0 /* VLMPopMenuViewController.h */,
+				BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		BDB88F0C17377AD5006134F0 /* GestureRecco */ = {
+			isa = PBXGroup;
+			children = (
+				BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */,
+				BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */,
+				BDF133F317356EA0003B6265 /* VLMPinchGestureRecognizer.h */,
+				BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */,
+				BDF133F01734B239003B6265 /* VLMPanGestureRecognizer.h */,
+				BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */,
+				BDF133F617357747003B6265 /* VLMTapGestureRecognizer.h */,
+				BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */,
+			);
+			name = GestureRecco;
+			sourceTree = "<group>";
+		};
 		BDBF1AC617249DDA0001B908 /* Vellum */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,10 +766,10 @@
 				BDBF1AC4172499D50001B908 /* VLMMainViewController.m */,
 				BDBF1ACA1724CDC00001B908 /* VLMZoomViewController.h */,
 				BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */,
-				BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */,
-				BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */,
-				BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */,
-				BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */,
+				BD0A8B1B172FF1B90066B67E /* EJBindingBridge.h */,
+				BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */,
+				BDB88F0C17377AD5006134F0 /* GestureRecco */,
+				BDB88F0517377260006134F0 /* Header */,
 			);
 			name = Vellum;
 			sourceTree = "<group>";
@@ -771,14 +846,22 @@
 				B62436681666851E0046B8C7 /* Ejecta.js in Resources */,
 				BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */,
 				BDF5D41B172B83F5004063D4 /* subtlenet@2X.png in Resources */,
-				BD0A8B00172EF2980066B67E /* button_action_off.png in Resources */,
-				BD0A8B01172EF2980066B67E /* button_action_off@2x.png in Resources */,
-				BD0A8B02172EF2980066B67E /* button_action_on.png in Resources */,
-				BD0A8B03172EF2980066B67E /* button_action_on@2x.png in Resources */,
-				BD0A8B04172EF2980066B67E /* button_plus_off.png in Resources */,
-				BD0A8B05172EF2980066B67E /* button_plus_off@2x.png in Resources */,
-				BD0A8B06172EF2980066B67E /* button_plus_on.png in Resources */,
-				BD0A8B07172EF2980066B67E /* button_plus_on@2x.png in Resources */,
+				BD0A8B10172F42A10066B67E /* button_action_off.png in Resources */,
+				BD0A8B11172F42A10066B67E /* button_action_off@2x.png in Resources */,
+				BD0A8B12172F42A10066B67E /* button_action_on.png in Resources */,
+				BD0A8B13172F42A10066B67E /* button_action_on@2x.png in Resources */,
+				BD0A8B14172F42A10066B67E /* button_plus_off.png in Resources */,
+				BD0A8B15172F42A10066B67E /* button_plus_off@2x.png in Resources */,
+				BD0A8B16172F42A10066B67E /* button_plus_on.png in Resources */,
+				BD0A8B17172F42A10066B67E /* button_plus_on@2x.png in Resources */,
+				BDB88EF917373FF6006134F0 /* popcircle_off.png in Resources */,
+				BDB88EFA17373FF6006134F0 /* popcircle_on.png in Resources */,
+				BDB88EFB17373FF6006134F0 /* popcircle_off@2x.png in Resources */,
+				BDB88EFC17373FF6006134F0 /* popcircle_on@2x.png in Resources */,
+				BDB88EFD17373FF6006134F0 /* popover_back.png in Resources */,
+				BDB88EFE17373FF6006134F0 /* popover_back@2x.png in Resources */,
+				BDB88F121737841F006134F0 /* clear.png in Resources */,
+				BDB88F131737841F006134F0 /* clear50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +939,13 @@
 				BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */,
 				BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */,
 				BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */,
+				BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */,
+				BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */,
+				BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */,
+				BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */,
+				BDB88F0117374BA7006134F0 /* VLMPopMenuViewController.m in Sources */,
+				BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */,
+				BDB88F0F17377C23006134F0 /* VLMMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

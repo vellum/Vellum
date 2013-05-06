@@ -207,6 +207,9 @@ static inline EJColorRGBA EJCanvasBlendStrokeColor( EJCanvasState *state ) {
 - (void)clip;
 - (void)resetClip;
 
+/*added by dl*/
+- (UIImage*)getImageFromGL;
+
 @property (nonatomic) EJCanvasState *state;
 @property (nonatomic) EJCompositeOperation globalCompositeOperation;
 @property (nonatomic, retain) EJFontDescriptor *font;

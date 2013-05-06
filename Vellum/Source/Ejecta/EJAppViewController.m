@@ -58,10 +58,26 @@
 	// this particular orientation is allowed.
 	return ( self.supportedInterfaceOrientations & (1 << orientation) );
 }
+
+#pragma mark - additions from DL
+
 - (void)callJS:(NSString *)statement{
 	EJJavaScriptView *view = (EJJavaScriptView *)self.view;
     [view loadScript:statement sourceURL:@""];
 
 }
+
+- (void)imageFromCanvas{
+	//EJJavaScriptView *view = (EJJavaScriptView *)self.view;
+    //view.screenShotDelegate
+    
+
+    
+    //EJSharedOpenGLContext *context = [EJSharedOpenGLContext instance];
+    //EAGLContext *glContext = context.glContext2D;
+    
+}
+
+
 
 @end
