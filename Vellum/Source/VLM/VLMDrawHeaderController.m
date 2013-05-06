@@ -13,13 +13,16 @@
 
 @interface VLMDrawHeaderController ()
 @property (nonatomic, strong) NSArray *titles;
-@property (nonatomic) NSInteger index;
 @property (nonatomic, strong) UIView *titleview;
-@property CGRect titleframe;
 @property (nonatomic, strong) DDPageControl *pagecontrol;
 @property (nonatomic, strong) UIButton *leftbutton;
 @property (nonatomic, strong) UIButton *rightbutton;
 @property (nonatomic, strong) UIView *cancelbutton;
+@property (nonatomic, strong) UIView *titlemask;
+@property (nonatomic, strong) UILabel *ghostlabel;
+@property (nonatomic) NSInteger index;
+@property CGRect titleframe;
+@property CGRect titlemaskframe;
 @end
 
 @implementation VLMDrawHeaderController
@@ -27,12 +30,15 @@
 @synthesize index;
 @synthesize titleview;
 @synthesize titleframe;
+@synthesize titlemask;
+@synthesize titlemaskframe;
 @synthesize pagecontrol;
 @synthesize delegate;
 @synthesize leftbutton;
 @synthesize rightbutton;
 @synthesize isPopoverVisible;
 @synthesize cancelbutton;
+@synthesize ghostlabel;
 
 - (id) initWithHeadings:(NSArray *)headings{
     self = [self init];
@@ -65,7 +71,7 @@
 
 	[self.view setFrame:CGRectMake(0, 0, winw, HEADER_HEIGHT)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
+    [self.view setClipsToBounds:YES];
     
     
     UIButton *pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
@@ -104,10 +110,11 @@
     [titleviewmask addSubview:titleview];
     [titleview setBackgroundColor:[UIColor clearColor]];
     [self setupHeadingView];
-    
+    self.titlemask = titleviewmask;
+    self.titlemaskframe = titleviewmask.frame;
     
     self.pagecontrol = [[DDPageControl alloc] init];
-    [self.pagecontrol setCenter:CGPointMake(winw/2, HEADER_HEIGHT - 14 + 3)];
+    [self.pagecontrol setCenter:CGPointMake(titleviewmask.frame.size.width/2, HEADER_HEIGHT - 14 + 3)];
     [self.pagecontrol setNumberOfPages:10];
     [self.pagecontrol setCurrentPage:0];
     //[self.pagecontrol setDefersCurrentPageDisplay:YES];
@@ -116,8 +123,7 @@
     [self.pagecontrol setIndicatorDiameter:5.0f];
     [self.pagecontrol setIndicatorSpace:7.0f];
     [self.pagecontrol setUserInteractionEnabled:NO];
-    [self.view addSubview:self.pagecontrol];
-
+    [titleviewmask addSubview:self.pagecontrol];
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -174,13 +180,89 @@
     }
     [self.pagecontrol setNumberOfPages:[self.titles count]];
     [self.pagecontrol setCurrentPage:0];
+    
+    self.ghostlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
+    [ghostlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
+    [ghostlabel setTextColor:[UIColor blackColor]];
+    [ghostlabel setTextAlignment:UITextAlignmentCenter];
+    [ghostlabel setBackgroundColor:[UIColor clearColor]];
+    [ghostlabel setAlpha:0.0f];
+    [ghostlabel setUserInteractionEnabled:NO];
+    //[ghostlabel setText:@"test"];
+    [self.titlemask addSubview:ghostlabel];
 
 }
+
+- (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title{
+    NSLog(@"setselected %d",selectedIndex);
+    
+    if (selectedIndex != -1){
+        self.index = selectedIndex;
+        [self.pagecontrol setCurrentPage:self.index];
+
+        if (self.ghostlabel.alpha == 1)
+        {
+            [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
+        }
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             if (self.ghostlabel.alpha == 0){
+                                 [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
+                             }
+                             [self.pagecontrol setAlpha:1.0f];
+                             [self.titleview setAlpha:1.0f];
+                             [self.ghostlabel setAlpha:0.0f];
+                         }
+                         completion:^(BOOL finished){
+                         }
+         ];
+
+        
+    } else {
+        NSLog(@"hi");
+        [self.ghostlabel setText:title];
+
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             [self.pagecontrol setAlpha:0.0f];
+                             [self.titleview setAlpha:0.0f];
+                             [self.ghostlabel setAlpha:1.0f];
+                         }
+                         completion:^(BOOL finished){
+                         }
+         ];
+
+        //[self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
+        //[self.pagecontrol setCurrentPage:self.index];
+        
+    }
+}
+
 - (void) tapped{
+    if (self.ghostlabel.alpha == 1){
+        [self togglePopover];
+        return;
+    }
     self.index++;
     if (self.index > [self.titles count] - 1){
         self.index = 0;
     }
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [self.pagecontrol setAlpha:1.0f];
+                         [self.titleview setAlpha:1.0f];
+                         [self.ghostlabel setAlpha:0.0f];
+                     }
+                     completion:^(BOOL finished){
+                     }
+     ];
+
     [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
     [self.pagecontrol setCurrentPage:self.index];
     if (self.delegate){
@@ -205,11 +287,15 @@
 }
 
 - (void)updatePage{
+
     [UIView animateWithDuration:0.25f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
+                         [self.pagecontrol setAlpha:1.0f];
+                         [self.titleview setAlpha:1.0f];
+                         [self.ghostlabel setAlpha:0.0f];
                      }
                      completion:^(BOOL finished){
                          [self.pagecontrol setCurrentPage:self.index];
@@ -226,9 +312,11 @@
         [self togglePopover];
     }
 }
+
 - (void)handleCancelPopover:(id)sender{
     [self togglePopover];
 }
+
 - (void)togglePopover{
 
     self.isPopoverVisible = !self.isPopoverVisible;

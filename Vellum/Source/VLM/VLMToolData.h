@@ -10,4 +10,10 @@
 
 @interface VLMToolData : NSObject
 
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *javascriptvalue;
+@property (nonatomic) BOOL selected;
+@property (nonatomic) BOOL enabled;
+- (id)init;
 @end
+

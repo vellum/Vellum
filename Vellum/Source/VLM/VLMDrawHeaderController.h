@@ -24,6 +24,7 @@
 
 - (id) initWithHeadings:(NSArray *)headings;
 - (void) setHeadings:(NSArray *)headings;
+- (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title;
 - (void) nextPage;
 - (void) prevPage;
 

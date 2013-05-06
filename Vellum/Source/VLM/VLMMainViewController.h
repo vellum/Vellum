@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "VLMDrawHeaderController.h"
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate,VLMHeaderDelegate>
+@protocol VLMMenuDelegate <NSObject>
+
+- (void)updateHeader;
+- (void)updateHeaderWithTitle:(NSString*)title;
+@end
+
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate,VLMHeaderDelegate, VLMMenuDelegate>
 
 @end

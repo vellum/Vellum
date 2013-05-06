@@ -15,6 +15,8 @@
 #import "EJAppViewController.h"
 #import "VLMTapGestureRecognizer.h"
 #import "VLMPopMenuViewController.h"
+#import "VLMToolCollection.h"
+#import "VLMToolData.h"
 
 @interface VLMMainViewController ()
 
@@ -86,7 +88,9 @@
     VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
     [self.view addSubview:h.view];
     self.headerController = h;
-    [h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
+    NSMutableArray *tools = [[VLMToolCollection instance] getEnabledTools];
+    [h setHeadings:tools];
+    //[h setHeadings:[NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil]];
     h.delegate = self;
     
     VLMPanGestureRecognizer *twoFingerPan = [[VLMPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
@@ -123,6 +127,7 @@
     // - - - - - -
     VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
     [self.view addSubview:poppy.view];
+    poppy.delegate = self;
     self.pop = poppy;
 }
 
@@ -145,11 +150,8 @@
 - (void)handleTwoFingerPan:(id)sender{
     
     VLMPanGestureRecognizer *pgr = (VLMPanGestureRecognizer *)sender;
-    if (pgr.numberOfTouches > 2) return;
 
-    if ( [pgr numberOfTouches] == 1 ) {
-        return;
-    } else if ( [pgr numberOfTouches] >= 3 ) {
+    if ( pgr.numberOfTouches != 2 ) {
         return;
     } else if([pgr state] == UIGestureRecognizerStateBegan) {
         return;
@@ -301,26 +303,14 @@
 #pragma mark - VLMHeaderDelegate
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title{
-    NSString *m = @"";
-    switch (index) {
-        case 0:
-            m = @"MODE_GRAPHITE";
-            break;
-        case 1:
-            m = @"MODE_DOTS";
-            break;
-        case 2:
-            m = @"MODE_INK";
-            break;
-            
-        default:
-            m = @"MODE_SCRATCH";
-            break;
-    }
-
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *item = (VLMToolData *)[tools getSelectedToolFromEnabledIndex:index];
+    
+    NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
     [self.avc callJS:s];
-    
+
+    [self.pop updatebuttons];
 }
 
 - (void)clearScreen{
@@ -344,4 +334,16 @@
     NSLog(@"hidepop");
     [self.pop hide];
 }
+
+#pragma mark - MenuDelegate
+
+- (void)updateHeader{
+    [self updateHeaderWithTitle:nil];
+}
+- (void)updateHeaderWithTitle:(NSString*)title{
+    NSInteger selectedindex = [[VLMToolCollection instance] getSelectedEnabledIndex];
+    [self.headerController setSelectedIndex:selectedindex andTitle:title];
+}
+
+
 @end

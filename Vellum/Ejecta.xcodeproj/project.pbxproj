@@ -118,19 +118,20 @@
 		BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
+		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; };
+		BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */; };
 		BDB88EF917373FF6006134F0 /* popcircle_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF317373FF6006134F0 /* popcircle_off.png */; };
 		BDB88EFA17373FF6006134F0 /* popcircle_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF417373FF6006134F0 /* popcircle_on.png */; };
 		BDB88EFB17373FF6006134F0 /* popcircle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */; };
 		BDB88EFC17373FF6006134F0 /* popcircle_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */; };
-		BDB88EFD17373FF6006134F0 /* popover_back.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF717373FF6006134F0 /* popover_back.png */; };
-		BDB88EFE17373FF6006134F0 /* popover_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF817373FF6006134F0 /* popover_back@2x.png */; };
-		BDB88F0117374BA7006134F0 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */; };
 		BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F03173755F0006134F0 /* VLMTriangleView.m */; };
-		BDB88F0F17377C23006134F0 /* VLMMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F0E17377C23006134F0 /* VLMMenuItem.m */; };
-		BDB88F121737841F006134F0 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F101737841F006134F0 /* clear.png */; };
-		BDB88F131737841F006134F0 /* clear50.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F111737841F006134F0 /* clear50.png */; };
+		BDB88F16173793FE006134F0 /* VLMMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F15173793FD006134F0 /* VLMMenuButton.m */; };
+		BDB88F1917379554006134F0 /* menu_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1717379554006134F0 /* menu_selected.png */; };
+		BDB88F1A17379554006134F0 /* menu_default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1817379554006134F0 /* menu_default.png */; };
+		BDB88F1C17379680006134F0 /* menu_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1B17379680006134F0 /* menu_highlighted.png */; };
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; };
+		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; };
 		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; };
 		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; };
 		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; };
@@ -333,24 +334,27 @@
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
 		BDA36CE5172E0F8B00665A50 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
+		BDB4BF7D17379FD7004ADC00 /* VLMToolData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMToolData.h; path = VLM/VLMToolData.h; sourceTree = "<group>"; };
+		BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMToolData.m; path = VLM/VLMToolData.m; sourceTree = "<group>"; };
+		BDB4BF801737A17A004ADC00 /* VLMToolCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMToolCollection.h; path = VLM/VLMToolCollection.h; sourceTree = "<group>"; };
+		BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMToolCollection.m; path = VLM/VLMToolCollection.m; sourceTree = "<group>"; };
 		BDB88EF317373FF6006134F0 /* popcircle_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popcircle_off.png; sourceTree = "<group>"; };
 		BDB88EF417373FF6006134F0 /* popcircle_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popcircle_on.png; sourceTree = "<group>"; };
 		BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popcircle_off@2x.png"; sourceTree = "<group>"; };
 		BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popcircle_on@2x.png"; sourceTree = "<group>"; };
-		BDB88EF717373FF6006134F0 /* popover_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popover_back.png; sourceTree = "<group>"; };
-		BDB88EF817373FF6006134F0 /* popover_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "popover_back@2x.png"; sourceTree = "<group>"; };
-		BDB88EFF17374BA7006134F0 /* VLMPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLMPopMenuViewController.h; sourceTree = "<group>"; };
-		BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMPopMenuViewController.m; sourceTree = "<group>"; };
 		BDB88F02173755F0006134F0 /* VLMTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTriangleView.h; path = VLM/VLMTriangleView.h; sourceTree = "<group>"; };
 		BDB88F03173755F0006134F0 /* VLMTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTriangleView.m; path = VLM/VLMTriangleView.m; sourceTree = "<group>"; };
-		BDB88F0D17377C23006134F0 /* VLMMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMenuItem.h; path = VLM/VLMMenuItem.h; sourceTree = "<group>"; };
-		BDB88F0E17377C23006134F0 /* VLMMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMenuItem.m; path = VLM/VLMMenuItem.m; sourceTree = "<group>"; };
-		BDB88F101737841F006134F0 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear.png; sourceTree = "<group>"; };
-		BDB88F111737841F006134F0 /* clear50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clear50.png; sourceTree = "<group>"; };
+		BDB88F14173793FD006134F0 /* VLMMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMenuButton.h; path = VLM/VLMMenuButton.h; sourceTree = "<group>"; };
+		BDB88F15173793FD006134F0 /* VLMMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMenuButton.m; path = VLM/VLMMenuButton.m; sourceTree = "<group>"; };
+		BDB88F1717379554006134F0 /* menu_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_selected.png; sourceTree = "<group>"; };
+		BDB88F1817379554006134F0 /* menu_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_default.png; sourceTree = "<group>"; };
+		BDB88F1B17379680006134F0 /* menu_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_highlighted.png; sourceTree = "<group>"; };
 		BDBF1AC3172499D50001B908 /* VLMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMainViewController.h; path = VLM/VLMMainViewController.h; sourceTree = "<group>"; };
 		BDBF1AC4172499D50001B908 /* VLMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMainViewController.m; path = VLM/VLMMainViewController.m; sourceTree = "<group>"; };
 		BDBF1ACA1724CDC00001B908 /* VLMZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMZoomViewController.h; path = VLM/VLMZoomViewController.h; sourceTree = "<group>"; };
 		BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMZoomViewController.m; path = VLM/VLMZoomViewController.m; sourceTree = "<group>"; };
+		BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPopMenuViewController.h; path = VLM/VLMPopMenuViewController.h; sourceTree = "<group>"; };
+		BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPopMenuViewController.m; path = VLM/VLMPopMenuViewController.m; sourceTree = "<group>"; };
 		BDF133F01734B239003B6265 /* VLMPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPanGestureRecognizer.h; path = VLM/VLMPanGestureRecognizer.h; sourceTree = "<group>"; };
 		BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPanGestureRecognizer.m; path = VLM/VLMPanGestureRecognizer.m; sourceTree = "<group>"; };
 		BDF133F317356EA0003B6265 /* VLMPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPinchGestureRecognizer.h; path = VLM/VLMPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -616,14 +620,13 @@
 		B64CE683166682B10087CF94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BDB88F101737841F006134F0 /* clear.png */,
-				BDB88F111737841F006134F0 /* clear50.png */,
+				BDB88F1717379554006134F0 /* menu_selected.png */,
+				BDB88F1B17379680006134F0 /* menu_highlighted.png */,
+				BDB88F1817379554006134F0 /* menu_default.png */,
 				BDB88EF317373FF6006134F0 /* popcircle_off.png */,
 				BDB88EF417373FF6006134F0 /* popcircle_on.png */,
 				BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */,
 				BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */,
-				BDB88EF717373FF6006134F0 /* popover_back.png */,
-				BDB88EF817373FF6006134F0 /* popover_back@2x.png */,
 				BD0A8B08172F42A10066B67E /* button_action_off.png */,
 				BD0A8B09172F42A10066B67E /* button_action_off@2x.png */,
 				BD0A8B0A172F42A10066B67E /* button_action_on.png */,
@@ -729,17 +732,29 @@
 			name = DD;
 			sourceTree = "<group>";
 		};
+		BDB4BF7C17379FB9004ADC00 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BDB4BF7D17379FD7004ADC00 /* VLMToolData.h */,
+				BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */,
+				BDB4BF801737A17A004ADC00 /* VLMToolCollection.h */,
+				BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		BDB88F0517377260006134F0 /* Header */ = {
 			isa = PBXGroup;
 			children = (
+				BDB4BF7C17379FB9004ADC00 /* Data */,
 				BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */,
 				BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */,
+				BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */,
+				BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */,
 				BDB88F02173755F0006134F0 /* VLMTriangleView.h */,
 				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
-				BDB88F0D17377C23006134F0 /* VLMMenuItem.h */,
-				BDB88F0E17377C23006134F0 /* VLMMenuItem.m */,
-				BDB88EFF17374BA7006134F0 /* VLMPopMenuViewController.h */,
-				BDB88F0017374BA7006134F0 /* VLMPopMenuViewController.m */,
+				BDB88F14173793FD006134F0 /* VLMMenuButton.h */,
+				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -858,10 +873,9 @@
 				BDB88EFA17373FF6006134F0 /* popcircle_on.png in Resources */,
 				BDB88EFB17373FF6006134F0 /* popcircle_off@2x.png in Resources */,
 				BDB88EFC17373FF6006134F0 /* popcircle_on@2x.png in Resources */,
-				BDB88EFD17373FF6006134F0 /* popover_back.png in Resources */,
-				BDB88EFE17373FF6006134F0 /* popover_back@2x.png in Resources */,
-				BDB88F121737841F006134F0 /* clear.png in Resources */,
-				BDB88F131737841F006134F0 /* clear50.png in Resources */,
+				BDB88F1917379554006134F0 /* menu_selected.png in Resources */,
+				BDB88F1A17379554006134F0 /* menu_default.png in Resources */,
+				BDB88F1C17379680006134F0 /* menu_highlighted.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,9 +957,11 @@
 				BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */,
 				BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */,
 				BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */,
-				BDB88F0117374BA7006134F0 /* VLMPopMenuViewController.m in Sources */,
 				BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */,
-				BDB88F0F17377C23006134F0 /* VLMMenuItem.m in Sources */,
+				BDB88F16173793FE006134F0 /* VLMMenuButton.m in Sources */,
+				BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */,
+				BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */,
+				BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

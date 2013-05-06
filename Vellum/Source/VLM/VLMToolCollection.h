@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class VLMToolData;
+
 @interface VLMToolCollection : NSObject
+
+@property (nonatomic, strong) NSMutableArray *tools;
+@property (nonatomic) NSInteger selectedIndex;
+
++ (VLMToolCollection *)instance;
+- (NSMutableArray *)getEnabledTools;
+- (NSInteger)getSelectedEnabledIndex;
+- (VLMToolData *)getSelectedToolFromEnabledIndex:(NSInteger)index;
 
 @end

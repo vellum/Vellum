@@ -10,12 +10,18 @@
 #import "VLMTriangleView.h"
 #import "VLMPopMenuViewController.h"
 #import "VLMMenuButton.h"
+#import "VLMToolCollection.h"
+#import "VLMToolData.h"
 
 @interface VLMPopMenuViewController ()
-
+@property (nonatomic,strong) NSMutableArray *toolbuttons;
+@property (nonatomic,strong) NSMutableArray *onoffbuttons;
 @end
 
 @implementation VLMPopMenuViewController
+@synthesize toolbuttons;
+@synthesize onoffbuttons;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
+    
     CGFloat HEADER_HEIGHT = 60.0f;
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     
@@ -51,23 +58,29 @@
     back.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:back];
     
-    NSArray *names = [NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil];
-    for (int i = 0;i < names.count; i++){
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [tools.tools count]; i++) {
         CGFloat x = topleft.x + (i%3) * (buttonsize+1);
         CGFloat y = topleft.y + floor(i/3) * (buttonsize+1);
         CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
+        VLMToolData *tool = (VLMToolData *)(tools.tools[i]);
         VLMMenuButton *item = [[VLMMenuButton alloc] initWithFrame:r];
-        if ( i == 0 ) {
-            [item setSelected:YES];
-            [item setUserInteractionEnabled:NO];
-        }
-        [item setText:names[i]];
+
+        [item setSelected:tool.selected];
+        [item setUserInteractionEnabled:!tool.selected];
+        [item setText:tool.name];
+        [item setTag:i];
         [back addSubview:item];
+        [buttons addObject:item];
+
+        [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+
     }
- 
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
-
+    self.toolbuttons = buttons;
 }
 
 
@@ -99,6 +112,44 @@
 	[self.view setAlpha:0.0];
 	[UIView commitAnimations];
     [self.view setUserInteractionEnabled:NO];
+}
+
+-(void)menuItemTapped:(id)sender{
+    VLMMenuButton *mb = (VLMMenuButton *)sender;
+    NSInteger tag = mb.tag;
+    
+    // update data
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    for (VLMToolData *item in tools.tools) {
+        item.selected = NO;
+    }
+    tools.selectedIndex = tag;
+    VLMToolData *selecteditem = (VLMToolData *)[tools.tools objectAtIndex:tag];
+    selecteditem.selected = YES;
+    
+    // update buttons
+    [self updatebuttons];
+
+    // update toolheader (and glview)
+    if (self.delegate != nil){
+        if (selecteditem.enabled)
+            [self.delegate updateHeader];
+        else
+            [self.delegate updateHeaderWithTitle:selecteditem.name];
+    }
+    
+}
+
+-(void)updatebuttons{
+    for ( VLMMenuButton *b in self.toolbuttons ){
+        b.userInteractionEnabled = YES;
+        b.selected = NO;
+    }
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMMenuButton *mb = (VLMMenuButton *) [self.toolbuttons objectAtIndex:tools.selectedIndex];
+    mb.userInteractionEnabled = NO;
+    mb.selected = YES;
+    
 }
 
 @end
