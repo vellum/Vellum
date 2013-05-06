@@ -9,7 +9,7 @@
 #import "VLMDrawHeaderController.h"
 #import "DDPageControl.h"
 
-#define HEADER_LABEL_WIDTH 175.0f
+#define HEADER_LABEL_WIDTH 120.0f
 
 @interface VLMDrawHeaderController ()
 @property (nonatomic, strong) NSArray *titles;
