@@ -8,6 +8,8 @@
 
 #import "VLMPopMenuViewController.h"
 #import "VLMTriangleView.h"
+#import "VLMPopMenuViewController.h"
+#import "VLMMenuButton.h"
 
 @interface VLMPopMenuViewController ()
 
@@ -39,17 +41,32 @@
     VLMTriangleView *tri = [[VLMTriangleView alloc] initWithFrame:CGRectMake(320/2-triangleSize.width/2, margin - triangleSize.height, triangleSize.width, triangleSize.height)];
     [self.view addSubview:tri];
     
-    UIView *back = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, 320-margin*2, 230-(margin+triangleSize.height))];
-    back.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:back];
 
     CGFloat innermargin = 5;
-    CGFloat buttonsize = (back.frame.size.width - innermargin*2)/3;
+    CGFloat pad = 1;
+    CGFloat buttonsize = (320 - margin*2 - innermargin*2 - pad*2)/3;
+    CGPoint topleft = CGPointMake(innermargin,innermargin);
+
+    UIView *back = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, 320-margin*2, innermargin*2+pad+buttonsize*2)];
+    back.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:back];
     
-    
+    NSArray *names = [NSArray arrayWithObjects:@"Lines", @"Dots", @"Ink", @"Scratch", nil];
+    for (int i = 0;i < names.count; i++){
+        CGFloat x = topleft.x + (i%3) * (buttonsize+1);
+        CGFloat y = topleft.y + floor(i/3) * (buttonsize+1);
+        CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
+        VLMMenuButton *item = [[VLMMenuButton alloc] initWithFrame:r];
+        if ( i == 0 ) {
+            [item setSelected:YES];
+            [item setUserInteractionEnabled:NO];
+        }
+        [item setText:names[i]];
+        [back addSubview:item];
+    }
+ 
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
-
 
 }
 
