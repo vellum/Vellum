@@ -82,6 +82,7 @@
         [onoff setSelected:tool.enabled];
         [onoff setTag:i];
         [back addSubview:onoff];
+        [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
         
         [onoffbuttons addObject:onoff];
         
@@ -139,13 +140,28 @@
     [self updatebuttons];
 
     // update toolheader (and glview)
-    if (self.delegate != nil){
+    if (self.delegate != nil) {
         if (selecteditem.enabled)
             [self.delegate updateHeader];
         else
             [self.delegate updateHeaderWithTitle:selecteditem.name];
+        
     }
     
+}
+
+-(void)onofftapped:(id)sender{
+    UIButton *b = (UIButton *)sender;
+    NSInteger tag = b.tag;
+    NSLog(@"tapped: %d", tag);
+
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tag];
+    item.enabled = !item.enabled;
+    [b setSelected:item.enabled];
+
+    //update header
+    [self.delegate refreshData];
 }
 
 -(void)updatebuttons{
@@ -156,8 +172,7 @@
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMMenuButton *mb = (VLMMenuButton *) [self.toolbuttons objectAtIndex:tools.selectedIndex];
     mb.userInteractionEnabled = NO;
-    mb.selected = YES;
-    
+    mb.selected = YES;    
 }
 
 @end

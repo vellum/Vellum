@@ -125,6 +125,16 @@
     [self.pagecontrol setUserInteractionEnabled:NO];
     [titleviewmask addSubview:self.pagecontrol];
     
+    self.ghostlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
+    [ghostlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
+    [ghostlabel setTextColor:[UIColor blackColor]];
+    [ghostlabel setTextAlignment:UITextAlignmentCenter];
+    [ghostlabel setBackgroundColor:[UIColor clearColor]];
+    [ghostlabel setAlpha:0.0f];
+    [ghostlabel setUserInteractionEnabled:NO];
+    [self.titlemask addSubview:ghostlabel];
+
+    
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
     [titleviewmask addGestureRecognizer:sgr];
@@ -181,15 +191,6 @@
     [self.pagecontrol setNumberOfPages:[self.titles count]];
     [self.pagecontrol setCurrentPage:0];
     
-    self.ghostlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
-    [ghostlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-    [ghostlabel setTextColor:[UIColor blackColor]];
-    [ghostlabel setTextAlignment:UITextAlignmentCenter];
-    [ghostlabel setBackgroundColor:[UIColor clearColor]];
-    [ghostlabel setAlpha:0.0f];
-    [ghostlabel setUserInteractionEnabled:NO];
-    //[ghostlabel setText:@"test"];
-    [self.titlemask addSubview:ghostlabel];
 
 }
 

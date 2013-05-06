@@ -347,6 +347,7 @@
     [self.avc callJS:s];
 
 }
+
 - (void)updateHeaderWithTitle:(NSString*)title{
     NSInteger selectedindex = [[VLMToolCollection instance] getSelectedEnabledIndex];
     [self.headerController setSelectedIndex:selectedindex andTitle:title];
@@ -356,6 +357,29 @@
     NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
     [self.avc callJS:s];
+}
+
+- (void)refreshData{
+    NSLog(@"refresh");
+
+    VLMToolCollection *toolcollection = [VLMToolCollection instance];
+    NSMutableArray *enabledtools = [toolcollection getEnabledTools];
+    [self.headerController setHeadings:enabledtools];
+    
+    VLMToolData *selecteditem = (VLMToolData *)[toolcollection.tools objectAtIndex:toolcollection.selectedIndex];
+    if ( !selecteditem.enabled ){
+        [self.headerController setSelectedIndex:-1 andTitle:selecteditem.name];
+        return;
+    }
+
+    NSInteger selectedenabledindex = [toolcollection getSelectedEnabledIndex];
+    if ( selectedenabledindex == -1 ){
+        [self.headerController setSelectedIndex:0 andTitle:selecteditem.name];
+    } else {
+        [self.headerController setSelectedIndex:selectedenabledindex andTitle:nil];
+    }
+    /*
+*/
 }
 
 

@@ -13,6 +13,8 @@
 
 - (void)updateHeader;
 - (void)updateHeaderWithTitle:(NSString*)title;
+- (void)refreshData;
+
 @end
 
 @interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate,VLMHeaderDelegate, VLMMenuDelegate>
