@@ -403,11 +403,10 @@
         NSLog(@"yup this is an ejcanvascontext2d");
         EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;
         UIImage *image = [ctx getImageFromGL];
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        /*
+        //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         if (self.screenShotDelegate!=nil){
             [screenShotDelegate screenShotFound:image];
-        }*/
+        }
         
         // Request to save the image to camera roll
         //UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);

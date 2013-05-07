@@ -373,8 +373,11 @@
 
 #pragma mark - screenshotdelegate
 - (void)screenShotFound:(UIImage *)found{
-    NSLog(@"screenshot!!!!");
-    UIImageWriteToSavedPhotosAlbum(found, nil, nil, nil);
+    //UIImageWriteToSavedPhotosAlbum(found, nil, nil, nil);
+    NSArray* dataToShare = [NSArray arrayWithObject:found];
+    
+    UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    [self presentViewController:activityViewController animated:YES completion:^{}];
 }
 
 @end
