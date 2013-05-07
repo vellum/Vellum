@@ -130,6 +130,11 @@
     [self.view addSubview:poppy.view];
     poppy.delegate = self;
     self.pop = poppy;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enteredForeground)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
 }
 
 #pragma mark - UIGestureRecco Delegate
@@ -386,5 +391,18 @@
 
 }
 
-
+- (void)enteredForeground{
+    UIView *h = self.headerController.view;
+    [h setUserInteractionEnabled:YES];
+    
+    [UIView animateWithDuration:0.25f
+                          delay:0.0f
+                        options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [h setAlpha: 1.0f];
+                     }
+                     completion:nil
+     ];
+    [self.zoomViewController hide];
+}
 @end
