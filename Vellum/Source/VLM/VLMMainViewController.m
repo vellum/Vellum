@@ -17,6 +17,7 @@
 #import "VLMPopMenuViewController.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+#import "DDPageControl.h"
 
 @interface VLMMainViewController ()
 
@@ -361,25 +362,28 @@
 
 - (void)refreshData{
     NSLog(@"refresh");
-
+    //NSInteger oldindex = [self.headerController.pagecontrol currentPage];
+    
     VLMToolCollection *toolcollection = [VLMToolCollection instance];
     NSMutableArray *enabledtools = [toolcollection getEnabledTools];
     [self.headerController setHeadings:enabledtools];
     
     VLMToolData *selecteditem = (VLMToolData *)[toolcollection.tools objectAtIndex:toolcollection.selectedIndex];
+
     if ( !selecteditem.enabled ){
         [self.headerController setSelectedIndex:-1 andTitle:selecteditem.name];
         return;
     }
 
     NSInteger selectedenabledindex = [toolcollection getSelectedEnabledIndex];
+    
+    // needs a not-animated version
     if ( selectedenabledindex == -1 ){
-        [self.headerController setSelectedIndex:0 andTitle:selecteditem.name];
+        [self.headerController setSelectedIndex:0 andTitle:selecteditem.name animated:NO];
     } else {
-        [self.headerController setSelectedIndex:selectedenabledindex andTitle:nil];
+        [self.headerController setSelectedIndex:selectedenabledindex andTitle:nil animated:NO];
     }
-    /*
-*/
+
 }
 
 

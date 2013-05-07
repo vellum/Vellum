@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "EJJavaScriptView.h"
 
+@class DDPageControl;
+
 @protocol VLMHeaderDelegate
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title;
 - (void)clearScreen;
@@ -21,10 +23,12 @@
 
 @property (nonatomic, retain) NSObject<VLMHeaderDelegate> *delegate;
 @property (nonatomic) BOOL isPopoverVisible;
+@property (nonatomic, strong) DDPageControl *pagecontrol;
 
 - (id) initWithHeadings:(NSArray *)headings;
 - (void) setHeadings:(NSArray *)headings;
 - (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title;
+- (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title animated:(BOOL)shouldAnimate;
 - (void) nextPage;
 - (void) prevPage;
 

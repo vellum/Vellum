@@ -14,7 +14,6 @@
 @interface VLMDrawHeaderController ()
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) UIView *titleview;
-@property (nonatomic, strong) DDPageControl *pagecontrol;
 @property (nonatomic, strong) UIButton *leftbutton;
 @property (nonatomic, strong) UIButton *rightbutton;
 @property (nonatomic, strong) UIView *cancelbutton;
@@ -196,16 +195,18 @@
 
 - (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title{
     NSLog(@"setselected %d",selectedIndex);
-    
+    [self setSelectedIndex:selectedIndex andTitle:title animated:YES];
+}
+- (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title animated:(BOOL)shouldAnimate{
     if (selectedIndex != -1){
         self.index = selectedIndex;
         [self.pagecontrol setCurrentPage:self.index];
-
+        
         if (self.ghostlabel.alpha == 1)
         {
             [self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
         }
-        [UIView animateWithDuration:0.25f
+        [UIView animateWithDuration: shouldAnimate ? 0.25f : 0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -219,13 +220,13 @@
                          completion:^(BOOL finished){
                          }
          ];
-
+        
         
     } else {
         NSLog(@"hi");
         [self.ghostlabel setText:title];
-
-        [UIView animateWithDuration:0.25f
+        
+        [UIView animateWithDuration:shouldAnimate ? 0.25f : 0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut|UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -236,11 +237,12 @@
                          completion:^(BOOL finished){
                          }
          ];
-
+        
         //[self.titleview setFrame:CGRectOffset(titleframe, -self.index*HEADER_LABEL_WIDTH, 0)];
         //[self.pagecontrol setCurrentPage:self.index];
         
     }
+
 }
 
 - (void) tapped{
