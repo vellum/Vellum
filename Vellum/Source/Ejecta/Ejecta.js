@@ -80,7 +80,7 @@ window.requestAnimationFrame = function(cb, element){ return ej.setTimeout(cb, 1
 
 // The native Image, Audio, HttpRequest and LocalStorage class mimic the real elements
 window.Image = Ejecta.Image;
-window.Audio = Ejecta.Audio;
+window.Audio = null;//Ejecta.Audio;
 window.Video = Ejecta.Video;
 window.XMLHttpRequest = Ejecta.HttpRequest;
 window.localStorage = new Ejecta.LocalStorage();

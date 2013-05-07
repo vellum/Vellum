@@ -19,6 +19,10 @@
 #import "VLMToolData.h"
 #import "DDPageControl.h"
 
+#define JOT_X_OFFSET 4.0f // compensate for jot stylus
+#define JOT_Y_OFFSET 6.0f
+
+
 @interface VLMMainViewController ()
 
 @property (strong, nonatomic) VLMDrawHeaderController *headerController;
@@ -180,9 +184,12 @@
 
 - (void)handleOneFingerPan:(id)sender{
     
-    UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)sender;
+    //UIPanGestureRecognizer *pgr = (UIPanGestureRecognizer *)sender;
+    VLMSinglePanGestureRecognizer *pgr = (VLMSinglePanGestureRecognizer *)sender;
     NSLog(@"onefingerpan, %i", [pgr numberOfTouches]);
     CGPoint p = [pgr locationInView:self.avc.view];
+    p.x += 1/self.zoomViewController.zoomlevel * JOT_X_OFFSET;
+    p.y += 1/self.zoomViewController.zoomlevel * JOT_Y_OFFSET;
     
     if([pgr state] == UIGestureRecognizerStateBegan) {
         NSString *s = [NSString stringWithFormat:@"beginStroke(%f,%f);", p.x, p.y];
