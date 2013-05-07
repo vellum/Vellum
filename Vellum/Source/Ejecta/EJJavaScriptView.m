@@ -285,14 +285,14 @@
 	// Redraw the canvas
 	self.currentRenderingContext = screenRenderingContext;
 
+	[screenRenderingContext present];
+
     // added by DL
     if ( requestedScreenShot ){
         requestedScreenShot = NO;
         [self screenShot];
     }
-    
 
-	[screenRenderingContext present];
 }
 
 
@@ -398,7 +398,16 @@
 - (void)screenShot{
 
     NSLog(@"screenshot");
-    
+/*
+ 
+ scriptView.currentRenderingContext = renderingContext;
+ 
+ EJImageData *imageData = [renderingContext getImageDataSx:sx sy:sy sw:sw sh:sh];
+ 
+ EJBindingImageData *binding = [[[EJBindingImageData alloc] initWithImageData:imageData] autorelease];
+ return [EJBindingImageData createJSObjectWithContext:ctx scriptView:scriptView instance:binding];
+
+ */
     if ([self.screenRenderingContext isKindOfClass:[EJCanvasContext2D class]]){
         NSLog(@"yup this is an ejcanvascontext2d");
         EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;

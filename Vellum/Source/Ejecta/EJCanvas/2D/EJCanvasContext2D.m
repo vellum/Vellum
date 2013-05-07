@@ -730,18 +730,22 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 }
 
 - (UIImage*)getImageFromGL{
-    float scale = 2;
+    //[self prepare];
+    [self flushBuffers];
+    
+    float scale = backingStoreRatio;
     short sx = scale * 0;
     short sy = scale * 0;
     short sw = scale * width;
     short sh = scale * height;
-    [self flushBuffers];
-    unsigned char *buffer[sw * sh];
-    glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    
+    NSMutableData * buffer= [NSMutableData dataWithLength: sw * sh * 4];
+    glPixelStorei(GL_PACK_ALIGNMENT, 4);
+    glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, [buffer mutableBytes]);
     
     UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
     CGContextRef aContext = UIGraphicsGetCurrentContext();
-    CGDataProviderRef ref = CGDataProviderCreateWithData(NULL, &buffer, sw * sh * 4, NULL);
+    CGDataProviderRef ref = CGDataProviderCreateWithCFData((CFDataRef)buffer);
     CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
     CGContextSetBlendMode(aContext, kCGBlendModeCopy);
     CGContextDrawImage(aContext, CGRectMake(0, 0, sw, sh), iref);
@@ -749,6 +753,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     UIGraphicsEndImageContext();
     return ret;
 }
+
 
 - (void)putImageData:(EJImageData*)imageData scaled:(float)scale dx:(float)dx dy:(float)dy {
 	EJTexture *texture = imageData.texture;

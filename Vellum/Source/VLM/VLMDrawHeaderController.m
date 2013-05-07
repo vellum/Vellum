@@ -365,6 +365,7 @@
     [actionSheet showInView:self.view.superview];
 
 }
+
 - (void)actionTapped:(id)sender{
     NSLog(@"actiontapped");
     [self.delegate screenCapture:self];
@@ -373,9 +374,7 @@
 
 #pragma mark - screenshotdelegate
 - (void)screenShotFound:(UIImage *)found{
-    //UIImageWriteToSavedPhotosAlbum(found, nil, nil, nil);
     NSArray* dataToShare = [NSArray arrayWithObject:found];
-    
     UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
     [self presentViewController:activityViewController animated:YES completion:^{}];
 }
