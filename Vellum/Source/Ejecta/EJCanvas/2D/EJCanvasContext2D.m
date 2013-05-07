@@ -729,12 +729,25 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 	return [self getImageDataScaled:1 flipped:upsideDown sx:sx sy:sy sw:sw sh:sh];
 }
 
-- (UIImage*)UIImage{
-    //EJImageData *data = [self getImageDataHDSx:0 sy:0 sw:width sh:height];
-    //NSMutableArray *pixels = data.pixels;
-
+- (UIImage*)getImageFromGL{
+    float scale = 2;
+    short sx = scale * 0;
+    short sy = scale * 0;
+    short sw = scale * width;
+    short sh = scale * height;
+    [self flushBuffers];
+    unsigned char *buffer[sw * sh];
+    glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
     
-    return nil;
+    UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
+    CGContextRef aContext = UIGraphicsGetCurrentContext();
+    CGDataProviderRef ref = CGDataProviderCreateWithData(NULL, &buffer, sw * sh * 4, NULL);
+    CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
+    CGContextSetBlendMode(aContext, kCGBlendModeCopy);
+    CGContextDrawImage(aContext, CGRectMake(0, 0, sw, sh), iref);
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return ret;
 }
 
 - (void)putImageData:(EJImageData*)imageData scaled:(float)scale dx:(float)dx dy:(float)dy {

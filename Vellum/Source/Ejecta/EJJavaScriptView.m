@@ -403,19 +403,7 @@
         NSLog(@"yup this is an ejcanvascontext2d");
         EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;
         UIImage *image = [ctx getImageFromGL];
-        
-        
-        /*
-         EJCanvasContext2D *ctx = (EJCanvasContext2D *) self.screenRenderingContext;
-        CGFloat scalingfactor = (ctx.useRetinaResolution && [UIScreen mainScreen].scale == 2) ? 2 : 1;
-        EJImageData *imgdata = [ctx getImageDataScaled:scalingfactor flipped:YES sx:0 sy:0 sw:ctx.width sh:ctx.height];// might need to multiply for retina
-        NSInteger w = imgdata.width;
-        NSInteger h = imgdata.height;
-        NSLog(@"imgdata size: %d, %d", w, h);
-        UIImage *image = [UIImage imageWithData:imgdata.pixels];
-        NSLog(@"image created");
-        */
-        //UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
         /*
         if (self.screenShotDelegate!=nil){
             [screenShotDelegate screenShotFound:image];

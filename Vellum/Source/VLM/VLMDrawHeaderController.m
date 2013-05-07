@@ -367,7 +367,7 @@
 }
 - (void)actionTapped:(id)sender{
     NSLog(@"actiontapped");
-      //[self.delegate screenCapture:self];
+    [self.delegate screenCapture:self];
 }
 
 
