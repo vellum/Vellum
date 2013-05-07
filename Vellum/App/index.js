@@ -2,6 +2,8 @@ var MODE_GRAPHITE = 0;
 var MODE_DOTS = 1;
 var MODE_INK = 2;
 var MODE_SCRATCH = 3;
+var MODE_LINE = 4;
+var MODE_ERASE = 5;
 var BGCOLOR = '#f2f2e8';
 var BRIDGE = new Ejecta.Bridge();
 
@@ -16,6 +18,7 @@ var w = window.innerWidth
   , angle = 0
   , zoomlevel = 1
   , drawmode = MODE_GRAPHITE
+  , accumdist = 0
   ;
 
 var setDrawingMode = function(mode){
@@ -30,7 +33,11 @@ var animate = function() {
             case MODE_GRAPHITE:
             case MODE_DOTS:
             case MODE_SCRATCH:
+            case MODE_ERASE:
                 drawgraphite();
+                break;
+            case MODE_LINE:
+                drawline();
                 break;
             case MODE_INK:
                 drawink();
@@ -105,7 +112,7 @@ var drawgraphite = function(){
         , vertexCount = 0
         , currange = curnib * multiplier
         , prevrange = prevnib * multiplier
-        , fgcolor = ( drawmode == MODE_SCRATCH ) ? BGCOLOR : '#000000'
+        , fgcolor = ( drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR : '#000000'
         ;
         if ( zoomlevel < 10 ){
             ctx.beginPath();
@@ -121,6 +128,8 @@ var drawgraphite = function(){
                     ctx.lineWidth = 0.1; // dots (these look great)
                 } else if ( drawmode == MODE_SCRATCH ){
                     ctx.lineWidth = 0.5; //
+                } else if ( drawmode == MODE_ERASE ){
+                    ctx.lineWidth = 0.15; //
                 } else {
                     ctx.lineWidth = 0.45; // these look ok
                 }
@@ -157,6 +166,74 @@ var drawgraphite = function(){
 
 }
 
+var drawline = function(){
+    
+    var x = prevmouse.x + (targetmouse.x-prevmouse.x)*0.25
+    , y = prevmouse.y + (targetmouse.y-prevmouse.y)*0.25
+    , dx = targetmouse.x - x
+    , dy = targetmouse.y - y
+    , dist = Math.sqrt( dx*dx + dy*dy)
+    , prevnib = curnib
+    , pangle = angle
+    , threshold = 0.001/(zoomlevel*1000)
+    ;
+    accumdist += dist;
+    if ( dist >= threshold ){
+        
+        angle = Math.atan2( dy, dx ) - Math.PI/2;
+        
+        curnib += dist*1.5;
+        curnib *= 0.125;
+        
+        var multiplier = 0.25
+        , count = 0
+        , cosangle = Math.cos( angle )
+        , sinangle = Math.sin( angle )
+        , cospangle = Math.cos( pangle )
+        , sinpangle = Math.sin( pangle )
+        , vertexCount = 0
+        , currange = curnib * multiplier
+        , prevrange = prevnib * multiplier
+        , fgcolor = '#000000'
+        ;
+        if(true){//if (accumdist<250){
+            ctx.beginPath();
+            ctx.lineWidth = 0.025;
+            ctx.strokeStyle = fgcolor;
+            for (var i = -currange; i <= currange; i += 3){
+                var pct = i/currange
+                , localx = x + cosangle * pct * currange
+                , localy = y + sinangle * pct * currange
+                , localpx = prevmouse.x + cospangle * pct * prevrange
+                , localpy = prevmouse.y + sinpangle * pct * prevrange
+                ;
+                ctx.moveTo(localpx, localpy);
+                ctx.lineTo(localx, localy);
+                
+            }
+            ctx.stroke();
+            ctx.closePath();
+        }
+        
+        var linwin = accumdist;
+        linwin/=500;
+        if (linwin>0.5)linwin = 0.5;
+        ctx.beginPath();
+        ctx.lineWidth = linwin;//0.3;
+        ctx.strokeStyle = fgcolor;
+        ctx.moveTo(prevmouse.x, prevmouse.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.closePath();
+        
+        
+    }
+    prevmouse.x = x;
+    prevmouse.y = y;
+    
+    
+}
+
 var setup = function() {
     canvas.width = w;
     canvas.height = h;
@@ -168,6 +245,7 @@ var setup = function() {
 
 var beginStroke = function(x,y) {
     console.log( 'beginStroke: ' + x + ', ' + y );
+    accumdist = 0;
     mousedown = true;
     targetmouse.x = prevmouse.x = x;
     targetmouse.y = prevmouse.y = y;
