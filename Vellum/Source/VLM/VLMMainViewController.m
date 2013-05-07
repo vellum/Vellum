@@ -404,5 +404,6 @@
                      completion:nil
      ];
     [self.zoomViewController hide];
+    [self handleDoubleTap:nil];
 }
 @end
