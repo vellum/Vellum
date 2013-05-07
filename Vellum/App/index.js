@@ -216,7 +216,7 @@ var drawline = function(){
         }
         
         var linwin = accumdist;
-        linwin/=500;
+        linwin/=(500/zoomlevel);
         if (linwin>0.5)linwin = 0.5;
         ctx.beginPath();
         ctx.lineWidth = linwin;//0.3;
