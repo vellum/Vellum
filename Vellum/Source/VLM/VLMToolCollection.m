@@ -27,18 +27,18 @@ static VLMToolCollection *sharedToolCollection;
     
         self.tools = [[NSMutableArray alloc] init];
         
-        NSArray *names = [NSArray arrayWithObjects:@"Mesh", @"Dots", @"Line", @"Ink", @"Eraser", @"Scratch", nil];
+        NSArray *names = [NSArray arrayWithObjects:@"Line", @"Dots", @"Mesh", @"Ink", @"Eraser", @"Scratch", nil];
         NSArray *enableds = [NSArray arrayWithObjects:
                              [NSNumber numberWithBool:YES],
                              [NSNumber numberWithBool:YES],
                              [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:NO],
+                             [NSNumber numberWithBool:YES],
                              [NSNumber numberWithBool:YES],
                              [NSNumber numberWithBool:NO], nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
-                           @"MODE_GRAPHITE",
-                           @"MODE_DOTS",
                            @"MODE_LINE",
+                           @"MODE_DOTS",
+                           @"MODE_GRAPHITE",
                            @"MODE_INK",
                            @"MODE_ERASE",
                            @"MODE_SCRATCH",

@@ -4,6 +4,7 @@ var MODE_INK = 2;
 var MODE_SCRATCH = 3;
 var MODE_LINE = 4;
 var MODE_ERASE = 5;
+var MODE_SCRAMBLE = 6;
 var BGCOLOR = '#f2f2e8';
 var BRIDGE = new Ejecta.Bridge();
 
@@ -17,7 +18,7 @@ var w = window.innerWidth
   , curnib = 1
   , angle = 0
   , zoomlevel = 1
-  , drawmode = MODE_GRAPHITE
+  , drawmode = MODE_LINE
   , accumdist = 0
   ;
 
@@ -114,6 +115,12 @@ var drawgraphite = function(){
         , prevrange = prevnib * multiplier
         , fgcolor = ( drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR : '#000000'
         ;
+        
+        
+        if ( drawmode == MODE_GRAPHITE){
+            //fgcolor = 'rgba(0,0,0,0.2)';
+        }
+        
         if ( zoomlevel < 10 ){
             ctx.beginPath();
             
@@ -135,15 +142,33 @@ var drawgraphite = function(){
                 }
             }
             ctx.strokeStyle = fgcolor;
-            for (var i = -currange; i <= currange; i += 1.5){
+            var step = 1.5;
+            
+            if ( drawmode == MODE_ERASE ){
+                step = 0.75;
+            }
+            for (var i = -currange; i <= currange; i += step){
                 var pct = i/currange
                 , localx = x + cosangle * pct * currange
                 , localy = y + sinangle * pct * currange
                 , localpx = prevmouse.x + cospangle * pct * prevrange
                 , localpy = prevmouse.y + sinpangle * pct * prevrange
                 ;
-                ctx.moveTo(localpx, localpy);
-                ctx.lineTo(localx, localy);
+                
+                var deltax, deltay;
+                
+                if ( drawmode == MODE_GRAPHITE || drawmode == MODE_DOTS ){
+                    deltax = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                    deltay = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                    ctx.moveTo(localpx + deltax, localpy + deltay);
+
+                    deltax = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                    deltay = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                    ctx.lineTo(localx + deltax, localy + deltay);
+                } else{
+                    ctx.moveTo(localpx, localpy);
+                    ctx.lineTo(localx, localy);
+                }
                 
             }
             ctx.stroke();
@@ -198,9 +223,9 @@ var drawline = function(){
         ;
         if(true){//if (accumdist<250){
             ctx.beginPath();
-            ctx.lineWidth = 0.025;
-            ctx.strokeStyle = fgcolor;
-            for (var i = -currange; i <= currange; i += 3){
+            ctx.lineWidth = 0.0125;
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            for (var i = -currange; i <= currange; i += 2){
                 var pct = i/currange
                 , localx = x + cosangle * pct * currange
                 , localy = y + sinangle * pct * currange
@@ -213,14 +238,45 @@ var drawline = function(){
             }
             ctx.stroke();
             ctx.closePath();
+
+            ctx.beginPath();
+            ctx.lineWidth = 0.25;
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+
+            //currange = prevrange = 2.0;
+            for (var i = -currange; i <= currange; i += 0.5){
+                var pct = i/currange
+                , localx = x + cosangle * pct * currange
+                , localy = y + sinangle * pct * currange
+                , localpx = prevmouse.x + cospangle * pct * prevrange
+                , localpy = prevmouse.y + sinpangle * pct * prevrange
+                ;
+                
+                deltax = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                deltay = (Math.random()>0.5) ? Math.random() * -currange/2 : Math.random() * currange/2;
+                ctx.moveTo(localpx + deltax, localpy + deltay);
+                
+                deltax = (Math.random()>0.5) ? Math.random() * -prevrange/2 : Math.random() * prevrange/2;
+                deltay = (Math.random()>0.5) ? Math.random() * -prevrange/2 : Math.random() * prevrange/2;
+                ctx.lineTo(localx + deltax, localy + deltay);
+
+                //ctx.moveTo(localpx, localpy);
+                //ctx.lineTo(localx, localy);
+                
+            }
+            ctx.stroke();
+            ctx.closePath();
+
         }
         
         var linwin = accumdist;
         linwin/=(500/zoomlevel);
-        if (linwin>0.5)linwin = 0.5;
+        if ( linwin < 0.25 ) linwin = 0.25;
+        if (linwin>1)linwin = 1;
         ctx.beginPath();
-        ctx.lineWidth = linwin;//0.3;
-        ctx.strokeStyle = fgcolor;
+        ctx.lineWidth = linwin;
+        ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+		
         ctx.moveTo(prevmouse.x, prevmouse.y);
         ctx.lineTo(x, y);
         ctx.stroke();
