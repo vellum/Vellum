@@ -14,6 +14,7 @@
 @synthesize javascriptvalue;
 @synthesize selected;
 @synthesize enabled;
+@synthesize isSubtractive;
 
 - (id)init{
     if ( self = [super init] ){
@@ -21,6 +22,7 @@
         self.javascriptvalue = @"";
         self.selected = NO;
         self.enabled = YES;
+        self.isSubtractive = NO;
     }
     return self;
 }

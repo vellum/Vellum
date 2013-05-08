@@ -31,5 +31,5 @@
 - (void) setSelectedIndex:(NSInteger)selectedIndex andTitle:(NSString *)title animated:(BOOL)shouldAnimate;
 - (void) nextPage;
 - (void) prevPage;
-
+- (void) resetToZero;
 @end

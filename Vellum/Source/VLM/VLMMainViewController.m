@@ -329,6 +329,9 @@
 - (void)clearScreen{
     [self handleDoubleTap:nil];
     [self.avc callJS:@"clearScreen();"];
+    if ([[VLMToolCollection instance] isSelectedToolSubtractive]) {
+        [self.headerController resetToZero];
+    }
 }
 
 - (void)screenCapture:(id)screenshotdelegate{

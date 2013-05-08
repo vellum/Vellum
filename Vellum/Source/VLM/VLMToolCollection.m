@@ -43,6 +43,13 @@ static VLMToolCollection *sharedToolCollection;
                            @"MODE_ERASE",
                            @"MODE_SCRATCH",
                            nil];
+        NSArray *isSubtractives = [NSArray arrayWithObjects:
+                             [NSNumber numberWithBool:NO],
+                             [NSNumber numberWithBool:NO],
+                             [NSNumber numberWithBool:NO],
+                             [NSNumber numberWithBool:NO],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES], nil];
 
         NSInteger selectedIndex = 0;
         
@@ -52,6 +59,7 @@ static VLMToolCollection *sharedToolCollection;
             data.javascriptvalue = [jsvals objectAtIndex:i];
             data.enabled = [[enableds objectAtIndex:i] boolValue];
             data.selected = (i == selectedIndex);
+            data.isSubtractive = [[isSubtractives objectAtIndex:i] boolValue];
             [self.tools addObject:data];
         }
 	}
@@ -103,6 +111,11 @@ static VLMToolCollection *sharedToolCollection;
         }
     }
     return ret;
+}
+
+- (BOOL)isSelectedToolSubtractive{
+    VLMToolData *tool = (VLMToolData*)[self.tools objectAtIndex:self.selectedIndex];
+    return tool.isSubtractive;
 }
 
 @end

@@ -19,5 +19,5 @@
 - (NSMutableArray *)getEnabledTools;
 - (NSInteger)getSelectedEnabledIndex;
 - (VLMToolData *)getSelectedToolFromEnabledIndex:(NSInteger)index;
-
+- (BOOL)isSelectedToolSubtractive;
 @end

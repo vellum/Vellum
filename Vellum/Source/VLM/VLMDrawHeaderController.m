@@ -347,6 +347,14 @@
     
 }
 
+- (void) resetToZero{
+    if ( [self.titles count] > 0 ){
+        self.index = 0;
+        [self updatePage];
+    }
+}
+
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

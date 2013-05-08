@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *javascriptvalue;
 @property (nonatomic) BOOL selected;
 @property (nonatomic) BOOL enabled;
+@property (nonatomic) BOOL isSubtractive;
 - (id)init;
 @end
 
