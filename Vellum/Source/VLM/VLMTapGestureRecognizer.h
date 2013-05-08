@@ -11,4 +11,7 @@
 
 @interface VLMTapGestureRecognizer : UITapGestureRecognizer
 @property (nonatomic) NSInteger numberOfTouches;
+@property CGPoint previous;
+@property CGFloat travel;
+@property CGFloat travelthreshold;
 @end
