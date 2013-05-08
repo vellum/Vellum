@@ -81,6 +81,7 @@
         [onoff setBackgroundImage:[UIImage imageNamed:@"popcircle_on.png"] forState:UIControlStateSelected];
         [onoff setSelected:tool.enabled];
         [onoff setTag:i];
+        [onoff setShowsTouchWhenHighlighted:YES];
         [back addSubview:onoff];
         [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
         
