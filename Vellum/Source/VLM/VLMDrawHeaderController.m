@@ -370,11 +370,19 @@
 - (void)plusTapped:(id)sender{
     NSLog(@"tap");
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Start Again", nil];
-    [actionSheet showInView:self.view.superview];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIButton *btn = (UIButton *)sender;
+        CGRect c = btn.frame;
+        [actionSheet showFromRect:c inView:self.view animated:YES];
+    } else {
+        [actionSheet showInView:self.view.superview];
+    }
 
 }
 
 - (void)actionTapped:(id)sender{
+    
     NSLog(@"actiontapped");
     [self.delegate screenCapture:self];
 }
@@ -384,7 +392,13 @@
 - (void)screenShotFound:(UIImage *)found{
     NSArray* dataToShare = [NSArray arrayWithObject:found];
     UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    [self presentViewController:activityViewController animated:YES completion:^{}];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIPopoverController *popovercontroller = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self presentViewController:activityViewController animated:YES completion:^{}];
+    }
 }
 
 @end
