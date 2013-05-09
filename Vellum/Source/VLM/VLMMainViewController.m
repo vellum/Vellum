@@ -139,6 +139,8 @@
                                              selector:@selector(enteredForeground)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
+    
+    [self.headerController updatePage];
 }
 
 #pragma mark - UIGestureRecco Delegate

@@ -32,4 +32,5 @@
 - (void) nextPage;
 - (void) prevPage;
 - (void) resetToZero;
+- (void)updatePage;
 @end

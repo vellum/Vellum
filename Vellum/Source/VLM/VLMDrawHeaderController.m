@@ -149,7 +149,6 @@
     [lpr setNumberOfTapsRequired:0];
     [lpr setNumberOfTouchesRequired:1];
     [titleviewmask addGestureRecognizer:lpr];
-
     
 }
 
