@@ -31,7 +31,6 @@
     return self;
 }
 
-
 #pragma mark -
 
 - (NSString *)description {
@@ -47,12 +46,11 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
     NSArray *touchesfromevent = [[event allTouches] allObjects];
-	int touchcount = [touchesfromevent count];
+    int touchcount = [touchesfromevent count];
     [super touchesBegan:touches withEvent:event];
-
-    if (touchcount != 1/* || [[touches anyObject] tapCount] > 1*/) {
+    
+    if (touchcount != 1 /* || [[touches anyObject] tapCount] > 1*/) {
         NSLog(@"single pan failing with more than one touch");
         self.state = UIGestureRecognizerStateFailed;
         return;
@@ -63,10 +61,10 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     NSArray *touchesfromevent = [[event allTouches] allObjects];
-	int touchcount = [touchesfromevent count];
-
+    int touchcount = [touchesfromevent count];
+    
     [super touchesMoved:touches withEvent:event];
-    if ( touchcount != 1 ) {
+    if (touchcount != 1) {
         self.state = UIGestureRecognizerStateFailed;
         return;
     }
@@ -78,7 +76,6 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
     [super touchesEnded:touches withEvent:event];
     self.state = UIGestureRecognizerStateEnded;
 }
@@ -88,6 +85,4 @@
     self.state = UIGestureRecognizerStateFailed;
 }
 
-
 @end
-

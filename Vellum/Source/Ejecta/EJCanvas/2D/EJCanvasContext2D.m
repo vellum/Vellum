@@ -746,11 +746,17 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
     CGContextRef aContext = UIGraphicsGetCurrentContext();
     CGDataProviderRef ref = CGDataProviderCreateWithCFData((CFDataRef)buffer);
-    CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
+    CGColorSpaceRef csref = CGColorSpaceCreateDeviceRGB();
+    CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, csref, kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
     CGContextSetBlendMode(aContext, kCGBlendModeCopy);
     CGContextDrawImage(aContext, CGRectMake(0, 0, sw, sh), iref);
     UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+
+    CGImageRelease(iref);
+    CGDataProviderRelease(ref);
+    CGColorSpaceRelease(csref);
+    
     return ret;
 }
 

@@ -12,11 +12,11 @@
 @protocol VLMMenuDelegate <NSObject>
 
 - (void)updateHeader;
-- (void)updateHeaderWithTitle:(NSString*)title;
+- (void)updateHeaderWithTitle:(NSString *)title;
 - (void)refreshData;
 
 @end
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate,VLMHeaderDelegate, VLMMenuDelegate>
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate>
 
 @end

@@ -11,15 +11,16 @@
 
 @interface VLMZoomViewController : UIViewController
 {
-	UILabel *label;
+    UILabel *label;
     CGFloat zoomlevel;
 }
 
-@property(nonatomic,retain) UILabel *label;
-@property(nonatomic) CGFloat zoomlevel;
+@property (nonatomic, retain) UILabel *label;
+@property (nonatomic) CGFloat zoomlevel;
 
 - (void)show;
 - (void)hide;
 - (void)setText:(int)value;
 - (BOOL)isVisible;
+
 @end

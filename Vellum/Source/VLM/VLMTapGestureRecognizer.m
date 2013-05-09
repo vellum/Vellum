@@ -7,7 +7,7 @@
 //
 
 #import "VLMTapGestureRecognizer.h"
-
+#define VLM_TAP_MAX_TRAVEL_DISTANCE 7.0f
 @implementation VLMTapGestureRecognizer
 @synthesize numberOfTouches;
 @synthesize travel;
@@ -17,7 +17,7 @@
     if (self = [super init]) {
         self.numberOfTouches = 0;
         self.previous = CGPointZero;
-        self.travelthreshold = 4;
+        self.travelthreshold = VLM_TAP_MAX_TRAVEL_DISTANCE;
         self.travel = 0;
     }
     return self;
@@ -27,7 +27,7 @@
     if (self = [super initWithTarget:target action:action]) {
         self.numberOfTouches = 0;
         self.previous = CGPointZero;
-        self.travelthreshold = 4;
+        self.travelthreshold = VLM_TAP_MAX_TRAVEL_DISTANCE;
         self.travel = 0;
     }
     return self;

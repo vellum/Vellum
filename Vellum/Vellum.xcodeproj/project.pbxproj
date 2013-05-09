@@ -116,28 +116,28 @@
 		BD0A8B16172F42A10066B67E /* button_plus_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0E172F42A10066B67E /* button_plus_on.png */; };
 		BD0A8B17172F42A10066B67E /* button_plus_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */; };
 		BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */; };
-		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; };
+		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
-		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; };
-		BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */; };
+		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDB88EF917373FF6006134F0 /* popcircle_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF317373FF6006134F0 /* popcircle_off.png */; };
 		BDB88EFA17373FF6006134F0 /* popcircle_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF417373FF6006134F0 /* popcircle_on.png */; };
 		BDB88EFB17373FF6006134F0 /* popcircle_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF517373FF6006134F0 /* popcircle_off@2x.png */; };
 		BDB88EFC17373FF6006134F0 /* popcircle_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF617373FF6006134F0 /* popcircle_on@2x.png */; };
-		BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F03173755F0006134F0 /* VLMTriangleView.m */; };
-		BDB88F16173793FE006134F0 /* VLMMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F15173793FD006134F0 /* VLMMenuButton.m */; };
+		BDB88F04173755F0006134F0 /* VLMTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F03173755F0006134F0 /* VLMTriangleView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDB88F16173793FE006134F0 /* VLMMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB88F15173793FD006134F0 /* VLMMenuButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDB88F1917379554006134F0 /* menu_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1717379554006134F0 /* menu_selected.png */; };
 		BDB88F1A17379554006134F0 /* menu_default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1817379554006134F0 /* menu_default.png */; };
 		BDB88F1C17379680006134F0 /* menu_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1B17379680006134F0 /* menu_highlighted.png */; };
-		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; };
-		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; };
-		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; };
-		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; };
-		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; };
-		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; };
+		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D418172B83F5004063D4 /* subtlenet.png */; };
 		BDF5D41B172B83F5004063D4 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D419172B83F5004063D4 /* subtlenet@2X.png */; };
-		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; };
+		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
