@@ -12,7 +12,7 @@
 @interface VLMPopMenuViewController : UIViewController
 @property (nonatomic, strong) id<VLMMenuDelegate> delegate;
 
--(void)hide;
--(void)show;
--(void)updatebuttons;
+- (void)hide;
+- (void)show;
+- (void)updatebuttons;
 @end

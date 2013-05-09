@@ -17,4 +17,3 @@
 @property (nonatomic) BOOL isSubtractive;
 - (id)init;
 @end
-
