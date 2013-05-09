@@ -30,7 +30,7 @@ static VLMToolCollection *sharedToolCollection;
         NSArray *names = [NSArray arrayWithObjects:
                           @"Scribble",
                           @"Stipple",
-                          @"Brush",
+                          @"Write",
                           @"Erase",
                           @"Scratch",
                           nil];
