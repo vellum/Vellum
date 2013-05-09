@@ -1,10 +1,13 @@
-var MODE_GRAPHITE = 0;
-var MODE_DOTS = 1;
-var MODE_INK = 2;
-var MODE_SCRATCH = 3;
-var MODE_LINE = 4;
-var MODE_ERASE = 5;
-var MODE_SCRAMBLE = 6;
+var MODE_GRAPHITE = 0,
+    MODE_DOTS = 1,
+    MODE_INK = 2,
+    MODE_SCRATCH = 3,
+    MODE_LINE = 4,
+    MODE_ERASE = 5,
+    MODE_SCRAMBLE = 6,
+    MODE_OUTLINE = 7
+    ;
+
 var BGCOLOR = '#f2f2e8';
 var BRIDGE = new Ejecta.Bridge();
 
@@ -37,8 +40,9 @@ var animate = function() {
             case MODE_ERASE:
                 drawgraphite();
                 break;
+            case MODE_OUTLINE:
             case MODE_LINE:
-                drawline();
+                drawpencil();
                 break;
             case MODE_INK:
                 drawink();
@@ -56,7 +60,7 @@ var drawink = function(){
     , dist = Math.sqrt( dx*dx + dy*dy)
     , prevnib = curnib
     , pangle = angle
-    , threshold = 0.001/(zoomlevel*1000)//(zoomlevel>10) ? 0.000001 : 1
+    , threshold = 0.001/(zoomlevel*1000)
     ;
     if ( dist >= threshold ){
         
@@ -191,7 +195,7 @@ var drawgraphite = function(){
 
 }
 
-var drawline = function(){
+var drawpencil = function(){
     
     var x = prevmouse.x + (targetmouse.x-prevmouse.x)*0.25
     , y = prevmouse.y + (targetmouse.y-prevmouse.y)*0.25
@@ -221,10 +225,11 @@ var drawline = function(){
         , prevrange = prevnib * multiplier
         , fgcolor = '#000000'
         ;
-        if(true){//if (accumdist<250){
+        if(true){
+            /*
             ctx.beginPath();
             ctx.lineWidth = 0.0125;
-            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
             for (var i = -currange; i <= currange; i += 2){
                 var pct = i/currange
                 , localx = x + cosangle * pct * currange
@@ -238,13 +243,13 @@ var drawline = function(){
             }
             ctx.stroke();
             ctx.closePath();
-
+*/
             ctx.beginPath();
-            ctx.lineWidth = 0.25;
-            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 0.125;
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
 
             //currange = prevrange = 2.0;
-            for (var i = -currange; i <= currange; i += 0.5){
+            for (var i = -currange; i <= currange; i += 1){
                 var pct = i/currange
                 , localx = x + cosangle * pct * currange
                 , localy = y + sinangle * pct * currange
@@ -272,10 +277,10 @@ var drawline = function(){
         var linwin = accumdist;
         linwin/=(500/zoomlevel);
         if ( linwin < 0.25 ) linwin = 0.25;
-        if (linwin>1)linwin = 1;
+        if (linwin>0.5)linwin = 0.5;
         ctx.beginPath();
         ctx.lineWidth = linwin;
-        ctx.strokeStyle = 'rgba(0,0,0,0.25)';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
 		
         ctx.moveTo(prevmouse.x, prevmouse.y);
         ctx.lineTo(x, y);
@@ -287,6 +292,53 @@ var drawline = function(){
     prevmouse.x = x;
     prevmouse.y = y;
     
+    
+}
+
+var drawline = function(){
+    
+    var x = prevmouse.x + (targetmouse.x-prevmouse.x)*0.25
+    , y = prevmouse.y + (targetmouse.y-prevmouse.y)*0.25
+    , dx = targetmouse.x - x
+    , dy = targetmouse.y - y
+    , dist = Math.sqrt( dx*dx + dy*dy)
+    , prevnib = curnib
+    , pangle = angle
+    , threshold = 0.001/(zoomlevel*1000)
+    ;
+    if ( dist >= threshold ){
+
+        // this version is like one width
+        /*        var nib = 20 * dist * 0.005;
+         nib = 20 - nib;
+         if ( nib < 0.125 )
+         nib = 0.125;
+         if (nib > 3)nib = 3;
+         */
+        // this version is like paper draw
+        var nib = dist * 0.125;
+        curnib += ( nib - curnib ) * 0.125;
+        
+        
+        
+        ctx.beginPath();
+        ctx.fillStyle = '#000000';
+        ctx.arc(x, y, curnib/2, 0, Math.PI*2, true);
+        ctx.fill();
+        ctx.closePath();
+        
+        
+        ctx.beginPath();
+        ctx.lineWidth= ( zoomlevel < 10 ) ? curnib : 0.5;
+        ctx.strokeStyle='#000000';
+        ctx.moveTo(x, y);
+        ctx.lineTo(prevmouse.x, prevmouse.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    prevmouse.x = x;
+    prevmouse.y = y;
+
     
 }
 
