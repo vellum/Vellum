@@ -42,7 +42,7 @@
 
 - (void)reset {
     [super reset];
-    self.anchorPoint = CGPointZero;
+    [self setAnchorPoint:CGPointZero];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -50,13 +50,12 @@
     int touchcount = [touchesfromevent count];
     [super touchesBegan:touches withEvent:event];
     
-    if (touchcount != 1 /* || [[touches anyObject] tapCount] > 1*/) {
-        NSLog(@"single pan failing with more than one touch");
-        self.state = UIGestureRecognizerStateFailed;
+    if (touchcount != 1) {
+        [self setState:UIGestureRecognizerStateFailed];
         return;
     }
-    self.state = UIGestureRecognizerStateBegan;
-    self.anchorPoint = [[touches anyObject] locationInView:self.view];
+    [self setState:UIGestureRecognizerStateBegan];
+    [self setAnchorPoint:[[touches anyObject] locationInView:self.view]];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -65,24 +64,26 @@
     
     [super touchesMoved:touches withEvent:event];
     if (touchcount != 1) {
-        self.state = UIGestureRecognizerStateFailed;
+        [self setState:UIGestureRecognizerStateFailed];
         return;
     }
     if (self.state == UIGestureRecognizerStateFailed) return;
-    self.dragPoint = [[touches anyObject] locationInView:self.view];
-    self.state = UIGestureRecognizerStateChanged;
+    
+    [self setDragPoint:[[touches anyObject] locationInView:self.view]];
+    
+    [self setState:UIGestureRecognizerStateChanged];
     
     return;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    self.state = UIGestureRecognizerStateEnded;
+    [self setState:UIGestureRecognizerStateEnded];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    self.state = UIGestureRecognizerStateFailed;
+    [self setState:UIGestureRecognizerStateFailed];
 }
 
 @end
