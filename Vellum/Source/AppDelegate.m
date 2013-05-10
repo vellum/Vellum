@@ -19,11 +19,4 @@
     return YES;
 }
 
-#pragma mark -
-#pragma mark Memory management
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 @end

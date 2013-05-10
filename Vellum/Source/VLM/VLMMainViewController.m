@@ -18,6 +18,8 @@
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
 #import "DDPageControl.h"
+#import "VLMUndoState.h"
+#import "VLMUndoManager.h"
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
@@ -29,6 +31,7 @@
 @property (strong, nonatomic) VLMZoomViewController *zoomViewController;
 @property (strong, nonatomic) EJAppViewController *avc;
 @property (strong, nonatomic) VLMPopMenuViewController *pop;
+@property (strong, nonatomic) VLMUndoManager *undoManager;
 @property CGFloat pinchLastScale;
 @property CGPoint pinchLastPoint;
 @property CGFloat pinchAccumulatedScale;
@@ -40,6 +43,7 @@
 - (void)handleSingleTap:(id)sender;
 - (void)handleDoubleTap:(id)sender;
 - (void)enteredForeground;
+- (void)saveUndoState;
 
 @end
 
@@ -49,6 +53,7 @@
 @synthesize touchCaptureView;
 @synthesize zoomViewController;
 @synthesize avc;
+@synthesize undoManager;
 @synthesize pinchLastScale;
 @synthesize pinchLastPoint;
 @synthesize pinchAccumulatedScale;
@@ -131,6 +136,9 @@
                                                object:nil];
     
     [self.headerController updatePage];
+    
+    VLMUndoManager *um = [[VLMUndoManager alloc] init];
+    [self setUndoManager:um];
 }
 
 #pragma mark -
@@ -168,6 +176,7 @@
     } else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
         NSString *s = [NSString stringWithFormat:@"endStroke(%f,%f);", p.x, p.y];
         [self.avc callJS:s];
+        [self saveUndoState];
         return;
     }
     NSString *s = [NSString stringWithFormat:@"continueStroke(%f,%f);", p.x, p.y];
@@ -299,6 +308,15 @@
     [self handleDoubleTap:nil];
 }
 
+- (void)saveUndoState{
+    if (![self.undoManager shouldSaveState] ) return;
+    
+    // request undo
+    EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
+    [jsv setUndoScreenShotDelegate:self];
+    [jsv requestUndoScreenShot];
+}
+
 #pragma mark - VLMHeaderDelegate
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title {
@@ -375,6 +393,16 @@
         [self.headerController setSelectedIndex:0 andTitle:selecteditem.name animated:NO];
     } else {
         [self.headerController setSelectedIndex:selectedenabledindex andTitle:nil animated:NO];
+    }
+}
+
+#pragma mark - VLMScreenShotDelegate
+
+- (void)screenShotFound:(UIImage *)found{
+    // send this thing to the
+    NSLog(@"mainviewcontroller: screenshotfound");
+    if ([self.undoManager shouldSaveState]){
+        [self.undoManager saveState:found];
     }
 }
 

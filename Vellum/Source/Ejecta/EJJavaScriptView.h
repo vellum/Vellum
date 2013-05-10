@@ -10,11 +10,18 @@
 #import "EJSharedOpenGLContext.h"
 #import "EJNonRetainingProxy.h"
 
-#define EJECTA_VERSION @"1.2"
+#define EJECTA_VERSION            @"1.2"
 #define EJECTA_DEFAULT_APP_FOLDER @"App/"
 
-#define EJECTA_BOOT_JS @"../Ejecta.js"
+#define EJECTA_BOOT_JS            @"../Ejecta.js"
 
+#pragma mark - VLM Additions
+
+@protocol VLMScreenShotDelegate
+- (void)screenShotFound:(UIImage *)found;
+@end
+
+#pragma mark -
 
 @protocol EJTouchDelegate
 - (void)triggerEvent:(NSString *)name all:(NSSet *)all changed:(NSSet *)changed remaining:(NSSet *)remaining;
@@ -29,53 +36,48 @@
 - (void)pause;
 @end
 
-// ADDED BY DL
-@protocol VLMScreenShotDelegate
-- (void)screenShotFound:(UIImage *)found;
-@end
 
 @class EJTimerCollection;
 @class EJClassLoader;
 
 @interface EJJavaScriptView : UIView {
-	NSString *appFolder;
-	
-	BOOL pauseOnEnterBackground;
-	BOOL hasScreenCanvas;
-
-	BOOL isPaused;
-
-    // ADDED BY DL
-    BOOL requestedScreenShot;
-	
-	EJNonRetainingProxy	*proxy;
-
-	JSGlobalContextRef jsGlobalContext;
-	EJClassLoader *classLoader;
-
-	EJTimerCollection *timers;
-	
-	EJSharedOpenGLContext *openGLContext;
-	EJSharedTextureCache *textureCache;
-	EJSharedOpenALManager *openALManager;
-	
-	EJCanvasContext *currentRenderingContext;
-	EAGLContext *glCurrentContext;
+    NSString *appFolder;
     
-	
-	CADisplayLink *displayLink;
-
-	NSObject<EJLifecycleDelegate> *lifecycleDelegate;
-	NSObject<EJTouchDelegate> *touchDelegate;
-	NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
-	EJCanvasContext<EJPresentable> *screenRenderingContext;
-	NSObject<VLMScreenShotDelegate> *screenShotDelegate;
+    BOOL pauseOnEnterBackground;
+    BOOL hasScreenCanvas;
     
-
-	NSOperationQueue *backgroundQueue;
-	
-	// Public for fast access in bound functions
-	@public JSValueRef jsUndefined;
+    BOOL isPaused;
+    
+    
+    EJNonRetainingProxy *proxy;
+    
+    JSGlobalContextRef jsGlobalContext;
+    EJClassLoader *classLoader;
+    
+    EJTimerCollection *timers;
+    
+    EJSharedOpenGLContext *openGLContext;
+    EJSharedTextureCache *textureCache;
+    EJSharedOpenALManager *openALManager;
+    
+    EJCanvasContext *currentRenderingContext;
+    EAGLContext *glCurrentContext;
+    
+    
+    CADisplayLink *displayLink;
+    
+    NSObject<EJLifecycleDelegate> *lifecycleDelegate;
+    NSObject<EJTouchDelegate> *touchDelegate;
+    NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
+    EJCanvasContext<EJPresentable> *screenRenderingContext;
+    NSObject<VLMScreenShotDelegate> *screenShotDelegate;
+    NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
+    
+    
+    NSOperationQueue *backgroundQueue;
+    
+    // Public for fast access in bound functions
+@public JSValueRef jsUndefined;
 }
 
 @property (nonatomic, copy) NSString *appFolder;
@@ -90,7 +92,9 @@
 @property (nonatomic, retain) NSObject<EJLifecycleDelegate> *lifecycleDelegate;
 @property (nonatomic, retain) NSObject<EJTouchDelegate> *touchDelegate;
 @property (nonatomic, retain) NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
+
 @property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
+@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
 
 @property (nonatomic, retain) EJCanvasContext *currentRenderingContext;
 @property (nonatomic, retain) EJCanvasContext<EJPresentable> *screenRenderingContext;
@@ -110,5 +114,9 @@
 - (JSValueRef)loadModuleWithId:(NSString *)moduleId module:(JSValueRef)module exports:(JSValueRef)exports;
 - (JSValueRef)createTimer:(JSContextRef)ctxp argc:(size_t)argc argv:(const JSValueRef [])argv repeat:(BOOL)repeat;
 
+#pragma mark - VLM Additions
+
 - (void)requestScreenShot;
+- (void)requestUndoScreenShot;
+
 @end
