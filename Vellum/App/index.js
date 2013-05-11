@@ -26,7 +26,7 @@ var w = window.innerWidth
   ;
 
 var setDrawingMode = function(mode){
-    console.log('setdrawingmode ' + mode);
+    //console.log('setdrawingmode ' + mode);
     drawmode = mode;
 };
 
@@ -352,7 +352,7 @@ var setup = function() {
 };
 
 var beginStroke = function(x,y) {
-    console.log( 'beginStroke: ' + x + ', ' + y );
+    //console.log( 'beginStroke: ' + x + ', ' + y );
     accumdist = 0;
     mousedown = true;
     targetmouse.x = prevmouse.x = x;
@@ -362,7 +362,7 @@ var beginStroke = function(x,y) {
 };
 
 var continueStroke = function(x,y) {
-    console.log( 'continueStroke: ' + x + ', ' + y );
+    //console.log( 'continueStroke: ' + x + ', ' + y );
     mousedown = true;
     targetmouse.x = x;
     targetmouse.y = y;
@@ -370,7 +370,7 @@ var continueStroke = function(x,y) {
 
 var endStroke = function(x,y) {
     mousedown = false;
-    console.log( 'endStroke: ' + x + ', ' + y );
+    //console.log( 'endStroke: ' + x + ', ' + y );
 
 	/*
     var imagedata = ctx.getImageData(0, 0, w, h);
@@ -387,7 +387,7 @@ var endStroke = function(x,y) {
 
 var setZoom = function( val ){
     zoomlevel = Number(val);
-    console.log('setzoom:'+zoomlevel);
+    //console.log('setzoom:'+zoomlevel);
 };
 
 var clearScreen = function(){
