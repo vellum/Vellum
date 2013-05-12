@@ -207,9 +207,6 @@ static inline EJColorRGBA EJCanvasBlendStrokeColor( EJCanvasState *state ) {
 - (void)clip;
 - (void)resetClip;
 
-/*added by dl*/
-- (UIImage*)getImageFromGL;
-
 @property (nonatomic) EJCanvasState *state;
 @property (nonatomic) EJCompositeOperation globalCompositeOperation;
 @property (nonatomic, retain) EJFontDescriptor *font;
@@ -219,12 +216,16 @@ static inline EJColorRGBA EJCanvasBlendStrokeColor( EJCanvasState *state ) {
 @property (nonatomic) BOOL imageSmoothingEnabled;
 
 /* TODO: not yet implemented:
-	createLinearGradient(x0, y0, x1, y1)
-	createRadialGradient(x0, y0, r0, x1, y1, r1)
 	shadowOffsetX
 	shadowOffsetY
 	shadowBlur
 	shadowColor
 	isPointInPath(x, y)
 */
+
+#pragma mark - VLM Additions
+- (UIImage*)getImageFromGL;
+//- (void)drawImageIntoGL:(UIImage*)image;
+
+
 @end

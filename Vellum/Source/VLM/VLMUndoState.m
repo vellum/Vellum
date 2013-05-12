@@ -8,7 +8,7 @@
 
 #import "VLMUndoState.h"
 
-@interface VLMUndoState()
+@interface VLMUndoState ()
 @end
 
 @implementation VLMUndoState
@@ -29,7 +29,12 @@
 }
 
 - (id)initWithImage:(UIImage *)existingImage {
-    if (self = [self init]) {
+    if (self = [super init]) {
+        NSString *prefixString = @"undo_";
+        NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+        NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];
+        [self setFileName:uniqueFileName];
+        [self setTimeStamp:[[NSDate date] timeIntervalSince1970]];
         [self setImage:existingImage];
     }
     return self;

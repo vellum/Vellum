@@ -4,6 +4,7 @@
 
 @implementation AppDelegate
 @synthesize window;
+@synthesize mainViewController;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -14,6 +15,7 @@
     [application setIdleTimerDisabled:YES];
     
     VLMMainViewController *vc = [[VLMMainViewController alloc] init];
+    [self setMainViewController:vc];
     [window setRootViewController:vc];
     
     return YES;

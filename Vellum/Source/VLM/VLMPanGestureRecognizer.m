@@ -92,6 +92,6 @@
          [self setState:UIGestureRecognizerStateFailed];
      }
      [super touchesCancelled:touches withEvent:event];
-     }
-     
-     @end
+ }
+ 
+ @end

@@ -64,20 +64,8 @@
 - (void)callJS:(NSString *)statement{
 	EJJavaScriptView *view = (EJJavaScriptView *)self.view;
     [view loadScript:statement sourceURL:@""];
-
-}
-
-- (void)imageFromCanvas{
-	//EJJavaScriptView *view = (EJJavaScriptView *)self.view;
-    //view.screenShotDelegate
-    
-
-    
-    //EJSharedOpenGLContext *context = [EJSharedOpenGLContext instance];
-    //EAGLContext *glContext = context.glContext2D;
     
 }
-
 
 
 @end

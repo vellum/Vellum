@@ -13,8 +13,12 @@
 - (id)init;
 - (void)saveState:(UIImage *)image;
 - (void)restoreState;
-- (UIImage*)previousImage;
-- (UIImage*)nextImage;
+- (UIImage *)previousImage;
+- (UIImage *)nextImage;
 - (BOOL)shouldSaveState;
+- (NSInteger)numStates;
+- (UIImage *)imageAt:(NSInteger)imageIndex inverted:(BOOL)shouldInvertIndex;
+- (void)dropAll;
+- (void)dropAllAfterCurrent;
 
 @end

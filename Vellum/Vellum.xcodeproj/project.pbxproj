@@ -105,7 +105,6 @@
 		B6F11556167BD59D001F1324 /* EJBindingWebGLObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F11555167BD59B001F1324 /* EJBindingWebGLObjects.m */; };
 		B6F463A41636C3FB00FC89C1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F463A31636C3FA00FC89C1 /* SystemConfiguration.framework */; };
 		B6F629D116F353C800F16BAC /* EJBindingCanvasStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */; };
-		B6F9AFC0169F81D400ABD91A /* EJBindingLifecycle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */; };
 		B870BDE916F2E11A00827F01 /* EJBindingWebGLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */; };
 		BD0A8B10172F42A10066B67E /* button_action_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B08172F42A10066B67E /* button_action_off.png */; };
 		BD0A8B11172F42A10066B67E /* button_action_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B09172F42A10066B67E /* button_action_off@2x.png */; };
@@ -118,6 +117,8 @@
 		BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */; };
 		BD70E7E0173CA6FB00AD2FED /* VLMUndoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F5173E282800D08179 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
 		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -318,8 +319,6 @@
 		B6F463A31636C3FA00FC89C1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B6F629CF16F353C600F16BAC /* EJBindingCanvasStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJBindingCanvasStyle.h; sourceTree = "<group>"; };
 		B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJBindingCanvasStyle.m; sourceTree = "<group>"; };
-		B6F9AFBE169F81D400ABD91A /* EJBindingLifecycle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJBindingLifecycle.h; sourceTree = "<group>"; };
-		B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJBindingLifecycle.m; sourceTree = "<group>"; };
 		B870BDE716F2E10400827F01 /* EJBindingWebGLExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EJBindingWebGLExtensions.h; path = WebGL/EJBindingWebGLExtensions.h; sourceTree = "<group>"; };
 		B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingWebGLExtensions.m; path = WebGL/EJBindingWebGLExtensions.m; sourceTree = "<group>"; };
 		BD0A8B08172F42A10066B67E /* button_action_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_action_off.png; sourceTree = "<group>"; };
@@ -336,6 +335,10 @@
 		BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoManager.m; path = VLM/VLMUndoManager.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
+		BD97F5F4173E282800D08179 /* VLMUndoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoViewController.h; path = VLM/VLMUndoViewController.h; sourceTree = "<group>"; };
+		BD97F5F5173E282800D08179 /* VLMUndoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoViewController.m; path = VLM/VLMUndoViewController.m; sourceTree = "<group>"; };
+		BD97F5F8173EC27400D08179 /* VLMArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMArcView.h; path = VLM/VLMArcView.h; sourceTree = "<group>"; };
+		BD97F5F9173EC27400D08179 /* VLMArcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMArcView.m; path = VLM/VLMArcView.m; sourceTree = "<group>"; };
 		BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMDrawHeaderController.h; path = VLM/VLMDrawHeaderController.h; sourceTree = "<group>"; };
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
@@ -589,8 +592,6 @@
 				B64CE64C166682700087CF94 /* EJBindingLocalStorage.m */,
 				B64CE64D166682700087CF94 /* EJBindingTouchInput.h */,
 				B64CE64E166682700087CF94 /* EJBindingTouchInput.m */,
-				B6F9AFBE169F81D400ABD91A /* EJBindingLifecycle.h */,
-				B6F9AFBF169F81D400ABD91A /* EJBindingLifecycle.m */,
 				B63D256B16E8DFAB007E6034 /* EJBindingWebSocket.h */,
 				B63D256C16E8DFAB007E6034 /* EJBindingWebSocket.m */,
 			);
@@ -736,6 +737,10 @@
 				BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */,
 				BD70E7E1173CA91400AD2FED /* VLMUndoState.h */,
 				BD70E7E2173CA91400AD2FED /* VLMUndoState.m */,
+				BD97F5F4173E282800D08179 /* VLMUndoViewController.h */,
+				BD97F5F5173E282800D08179 /* VLMUndoViewController.m */,
+				BD97F5F8173EC27400D08179 /* VLMArcView.h */,
+				BD97F5F9173EC27400D08179 /* VLMArcView.m */,
 			);
 			name = Undo;
 			sourceTree = "<group>";
@@ -928,7 +933,6 @@
 				B64CE67E166682700087CF94 /* EJBindingTouchInput.m in Sources */,
 				B64CE67F166682700087CF94 /* AppDelegate.m in Sources */,
 				B64CE682166682700087CF94 /* main.m in Sources */,
-				B6F9AFC0169F81D400ABD91A /* EJBindingLifecycle.m in Sources */,
 				B6F114DF1676B4FE001F1324 /* EJBindingCanvas.m in Sources */,
 				B6F114E31676BAFB001F1324 /* EJCanvasContext.m in Sources */,
 				B6F114FA1676BD40001F1324 /* EJBindingCanvasContext2D.m in Sources */,
@@ -982,6 +986,8 @@
 				BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */,
 				BD70E7E0173CA6FB00AD2FED /* VLMUndoManager.m in Sources */,
 				BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */,
+				BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */,
+				BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

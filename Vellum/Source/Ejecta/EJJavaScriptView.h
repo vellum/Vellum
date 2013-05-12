@@ -10,15 +10,17 @@
 #import "EJSharedOpenGLContext.h"
 #import "EJNonRetainingProxy.h"
 
-#define EJECTA_VERSION            @"1.2"
+#define EJECTA_VERSION @"1.2"
 #define EJECTA_DEFAULT_APP_FOLDER @"App/"
 
-#define EJECTA_BOOT_JS            @"../Ejecta.js"
+#define EJECTA_BOOT_JS @"../Ejecta.js"
+
 
 #pragma mark - VLM Additions
 
 @protocol VLMScreenShotDelegate
 - (void)screenShotFound:(UIImage *)found;
+- (UIImage *)screenshotToRestore;
 @end
 
 #pragma mark -
@@ -31,53 +33,54 @@
 - (void)triggerDeviceMotionEvents;
 @end
 
-@protocol EJLifecycleDelegate
+@protocol EJWindowEventsDelegate
 - (void)resume;
 - (void)pause;
+- (void)resize;
 @end
-
 
 @class EJTimerCollection;
 @class EJClassLoader;
 
 @interface EJJavaScriptView : UIView {
-    NSString *appFolder;
+	CGSize oldSize;
+	NSString *appFolder;
+	
+	BOOL pauseOnEnterBackground;
+	BOOL hasScreenCanvas;
+
+	BOOL isPaused;
+	
+	EJNonRetainingProxy	*proxy;
+
+	JSGlobalContextRef jsGlobalContext;
+	EJClassLoader *classLoader;
+
+	EJTimerCollection *timers;
+	
+	EJSharedOpenGLContext *openGLContext;
+	EJSharedTextureCache *textureCache;
+	EJSharedOpenALManager *openALManager;
+	
+	EJCanvasContext *currentRenderingContext;
+	EAGLContext *glCurrentContext;
+	
+	CADisplayLink *displayLink;
+
+	NSObject<EJWindowEventsDelegate> *windowEventsDelegate;
+	NSObject<EJTouchDelegate> *touchDelegate;
+	NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
+	EJCanvasContext<EJPresentable> *screenRenderingContext;
+
+	NSOperationQueue *backgroundQueue;
+	
+	// Public for fast access in bound functions
+	@public JSValueRef jsUndefined;
     
-    BOOL pauseOnEnterBackground;
-    BOOL hasScreenCanvas;
-    
-    BOOL isPaused;
-    
-    
-    EJNonRetainingProxy *proxy;
-    
-    JSGlobalContextRef jsGlobalContext;
-    EJClassLoader *classLoader;
-    
-    EJTimerCollection *timers;
-    
-    EJSharedOpenGLContext *openGLContext;
-    EJSharedTextureCache *textureCache;
-    EJSharedOpenALManager *openALManager;
-    
-    EJCanvasContext *currentRenderingContext;
-    EAGLContext *glCurrentContext;
-    
-    
-    CADisplayLink *displayLink;
-    
-    NSObject<EJLifecycleDelegate> *lifecycleDelegate;
-    NSObject<EJTouchDelegate> *touchDelegate;
-    NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
-    EJCanvasContext<EJPresentable> *screenRenderingContext;
+    // VLM Additions
     NSObject<VLMScreenShotDelegate> *screenShotDelegate;
     NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
     
-    
-    NSOperationQueue *backgroundQueue;
-    
-    // Public for fast access in bound functions
-@public JSValueRef jsUndefined;
 }
 
 @property (nonatomic, copy) NSString *appFolder;
@@ -89,17 +92,15 @@
 @property (nonatomic, readonly) JSGlobalContextRef jsGlobalContext;
 @property (nonatomic, readonly) EJSharedOpenGLContext *openGLContext;
 
-@property (nonatomic, retain) NSObject<EJLifecycleDelegate> *lifecycleDelegate;
+@property (nonatomic, retain) NSObject<EJWindowEventsDelegate> *windowEventsDelegate;
 @property (nonatomic, retain) NSObject<EJTouchDelegate> *touchDelegate;
 @property (nonatomic, retain) NSObject<EJDeviceMotionDelegate> *deviceMotionDelegate;
-
-@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
-@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
 
 @property (nonatomic, retain) EJCanvasContext *currentRenderingContext;
 @property (nonatomic, retain) EJCanvasContext<EJPresentable> *screenRenderingContext;
 
 @property (nonatomic, retain) NSOperationQueue *backgroundQueue;
+@property (nonatomic, retain) EJClassLoader *classLoader;
 
 - (id)initWithFrame:(CGRect)frame appFolder:(NSString *)folder;
 
@@ -115,8 +116,11 @@
 - (JSValueRef)createTimer:(JSContextRef)ctxp argc:(size_t)argc argv:(const JSValueRef [])argv repeat:(BOOL)repeat;
 
 #pragma mark - VLM Additions
+@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
+@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
 
 - (void)requestScreenShot;
 - (void)requestUndoScreenShot;
+- (void)requestRestoreUndoScreenShot;
 
 @end

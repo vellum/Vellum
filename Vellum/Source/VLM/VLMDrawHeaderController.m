@@ -386,4 +386,8 @@
     }
 }
 
+- (UIImage *)screenshotToRestore {
+    return nil;
+}
+
 @end

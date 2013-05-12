@@ -9,6 +9,7 @@
 #import "EJBindingBase.h"
 
 @interface EJBindingBridge : EJBindingBase{
-    NSString *datastring;
+    NSInteger undoCount;
+    NSInteger undoIndex;
 }
 @end

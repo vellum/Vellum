@@ -7,6 +7,8 @@
 //
 
 #import "EJBindingBridge.h"
+#import "VLMMainViewController.h"
+#import "AppDelegate.h"
 
 @implementation EJBindingBridge
 
@@ -18,23 +20,32 @@
     if( self = [super initWithContext:ctx object:obj argc:argc argv:argv] ) {
         
         if( argc > 0 ) {
-//NSString *s = JSValueToNSString(ctx, value);
         }
     }
     return self;
 }
 
-EJ_BIND_SET( screendata, ctx, value) {
-    datastring = JSValueToNSString(ctx, value);
-    NSLog(@"screencapture: %@", datastring);
+EJ_BIND_SET( undoCount, ctx, value) {
+    undoCount = JSValueToNumberFast(ctx, value);
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    VLMMainViewController *mvc = [delegate mainViewController];
+    [mvc updateUndoCount:undoCount];
 }
-EJ_BIND_GET(screendata, ctx){
+
+EJ_BIND_GET(undoCount, ctx){
     return JSValueMakeNull(ctx);
 }
 
-EJ_BIND_FUNCTION(screencapture, ctx, argc, argv){
-    NSLog(@"screencap called, %@", datastring);
+EJ_BIND_SET( undoIndex, ctx, value) {
+    undoIndex = JSValueToNumberFast(ctx, value);
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    VLMMainViewController *mvc = [delegate mainViewController];
+    [mvc updateUndoIndex:undoIndex];
+}
+
+EJ_BIND_GET(undoIndex, ctx){
     return JSValueMakeNull(ctx);
 }
+
 
 @end

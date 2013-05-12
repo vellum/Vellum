@@ -20,6 +20,7 @@
 #import "DDPageControl.h"
 #import "VLMUndoState.h"
 #import "VLMUndoManager.h"
+#import "VLMUndoViewController.h"
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
@@ -29,12 +30,15 @@
 @property (strong, nonatomic) VLMDrawHeaderController *headerController;
 @property (strong, nonatomic) UIView *touchCaptureView;
 @property (strong, nonatomic) VLMZoomViewController *zoomViewController;
+@property (strong, nonatomic) VLMUndoViewController *undoViewController;
 @property (strong, nonatomic) EJAppViewController *avc;
 @property (strong, nonatomic) VLMPopMenuViewController *pop;
 @property (strong, nonatomic) VLMUndoManager *undoManager;
 @property CGFloat pinchLastScale;
 @property CGPoint pinchLastPoint;
 @property CGFloat pinchAccumulatedScale;
+@property (strong, nonatomic) UIImage *restoreUndoImage;
+@property NSInteger lastKnownUndoIndex;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -52,11 +56,14 @@
 @synthesize headerController;
 @synthesize touchCaptureView;
 @synthesize zoomViewController;
+@synthesize undoViewController;
 @synthesize avc;
 @synthesize undoManager;
 @synthesize pinchLastScale;
 @synthesize pinchLastPoint;
 @synthesize pinchAccumulatedScale;
+@synthesize restoreUndoImage;
+@synthesize lastKnownUndoIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,6 +80,7 @@
     UIView *t = [[UIView alloc] initWithFrame:frame];
     EJAppViewController *vc = [[EJAppViewController alloc] init];
     VLMZoomViewController *z = [[VLMZoomViewController alloc] init];
+    VLMUndoViewController *uvc = [[VLMUndoViewController alloc] init];
     
     VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
     NSMutableArray *tools = [[VLMToolCollection instance] getEnabledTools];
@@ -86,6 +94,7 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     [self.view addSubview:vc.view];
     [self.view addSubview:z.view];
+    [self.view addSubview:uvc.view];
     [self.view addSubview:t];
     [self.view addSubview:h.view];
     
@@ -93,6 +102,7 @@
     [self setZoomViewController:z];
     [self setTouchCaptureView:t];
     [self setHeaderController:h];
+    [self setUndoViewController:uvc];
     
     VLMPanGestureRecognizer *twoFingerPan = [[VLMPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
     [twoFingerPan setMinimumNumberOfTouches:2];
@@ -139,6 +149,10 @@
     
     VLMUndoManager *um = [[VLMUndoManager alloc] init];
     [self setUndoManager:um];
+    
+    lastKnownUndoIndex = 0;
+    [self saveUndoState];
+
 }
 
 #pragma mark -
@@ -172,6 +186,9 @@
         [self.avc callJS:s];
         s = [NSString stringWithFormat:@"setZoom( %f );", self.zoomViewController.zoomlevel];
         [self.avc callJS:s];
+        
+        
+        //[self.undoManager dropAllAfterCurrent];
         return;
     } else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
         NSString *s = [NSString stringWithFormat:@"endStroke(%f,%f);", p.x, p.y];
@@ -201,7 +218,37 @@
 
 - (void)handleThreeFingerPan:(id)sender {
     VLMPanGestureRecognizer *pgr = (VLMPanGestureRecognizer *)sender;
+    switch ([pgr state]) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged:
+            if (![self.undoViewController isVisible]){
+                [self.undoViewController show];
+                lastKnownUndoIndex = self.undoViewController.index;
+            }
+            break;
+        default:
+            if ([self.undoViewController isVisible]){
+                [self.undoViewController hide];
+            }
+            break;
+    }
     if (pgr.numberOfTouches != 3) return;
+    CGPoint xy = [pgr translationInView:pgr.view];
+    CGFloat delta = xy.y;
+    CGFloat interval = 240.0f/8.0f;
+    delta = floorf(delta/interval);
+
+    NSInteger nextIndex = lastKnownUndoIndex + delta;
+    if ( nextIndex < 0 ) nextIndex = 0;
+    if ( nextIndex > self.undoViewController.numStates-1 ) nextIndex = self.undoViewController.numStates-1;
+
+    if ( nextIndex != self.undoViewController.index )
+    {
+        NSLog(@"nextIndex: %d", nextIndex);
+        NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
+        [self.avc callJS:s];
+    }
+
 }
 
 - (void)handlePinch:(id)sender {
@@ -309,6 +356,10 @@
 }
 
 - (void)saveUndoState{
+    NSString *s = @"saveUndoState();";
+    [self.avc callJS:s];
+
+    return;
     if (![self.undoManager shouldSaveState] ) return;
     
     // request undo
@@ -335,6 +386,8 @@
     if ([[VLMToolCollection instance] isSelectedToolSubtractive]) {
         [self.headerController resetToZero];
     }
+    [self.undoManager dropAll];
+    [self saveUndoState];
 }
 
 - (void)screenCapture:(id)screenshotdelegate {
@@ -399,11 +452,24 @@
 #pragma mark - VLMScreenShotDelegate
 
 - (void)screenShotFound:(UIImage *)found{
-    // send this thing to the
-    NSLog(@"mainviewcontroller: screenshotfound");
     if ([self.undoManager shouldSaveState]){
         [self.undoManager saveState:found];
     }
+}
+
+- (UIImage*)screenshotToRestore{
+    return self.restoreUndoImage;
+}
+
+#pragma mark - public () for cross js communication
+- (void)updateUndoCount:(NSInteger)count{
+    NSLog(@"mainviewcontroller:updateundocount(%d)", count);
+    [self.undoViewController setNumStates:count];
+}
+- (void)updateUndoIndex:(NSInteger)index{
+    NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
+    [self.undoViewController setIndex:index];
+    [self.undoViewController update];
 }
 
 @end

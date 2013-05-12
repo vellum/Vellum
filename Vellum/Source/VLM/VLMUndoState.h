@@ -12,8 +12,8 @@
 
 @property (nonatomic, strong) NSString *fileName;
 @property (nonatomic) NSTimeInterval timeStamp;
-@property (nonatomic, weak) UIImage *image;
+@property (nonatomic, strong) UIImage *image;
 
-- (id)initWithImage:(UIImage*)existingImage;
+- (id)initWithImage:(UIImage *)existingImage;
 
 @end

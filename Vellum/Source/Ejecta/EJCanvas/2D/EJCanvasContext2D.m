@@ -4,7 +4,6 @@
 
 #import "EJCanvasPattern.h"
 #import "EJCanvasGradient.h"
-#import <JavaScriptCore/JavaScriptCore.h>
 
 @implementation EJCanvasContext2D
 
@@ -697,7 +696,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 		int internalWidth = sw * scale;
 		int internalHeight = sh * scale;
 		int internalX = sx * scale;
-		int internalY = (height-sy-sh) * scale;
+		int internalY = ((bufferHeight/scale)-sy-sh) * scale;
 		
 		EJColorRGBA *internalPixels = malloc( internalWidth * internalHeight * sizeof(EJColorRGBA));
 		glReadPixels( internalX, internalY, internalWidth, internalHeight, GL_RGBA, GL_UNSIGNED_BYTE, internalPixels );
@@ -728,38 +727,6 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 - (EJImageData*)getImageDataHDSx:(short)sx sy:(short)sy sw:(short)sw sh:(short)sh {
 	return [self getImageDataScaled:1 flipped:upsideDown sx:sx sy:sy sw:sw sh:sh];
 }
-
-- (UIImage*)getImageFromGL{
-    //[self prepare];
-    [self flushBuffers];
-    
-    float scale = backingStoreRatio;
-    short sx = scale * 0;
-    short sy = scale * 0;
-    short sw = scale * width;
-    short sh = scale * height;
-    
-    NSMutableData * buffer= [NSMutableData dataWithLength: sw * sh * 4];
-    glPixelStorei(GL_PACK_ALIGNMENT, 4);
-    glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, [buffer mutableBytes]);
-    
-    UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
-    CGContextRef aContext = UIGraphicsGetCurrentContext();
-    CGDataProviderRef ref = CGDataProviderCreateWithCFData((CFDataRef)buffer);
-    CGColorSpaceRef csref = CGColorSpaceCreateDeviceRGB();
-    CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, csref, kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
-    CGContextSetBlendMode(aContext, kCGBlendModeCopy);
-    CGContextDrawImage(aContext, CGRectMake(0, 0, sw, sh), iref);
-    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    CGImageRelease(iref);
-    CGDataProviderRelease(ref);
-    CGColorSpaceRelease(csref);
-    
-    return ret;
-}
-
 
 - (void)putImageData:(EJImageData*)imageData scaled:(float)scale dx:(float)dx dy:(float)dy {
 	EJTexture *texture = imageData.texture;
@@ -893,5 +860,66 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 		glDepthFunc(GL_ALWAYS);
 	}
 }
+
+#pragma mark - VLM Additions
+
+- (UIImage*)getImageFromGL{
+    //[self prepare];
+    [self flushBuffers];
+    
+    float scale = backingStoreRatio;
+    short sx = scale * 0;
+    short sy = scale * 0;
+    short sw = scale * width;
+    short sh = scale * height;
+    
+    NSMutableData * buffer= [NSMutableData dataWithLength: sw * sh * 4];
+    glPixelStorei(GL_PACK_ALIGNMENT, 4);
+    glReadPixels(sx, sy, sw, sh, GL_RGBA, GL_UNSIGNED_BYTE, [buffer mutableBytes]);
+    
+    UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
+    CGContextRef aContext = UIGraphicsGetCurrentContext();
+    CGDataProviderRef ref = CGDataProviderCreateWithCFData((CFDataRef)buffer);
+    CGColorSpaceRef csref = CGColorSpaceCreateDeviceRGB();
+    CGImageRef iref = CGImageCreate(sw,sh,8,32,sw*4, csref, kCGImageAlphaLast, ref, NULL, true, kCGRenderingIntentDefault);
+    CGContextSetBlendMode(aContext, kCGBlendModeCopy);
+    CGContextDrawImage(aContext, CGRectMake(0, 0, sw, sh), iref);
+    UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGImageRelease(iref);
+    CGDataProviderRelease(ref);
+    CGColorSpaceRelease(csref);
+    
+    return ret;
+}
+
+- (void)drawImageIntoGL:(UIImage*)image{
+    
+    CGImageRef imageRef = CGImageCreateCopy([image CGImage]);
+    int sw = width * backingStoreRatio;
+    int sh = height * backingStoreRatio;
+    
+    NSMutableData * textureData = [NSMutableData dataWithLength: sw * sh * 4];
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * sw;
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate([textureData mutableBytes], sw, sh,
+                                                 bitsPerComponent, bytesPerRow, colorSpace,
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGContextDrawImage(context, CGRectMake(0, 0, sw, sh), imageRef);
+    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0,sh);
+    CGContextConcatCTM(context, flipVertical);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    
+    EJImageData *imageData = [[EJImageData alloc] initWithWidth:sw height:sh pixels:textureData];
+    [self putImageDataHD:imageData dx:0 dy:0];
+    [self flushBuffers];
+    
+}
+
 
 @end

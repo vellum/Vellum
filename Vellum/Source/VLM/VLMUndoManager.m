@@ -10,7 +10,7 @@
 #import "VLMUndoState.h"
 
 #define ELAPSED_THRESHOLD 3.0f
-#define MAX_UNDO_STATES   5
+#define MAX_UNDO_STATES   4
 
 @interface VLMUndoManager ()
 @property (nonatomic, strong) NSMutableArray *images;
@@ -34,6 +34,10 @@
     return self;
 }
 
+- (NSInteger)numStates {
+    return [self.images count];
+}
+
 - (BOOL)shouldSaveState {
     if ([self.images count] == 0) return YES;
     
@@ -47,16 +51,33 @@
 }
 
 - (void)saveState:(UIImage *)image {
-    if ([self.images count] + 1 > MAX_UNDO_STATES) {
+    if ([self.images count] > MAX_UNDO_STATES) {
         [self.images removeObjectAtIndex:0];
     }
     VLMUndoState *state = [[VLMUndoState alloc] initWithImage:image];
     [self.images addObject:state];
-    [self setIndex:[self.images count] - 1];
+    [self setIndex:self.images.count-1];
     NSLog(@"count %d", self.images.count);
 }
 
 - (void)restoreState {
+}
+
+- (UIImage *)imageAt:(NSInteger)imageIndex inverted:(BOOL)shouldInvertIndex {
+    NSInteger convertedIndex = imageIndex;
+    if (self.images.count == 0) return nil;
+    int min = 0;
+    int max = self.images.count - 1;
+    if ( imageIndex < min || imageIndex > max) return nil;
+    
+    if (shouldInvertIndex) {
+        convertedIndex = max - imageIndex;
+    }
+    NSLog(@"retrieving image at %d (%d)", imageIndex, convertedIndex);
+    VLMUndoState *state = (VLMUndoState *)[self.images objectAtIndex:convertedIndex];
+    if ( state == nil ) return nil;
+    [self setIndex:convertedIndex];
+    return state.image;
 }
 
 - (UIImage *)previousImage {
@@ -80,5 +101,23 @@
     [self setIndex:ind];
     return state.image;
 }
+
+- (void)dropAll {
+    [self.images removeAllObjects];
+    [self setIndex:0];
+}
+- (void)dropAllAfterCurrent{
+    if ( images.count <= 1 ) {
+        [self setIndex:0];
+        return;
+    }
+    int min = self.index+1;
+    int max = self.images.count-1;
+    int len = max-min;
+    if (min < max){
+        [self.images removeObjectsInRange:(NSRange){min, len}];
+    }
+}
+
 
 @end
