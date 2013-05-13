@@ -396,7 +396,7 @@ var getScreenShot = function() {
 
 var undoStates = [];
 var lastundostamp = 0;
-var MAX_UNDO_COUNT = 8;
+var MAX_UNDO_COUNT = 10;
 var undoIndex = 0;
 var backingStorePixelRatio = ctx.backingStorePixelRatio;
 var saveUndoState = function() {
@@ -406,6 +406,10 @@ var saveUndoState = function() {
     var elapsed = millis-lastundostamp;
     if ( elapsed < 3000 ){
         return;
+    }
+    // if we've previously restored a state mid list, drop every state after the current state
+    if ( undoIndex < undoStates.length-1 ){
+        clearUndosAfterIndex(undoIndex);
     }
     
     // remove first item if we're over our limit
@@ -462,5 +466,13 @@ var clearUndos = function(){
     if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
     BRIDGE.undoCount = undoStates.length;
     BRIDGE.undoIndex = undoIndex;
+}
+
+var clearUndosAfterIndex = function(index_in){
+    var numslotstodelete = undoStates.length - index_in - 1;
+    if (numslotstodelete>0){
+        console.log('removing undo states after '+index_in);
+        undoStates.splice(index_in + 1, numslotstodelete);
+    }
 }
 setup();

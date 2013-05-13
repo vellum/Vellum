@@ -19,7 +19,7 @@
     if (self) {
         // Initialization code
         [self setIndex:0];
-        [self setShapeCount:8];
+        [self setShapeCount:10];
         [self setUserInteractionEnabled:NO];
         [self setBackgroundColor:[UIColor clearColor]];
     }
@@ -36,7 +36,7 @@
     CGContextBeginPath(ctx);
     CGFloat radius = rect.size.width / 2;
     for (CGFloat i = 0; i <= self.shapeCount; i++) {
-        CGFloat radians = i / (CGFloat)self.shapeCount *  M_PI * 2.0f;
+        CGFloat radians = i / (CGFloat)self.shapeCount *  M_PI * 2.0f - M_PI/2.0f;
         CGFloat x = center.x + cos(radians) * radius;
         CGFloat y = center.y + sin(radians) * radius;
         if (i == 0) CGContextMoveToPoint(ctx, x, y);
@@ -50,7 +50,7 @@
     CGContextSetRGBFillColor(ctx, 0.75, 0.75, 0.75, 1);
     CGContextBeginPath(ctx);
     for (CGFloat i = 0; i <= self.index; i++) {
-        CGFloat radians = i / (CGFloat)self.shapeCount *  -M_PI * 2.0f - M_PI / 2.0f;
+        CGFloat radians = i / (CGFloat)self.shapeCount *  M_PI * 2.0f - M_PI / 2.0f;
         CGFloat x = center.x + cos(radians) * radius;
         CGFloat y = center.y + sin(radians) * radius;
         if (i == 0) CGContextMoveToPoint(ctx, x, y);
