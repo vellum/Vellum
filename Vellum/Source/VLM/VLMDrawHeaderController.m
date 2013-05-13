@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIView *cancelbutton;
 @property (nonatomic, strong) UIView *titlemask;
 @property (nonatomic, strong) UILabel *ghostlabel;
+@property (nonatomic, strong) UIActivityViewController *activityViewController;
+@property (nonatomic, strong) UIPopoverController *popovercontroller;
 @property (nonatomic) NSInteger index;
 @property CGRect titleframe;
 @property CGRect titlemaskframe;
@@ -48,7 +50,8 @@
 @synthesize isPopoverVisible;
 @synthesize cancelbutton;
 @synthesize ghostlabel;
-
+@synthesize activityViewController;
+@synthesize popovercontroller;
 - (id)initWithHeadings:(NSArray *)headings {
     self = [self init];
     if (self) {
@@ -375,21 +378,21 @@
 }
 
 #pragma mark - VLMScreenshotDelegate
+//    UIActivityViewController *objVC = [[UIActivityViewController alloc]initWithActivityItems:[NSArray arrayWithObjects:[NSURL URLWithString:urlString], nil] applicationActivities:nil];
 
 - (void)screenShotFound:(UIImage *)found {
-    NSArray *dataToShare = [NSArray arrayWithObject:found];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    
+    NSArray *dataToShare = [NSArray arrayWithObjects:found, nil];
+
+    self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    UIViewController * mvc = (UIViewController*)del.mainViewController;
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        UIPopoverController *popovercontroller = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-        [popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:self.activityViewController];
+        [self.popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
         
-        AppDelegate *del = [[UIApplication sharedApplication] delegate];
-        UIViewController * mvc = (UIViewController*)del.mainViewController;
-        [mvc presentViewController:activityViewController animated:YES completion:^{}];
-        //[self presentViewController:activityViewController animated:YES completion:^{}];
-        
+        [mvc presentViewController:self.activityViewController animated:YES completion:^{}];
     }
 }
 
