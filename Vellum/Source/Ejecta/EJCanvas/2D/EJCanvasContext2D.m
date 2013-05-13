@@ -466,6 +466,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 	color:(EJColorRGBA)color
 	withTransform:(CGAffineTransform)transform
 {
+    
 	if( vertexBufferIndex >= vertexBufferSize - 6 ) {
 		[self flushBuffers];
 	}
@@ -747,6 +748,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 }
 
 - (void)putImageDataHD:(EJImageData*)imageData dx:(float)dx dy:(float)dy {
+    [self resetFramebuffer];
 	[self putImageData:imageData scaled:backingStoreRatio dx:dx dy:dy];
 }
 
