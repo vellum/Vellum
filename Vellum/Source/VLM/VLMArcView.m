@@ -47,7 +47,7 @@
     CGContextFillPath(ctx);
     
     
-    CGContextSetRGBFillColor(ctx, 0.75, 0.75, 0.75, 1);
+    CGContextSetRGBFillColor(ctx, 0.9, 0.9, 0.9, 1);
     CGContextBeginPath(ctx);
     for (CGFloat i = 0; i <= self.index; i++) {
         CGFloat radians = i / (CGFloat)self.shapeCount *  M_PI * 2.0f - M_PI / 2.0f;

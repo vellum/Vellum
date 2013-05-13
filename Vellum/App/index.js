@@ -335,6 +335,7 @@ var setup = function() {
 };
 
 var beginStroke = function(x, y) {
+    cancelQueuedSave();
     //console.log( 'beginStroke: ' + x + ', ' + y );
     accumdist = 0;
     accum = {x:0,y:0};
@@ -346,6 +347,7 @@ var beginStroke = function(x, y) {
 };
 
 var continueStroke = function(x, y) {
+    cancelQueuedSave();
     //console.log( 'continueStroke: ' + x + ', ' + y );
     mousedown = true;
     targetmouse.x = x;
@@ -384,7 +386,7 @@ var clearScreen = function() {
     ctx.fillStyle = BGCOLOR;
     ctx.fillRect(0, 0, w, h);
     clearUndos();
-    saveUndoState();
+    saveUndoStateGuts();
 };
 
 var getScreenShot = function() {
@@ -399,14 +401,40 @@ var lastundostamp = 0;
 var MAX_UNDO_COUNT = 10;
 var undoIndex = 0;
 var backingStorePixelRatio = ctx.backingStorePixelRatio;
-var saveUndoState = function() {
+var timerID = null;
 
+
+// call this while drawing (to prevent temporary lag from glreadpixels)
+var cancelQueuedSave = function(){
+    if ( timerID != null ){
+        clearTimeout(timerID);
+        timerID = null;
+    }
+}
+
+// notes: i think the way this is called is weird
+// it should start a timer that calls back to save the undo state
+// if user starts drawing before it expires, we extend the timer (or cancel/restart it)
+
+var saveUndoState = function() {
     if ( Math.sqrt( accum.x*accum.x + accum.y*accum.y) < 5 ) return;
     var millis = Date.now();
     var elapsed = millis-lastundostamp;
-    if ( elapsed < 1500 ){
+    var ELAPSED_THRESHOLD = 1500;// good for retina iphone
+    //var ELAPSED_THRESHOLD = 5000;// good for retina ipad (glreadpixels is slow)
+    
+    if ( elapsed < ELAPSED_THRESHOLD ){
         return;
     }
+
+    cancelQueuedSave();
+    timerID = setTimeout(saveUndoStateGuts, 1000);
+};
+
+var saveUndoStateGuts = function(){
+
+    var millis = Date.now();
+
     // if we've previously restored a state mid list, drop every state after the current state
     if ( undoIndex < undoStates.length-1 ){
         clearUndosAfterIndex(undoIndex);
@@ -421,13 +449,14 @@ var saveUndoState = function() {
     var data = ctx.getImageDataHD(0, 0, w*backingStorePixelRatio, h*backingStorePixelRatio);
     undoStates.push(data);
     undoIndex = undoStates.length-1;
-
+    
     
     // call out to the native side and update these values
     if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
     BRIDGE.undoCount = undoStates.length;
     BRIDGE.undoIndex = undoIndex;
-};
+
+}
 
 var restoreUndoStateAtIndex = function(index_in){
     if ( isRestoringPixels ){

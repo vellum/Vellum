@@ -44,7 +44,7 @@
     CGFloat diameter = 120;
     CGRect rect = CGRectMake(bounds.size.width / 2 - diameter / 2, 99, diameter, diameter);
     [self setArcView:[[VLMArcView alloc] initWithFrame:rect]];
-    [self.arcView setAlpha:0.75f];
+    [self.arcView setAlpha:0.9f];
     [self.view addSubview:self.arcView];
     
     UILabel *lbl = [[UILabel alloc] initWithFrame:rect];

@@ -8,6 +8,7 @@
 
 #import "VLMDrawHeaderController.h"
 #import "DDPageControl.h"
+#import "AppDelegate.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 
@@ -383,7 +384,12 @@
         UIPopoverController *popovercontroller = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
         [popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
-        [self presentViewController:activityViewController animated:YES completion:^{}];
+        
+        AppDelegate *del = [[UIApplication sharedApplication] delegate];
+        UIViewController * mvc = (UIViewController*)del.mainViewController;
+        [mvc presentViewController:activityViewController animated:YES completion:^{}];
+        //[self presentViewController:activityViewController animated:YES completion:^{}];
+        
     }
 }
 
