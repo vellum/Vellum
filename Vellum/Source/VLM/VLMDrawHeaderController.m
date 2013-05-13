@@ -255,6 +255,7 @@
 - (void)resetToZero {
     if ([self.titles count] > 0) {
         [self setSelectedIndex:0 andTitle:@"" animated:NO];
+        [self updatePage];
     }
 }
 
