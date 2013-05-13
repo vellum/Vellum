@@ -404,7 +404,7 @@ var saveUndoState = function() {
     if ( Math.sqrt( accum.x*accum.x + accum.y*accum.y) < 5 ) return;
     var millis = Date.now();
     var elapsed = millis-lastundostamp;
-    if ( elapsed < 3000 ){
+    if ( elapsed < 1500 ){
         return;
     }
     // if we've previously restored a state mid list, drop every state after the current state
