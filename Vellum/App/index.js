@@ -428,7 +428,7 @@ var saveUndoState = function() {
     }
 
     cancelQueuedSave();
-    timerID = setTimeout(saveUndoStateGuts, 1000);
+    timerID = setTimeout(saveUndoStateGuts, 500);
 };
 
 var saveUndoStateGuts = function(){
