@@ -11,5 +11,7 @@
 @interface EJBindingBridge : EJBindingBase{
     NSInteger undoCount;
     NSInteger undoIndex;
+    BOOL isPad;
+    BOOL isRetina;
 }
 @end

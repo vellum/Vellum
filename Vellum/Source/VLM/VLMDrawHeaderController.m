@@ -134,7 +134,7 @@
     self.ghostlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     [ghostlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
     [ghostlabel setTextColor:[UIColor blackColor]];
-    [ghostlabel setTextAlignment:UITextAlignmentCenter];
+    [ghostlabel setTextAlignment:NSTextAlignmentCenter];
     [ghostlabel setBackgroundColor:[UIColor clearColor]];
     [ghostlabel setAlpha:0.0f];
     [ghostlabel setUserInteractionEnabled:NO];
@@ -155,6 +155,9 @@
     [lpr setNumberOfTapsRequired:0];
     [lpr setNumberOfTouchesRequired:1];
     [titleviewmask addGestureRecognizer:lpr];
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(swipedDown:)];
+    [self.leftbutton addGestureRecognizer:lpgr];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,7 +183,7 @@
         [A setText:t];
         [A setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [A setTextColor:[UIColor blackColor]];
-        [A setTextAlignment:UITextAlignmentCenter];
+        [A setTextAlignment:NSTextAlignmentCenter];
         [A setBackgroundColor:[UIColor clearColor]];
         [self.titleview addSubview:A];
     }
@@ -252,6 +255,10 @@
     if (self.delegate) {
         [self.delegate updateIndex:self.index AndTitle:self.titles[self.index]];
     }
+}
+
+- (void)swipedDown:(id)sender{
+    NSLog(@"swipedown");
 }
 
 #pragma mark - public ()
@@ -384,6 +391,7 @@
     NSArray *dataToShare = [NSArray arrayWithObjects:found, nil];
 
     self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+    [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, nil]];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     UIViewController * mvc = (UIViewController*)del.mainViewController;
 

@@ -20,7 +20,7 @@
         // Initialization code
         [self setLabel:[[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)]];
         [self.label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
-        [self.label setTextAlignment:UITextAlignmentCenter];
+        [self.label setTextAlignment:NSTextAlignmentCenter];
         [self.label setTextColor:[UIColor blackColor]];
         [self.label setBackgroundColor:[UIColor clearColor]];
         [self addSubview:self.label];
