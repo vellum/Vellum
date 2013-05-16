@@ -29,7 +29,7 @@ static VLMToolCollection *sharedToolCollection;
                           @"Scribble",      //1
                           @"Shade",       //2
                           @"Outline",       //3
-                          @"Write",         //4
+                          @"Ink ",         //4
                           @"Erase",         //5
                           @"Scratch",       //6
                           nil];
