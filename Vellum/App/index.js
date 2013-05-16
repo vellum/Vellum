@@ -17,8 +17,11 @@ var w = window.innerWidth
 , canvas = document.getElementById('canvas')
 , ctx = canvas.getContext('2d')
 , prevmouse = { x: 0, y: 0 }
+
 , targetmouse = { x: 0, y: 0 }
-, accum = {x:0,y:0}
+
+, accum = { x:0, y:0 }
+
 , isRestoringPixels = false
 
 , mousedown = false
@@ -35,7 +38,7 @@ var setDrawingMode = function(mode) {
 };
 
 var animate = function() {
-    if (isRestoringPixels)return;
+    if (isRestoringPixels) return;
     //console.log('animate');
     if (mousedown) {
         switch (drawmode) {
@@ -218,52 +221,29 @@ var drawpencil = function() {
         , prevrange = prevnib * multiplier
         , fgcolor = '#000000'
         ;
-        if (true) {
-            /*
-             ctx.beginPath();
-             ctx.lineWidth = 0.0125;
-             ctx.strokeStyle = 'rgba(0,0,0,1)';
-             for (var i = -currange; i <= currange; i += 2){
-             var pct = i/currange
-             , localx = x + cosangle * pct * currange
-             , localy = y + sinangle * pct * currange
-             , localpx = prevmouse.x + cospangle * pct * prevrange
-             , localpy = prevmouse.y + sinpangle * pct * prevrange
-             ;
-             ctx.moveTo(localpx, localpy);
-             ctx.lineTo(localx, localy);
-             
-             }
-             ctx.stroke();
-             ctx.closePath();
-             */
-            ctx.beginPath();
-            ctx.lineWidth = 0.125;
-            ctx.strokeStyle = 'rgba(0,0,0,1)';
+        
+        ctx.beginPath();
+        ctx.lineWidth = 0.125;
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        
+        for (var i = -currange; i <= currange; i += 1) {
+            var pct = i / currange
+            , localx = x + cosangle * pct * currange
+            , localy = y + sinangle * pct * currange
+            , localpx = prevmouse.x + cospangle * pct * prevrange
+            , localpy = prevmouse.y + sinpangle * pct * prevrange
+            ;
             
-            //currange = prevrange = 2.0;
-            for (var i = -currange; i <= currange; i += 1) {
-                var pct = i / currange
-                , localx = x + cosangle * pct * currange
-                , localy = y + sinangle * pct * currange
-                , localpx = prevmouse.x + cospangle * pct * prevrange
-                , localpy = prevmouse.y + sinpangle * pct * prevrange
-                ;
-                
-                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                ctx.moveTo(localpx + deltax, localpy + deltay);
-                
-                deltax = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
-                deltay = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
-                ctx.lineTo(localx + deltax, localy + deltay);
-                
-                //ctx.moveTo(localpx, localpy);
-                //ctx.lineTo(localx, localy);
-            }
-            ctx.stroke();
-            ctx.closePath();
+            deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+            deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+            ctx.moveTo(localpx + deltax, localpy + deltay);
+            
+            deltax = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
+            deltay = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
+            ctx.lineTo(localx + deltax, localy + deltay);
         }
+        ctx.stroke();
+        ctx.closePath();
         
         var linwin = accumdist;
         linwin /= (500 / zoomlevel);
@@ -304,8 +284,6 @@ var drawline = function() {
         var nib = dist * 0.125;
         curnib += (nib - curnib) * 0.125;
         
-        
-        
         ctx.beginPath();
         ctx.fillStyle = '#000000';
         ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
@@ -338,7 +316,7 @@ var beginStroke = function(x, y) {
     cancelQueuedSave();
     //console.log( 'beginStroke: ' + x + ', ' + y );
     accumdist = 0;
-    accum = {x:0,y:0};
+    accum = { x:0, y:0 };
     mousedown = true;
     targetmouse.x = prevmouse.x = x;
     targetmouse.y = prevmouse.y = y;
@@ -354,27 +332,14 @@ var continueStroke = function(x, y) {
     targetmouse.y = y;
     
     // this is lame
-    accum.x += ( x- prevmouse.x );
-    accum.y += (y-prevmouse.y);
+    accum.x += (x - prevmouse.x);
+    accum.y += (y - prevmouse.y);
 };
 
 var endStroke = function(x, y) {
     mousedown = false;
     //console.log( 'endStroke: ' + x + ', ' + y );
-    
-    /*
-     var imagedata = ctx.getImageData(0, 0, w, h);
-     
-     //console.log( 'imagedata: ' + imagedata );
-     if ( imagedata != null ){
-     var json = JSON.stringify(imagedata);
-     console.log('writing to localstorage' + json );
-     localStorage.setItem( 'lastScreen', json );
-     }
-     */
     var backingStorePixelRatio = ctx.backingStorePixelRatio;
-    
-    
 };
 
 var setZoom = function(val) {
@@ -389,13 +354,6 @@ var clearScreen = function() {
     saveUndoStateGuts();
 };
 
-var getScreenShot = function() {
-    //if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
-    //var data = ctx.getImageData(0, 0, w, h);
-    //BRIDGE.screendata = JSON.stringify(data.data);
-    //BRIDGE.screencapture(data.data);
-};
-
 var undoStates = [];
 var lastundostamp = 0;
 var MAX_UNDO_COUNT = 10;
@@ -405,82 +363,79 @@ var timerID = null;
 
 
 // call this while drawing (to prevent temporary lag from glreadpixels)
-var cancelQueuedSave = function(){
-    if ( timerID != null ){
+var cancelQueuedSave = function() {
+    if (timerID != null) {
         clearTimeout(timerID);
         timerID = null;
     }
 }
 
-// notes: i think the way this is called is weird
-// it should start a timer that calls back to save the undo state
-// if user starts drawing before it expires, we extend the timer (or cancel/restart it)
-
 var saveUndoState = function() {
-    if ( Math.sqrt( accum.x*accum.x + accum.y*accum.y) < 5 ) return;
+    if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
     var millis = Date.now();
-    var elapsed = millis-lastundostamp;
-    var ELAPSED_THRESHOLD = 1500;// good for retina iphone
+    var elapsed = millis - lastundostamp;
+    var ELAPSED_THRESHOLD = 1000; // good for retina iphone
     //var ELAPSED_THRESHOLD = 5000;// good for retina ipad (glreadpixels is slow)
     
-    if ( elapsed < ELAPSED_THRESHOLD ){
+    if (elapsed < ELAPSED_THRESHOLD) {
         return;
     }
-
-    cancelQueuedSave();
-    timerID = setTimeout(saveUndoStateGuts, 500);
+    
+    saveUndoStateGuts();
+    
+    // - - - -  this sets up a timer that calls saves sometime later - - - -
+    //cancelQueuedSave();
+    //timerID = setTimeout(saveUndoStateGuts, 1000);
 };
 
-var saveUndoStateGuts = function(){
-
+var saveUndoStateGuts = function() {
     var millis = Date.now();
-
+    
     // if we've previously restored a state mid list, drop every state after the current state
-    if ( undoIndex < undoStates.length-1 ){
+    if (undoIndex < undoStates.length - 1) {
         clearUndosAfterIndex(undoIndex);
     }
     
     // remove first item if we're over our limit
-    if ( undoStates.length + 1 > MAX_UNDO_COUNT ){
+    if (undoStates.length + 1 > MAX_UNDO_COUNT) {
         undoStates.splice(0, 1);
     }
     
     lastundostamp = millis;
-    var data = ctx.getImageDataHD(0, 0, w*backingStorePixelRatio, h*backingStorePixelRatio);
+    var data = ctx.getImageDataHD(0, 0, w * backingStorePixelRatio, h * backingStorePixelRatio);
     undoStates.push(data);
-    undoIndex = undoStates.length-1;
+    undoIndex = undoStates.length - 1;
     
     
     // call out to the native side and update these values
     if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
     BRIDGE.undoCount = undoStates.length;
     BRIDGE.undoIndex = undoIndex;
-
 }
 
-var restoreUndoStateAtIndex = function(index_in){
-    if ( isRestoringPixels ){
+var restoreUndoStateAtIndex = function(index_in) {
+    if (isRestoringPixels) {
         console.log('restoring pixels already... bailing');
         
-            return;
+        return;
     }
     
-    console.log('javascriptview: restorestateatindex(' + index_in + ')' );
+    console.log('javascriptview: restorestateatindex(' + index_in + ')');
     // do some bounds checking
     var length = undoStates.length;
-    if ( length == 0 ) return;
-    if ( index_in < 0 || index_in > length-1 ) return;
-
-    console.log('\tbounds check ok' );
-
+    if (length == 0) return;
+    if (index_in < 0 || index_in > length - 1) return;
+    
+    console.log('\tbounds check ok');
+    
     // restore pixels from array
     isRestoringPixels = true;
     var data = undoStates[index_in];
     if (data == null) return;
-
+    
     ctx.putImageDataHD(data, 0, 0);
     undoIndex = index_in;
-
+    
     console.log('\tcalling out to bridge');
     // call out to the native side and update these values
     if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
@@ -488,7 +443,7 @@ var restoreUndoStateAtIndex = function(index_in){
     isRestoringPixels = false;
 };
 
-var clearUndos = function(){
+var clearUndos = function() {
     undoStates = [];
     undoIndex = 0;
     // call out to the native side and update these values
@@ -497,10 +452,10 @@ var clearUndos = function(){
     BRIDGE.undoIndex = undoIndex;
 }
 
-var clearUndosAfterIndex = function(index_in){
+var clearUndosAfterIndex = function(index_in) {
     var numslotstodelete = undoStates.length - index_in - 1;
-    if (numslotstodelete>0){
-        console.log('removing undo states after '+index_in);
+    if (numslotstodelete > 0) {
+        console.log('removing undo states after ' + index_in);
         undoStates.splice(index_in + 1, numslotstodelete);
     }
 }
