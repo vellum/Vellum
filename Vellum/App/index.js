@@ -371,6 +371,10 @@ var cancelQueuedSave = function() {
 }
 
 var saveUndoState = function() {
+    // disable undo for ipad, since glreadpixels is slow and blocks drawing operations
+    if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
+    if ( BRIDGE.isIPad ) return;
+    
     if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
     var millis = Date.now();
     var elapsed = millis - lastundostamp;
@@ -414,9 +418,11 @@ var saveUndoStateGuts = function() {
 }
 
 var restoreUndoStateAtIndex = function(index_in) {
+    
+    // this state probably never occurs
+    // bail if we're already restoring pixels
     if (isRestoringPixels) {
         console.log('restoring pixels already... bailing');
-        
         return;
     }
     

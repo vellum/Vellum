@@ -115,7 +115,6 @@
 		BD0A8B16172F42A10066B67E /* button_plus_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0E172F42A10066B67E /* button_plus_on.png */; };
 		BD0A8B17172F42A10066B67E /* button_plus_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */; };
 		BD0A8B1D172FF1B90066B67E /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */; };
-		BD70E7E0173CA6FB00AD2FED /* VLMUndoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F5173E282800D08179 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -143,7 +142,7 @@
 		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */; };
-		BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */; };
+		BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDFB2E5B1745F9D8006AF1C7 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E571745F9D8006AF1C7 /* camera.png */; };
 		BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E581745F9D8006AF1C7 /* camera@2x.png */; };
 		BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */; };
@@ -338,8 +337,6 @@
 		BD0A8B0F172F42A10066B67E /* button_plus_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_plus_on@2x.png"; sourceTree = "<group>"; };
 		BD0A8B1B172FF1B90066B67E /* EJBindingBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EJBindingBridge.h; path = VLM/EJBindingBridge.h; sourceTree = "<group>"; };
 		BD0A8B1C172FF1B90066B67E /* EJBindingBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingBridge.m; path = VLM/EJBindingBridge.m; sourceTree = "<group>"; };
-		BD70E7DE173CA6FB00AD2FED /* VLMUndoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoManager.h; path = VLM/VLMUndoManager.h; sourceTree = "<group>"; };
-		BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoManager.m; path = VLM/VLMUndoManager.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD97F5F4173E282800D08179 /* VLMUndoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoViewController.h; path = VLM/VLMUndoViewController.h; sourceTree = "<group>"; };
@@ -756,8 +753,6 @@
 		BD70E7E4173CA91D00AD2FED /* Undo */ = {
 			isa = PBXGroup;
 			children = (
-				BD70E7DE173CA6FB00AD2FED /* VLMUndoManager.h */,
-				BD70E7DF173CA6FB00AD2FED /* VLMUndoManager.m */,
 				BD70E7E1173CA91400AD2FED /* VLMUndoState.h */,
 				BD70E7E2173CA91400AD2FED /* VLMUndoState.m */,
 				BD97F5F4173E282800D08179 /* VLMUndoViewController.h */,
@@ -1023,7 +1018,6 @@
 				BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */,
 				BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */,
 				BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */,
-				BD70E7E0173CA6FB00AD2FED /* VLMUndoManager.m in Sources */,
 				BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */,
 				BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */,
 				BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */,
@@ -1055,7 +1049,7 @@
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = Vellum;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1075,7 +1069,7 @@
 				);
 				PRODUCT_NAME = Vellum;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

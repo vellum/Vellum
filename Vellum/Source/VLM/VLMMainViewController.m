@@ -19,7 +19,6 @@
 #import "VLMToolData.h"
 #import "DDPageControl.h"
 #import "VLMUndoState.h"
-#import "VLMUndoManager.h"
 #import "VLMUndoViewController.h"
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
@@ -33,7 +32,6 @@
 @property (strong, nonatomic) VLMUndoViewController *undoViewController;
 @property (strong, nonatomic) EJAppViewController *avc;
 @property (strong, nonatomic) VLMPopMenuViewController *pop;
-@property (strong, nonatomic) VLMUndoManager *undoManager;
 @property CGFloat pinchLastScale;
 @property CGPoint pinchLastPoint;
 @property CGFloat pinchAccumulatedScale;
@@ -47,7 +45,6 @@
 - (void)handleSingleTap:(id)sender;
 - (void)handleDoubleTap:(id)sender;
 - (void)enteredForeground;
-- (void)saveUndoState;
 
 @end
 
@@ -133,7 +130,12 @@
     [t addGestureRecognizer:oneFingerPan];
     [t addGestureRecognizer:doubleTap];
     [t addGestureRecognizer:singleTap];
-    [t addGestureRecognizer:threeFingerPan];
+    
+    // only enable 3 finger undo for small screen devices
+    // to counter glreadpixels performance problems
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [t addGestureRecognizer:threeFingerPan];
+    }
     
     VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
     [poppy setDelegate:self];
@@ -147,12 +149,7 @@
     
     [self.headerController updatePage];
     
-    VLMUndoManager *um = [[VLMUndoManager alloc] init];
-    [self setUndoManager:um];
-    
     lastKnownUndoIndex = 0;
-    [self saveUndoState];
-
 }
 
 #pragma mark -
@@ -193,7 +190,6 @@
     } else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
         NSString *s = [NSString stringWithFormat:@"endStroke(%f,%f);", p.x, p.y];
         [self.avc callJS:s];
-        [self saveUndoState];
         return;
     }
     NSString *s = [NSString stringWithFormat:@"continueStroke(%f,%f);", p.x, p.y];
@@ -221,13 +217,13 @@
     switch ([pgr state]) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged:
-            if (![self.undoViewController isVisible]){
+            if (![self.undoViewController isVisible]) {
                 [self.undoViewController show];
                 lastKnownUndoIndex = self.undoViewController.index;
             }
             break;
         default:
-            if ([self.undoViewController isVisible]){
+            if ([self.undoViewController isVisible]) {
                 [self.undoViewController hide];
             }
             break;
@@ -235,20 +231,18 @@
     if (pgr.numberOfTouches != 3) return;
     CGPoint xy = [pgr translationInView:pgr.view];
     CGFloat delta = xy.y;
-    CGFloat interval = 240.0f/8.0f;
-    delta = floorf(delta/interval);
-
+    CGFloat interval = 240.0f / 8.0f;
+    delta = floorf(delta / interval);
+    
     NSInteger nextIndex = lastKnownUndoIndex + delta;
-    if ( nextIndex < 0 ) nextIndex = 0;
-    if ( nextIndex > self.undoViewController.numStates-1 ) nextIndex = self.undoViewController.numStates-1;
-
-    if ( nextIndex != self.undoViewController.index )
-    {
+    if (nextIndex < 0) nextIndex = 0;
+    if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
+    
+    if (nextIndex != self.undoViewController.index) {
         NSLog(@"nextIndex: %d", nextIndex);
         NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
         [self.avc callJS:s];
     }
-
 }
 
 - (void)handlePinch:(id)sender {
@@ -355,18 +349,6 @@
     [self handleDoubleTap:nil];
 }
 
-- (void)saveUndoState{
-    NSString *s = @"saveUndoState();";
-    [self.avc callJS:s];
-
-    return;
-    if (![self.undoManager shouldSaveState] ) return;
-    
-    // request undo
-    EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
-    [jsv setUndoScreenShotDelegate:self];
-    [jsv requestUndoScreenShot];
-}
 
 #pragma mark - VLMHeaderDelegate
 
@@ -386,8 +368,6 @@
     if ([[VLMToolCollection instance] isSelectedToolSubtractive]) {
         [self.headerController resetToZero];
     }
-    [self.undoManager dropAll];
-    [self saveUndoState];
 }
 
 - (void)screenCapture:(id)screenshotdelegate {
@@ -449,24 +429,14 @@
     }
 }
 
-#pragma mark - VLMScreenShotDelegate
-
-- (void)screenShotFound:(UIImage *)found{
-    if ([self.undoManager shouldSaveState]){
-        [self.undoManager saveState:found];
-    }
-}
-
-- (UIImage*)screenshotToRestore{
-    return self.restoreUndoImage;
-}
 
 #pragma mark - public () for cross js communication
-- (void)updateUndoCount:(NSInteger)count{
+- (void)updateUndoCount:(NSInteger)count {
     NSLog(@"mainviewcontroller:updateundocount(%d)", count);
     [self.undoViewController setNumStates:count];
 }
-- (void)updateUndoIndex:(NSInteger)index{
+
+- (void)updateUndoIndex:(NSInteger)index {
     NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
     [self.undoViewController setIndex:index];
     [self.undoViewController update];

@@ -25,6 +25,7 @@
     return self;
 }
 
+// undocount
 EJ_BIND_SET( undoCount, ctx, value) {
     undoCount = JSValueToNumberFast(ctx, value);
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -36,6 +37,7 @@ EJ_BIND_GET(undoCount, ctx){
     return JSValueMakeNull(ctx);
 }
 
+// undoindex
 EJ_BIND_SET( undoIndex, ctx, value) {
     undoIndex = JSValueToNumberFast(ctx, value);
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -45,6 +47,15 @@ EJ_BIND_SET( undoIndex, ctx, value) {
 
 EJ_BIND_GET(undoIndex, ctx){
     return JSValueMakeNull(ctx);
+}
+
+// isIPad
+EJ_BIND_SET( isIPad, ctx, value) {
+    // do nothing. not settable.
+}
+
+EJ_BIND_GET(isIPad, ctx){
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
 }
 
 
