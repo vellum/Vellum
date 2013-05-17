@@ -9,6 +9,8 @@
 #import "VLMDrawHeaderController.h"
 #import "DDPageControl.h"
 #import "AppDelegate.h"
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
+#import "VLMActivitySaveToAlbum.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
@@ -163,6 +165,8 @@
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(swipedDown:)];
     [self.leftbutton addGestureRecognizer:lpgr];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -373,7 +377,10 @@
         }
     } else {
         if (buttonIndex == 0 && self.imageToSave != nil) {
-            UIImageWriteToSavedPhotosAlbum(self.imageToSave, nil, nil, nil);
+            ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+            [library saveImage:self.imageToSave toAlbum:@"Vellum" withCompletionBlock:nil];
+            //UIImageWriteToSavedPhotosAlbum(self.imageToSave, nil, nil, nil);
+
             self.imageToSave = nil;
         }
     }
@@ -405,8 +412,13 @@
     if( NSClassFromString (@"UIActivityViewController") ) {
         NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum", nil];
         
-        self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-        [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, nil]];
+        VLMActivitySaveToAlbum *activity = [[VLMActivitySaveToAlbum alloc] init];
+        NSArray *applicationActivities = @[activity];
+        
+        self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:applicationActivities];
+        
+        [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, nil]];
+
         AppDelegate *del = [[UIApplication sharedApplication] delegate];
         UIViewController * mvc = (UIViewController*)del.mainViewController;
         

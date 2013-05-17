@@ -141,6 +141,13 @@
 		BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D418172B83F5004063D4 /* subtlenet.png */; };
 		BDF5D41B172B83F5004063D4 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D419172B83F5004063D4 /* subtlenet@2X.png */; };
 		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */; };
+		BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */; };
+		BDFB2E5B1745F9D8006AF1C7 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E571745F9D8006AF1C7 /* camera.png */; };
+		BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E581745F9D8006AF1C7 /* camera@2x.png */; };
+		BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */; };
+		BDFB2E5E1745F9D8006AF1C7 /* camera~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -374,6 +381,15 @@
 		BDF5D419172B83F5004063D4 /* subtlenet@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtlenet@2X.png"; sourceTree = "<group>"; };
 		BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSinglePanGestureRecognizer.h; path = VLM/VLMSinglePanGestureRecognizer.h; sourceTree = "<group>"; };
 		BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMSinglePanGestureRecognizer.m; path = VLM/VLMSinglePanGestureRecognizer.m; sourceTree = "<group>"; };
+		BDFB2E4F1745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		BDFB2E541745F13A006AF1C7 /* VLMActivitySaveToAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMActivitySaveToAlbum.h; path = VLM/VLMActivitySaveToAlbum.h; sourceTree = "<group>"; };
+		BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMActivitySaveToAlbum.m; path = VLM/VLMActivitySaveToAlbum.m; sourceTree = "<group>"; };
+		BDFB2E571745F9D8006AF1C7 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		BDFB2E581745F9D8006AF1C7 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera~ipad.png"; sourceTree = "<group>"; };
+		BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera~ipad@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */,
 				B60FA92A1702297C00078D20 /* MediaPlayer.framework in Frameworks */,
 				B6D6E09A16F7D03F009AB75F /* StoreKit.framework in Frameworks */,
 				B63D256A16E8DF33007E6034 /* Security.framework in Frameworks */,
@@ -433,6 +450,7 @@
 				B64CE60C1666825F0087CF94 /* libJavaScriptCore.a */,
 				B66F1E7F1476B6A40090D208 /* libstdc++.dylib */,
 				B66F1E771476B3AC0090D208 /* libicucore.dylib */,
+				BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */,
 				B60FA9291702297C00078D20 /* MediaPlayer.framework */,
 				B6D6E09916F7D03C009AB75F /* StoreKit.framework */,
 				B63D256916E8DF33007E6034 /* Security.framework */,
@@ -485,12 +503,13 @@
 			isa = PBXGroup;
 			children = (
 				BDBF1AC617249DDA0001B908 /* Vellum */,
+				BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */,
 				BDA36CE3172E034A00665A50 /* DD */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
-				B64CE64F166682700087CF94 /* Prefix.pch */,
 				B64CE650166682700087CF94 /* AppDelegate.h */,
 				B64CE651166682700087CF94 /* AppDelegate.m */,
+				B64CE64F166682700087CF94 /* Prefix.pch */,
 				B64CE661166682700087CF94 /* main.m */,
 			);
 			path = Source;
@@ -627,6 +646,10 @@
 		B64CE683166682B10087CF94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BDFB2E571745F9D8006AF1C7 /* camera.png */,
+				BDFB2E581745F9D8006AF1C7 /* camera@2x.png */,
+				BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */,
+				BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */,
 				BDB88F1717379554006134F0 /* menu_selected.png */,
 				BDB88F1B17379680006134F0 /* menu_highlighted.png */,
 				BDB88F1817379554006134F0 /* menu_default.png */,
@@ -777,6 +800,8 @@
 				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
 				BDB88F14173793FD006134F0 /* VLMMenuButton.h */,
 				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
+				BDFB2E541745F13A006AF1C7 /* VLMActivitySaveToAlbum.h */,
+				BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -810,6 +835,16 @@
 				BD70E7E4173CA91D00AD2FED /* Undo */,
 			);
 			name = Vellum;
+			sourceTree = "<group>";
+		};
+		BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */ = {
+			isa = PBXGroup;
+			children = (
+				BDFB2E4F1745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
+			);
+			name = "ALAssetsLibrary Category";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -899,6 +934,10 @@
 				BDB88F1917379554006134F0 /* menu_selected.png in Resources */,
 				BDB88F1A17379554006134F0 /* menu_default.png in Resources */,
 				BDB88F1C17379680006134F0 /* menu_highlighted.png in Resources */,
+				BDFB2E5B1745F9D8006AF1C7 /* camera.png in Resources */,
+				BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */,
+				BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */,
+				BDFB2E5E1745F9D8006AF1C7 /* camera~ipad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,6 +1027,8 @@
 				BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */,
 				BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */,
 				BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */,
+				BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
+				BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,7 +1046,7 @@
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1026,7 +1067,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
