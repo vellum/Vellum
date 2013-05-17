@@ -385,13 +385,11 @@
 }
 
 #pragma mark - VLMScreenshotDelegate
-//    UIActivityViewController *objVC = [[UIActivityViewController alloc]initWithActivityItems:[NSArray arrayWithObjects:[NSURL URLWithString:urlString], nil] applicationActivities:nil];
-
 - (void)screenShotFound:(UIImage *)found {
-    NSArray *dataToShare = [NSArray arrayWithObjects:found, nil];
+    NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum", nil];
 
     self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, nil]];
+    [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, nil]];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     UIViewController * mvc = (UIViewController*)del.mainViewController;
 
@@ -402,6 +400,7 @@
         
         [mvc presentViewController:self.activityViewController animated:YES completion:^{}];
     }
+
 }
 
 - (UIImage *)screenshotToRestore {
