@@ -439,7 +439,7 @@
     self.imageToSave = found;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        UIButton *btn = self.   
+        UIButton *btn = self.rightbutton;
         CGRect c = btn.frame;
         [actionSheet showFromRect:c inView:self.view animated:YES];
     } else {
