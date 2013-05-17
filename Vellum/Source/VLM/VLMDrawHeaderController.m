@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
+#define ACTIONSHEET_CLEARSCREEN 1000
+#define ACTIONSHEET_SHARE 1001
 
 @interface VLMDrawHeaderController ()
 
@@ -26,6 +28,7 @@
 @property (nonatomic) NSInteger index;
 @property CGRect titleframe;
 @property CGRect titlemaskframe;
+@property (nonatomic, strong) UIImage *imageToSave;
 
 - (void)setupHeadingView;
 - (void)longPress:(id)sender;
@@ -52,6 +55,8 @@
 @synthesize ghostlabel;
 @synthesize activityViewController;
 @synthesize popovercontroller;
+@synthesize imageToSave;
+
 - (id)initWithHeadings:(NSArray *)headings {
     self = [self init];
     if (self) {
@@ -361,8 +366,16 @@
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        [self.delegate clearScreen];
+    NSLog(@"%d", actionSheet.tag);
+    if ( actionSheet.tag == ACTIONSHEET_CLEARSCREEN ){
+        if (buttonIndex == 0) {
+            [self.delegate clearScreen];
+        }
+    } else {
+        if (buttonIndex == 0 && self.imageToSave != nil) {
+            UIImageWriteToSavedPhotosAlbum(self.imageToSave, nil, nil, nil);
+            self.imageToSave = nil;
+        }
     }
 }
 
@@ -370,6 +383,7 @@
 
 - (void)plusTapped:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Start Again", nil];
+    [actionSheet setTag:ACTIONSHEET_CLEARSCREEN];
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UIButton *btn = (UIButton *)sender;
@@ -386,21 +400,40 @@
 
 #pragma mark - VLMScreenshotDelegate
 - (void)screenShotFound:(UIImage *)found {
-    NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum", nil];
-
-    self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
-    [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, nil]];
-    AppDelegate *del = [[UIApplication sharedApplication] delegate];
-    UIViewController * mvc = (UIViewController*)del.mainViewController;
-
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:self.activityViewController];
-        [self.popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    } else {
+    
+    // ios6+
+    if( NSClassFromString (@"UIActivityViewController") ) {
+        NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum", nil];
         
-        [mvc presentViewController:self.activityViewController animated:YES completion:^{}];
+        self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
+        [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, nil]];
+        AppDelegate *del = [[UIApplication sharedApplication] delegate];
+        UIViewController * mvc = (UIViewController*)del.mainViewController;
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:self.activityViewController];
+            [self.popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        } else {
+            
+            [mvc presentViewController:self.activityViewController animated:YES completion:^{}];
+        }
+        return;
     }
-
+    
+    // ios5
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Save to Camera Roll", nil];
+    [actionSheet setTag:ACTIONSHEET_SHARE];
+    self.imageToSave = found;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIButton *btn = self.leftbutton;
+        CGRect c = btn.frame;
+        [actionSheet showFromRect:c inView:self.view animated:YES];
+    } else {
+        [actionSheet showInView:self.view.superview];
+    }
+    
 }
 
 - (UIImage *)screenshotToRestore {
