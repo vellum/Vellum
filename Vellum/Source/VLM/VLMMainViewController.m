@@ -446,7 +446,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage * img = [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
-    
+    EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
+    [jsv injectScreenShot:img];
+    [self.avc callJS:@"saveUndoState();"];
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self.headerController dismissPopoverController];
     } else {

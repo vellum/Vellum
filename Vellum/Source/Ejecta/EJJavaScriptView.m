@@ -451,4 +451,11 @@
     requestedRestoreScreenShot = YES;
 }
 
+- (void)injectScreenShot:(UIImage*)image{
+    if ([self.screenRenderingContext isKindOfClass:[EJCanvasContext2D class]]) {
+        EJCanvasContext2D *ctx = (EJCanvasContext2D *)self.screenRenderingContext;
+        [ctx drawImageIntoGL:image];
+    }
+}
+
 @end

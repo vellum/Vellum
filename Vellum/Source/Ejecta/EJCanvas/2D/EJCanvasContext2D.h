@@ -225,7 +225,7 @@ static inline EJColorRGBA EJCanvasBlendStrokeColor( EJCanvasState *state ) {
 
 #pragma mark - VLM Additions
 - (UIImage*)getImageFromGL;
-//- (void)drawImageIntoGL:(UIImage*)image;
+- (void)drawImageIntoGL:(UIImage*)image;
 
 
 @end

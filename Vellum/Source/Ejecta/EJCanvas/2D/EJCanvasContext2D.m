@@ -895,7 +895,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     
     return ret;
 }
-/*
+
 - (void)drawImageIntoGL:(UIImage*)image{
     
     CGImageRef imageRef = CGImageCreateCopy([image CGImage]);
@@ -919,10 +919,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     
     EJImageData *imageData = [[EJImageData alloc] initWithWidth:sw height:sh pixels:textureData];
     [self putImageDataHD:imageData dx:0 dy:0];
-    [self flushBuffers];
-    
 }
- */
 
 
 @end

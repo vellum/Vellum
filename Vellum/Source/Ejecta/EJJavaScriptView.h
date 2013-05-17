@@ -122,5 +122,6 @@
 - (void)requestScreenShot;
 - (void)requestUndoScreenShot;
 - (void)requestRestoreUndoScreenShot;
+- (void)injectScreenShot:(UIImage*)image;
 
 @end
