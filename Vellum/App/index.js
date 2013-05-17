@@ -339,7 +339,8 @@ var continueStroke = function(x, y) {
 var endStroke = function(x, y) {
     mousedown = false;
     //console.log( 'endStroke: ' + x + ', ' + y );
-    var backingStorePixelRatio = ctx.backingStorePixelRatio;
+    //var backingStorePixelRatio = ctx.backingStorePixelRatio;
+    saveUndoState();
 };
 
 var setZoom = function(val) {

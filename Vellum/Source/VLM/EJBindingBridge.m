@@ -55,7 +55,7 @@ EJ_BIND_SET( isIPad, ctx, value) {
 }
 
 EJ_BIND_GET(isIPad, ctx){
-    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+    return JSValueMakeBoolean(ctx, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad));
 }
 
 
