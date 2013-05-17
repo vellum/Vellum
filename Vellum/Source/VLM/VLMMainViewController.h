@@ -17,7 +17,7 @@
 
 @end
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate>
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;

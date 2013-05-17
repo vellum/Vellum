@@ -442,4 +442,30 @@
     [self.undoViewController update];
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage * img = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self.headerController dismissPopoverController];
+    } else {
+        [picker dismissModalViewControllerAnimated:YES];
+    }
+    [self.headerController cleanupImagePicker];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissModalViewControllerAnimated:YES];
+    // do nothing
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    // do nothing
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    // do nothing
+}
 @end

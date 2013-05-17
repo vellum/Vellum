@@ -11,10 +11,12 @@
 #import "AppDelegate.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "VLMActivitySaveToAlbum.h"
+#import "VLMMainViewController.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
 #define ACTIONSHEET_SHARE 1001
+#define ACTIONSHEET_IMPORT 1002
 
 @interface VLMDrawHeaderController ()
 
@@ -31,6 +33,7 @@
 @property CGRect titleframe;
 @property CGRect titlemaskframe;
 @property (nonatomic, strong) UIImage *imageToSave;
+@property (nonatomic, strong) UIImagePickerController *pickerController;
 
 - (void)setupHeadingView;
 - (void)longPress:(id)sender;
@@ -58,6 +61,7 @@
 @synthesize activityViewController;
 @synthesize popovercontroller;
 @synthesize imageToSave;
+@synthesize pickerController;
 
 - (id)initWithHeadings:(NSArray *)headings {
     self = [self init];
@@ -163,7 +167,7 @@
     [lpr setNumberOfTouchesRequired:1];
     [titleviewmask addGestureRecognizer:lpr];
     
-    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(swipedDown:)];
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(plusLongPressed:)];
     [self.leftbutton addGestureRecognizer:lpgr];
     
     
@@ -266,8 +270,21 @@
     }
 }
 
-- (void)swipedDown:(id)sender{
-    NSLog(@"swipedown");
+- (void)plusLongPressed:(id)sender{
+    UILongPressGestureRecognizer *lpgr = (UILongPressGestureRecognizer *)sender;
+    if ( [lpgr state] == UIGestureRecognizerStateBegan ){
+
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an Image", nil];
+        [actionSheet setTag:ACTIONSHEET_IMPORT];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            CGRect c = self.leftbutton.frame;
+            [actionSheet showFromRect:c inView:self.view animated:YES];
+        } else {
+            [actionSheet showInView:self.view.superview];
+        }
+        
+    }
 }
 
 #pragma mark - public ()
@@ -367,22 +384,59 @@
     }
 }
 
+- (void)dismissPopoverController{
+    if ( self.popovercontroller != nil ){
+        [self.popovercontroller dismissPopoverAnimated:YES];
+    }
+}
+
+- (void)cleanupImagePicker{
+    if ( self.popovercontroller != nil ){
+        [self setPopovercontroller:nil];
+    }
+    if ( self.pickerController != nil ){
+        [self setPickerController:nil];
+    }
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"%d", actionSheet.tag);
-    if ( actionSheet.tag == ACTIONSHEET_CLEARSCREEN ){
-        if (buttonIndex == 0) {
-            [self.delegate clearScreen];
-        }
-    } else {
-        if (buttonIndex == 0 && self.imageToSave != nil) {
-            ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-            [library saveImage:self.imageToSave toAlbum:@"Vellum" withCompletionBlock:nil];
-            //UIImageWriteToSavedPhotosAlbum(self.imageToSave, nil, nil, nil);
+    switch (actionSheet.tag) {
+        case ACTIONSHEET_CLEARSCREEN:
+            if (buttonIndex == 0) {
+                [self.delegate clearScreen];
+            }
+            break;
 
-            self.imageToSave = nil;
-        }
+        case ACTIONSHEET_IMPORT:
+            if (buttonIndex == 0) {
+                AppDelegate *del = [[UIApplication sharedApplication] delegate];
+                VLMMainViewController * mvc = (VLMMainViewController*)del.mainViewController;
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                [picker setDelegate:mvc];
+                [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                self.pickerController = picker;
+                
+                if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                    self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:picker];// does this need to be a property?
+                    [self.popovercontroller presentPopoverFromRect:self.leftbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                } else {
+                    UIViewController *vc = (UIViewController*)mvc;
+                    [vc presentViewController:picker animated:YES completion:^{}];
+                }
+
+            }
+        case ACTIONSHEET_SHARE:
+            if (buttonIndex == 0 && self.imageToSave != nil) {
+                ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+                [library saveImage:self.imageToSave toAlbum:@"Vellum" withCompletionBlock:nil];
+                self.imageToSave = nil;
+            }
+            break;
+        default:
+            break;
     }
 }
 

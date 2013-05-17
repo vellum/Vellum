@@ -35,5 +35,7 @@
 - (void)prevPage;
 - (void)resetToZero;
 - (void)updatePage;
+- (void)dismissPopoverController;
+- (void)cleanupImagePicker;
 
 @end
