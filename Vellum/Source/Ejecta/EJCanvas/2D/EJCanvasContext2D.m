@@ -911,9 +911,11 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     CGContextRef context = CGBitmapContextCreate([textureData mutableBytes], sw, sh,
                                                  bitsPerComponent, bytesPerRow, colorSpace,
                                                  kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    // flip vertically
+    CGContextTranslateCTM(context, 0, sh);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
+    
     CGContextDrawImage(context, CGRectMake(0, 0, sw, sh), imageRef);
-    CGAffineTransform flipVertical = CGAffineTransformMake(1, 0, 0, -1, 0,sh);
-    CGContextConcatCTM(context, flipVertical);
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
     

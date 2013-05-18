@@ -447,7 +447,10 @@
     UIImage * img = [info objectForKey:UIImagePickerControllerOriginalImage];
     NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
     EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
-    [jsv injectScreenShot:img];
+    
+    UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
+    
+    [jsv injectScreenShot:padded];
     [self.avc callJS:@"saveUndoState();"];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -470,5 +473,56 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     // do nothing
+}
+
+- (UIImage*)getPaddedImageForImage:(UIImage*)image AndSize:(CGSize)size{
+    BOOL isRetina = NO;
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00) {
+        isRetina = YES;
+        CGFloat scale = [[UIScreen mainScreen] scale];
+        size.width *= scale;
+        size.height *= scale;
+    }
+    
+    CGSize inputSize = image.size;
+    CGRect outputRect = CGRectMake(0,0,size.width,size.height);
+
+    CGImageRef iref = image.CGImage;
+    if ( inputSize.height >= inputSize.width ){//portrait
+        
+        if ( inputSize.height >= size.height ){
+            outputRect.size.width = inputSize.width/inputSize.height * outputRect.size.height;
+        } else {
+            outputRect.size.height = inputSize.height;
+            outputRect.size.width = inputSize.width/inputSize.height * outputRect.size.height;
+        }
+        outputRect.origin.y = (size.height-outputRect.size.height) / 2.0f;
+        outputRect.origin.x = (size.width-outputRect.size.width) / 2.0f;
+    
+    } else {//landscape
+        
+        if ( inputSize.width >= size.width ){
+            outputRect.size.height = inputSize.height/inputSize.width * outputRect.size.width;
+        } else {
+            outputRect.size.width = inputSize.width;
+            outputRect.size.height = inputSize.height/inputSize.width * outputRect.size.width;
+        }
+        outputRect.origin.y = (size.height-outputRect.size.height) / 2.0f;
+        outputRect.origin.x = (size.width-outputRect.size.width) / 2.0f;
+    }
+    
+    UIColor *bgcolor = [UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f];
+    
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [bgcolor CGColor]);
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
+    
+    CGContextDrawImage(context, outputRect, iref);
+    
+    UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return result;
+    
 }
 @end

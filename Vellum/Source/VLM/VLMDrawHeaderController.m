@@ -274,7 +274,7 @@
     UILongPressGestureRecognizer *lpgr = (UILongPressGestureRecognizer *)sender;
     if ( [lpgr state] == UIGestureRecognizerStateBegan ){
 
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Import Image", nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose Image", nil];
         [actionSheet setTag:ACTIONSHEET_IMPORT];
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
