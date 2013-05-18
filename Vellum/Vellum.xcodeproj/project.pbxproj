@@ -147,6 +147,9 @@
 		BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E581745F9D8006AF1C7 /* camera@2x.png */; };
 		BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */; };
 		BDFB2E5E1745F9D8006AF1C7 /* camera~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */; };
+		BDFB2E6A174753F7006AF1C7 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E68174753F7006AF1C7 /* libGoogleAnalytics_debug.a */; };
+		BDFB2E6B174753F7006AF1C7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E69174753F7006AF1C7 /* libGoogleAnalytics.a */; };
+		BDFB2E6D1747546B006AF1C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E6C1747546B006AF1C7 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -387,6 +390,14 @@
 		BDFB2E581745F9D8006AF1C7 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 		BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera~ipad.png"; sourceTree = "<group>"; };
 		BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera~ipad@2x.png"; sourceTree = "<group>"; };
+		BDFB2E63174753F7006AF1C7 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		BDFB2E64174753F7006AF1C7 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		BDFB2E65174753F7006AF1C7 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		BDFB2E66174753F7006AF1C7 /* GAITransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransaction.h; sourceTree = "<group>"; };
+		BDFB2E67174753F7006AF1C7 /* GAITransactionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITransactionItem.h; sourceTree = "<group>"; };
+		BDFB2E68174753F7006AF1C7 /* libGoogleAnalytics_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics_debug.a; sourceTree = "<group>"; };
+		BDFB2E69174753F7006AF1C7 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		BDFB2E6C1747546B006AF1C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,13 +405,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6F463A41636C3FB00FC89C1 /* SystemConfiguration.framework in Frameworks */,
+				BDFB2E6D1747546B006AF1C7 /* CoreData.framework in Frameworks */,
 				BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */,
 				B60FA92A1702297C00078D20 /* MediaPlayer.framework in Frameworks */,
 				B6D6E09A16F7D03F009AB75F /* StoreKit.framework in Frameworks */,
 				B63D256A16E8DF33007E6034 /* Security.framework in Frameworks */,
 				B63D256816E8DF23007E6034 /* CFNetwork.framework in Frameworks */,
 				B6F1151C1677FCF5001F1324 /* CoreMotion.framework in Frameworks */,
-				B6F463A41636C3FB00FC89C1 /* SystemConfiguration.framework in Frameworks */,
 				5B7B76761619DB9700691910 /* CoreText.framework in Frameworks */,
 				B6074FF315F8E41700D987F9 /* GameKit.framework in Frameworks */,
 				B66F1E811476B6B90090D208 /* libicucore.dylib in Frameworks */,
@@ -415,6 +427,8 @@
 				B6CFCCD91332F152001F17AF /* AVFoundation.framework in Frameworks */,
 				B6AC4A061359E7A5003C4982 /* iAd.framework in Frameworks */,
 				B6243666166684420046B8C7 /* libJavaScriptCore.a in Frameworks */,
+				BDFB2E6A174753F7006AF1C7 /* libGoogleAnalytics_debug.a in Frameworks */,
+				BDFB2E6B174753F7006AF1C7 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +446,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BDFB2E6C1747546B006AF1C7 /* CoreData.framework */,
 				B68C5AEF132E6CD60015092E /* App */,
 				B64CE60E166682700087CF94 /* Source */,
 				B64CE683166682B10087CF94 /* Resources */,
@@ -444,6 +459,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BDFB2E68174753F7006AF1C7 /* libGoogleAnalytics_debug.a */,
+				BDFB2E69174753F7006AF1C7 /* libGoogleAnalytics.a */,
 				B64CE60C1666825F0087CF94 /* libJavaScriptCore.a */,
 				B66F1E7F1476B6A40090D208 /* libstdc++.dylib */,
 				B66F1E771476B3AC0090D208 /* libicucore.dylib */,
@@ -502,6 +519,7 @@
 				BDBF1AC617249DDA0001B908 /* Vellum */,
 				BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */,
 				BDA36CE3172E034A00665A50 /* DD */,
+				BDFB2E62174753E7006AF1C7 /* Google */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
 				B64CE650166682700087CF94 /* AppDelegate.h */,
@@ -839,6 +857,19 @@
 				BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 			);
 			name = "ALAssetsLibrary Category";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		BDFB2E62174753E7006AF1C7 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				BDFB2E63174753F7006AF1C7 /* GAI.h */,
+				BDFB2E64174753F7006AF1C7 /* GAITrackedViewController.h */,
+				BDFB2E65174753F7006AF1C7 /* GAITracker.h */,
+				BDFB2E66174753F7006AF1C7 /* GAITransaction.h */,
+				BDFB2E67174753F7006AF1C7 /* GAITransactionItem.h */,
+			);
+			name = Google;
 			path = ..;
 			sourceTree = "<group>";
 		};
