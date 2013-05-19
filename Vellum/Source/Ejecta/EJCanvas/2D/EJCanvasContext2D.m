@@ -916,11 +916,16 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
     CGContextScaleCTM(context, 1.0f, -1.0f);
     
     CGContextDrawImage(context, CGRectMake(0, 0, sw, sh), imageRef);
+    CGImageRelease(imageRef);
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
     
     EJImageData *imageData = [[EJImageData alloc] initWithWidth:sw height:sh pixels:textureData];
     [self putImageDataHD:imageData dx:0 dy:0];
+
+    // this is ok, putImageData methods
+    [imageData dealloc];
+    
 }
 
 
