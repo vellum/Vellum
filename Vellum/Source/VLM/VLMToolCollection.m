@@ -26,12 +26,12 @@ static VLMToolCollection *sharedToolCollection;
         self.tools = [[NSMutableArray alloc] init];
         
         NSArray *names = [NSArray arrayWithObjects:
-                          @"Scribble",      //1
+                          @"Scribble",    //1
                           @"Shade",       //2
-                          @"Outline",       //3
-                          @"Ink ",         //4
-                          @"Erase",         //5
-                          @"Scratch",       //6
+                          @"Line",        //3
+                          @"Ink ",        //4
+                          @"Erase",       //5
+                          @"Scratch",     //6
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
                              [NSNumber numberWithBool:YES], //1
