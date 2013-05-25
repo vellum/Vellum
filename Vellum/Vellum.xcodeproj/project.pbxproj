@@ -131,6 +131,7 @@
 		BDB88F1917379554006134F0 /* menu_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1717379554006134F0 /* menu_selected.png */; };
 		BDB88F1A17379554006134F0 /* menu_default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1817379554006134F0 /* menu_default.png */; };
 		BDB88F1C17379680006134F0 /* menu_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88F1B17379680006134F0 /* menu_highlighted.png */; };
+		BDBEB9FE175118700056BC09 /* OPPresentatorWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBEB9FD175118700056BC09 /* OPPresentatorWindow.m */; };
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -140,7 +141,6 @@
 		BDF5D41A172B83F5004063D4 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D418172B83F5004063D4 /* subtlenet.png */; };
 		BDF5D41B172B83F5004063D4 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF5D419172B83F5004063D4 /* subtlenet@2X.png */; };
 		BDF5D421172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDF62D621750956700E3BE09 /* OPPresentatorWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF62D611750956700E3BE09 /* OPPresentatorWindow.m */; };
 		BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */; };
 		BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -366,6 +366,8 @@
 		BDB88F1717379554006134F0 /* menu_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_selected.png; sourceTree = "<group>"; };
 		BDB88F1817379554006134F0 /* menu_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_default.png; sourceTree = "<group>"; };
 		BDB88F1B17379680006134F0 /* menu_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_highlighted.png; sourceTree = "<group>"; };
+		BDBEB9FC175118700056BC09 /* OPPresentatorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPresentatorWindow.h; sourceTree = "<group>"; };
+		BDBEB9FD175118700056BC09 /* OPPresentatorWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPresentatorWindow.m; sourceTree = "<group>"; };
 		BDBF1AC3172499D50001B908 /* VLMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMMainViewController.h; path = VLM/VLMMainViewController.h; sourceTree = "<group>"; };
 		BDBF1AC4172499D50001B908 /* VLMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMMainViewController.m; path = VLM/VLMMainViewController.m; sourceTree = "<group>"; };
 		BDBF1ACA1724CDC00001B908 /* VLMZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMZoomViewController.h; path = VLM/VLMZoomViewController.h; sourceTree = "<group>"; };
@@ -382,8 +384,6 @@
 		BDF5D419172B83F5004063D4 /* subtlenet@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subtlenet@2X.png"; sourceTree = "<group>"; };
 		BDF5D41F172B89BB004063D4 /* VLMSinglePanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSinglePanGestureRecognizer.h; path = VLM/VLMSinglePanGestureRecognizer.h; sourceTree = "<group>"; };
 		BDF5D420172B89BB004063D4 /* VLMSinglePanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMSinglePanGestureRecognizer.m; path = VLM/VLMSinglePanGestureRecognizer.m; sourceTree = "<group>"; };
-		BDF62D601750956700E3BE09 /* OPPresentatorWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPPresentatorWindow.h; sourceTree = "<group>"; };
-		BDF62D611750956700E3BE09 /* OPPresentatorWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPPresentatorWindow.m; sourceTree = "<group>"; };
 		BDFB2E4F1745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -462,8 +462,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BDF62D601750956700E3BE09 /* OPPresentatorWindow.h */,
-				BDF62D611750956700E3BE09 /* OPPresentatorWindow.m */,
+				BDBEB9FC175118700056BC09 /* OPPresentatorWindow.h */,
+				BDBEB9FD175118700056BC09 /* OPPresentatorWindow.m */,
 				BDFB2E68174753F7006AF1C7 /* libGoogleAnalytics_debug.a */,
 				BDFB2E69174753F7006AF1C7 /* libGoogleAnalytics.a */,
 				B64CE60C1666825F0087CF94 /* libJavaScriptCore.a */,
@@ -1059,7 +1059,7 @@
 				BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */,
 				BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				BDFB2E561745F13A006AF1C7 /* VLMActivitySaveToAlbum.m in Sources */,
-				BDF62D621750956700E3BE09 /* OPPresentatorWindow.m in Sources */,
+				BDBEB9FE175118700056BC09 /* OPPresentatorWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

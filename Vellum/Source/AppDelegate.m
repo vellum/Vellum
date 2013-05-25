@@ -4,7 +4,7 @@
 #import "GAI.h"
 
 @implementation AppDelegate
-@synthesize window;
+@synthesize window=_window;
 @synthesize mainViewController;
 
 #pragma mark -
@@ -17,7 +17,7 @@
     
     VLMMainViewController *vc = [[VLMMainViewController alloc] init];
     [self setMainViewController:vc];
-    [window setRootViewController:vc];
+    [self.window setRootViewController:vc];
     
     
     // google
