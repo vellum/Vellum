@@ -66,6 +66,11 @@
         [v.superview bringSubviewToFront:v];
         idx++;
     }
+    // hide any remaining touch views
+    for (int i = idx; i < [self.touchViews count]; i++){
+        UIView *v = [self.touchViews objectAtIndex:idx];
+        v.hidden = YES;
+    }
 }
 
 -(BOOL) hasMirroredScreen {
