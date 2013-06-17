@@ -43,8 +43,12 @@
         UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, placeholder.frame.size.width, placeholder.frame.size.height)];
         [placeholder addSubview:iv];
         [placeholder setUserInteractionEnabled:NO];
-//        [placeholder setAlpha:0.0f];
         [self setContentImageView:iv];
+        
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(margin-5, 382, 320-margin*2 + 5*2, 2)];
+        [line setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+        [line setUserInteractionEnabled:NO];
+        [self.contentView addSubview:line];
     }
     return self;
 }

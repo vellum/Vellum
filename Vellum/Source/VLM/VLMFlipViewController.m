@@ -48,6 +48,11 @@
     [self.view addSubview:h];
     [self setHeader:h];
     
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    [tgr setNumberOfTapsRequired:1];
+    [tgr setNumberOfTouchesRequired:1];
+    [h addGestureRecognizer:tgr];
+    
     texts = [NSArray arrayWithObjects:
              @"Draw with one finger.",
              @"Tap header for palette.",
@@ -115,12 +120,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+        return texts.count-1;
+    }
     return texts.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 380;
+    return 385;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,7 +149,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 
+#pragma mark GestureRecco
 
+- (void)tapped{
+    NSLog(@"tapped");
+    [self.tableview scrollRectToVisible:CGRectMake(0,1,1,1) animated:YES];
+}
 
 
 @end
