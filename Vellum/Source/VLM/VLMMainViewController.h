@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VLMDrawHeaderController.h"
+#import "VLMFlipViewController.h"
 
 @protocol VLMMenuDelegate <NSObject>
 
@@ -17,7 +18,7 @@
 
 @end
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
 
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;

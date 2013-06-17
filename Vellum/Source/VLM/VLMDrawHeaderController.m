@@ -12,6 +12,7 @@
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "VLMActivitySaveToAlbum.h"
 #import "VLMMainViewController.h"
+#import "VLMConstants.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
@@ -85,7 +86,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGFloat HEADER_HEIGHT = 60.0f;
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     
     [self setIndex:0];
@@ -149,6 +149,7 @@
     [ghostlabel setBackgroundColor:[UIColor clearColor]];
     [ghostlabel setAlpha:0.0f];
     [ghostlabel setUserInteractionEnabled:NO];
+    [ghostlabel setFrame:CGRectOffset(ghostlabel.frame, 0, 1.0f)];
     [self.titlemask addSubview:ghostlabel];
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
@@ -181,7 +182,6 @@
 #pragma mark - private ()
 
 - (void)setupHeadingView {
-    CGFloat HEADER_HEIGHT = 60.0f;
     int count = [self.titles count];
     [self.titleview setFrame:CGRectMake(0, 0, count * HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     
@@ -192,7 +192,7 @@
     
     for (int i = 0; i < count; i++) {
         NSString *t = self.titles[i];
-        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i * HEADER_LABEL_WIDTH, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
+        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i * HEADER_LABEL_WIDTH, 1, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
         [A setText:t];
         [A setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [A setTextColor:[UIColor blackColor]];
@@ -241,7 +241,7 @@
 }
 
 - (void)tapped {
-    if (self.ghostlabel.alpha == 1) {
+    if (self.ghostlabel.alpha == 1 || [self.titles count] == 1) {
         [self togglePopover];
         return;
     }
@@ -418,6 +418,10 @@
                 [picker setDelegate:mvc];
                 [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
                 self.pickerController = picker;
+                
+                
+                [picker.navigationBar setTitleVerticalPositionAdjustment:HEADER_TITLE_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
+
                 
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                     self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:picker];// does this need to be a property?

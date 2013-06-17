@@ -34,11 +34,11 @@ static VLMToolCollection *sharedToolCollection;
                           @"Scratch",     //6
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
-                             [NSNumber numberWithBool:YES], //1
-                             [NSNumber numberWithBool:YES], //2
-                             [NSNumber numberWithBool:YES], //3
-                             [NSNumber numberWithBool:YES], //4
-                             [NSNumber numberWithBool:YES], //5
+                             [NSNumber numberWithBool:NO], //1
+                             [NSNumber numberWithBool:NO], //2
+                             [NSNumber numberWithBool:NO], //3
+                             [NSNumber numberWithBool:NO], //4
+                             [NSNumber numberWithBool:NO], //5
                              [NSNumber numberWithBool:NO], //6
                              nil];
         NSArray *jsvals = [NSArray arrayWithObjects:

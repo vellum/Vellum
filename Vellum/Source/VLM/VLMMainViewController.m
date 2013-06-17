@@ -20,6 +20,8 @@
 #import "DDPageControl.h"
 #import "VLMUndoState.h"
 #import "VLMUndoViewController.h"
+#import "VLMConstants.h"
+#import "UINavigationBar+Fat.h"
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
@@ -37,6 +39,9 @@
 @property CGFloat pinchAccumulatedScale;
 @property (strong, nonatomic) UIImage *restoreUndoImage;
 @property NSInteger lastKnownUndoIndex;
+@property (strong, nonatomic) UIButton *infoButton;
+@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
+
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -61,6 +66,8 @@
 @synthesize pinchAccumulatedScale;
 @synthesize restoreUndoImage;
 @synthesize lastKnownUndoIndex;
+@synthesize infoButton;
+@synthesize flipsidePopoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -80,9 +87,12 @@
     VLMUndoViewController *uvc = [[VLMUndoViewController alloc] init];
     
     VLMDrawHeaderController *h = [[VLMDrawHeaderController alloc] init];
-    NSMutableArray *tools = [[VLMToolCollection instance] getEnabledTools];
-    [h setHeadings:tools];
     [h setDelegate:self];
+    
+    UIButton *ib = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    CGFloat margin = 15;
+    [ib setFrame:CGRectMake(frame.size.width-ib.frame.size.width-margin, frame.size.height-ib.frame.size.height - margin, ib.frame.size.width, ib.frame.size.height)];
+    [ib addTarget:self action:@selector(infoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setPinchLastScale:1.0f];
     [self setPinchAccumulatedScale:1.0f];
@@ -94,12 +104,14 @@
     [self.view addSubview:uvc.view];
     [self.view addSubview:t];
     [self.view addSubview:h.view];
+    [self.view addSubview:ib];
     
     [self setAvc:vc];
     [self setZoomViewController:z];
     [self setTouchCaptureView:t];
     [self setHeaderController:h];
     [self setUndoViewController:uvc];
+    [self setInfoButton:ib];
     
     VLMPanGestureRecognizer *twoFingerPan = [[VLMPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerPan:)];
     [twoFingerPan setMinimumNumberOfTouches:2];
@@ -150,6 +162,15 @@
     [self.headerController updatePage];
     
     lastKnownUndoIndex = 0;
+    
+    [self refreshData];
+    [self updateHeader];
+    VLMToolCollection *toolcollection = [VLMToolCollection instance];
+    VLMToolData *selecteditem = (VLMToolData *)[toolcollection.tools objectAtIndex:toolcollection.selectedIndex];
+    if (!selecteditem.enabled) {
+        [h setSelectedIndex:-1 andTitle:selecteditem.name animated:NO];
+    }
+
 }
 
 #pragma mark -
@@ -304,12 +325,14 @@
     
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:!h.userInteractionEnabled];
+    [self.infoButton setUserInteractionEnabled:!self.infoButton.userInteractionEnabled];
     
     [UIView animateWithDuration:0.25f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [h setAlpha:(h.userInteractionEnabled) ? 1:0 ];
+                         [self.infoButton setAlpha:(h.userInteractionEnabled) ? 1:0 ];
                      }
      
                      completion:nil
@@ -525,4 +548,47 @@
     return result;
     
 }
+
+#pragma mark - Flipside View Controller
+
+- (void)flipsideViewControllerDidFinish:(VLMFlipViewController *)controller
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.flipsidePopoverController dismissPopoverAnimated:YES];
+    }
+}
+
+- (void)infoButtonTapped:(id)sender
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+
+        
+        VLMFlipViewController *controller = [[VLMFlipViewController alloc] initWithNibName:nil bundle:nil];
+        controller.delegate = self;
+        controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        
+        [self presentModalViewController:controller animated:YES];
+
+    } else {
+        if (!self.flipsidePopoverController) {
+            VLMFlipViewController *controller = [[VLMFlipViewController alloc] initWithNibName:nil bundle:nil];
+            controller.delegate = self;
+
+
+            self.flipsidePopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+        }
+        if ([self.flipsidePopoverController isPopoverVisible]) {
+            [self.flipsidePopoverController dismissPopoverAnimated:YES];
+        } else {
+            
+            [self.flipsidePopoverController presentPopoverFromRect:self.infoButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+        }
+    }
+}
+
+
+
 @end

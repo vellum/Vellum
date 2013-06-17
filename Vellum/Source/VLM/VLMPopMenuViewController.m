@@ -77,7 +77,9 @@
         [onoff setSelected:tool.enabled];
         [onoff setTag:i];
         [onoff setShowsTouchWhenHighlighted:YES];
-        [back addSubview:onoff];
+
+        // removing this for now, people seem to not get it.
+        //[back addSubview:onoff];
         [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
         
         [onoffbuttons addObject:onoff];

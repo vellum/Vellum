@@ -115,7 +115,7 @@ const EJCompositeOperationFunc EJCompositeOperationFuncs[] = {
 	width = newWidth;
 	height = newHeight;
 	
-	backingStoreRatio = (useRetinaResolution && [UIScreen mainScreen].scale == 2) ? 2 : 1;
+	backingStoreRatio = 2;//(useRetinaResolution && [UIScreen mainScreen].scale == 2) ? 2 : 1;
 	bufferWidth = width * backingStoreRatio;
 	bufferHeight = height * backingStoreRatio;
 	
