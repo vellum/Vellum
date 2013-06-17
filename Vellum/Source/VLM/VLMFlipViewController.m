@@ -55,8 +55,8 @@
              @"Pinch to zoom.",
              @"Double-tap to reset zoom.",
              //@"Tap Plus to Start Again",
-             @"Long-press \"+\" to start\n from saved drawing.",
-             @"Vertical-Pan with 3 fingers to undo.",
+             @"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
+             @"Pan vertically with 3 fingers to undo.",
              nil];
     
     images = [NSArray arrayWithObjects:
