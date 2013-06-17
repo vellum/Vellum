@@ -170,6 +170,7 @@
     if (!selecteditem.enabled) {
         [h setSelectedIndex:-1 andTitle:selecteditem.name animated:NO];
     }
+    [self handleDoubleTap:nil];
 
 }
 
@@ -272,8 +273,14 @@
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
     if ([pgr state] == UIGestureRecognizerStateBegan) {
+        
         CGPoint location = [sender locationInView:self.avc.view];
-        [self setPinchLastPoint:CGPointMake(location.x / bounds.size.width, location.y / bounds.size.height)]; // this is now a percentage value
+        if ( !self.avc.shouldDoubleResolution ){
+            [self setPinchLastPoint:CGPointMake(location.x / bounds.size.width, location.y / bounds.size.height)]; // this is now a percentage value
+        } else {
+            // 3gs gets this
+            [self setPinchLastPoint:CGPointMake(location.x / (bounds.size.width*2), location.y / (bounds.size.height*2))]; // this is now a percentage value
+        }
         [self setPinchLastScale:1.0f];
         [self.zoomViewController show];
         return;
@@ -342,17 +349,33 @@
 - (void)handleDoubleTap:(id)sender {
     VLMTapGestureRecognizer *tgr = (VLMTapGestureRecognizer *)sender;
     if (tgr.numberOfTouches > 1) return;
-    [self.zoomViewController setText:100];
     
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDelay:0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.2];
-    [self.avc.view setTransform:CGAffineTransformMakeScale(1, 1)];
-    [self.avc.view setCenter:CGPointMake(bounds.size.width / 2, bounds.size.height / 2)];
-    [UIView commitAnimations];
-    self.pinchAccumulatedScale = 1.0f;
+    if ( !self.avc.shouldDoubleResolution ) {
+        [self.zoomViewController setText:100];
+        self.pinchAccumulatedScale = 1.0f;
+        CGRect bounds = [[UIScreen mainScreen] bounds];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.2];
+        [self.avc.view setTransform:CGAffineTransformMakeScale(1, 1)];
+        [self.avc.view setCenter:CGPointMake(bounds.size.width / 2, bounds.size.height / 2)];
+        [UIView commitAnimations];
+        
+    } else {
+        [self.zoomViewController setText:50];
+        self.pinchAccumulatedScale = 0.5f;
+        CGRect bounds = [[UIScreen mainScreen] bounds];
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.2];
+        [self.avc.view setTransform:CGAffineTransformMakeScale(0.5, 0.5)];
+        [self.avc.view setCenter:CGPointMake(bounds.size.width / 2, bounds.size.height / 2)];
+        [UIView commitAnimations];
+        
+    }
+
 }
 
 - (void)enteredForeground {

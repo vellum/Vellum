@@ -4,11 +4,13 @@
 #import "EJJavaScriptView.h"
 
 @implementation EJAppViewController
+@synthesize shouldDoubleResolution;
 
 - (id)init{
 	if( self = [super init] ) {
 		landscapeMode = [[[NSBundle mainBundle] infoDictionary][@"UIInterfaceOrientation"]
 			hasPrefix:@"UIInterfaceOrientationLandscape"];
+        shouldDoubleResolution = NO;
 	}
 	return self;
 }
@@ -27,7 +29,23 @@
 	if( landscapeMode ) {
 		frame.size = CGSizeMake(frame.size.height, frame.size.width);
 	}
-	
+    
+    
+    // from http://stackoverflow.com/questions/3504173/detect-retina-display
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] &&
+        ([UIScreen mainScreen].scale == 2.0)) {
+        // Retina display
+        // do nothing, the underlying canvas object will double the pixels
+    } else {
+        // non-Retina display
+        // if this is a low-res non-retina display (eg iPhone 3GS), double the size of the view
+        if ( frame.size.width <= 320 ){
+            shouldDoubleResolution = YES;
+            frame.size.width *= 2;
+            frame.size.height *= 2;
+        }
+        
+    }
 	EJJavaScriptView *view = [[EJJavaScriptView alloc] initWithFrame:frame];
 	self.view = view;
 	
