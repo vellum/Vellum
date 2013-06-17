@@ -154,11 +154,11 @@
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [titleviewmask addGestureRecognizer:sgr];
+    //[titleviewmask addGestureRecognizer:sgr];
     
     UISwipeGestureRecognizer *sgr2 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(prevPage)];
     [sgr2 setDirection:UISwipeGestureRecognizerDirectionRight];
-    [titleviewmask addGestureRecognizer:sgr2];
+    //[titleviewmask addGestureRecognizer:sgr2];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [titleviewmask addGestureRecognizer:tgr];
