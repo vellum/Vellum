@@ -411,8 +411,12 @@
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title {
     VLMToolCollection *tools = [VLMToolCollection instance];
-    VLMToolData *item = (VLMToolData *)[tools getSelectedToolFromEnabledIndex:index];
-    
+    VLMToolData *item;
+    if ( [tools isToggleable] ){
+        item = (VLMToolData *)[tools getSelectedToolFromEnabledIndex:index];
+    } else {
+        item = (VLMToolData *)[tools.tools objectAtIndex:index];
+    }
     NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
     [self.avc callJS:s];

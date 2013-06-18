@@ -79,7 +79,7 @@
         [onoff setShowsTouchWhenHighlighted:YES];
 
         // removing this for now, people seem to not get it.
-        //[back addSubview:onoff];
+        [back addSubview:onoff];
         [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
         
         [onoffbuttons addObject:onoff];

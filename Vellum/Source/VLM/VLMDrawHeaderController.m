@@ -14,6 +14,7 @@
 #import "VLMMainViewController.h"
 #import "VLMConstants.h"
 #import "VLMToolCollection.h"
+#import "VLMToolData.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
@@ -294,6 +295,15 @@
     if ([self.titles count] > 0) {
         [self setSelectedIndex:0 andTitle:@"" animated:NO];
         [self updatePage];
+    } else {
+        VLMToolCollection *tools = [VLMToolCollection instance];
+        VLMToolData *data = [tools.tools objectAtIndex:0];
+        [data setSelected:YES];
+        [tools setSelectedIndex:0];
+        [self setSelectedIndex:-1 andTitle:data.name];
+        if (self.delegate) {
+            [self.delegate updateIndex:0 AndTitle:data.name];
+        }
     }
 }
 
