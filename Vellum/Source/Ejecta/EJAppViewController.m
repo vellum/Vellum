@@ -2,6 +2,7 @@
 
 #import "EJAppViewController.h"
 #import "EJJavaScriptView.h"
+#import "VLMConstants.h"
 
 @implementation EJAppViewController
 @synthesize shouldDoubleResolution;
@@ -41,8 +42,8 @@
         // if this is a low-res non-retina display (eg iPhone 3GS), double the size of the view
         if ( frame.size.width <= 320 ){
             shouldDoubleResolution = YES;
-            frame.size.width *= 2;
-            frame.size.height *= 2;
+            frame.size.width *= OLD_DEVICE_SCREEN_MULTIPLIER;
+            frame.size.height *= OLD_DEVICE_SCREEN_MULTIPLIER;
         }
         
     }
