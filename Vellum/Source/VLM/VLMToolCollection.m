@@ -42,8 +42,8 @@ static VLMToolCollection *sharedToolCollection;
                              [NSNumber numberWithBool:NO], //6
                              nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
-                           @"MODE_GRAPHITE",    //1
-                           @"MODE_DOTS",        //2
+                           @"MODE_SCRIBBLE",    //1
+                           @"MODE_SHADE",       //2
                            @"MODE_OUTLINE",     //3
                            @"MODE_INK",         //4
                            @"MODE_ERASE",       //5

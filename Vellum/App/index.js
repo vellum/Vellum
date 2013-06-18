@@ -1,11 +1,11 @@
 var
-MODE_GRAPHITE = 0,
-MODE_DOTS = 1,
+MODE_SCRIBBLE = 0,
+MODE_SHADE = 1,
 MODE_INK = 2,
 MODE_SCRATCH = 3,
 MODE_LINE = 4,
 MODE_ERASE = 5,
-MODE_SCRAMBLE = 6,
+MODE_SCRAMBLE = 6, // ?
 MODE_OUTLINE = 7
 ;
 
@@ -42,8 +42,8 @@ var animate = function() {
     //console.log('animate');
     if (mousedown) {
         switch (drawmode) {
-            case MODE_GRAPHITE:
-            case MODE_DOTS:
+            case MODE_SCRIBBLE:
+            case MODE_SHADE:
             case MODE_SCRATCH:
             case MODE_ERASE:
                 drawgraphite();
@@ -124,7 +124,7 @@ var drawgraphite = function() {
         ;
         
         
-        if (drawmode == MODE_GRAPHITE) {
+        if (drawmode == MODE_SCRIBBLE) {
             //fgcolor = 'rgba(0,0,0,0.2)';
         }
         
@@ -132,13 +132,13 @@ var drawgraphite = function() {
             ctx.beginPath();
             
             if (zoomlevel < 1) {
-                if (drawmode == MODE_DOTS) {
+                if (drawmode == MODE_SHADE) {
                     ctx.lineWidth = 0.05; // dots (these look great)
                 } else {
                     ctx.lineWidth = 0.5; // solid lines MOIRE
                 }
             } else {
-                if (drawmode == MODE_DOTS) {
+                if (drawmode == MODE_SHADE) {
                     ctx.lineWidth = 0.1; // dots (these look great)
                 } else if (drawmode == MODE_SCRATCH) {
                     ctx.lineWidth = 0.5; //
@@ -164,7 +164,7 @@ var drawgraphite = function() {
                 
                 var deltax, deltay;
                 
-                if (drawmode == MODE_GRAPHITE || drawmode == MODE_DOTS) {
+                if (drawmode == MODE_SCRIBBLE || drawmode == MODE_SHADE) {
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     ctx.moveTo(localpx + deltax, localpy + deltay);
