@@ -13,6 +13,7 @@
 #import "VLMActivitySaveToAlbum.h"
 #import "VLMMainViewController.h"
 #import "VLMConstants.h"
+#import "VLMToolCollection.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
@@ -154,11 +155,11 @@
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
-    //[titleviewmask addGestureRecognizer:sgr];
+    [titleviewmask addGestureRecognizer:sgr];
     
     UISwipeGestureRecognizer *sgr2 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(prevPage)];
     [sgr2 setDirection:UISwipeGestureRecognizerDirectionRight];
-    //[titleviewmask addGestureRecognizer:sgr2];
+    [titleviewmask addGestureRecognizer:sgr2];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [titleviewmask addGestureRecognizer:tgr];
@@ -348,6 +349,7 @@
 }
 
 - (void)nextPage {
+    if( ![[VLMToolCollection instance] isToggleable] ) return;
     [self setIndex:self.index + 1];
     if (self.index > [self.titles count] - 1) {
         self.index = [self.titles count] - 1;
@@ -356,6 +358,7 @@
 }
 
 - (void)prevPage {
+    if( ![[VLMToolCollection instance] isToggleable] ) return;
     [self setIndex:self.index - 1];
     if (self.index < 0) {
         [self setIndex:0];
