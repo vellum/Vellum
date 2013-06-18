@@ -25,6 +25,7 @@
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
+#define OLD_DEVICE_SCREEN_MULTIPLIER 2.0f
 
 @interface VLMMainViewController ()
 
@@ -279,7 +280,7 @@
             [self setPinchLastPoint:CGPointMake(location.x / bounds.size.width, location.y / bounds.size.height)]; // this is now a percentage value
         } else {
             // 3gs gets this
-            [self setPinchLastPoint:CGPointMake(location.x / (bounds.size.width*2), location.y / (bounds.size.height*2))]; // this is now a percentage value
+            [self setPinchLastPoint:CGPointMake(location.x / (bounds.size.width*OLD_DEVICE_SCREEN_MULTIPLIER), location.y / (bounds.size.height*OLD_DEVICE_SCREEN_MULTIPLIER))]; // this is now a percentage value
         }
         [self setPinchLastScale:1.0f];
         [self.zoomViewController show];
@@ -311,14 +312,27 @@
     if (accum > 40) accum = 40;
     [self setPinchAccumulatedScale:accum];
     
-    bounds.size.width *= self.pinchAccumulatedScale;
-    bounds.size.height *= self.pinchAccumulatedScale;
-    
-    CGPoint xy = [sender locationInView:[sender view]];
-    CGPoint topleft = CGPointMake(xy.x - self.pinchLastPoint.x * bounds.size.width, xy.y - self.pinchLastPoint.y * bounds.size.height);
-    bounds.origin = topleft;
-    [self.avc.view setTransform:CGAffineTransformMakeScale(self.pinchAccumulatedScale, self.pinchAccumulatedScale)];
-    [self.avc.view setCenter:CGPointMake(topleft.x + bounds.size.width / 2, topleft.y + bounds.size.height / 2)];
+    if ( !self.avc.shouldDoubleResolution ){
+        bounds.size.width *= self.pinchAccumulatedScale;
+        bounds.size.height *= self.pinchAccumulatedScale;
+        
+        CGPoint xy = [sender locationInView:[sender view]];
+        CGPoint topleft = CGPointMake(xy.x - self.pinchLastPoint.x * bounds.size.width, xy.y - self.pinchLastPoint.y * bounds.size.height);
+        bounds.origin = topleft;
+        [self.avc.view setTransform:CGAffineTransformMakeScale(self.pinchAccumulatedScale, self.pinchAccumulatedScale)];
+        [self.avc.view setCenter:CGPointMake(topleft.x + bounds.size.width / 2, topleft.y + bounds.size.height / 2)];
+        
+    } else {
+        CGFloat w = (bounds.size.width * OLD_DEVICE_SCREEN_MULTIPLIER) * self.pinchAccumulatedScale;
+        CGFloat h = (bounds.size.height * OLD_DEVICE_SCREEN_MULTIPLIER) * self.pinchAccumulatedScale;
+        
+        CGPoint xy = [sender locationInView:[sender view]];
+        CGPoint topleft = CGPointMake(xy.x - self.pinchLastPoint.x * w, xy.y - self.pinchLastPoint.y * h);
+        bounds.origin = topleft;
+        [self.avc.view setTransform:CGAffineTransformMakeScale(self.pinchAccumulatedScale, self.pinchAccumulatedScale)];
+        [self.avc.view setCenter:CGPointMake(topleft.x + w / 2, topleft.y + h / 2)];
+        
+    }
     
     int val = round(self.pinchAccumulatedScale * 100);
     [zoomViewController setText:val];
@@ -363,14 +377,14 @@
         [UIView commitAnimations];
         
     } else {
-        [self.zoomViewController setText:50];
-        self.pinchAccumulatedScale = 0.5f;
+        [self.zoomViewController setText:round(1.0f/OLD_DEVICE_SCREEN_MULTIPLIER*100.0f)];
+        self.pinchAccumulatedScale = 1.0f/OLD_DEVICE_SCREEN_MULTIPLIER;
         CGRect bounds = [[UIScreen mainScreen] bounds];
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [UIView setAnimationDuration:0.2];
-        [self.avc.view setTransform:CGAffineTransformMakeScale(0.5, 0.5)];
+        [self.avc.view setTransform:CGAffineTransformMakeScale(1.0f/OLD_DEVICE_SCREEN_MULTIPLIER, 1.0f/OLD_DEVICE_SCREEN_MULTIPLIER)];
         [self.avc.view setCenter:CGPointMake(bounds.size.width / 2, bounds.size.height / 2)];
         [UIView commitAnimations];
         
