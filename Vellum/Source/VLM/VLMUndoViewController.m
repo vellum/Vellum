@@ -8,6 +8,8 @@
 
 #import "VLMUndoViewController.h"
 #import "VLMArcView.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface VLMUndoViewController ()
 @property (nonatomic, strong) VLMArcView *arcView;
@@ -55,6 +57,9 @@
     [lbl setText:@"Undo"];
     [lbl setAdjustsFontSizeToFitWidth:YES];
     [self.view addSubview:lbl];
+    
+    
+    [self.view.layer setZPosition:1001.0f];
 }
 
 - (void)didReceiveMemoryWarning {
