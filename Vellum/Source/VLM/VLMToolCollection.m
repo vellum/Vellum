@@ -26,8 +26,8 @@ static VLMToolCollection *sharedToolCollection;
         self.tools = [[NSMutableArray alloc] init];
         
         NSArray *names = [NSArray arrayWithObjects:
-                          @"Scribble",    //1
                           @"Graphite",    //0
+                          @"Scribble",    //1
                           @"Shade",       //2
                           @"Line",        //3
                           @"Ink ",        //4
@@ -44,8 +44,8 @@ static VLMToolCollection *sharedToolCollection;
                              [NSNumber numberWithBool:YES], //6
                              nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
-                           @"MODE_SCRIBBLE",    //1
                            @"MODE_GRAPHITE",    //0
+                           @"MODE_SCRIBBLE",    //1
                            @"MODE_SHADE",       //2
                            @"MODE_OUTLINE",     //3
                            @"MODE_INK",         //4
