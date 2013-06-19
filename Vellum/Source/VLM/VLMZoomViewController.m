@@ -52,6 +52,8 @@
     [lbl setAdjustsFontSizeToFitWidth:YES];
     [self.view addSubview:lbl];
     [self setLabel:lbl];
+    
+    [self.view.layer setZPosition:1000.0f];
 }
 
 - (void)didReceiveMemoryWarning {

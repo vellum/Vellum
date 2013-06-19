@@ -336,7 +336,7 @@
 }
 
 - (void)handleSingleTap:(id)sender {
-    if (self.headerController.isPopoverVisible) return;
+    //if (self.headerController.isPopoverVisible) return;
     
     VLMTapGestureRecognizer *tgr = (VLMTapGestureRecognizer *)sender;
     if (tgr.numberOfTouches > 1) return;
@@ -344,6 +344,13 @@
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:!h.userInteractionEnabled];
     [self.infoButton setUserInteractionEnabled:!self.infoButton.userInteractionEnabled];
+    if( self.headerController.isPopoverVisible ){
+        if ( h.userInteractionEnabled ){
+            [self.pop show];
+        } else {
+            [self.pop hide];
+        }
+    }
     
     [UIView animateWithDuration:0.25f
                           delay:0.0f

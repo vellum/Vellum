@@ -6,7 +6,8 @@ MODE_SCRATCH = 3,
 MODE_LINE = 4,
 MODE_ERASE = 5,
 MODE_SCRAMBLE = 6, // ?
-MODE_OUTLINE = 7
+MODE_OUTLINE = 7,
+MODE_GRAPHITE = 8
 ;
 
 var BGCOLOR = '#f2f2e8';
@@ -42,6 +43,7 @@ var animate = function() {
     //console.log('animate');
     if (mousedown) {
         switch (drawmode) {
+            case MODE_GRAPHITE:
             case MODE_SCRIBBLE:
             case MODE_SHADE:
             case MODE_SCRATCH:

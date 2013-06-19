@@ -142,7 +142,7 @@
     [self setupHeadingView];
     [self setTitlemask:titleviewmask];
     [self setTitlemaskframe:titleviewmask.frame];
-    [titleviewmask addSubview:self.pagecontrol];
+    //[titleviewmask addSubview:self.pagecontrol];
     
     self.ghostlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     [ghostlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
@@ -156,11 +156,11 @@
     
     UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextPage)];
     [sgr setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [titleviewmask addGestureRecognizer:sgr];
+    //[titleviewmask addGestureRecognizer:sgr];
     
     UISwipeGestureRecognizer *sgr2 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(prevPage)];
     [sgr2 setDirection:UISwipeGestureRecognizerDirectionRight];
-    [titleviewmask addGestureRecognizer:sgr2];
+    //[titleviewmask addGestureRecognizer:sgr2];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     [titleviewmask addGestureRecognizer:tgr];
@@ -243,6 +243,9 @@
 }
 
 - (void)tapped {
+    [self togglePopover];
+    return;
+    
     if (self.ghostlabel.alpha == 1 || [self.titles count] == 1) {
         [self togglePopover];
         return;

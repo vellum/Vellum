@@ -39,26 +39,35 @@
     CGFloat HEADER_HEIGHT = 60.0f; //FIXME: HEADER_HEIGHT should be a constant
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     CGSize triangleSize = CGSizeMake(16, 8);
-    CGFloat margin = 10.0f;
-    CGFloat innermargin = 5;
+    CGFloat margin = 0.0f;
+    CGFloat innermargin = 3.0f;
     CGFloat pad = 1;
-    CGFloat buttonsize = (320 - margin * 2 - innermargin * 2 - pad * 2) / 3;
+    CGFloat buttonsize = 75.0f;//(320 - margin * 2 - innermargin * 2 - pad * 2) / 3;
     CGPoint topleft = CGPointMake(innermargin, innermargin);
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     VLMToolCollection *tools = [VLMToolCollection instance];
     
-    VLMTriangleView *tri = [[VLMTriangleView alloc] initWithFrame:CGRectMake(320 / 2 - triangleSize.width / 2, margin - triangleSize.height, triangleSize.width, triangleSize.height)];
-    
-    UIView *back = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, 320 - margin * 2, innermargin * 2 + pad + buttonsize * 2)];
+    UIView *back = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, 320 - margin * 2, innermargin * 2 + buttonsize * 1)];
     [back setBackgroundColor:[UIColor whiteColor]];
     
-    [self.view setFrame:CGRectMake(winw / 2.0f - 320.0f / 2.0f, HEADER_HEIGHT, 320, 230)];
-    [self.view addSubview:tri];
+    //[self.view setFrame:CGRectMake(winw / 2.0f - 320.0f / 2.0f, HEADER_HEIGHT, 320, 230 + buttonsize + margin)];
+    //[self.view addSubview:tri];
+    [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT, 320, buttonsize + margin*2)];
     [self.view addSubview:back];
     
+    UIScrollView *sv = [[UIScrollView alloc] initWithFrame:back.frame];
+    [sv setContentSize:CGSizeMake([tools.tools count]*(buttonsize+1) + 2*innermargin, 2*innermargin + buttonsize)];
+    [sv setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:sv];
+
+    UIView *topborder = [[UIView alloc] initWithFrame:CGRectMake(0, -1, self.view.frame.size.width, 1.0f)];
+    [topborder setBackgroundColor:[UIColor colorWithWhite:0.95f alpha:1.0f]];
+    [topborder setUserInteractionEnabled:NO];
+    [back addSubview:topborder];
+
     for (int i = 0; i < [tools.tools count]; i++) {
-        CGFloat x = topleft.x + (i % 3) * (buttonsize + 1);
-        CGFloat y = topleft.y + floor(i / 3) * (buttonsize + 1);
+        CGFloat x = topleft.x + i * (buttonsize+1);//topleft.x + (i % 3) * (buttonsize + 1);
+        CGFloat y = topleft.y;//topleft.y + floor(i / 3) * (buttonsize + 1);
         CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
         VLMToolData *tool = (VLMToolData *)(tools.tools[i]);
         
@@ -67,7 +76,8 @@
         [item setUserInteractionEnabled:!tool.selected];
         [item setText:tool.name];
         [item setTag:i];
-        [back addSubview:item];
+        //[back addSubview:item];
+        [sv addSubview:item];
         [buttons addObject:item];
         [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -79,11 +89,23 @@
         [onoff setShowsTouchWhenHighlighted:YES];
 
         // removing this for now, people seem to not get it.
-        [back addSubview:onoff];
+        //[back addSubview:onoff];
         [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
         
         [onoffbuttons addObject:onoff];
     }
+    /*
+    for ( int i = [tools.tools count]; i < 9; i++ ){
+        CGFloat x = topleft.x + (i % 3) * (buttonsize + 1);
+        CGFloat y = topleft.y + floor(i / 3) * (buttonsize + 1);
+        CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
+        UIView *p = [[UIView alloc] initWithFrame:r];
+        [p setUserInteractionEnabled:NO];
+        [p setBackgroundColor:[UIColor colorWithWhite:0.95f alpha:1.0f]];
+        [back addSubview:p];
+    }
+     */
+    
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
     [self setToolbuttons:buttons];
