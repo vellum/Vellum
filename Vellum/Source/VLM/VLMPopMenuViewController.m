@@ -12,6 +12,7 @@
 #import "VLMMenuButton.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+#import "VLMScrollView.h"
 
 @interface VLMPopMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *toolbuttons;
@@ -55,9 +56,10 @@
     [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT, 320, buttonsize + margin*2)];
     [self.view addSubview:back];
     
-    UIScrollView *sv = [[UIScrollView alloc] initWithFrame:back.frame];
+    VLMScrollView *sv = [[VLMScrollView alloc] initWithFrame:back.frame];
     [sv setContentSize:CGSizeMake([tools.tools count]*(buttonsize+1) + 2*innermargin, 2*innermargin + buttonsize)];
     [sv setBackgroundColor:[UIColor clearColor]];
+    [sv setCanCancelContentTouches:YES];
     [self.view addSubview:sv];
 
     UIView *topborder = [[UIView alloc] initWithFrame:CGRectMake(0, -1, self.view.frame.size.width, 1.0f)];
