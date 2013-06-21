@@ -247,8 +247,10 @@
     } else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
         return;
     }
-    CGPoint p = [(UIPanGestureRecognizer *)sender translationInView : self.touchCaptureView];
-    [sender setTranslation:CGPointZero inView:self.touchCaptureView];
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    
+    CGPoint p = [(UIPanGestureRecognizer *)sender translationInView : window];//self.touchCaptureView];
+    [sender setTranslation:CGPointZero inView:window];//self.touchCaptureView];
     CGPoint c = self.avc.view.center;
     c.x += p.x; c.y += p.y;
     [self.avc.view setCenter:c];
@@ -290,7 +292,10 @@
 - (void)handlePinch:(id)sender {
     VLMPinchGestureRecognizer *pgr = (VLMPinchGestureRecognizer *)sender;
     int numberOfTouches = pgr.numberOfTouches;
-    CGRect bounds = [[UIScreen mainScreen] bounds];
+
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    CGRect bounds = window.frame;
+    //CGRect bounds = [[UIScreen mainScreen] bounds];
     
     if ([pgr state] == UIGestureRecognizerStateBegan) {
         
@@ -335,7 +340,7 @@
         bounds.size.width *= self.pinchAccumulatedScale;
         bounds.size.height *= self.pinchAccumulatedScale;
         
-        CGPoint xy = [sender locationInView:[sender view]];
+        CGPoint xy = [sender locationInView:window];
         CGPoint topleft = CGPointMake(xy.x - self.pinchLastPoint.x * bounds.size.width, xy.y - self.pinchLastPoint.y * bounds.size.height);
         bounds.origin = topleft;
         [self.avc.view setTransform:CGAffineTransformMakeScale(self.pinchAccumulatedScale, self.pinchAccumulatedScale)];
@@ -345,7 +350,7 @@
         CGFloat w = (bounds.size.width * OLD_DEVICE_SCREEN_MULTIPLIER) * self.pinchAccumulatedScale;
         CGFloat h = (bounds.size.height * OLD_DEVICE_SCREEN_MULTIPLIER) * self.pinchAccumulatedScale;
         
-        CGPoint xy = [sender locationInView:[sender view]];
+        CGPoint xy = [sender locationInView:window];
         CGPoint topleft = CGPointMake(xy.x - self.pinchLastPoint.x * w, xy.y - self.pinchLastPoint.y * h);
         bounds.origin = topleft;
         [self.avc.view setTransform:CGAffineTransformMakeScale(self.pinchAccumulatedScale, self.pinchAccumulatedScale)];

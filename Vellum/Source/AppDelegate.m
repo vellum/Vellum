@@ -23,7 +23,7 @@
     [application setIdleTimerDisabled:YES];
 
     
-    
+
     EJAppViewController *appvc = [[EJAppViewController alloc] init];
     VLMMainViewController *vc = [[VLMMainViewController alloc] initWithEJAppViewController:appvc];
     [self setAvc:appvc];
