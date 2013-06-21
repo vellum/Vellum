@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UINavigationBar+Fat.h"
-
+#import "VLMConstants.h"
 
 @class VLMFlipViewController;
 

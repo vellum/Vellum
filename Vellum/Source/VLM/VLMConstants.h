@@ -20,7 +20,9 @@
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
-#define OLD_DEVICE_SCREEN_MULTIPLIER 1.425f
+#define OLD_DEVICE_SCREEN_MULTIPLIER 2.0f
+//#define FAT_HEADER
+//#define STYLED_HEADER
 
 #pragma mark -
 #pragma mark Colors

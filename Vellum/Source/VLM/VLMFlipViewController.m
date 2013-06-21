@@ -34,7 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.contentSizeForViewInPopover = CGSizeMake(320.0, 480.0);
+        self.contentSizeForViewInPopover = CGSizeMake(320.0, 525.0);
     }
     return self;
 }
@@ -50,13 +50,13 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
     texts = [NSArray arrayWithObjects:
-             @"Draw with one finger.",
-             @"Tap header for palette.",
-             @"Tap to toggle header.",
-             @"Pinch to zoom.",
-             @"Double-tap to reset zoom.",
-             @"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
-             @"Pan vertically with 3 fingers to undo.",
+             @"PAN ANYWHERE to draw.",
+             @"TAP HEADER for palette.",
+             @"TAP ANYWHERE to toggle header.",
+             @"PINCH to zoom.",
+             @"DOUBLE-TAP ANYWHERE to reset zoom.",
+             @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
+             @"PAN VERTICALLY with 3 fingers to undo.",
              nil];
     
     images = [NSArray arrayWithObjects:
@@ -92,21 +92,22 @@
         [titlelabel addGestureRecognizer:tgr];
         
 
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
-    [button setFrame:CGRectOffset(button.frame, 0, 2.0f)];
-    [button setTitle:@"Done" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
-    [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-    [button setContentMode:UIViewContentModeTopRight];
-    [self.header addSubview:button];
-    [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
-    
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
+        [button setFrame:CGRectOffset(button.frame, 0, 2.0f)];
+        [button setTitle:@"Done" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
+        [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+        [button setContentMode:UIViewContentModeTopRight];
+        [self.header addSubview:button];
+        [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
+        
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+
     } else {
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
         
     }
     tableView.delegate = self;

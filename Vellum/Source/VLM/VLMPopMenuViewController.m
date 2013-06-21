@@ -13,6 +13,7 @@
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
 #import "VLMScrollView.h"
+#import "VLMConstants.h"
 
 @interface VLMPopMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *toolbuttons;
@@ -37,7 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGFloat HEADER_HEIGHT = 60.0f; //FIXME: HEADER_HEIGHT should be a constant
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     CGSize triangleSize = CGSizeMake(16, 8);
     CGFloat margin = 0.0f;

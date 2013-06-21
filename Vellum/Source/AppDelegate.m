@@ -45,8 +45,9 @@
     // Create tracker instance.
     //id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41031955-1"];
 
+#if STYLED_HEADER
     [self establishAppearanceDefaults];
-
+#endif
     return YES;
 }
 
@@ -108,6 +109,10 @@
      ];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:clearfixed forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
+#if FAT_HEADER
+    NSLog(@"fat header defined");
+    
+
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 
 
@@ -119,6 +124,9 @@
         [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:-1.0f forBarMetrics:UIBarMetricsDefault];
         
     }
+#else
+    [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:-1.0f forBarMetrics:UIBarMetricsDefault];
+#endif
     
 }
 

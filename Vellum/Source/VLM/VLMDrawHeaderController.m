@@ -456,7 +456,9 @@
 
                     [self.popovercontroller presentPopoverFromRect:self.leftbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 } else {
+#if FAT_HEADER
                     [picker.navigationBar setTitleVerticalPositionAdjustment:HEADER_TITLE_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
+#endif
                     UIViewController *vc = (UIViewController*)mvc;
                     [vc presentViewController:picker animated:YES completion:^{}];
                 }
