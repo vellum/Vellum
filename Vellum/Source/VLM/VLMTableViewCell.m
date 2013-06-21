@@ -28,19 +28,12 @@
         CGFloat margin = 25;
         CGFloat width = 320-margin*2;
         CGFloat height = 586.0f/320.0f*width;
-        UILabel *llll = [[UILabel alloc] initWithFrame:CGRectMake(margin, margin, width, 60)];
-        [llll setBackgroundColor:[UIColor blackColor]];
-        [llll setTextColor:[UIColor whiteColor]];
-        [llll setTextAlignment:NSTextAlignmentCenter];
-        [llll setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
-        [llll setNumberOfLines:2];
-        [self.contentView addSubview:llll];
-        [self setTitleLabel:llll];
+        
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         
         
-        UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, 60 + margin, width, height)];
+        UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, width, height)];
         [placeholder setBackgroundColor:[UIColor colorWithWhite:0.8f alpha:1.0f]];
         [self.contentView addSubview:placeholder];
         
@@ -60,9 +53,6 @@
     // Configuqre the view for the selected state
 }
 
-- (void)setTitleText:(NSString *)text{
-    [self.titleLabel setText:text];
-}
 
 - (void)setContentImage:(NSString*)imageName{
     if ( [imageName isEqualToString:self.path] ) return;

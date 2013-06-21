@@ -138,6 +138,7 @@
 		BD71375717743B1000DEBADB /* about-05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375017743B1000DEBADB /* about-05@2x.png */; };
 		BD71375817743B1000DEBADB /* about-06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375117743B1000DEBADB /* about-06@2x.png */; };
 		BD71375917743B1000DEBADB /* about-07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375217743B1000DEBADB /* about-07@2x.png */; };
+		BD71375C1774A85800DEBADB /* VLMSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD71375B1774A85800DEBADB /* VLMSectionView.m */; };
 		BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F5173E282800D08179 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -391,6 +392,8 @@
 		BD71375017743B1000DEBADB /* about-05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-05@2x.png"; sourceTree = "<group>"; };
 		BD71375117743B1000DEBADB /* about-06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-06@2x.png"; sourceTree = "<group>"; };
 		BD71375217743B1000DEBADB /* about-07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07@2x.png"; sourceTree = "<group>"; };
+		BD71375A1774A85800DEBADB /* VLMSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSectionView.h; path = VLM/VLMSectionView.h; sourceTree = "<group>"; };
+		BD71375B1774A85800DEBADB /* VLMSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMSectionView.m; path = VLM/VLMSectionView.m; sourceTree = "<group>"; };
 		BD97F5F4173E282800D08179 /* VLMUndoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoViewController.h; path = VLM/VLMUndoViewController.h; sourceTree = "<group>"; };
 		BD97F5F5173E282800D08179 /* VLMUndoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoViewController.m; path = VLM/VLMUndoViewController.m; sourceTree = "<group>"; };
 		BD97F5F8173EC27400D08179 /* VLMArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMArcView.h; path = VLM/VLMArcView.h; sourceTree = "<group>"; };
@@ -842,6 +845,8 @@
 				BD0C9276176A383600A0C89D /* VLMFlipViewController.m */,
 				BD0C9278176A984500A0C89D /* VLMTableViewCell.h */,
 				BD0C9279176A984500A0C89D /* VLMTableViewCell.m */,
+				BD71375A1774A85800DEBADB /* VLMSectionView.h */,
+				BD71375B1774A85800DEBADB /* VLMSectionView.m */,
 			);
 			name = Flipside;
 			sourceTree = "<group>";
@@ -1160,6 +1165,7 @@
 				BD0C9277176A383600A0C89D /* VLMFlipViewController.m in Sources */,
 				BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */,
 				BD2062C01772A053008A549F /* VLMScrollView.m in Sources */,
+				BD71375C1774A85800DEBADB /* VLMSectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

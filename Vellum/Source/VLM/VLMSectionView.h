@@ -1,0 +1,20 @@
+//
+//  VLMSectionView.h
+//  Vellum
+//
+//  Created by David Lu on 6/21/13.
+//
+//
+
+#import <UIKit/UIKit.h>
+
+@interface VLMSectionView : UIView{
+    UILabel *headerLabel;
+}
+
+@property (nonatomic, strong) UILabel *headerLabel;
+
+- (void)setText:(NSString*)text;
+- (void)reset;
++ (CGFloat)expectedViewHeightForText:(NSString *)text;
+@end

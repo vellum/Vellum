@@ -9,6 +9,7 @@
 #import "VLMFlipViewController.h"
 #import "VLMConstants.h"
 #import "VLMTableViewCell.h"
+#import "VLMSectionView.h"
 
 @interface VLMFlipViewController ()
 @property (nonatomic,strong) UIView *header;
@@ -16,6 +17,8 @@
 @property (nonatomic, weak) UITableView *tableview;
 @property (nonatomic,strong) NSArray *texts;
 @property (nonatomic,strong) NSArray *images;
+@property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
+
 @end
 
 @implementation VLMFlipViewController
@@ -39,6 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Improve scrolling performance by reusing UITableView section headers
+    self.reusableSectionHeaderViews = [NSMutableSet setWithCapacity:3];
+
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
@@ -123,33 +130,58 @@
     [self.delegate flipsideViewControllerDidFinish:self];
 }
 
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger sections = self.texts.count;
+    return sections;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 1;
+}
+
 #pragma mark - UITableView Delegate Methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    /*
-    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
-        return texts.count-1;
-    }*/
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return texts.count;
+    NSString *text = texts[section];
+    return [VLMSectionView expectedViewHeightForText:text];
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    NSString *text = texts[section];
+    CGFloat winw = 320.0f;
+    VLMSectionView *customview = [self dequeueReusableSectionHeaderView];
+    if (!customview){
+        customview = [[VLMSectionView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 60.0f)];
+        [self.reusableSectionHeaderViews addObject:customview];
+        
+    }
+    [customview reset];
+    [customview setText:text];
+    return customview;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 600;
+    return 550;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    int ind = indexPath.row;
+    int ind = indexPath.section;
 
     VLMTableViewCell *cell = (VLMTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
             cell = [[VLMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    [cell setTitleText:texts[ind]];
     [cell setContentImage:images[ind]];
     return cell;
 }
@@ -157,6 +189,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
+- (VLMSectionView *)dequeueReusableSectionHeaderView{
+    for (VLMSectionView *sectionHeaderView in self.reusableSectionHeaderViews) {
+        if (!sectionHeaderView.superview) {
+            // we found a section header that is no longer visible
+            return sectionHeaderView;
+        }
+    }
+    return nil;
+}
+
 
 #pragma mark GestureRecco
 
