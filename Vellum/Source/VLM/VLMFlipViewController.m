@@ -80,7 +80,7 @@
         UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
         [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-        [titlelabel setText:@"Info"];
+        [titlelabel setText:@"Gestures"];
         [titlelabel setUserInteractionEnabled:YES];
         [titlelabel setTextAlignment:NSTextAlignmentCenter];
         [titlelabel setBackgroundColor:[UIColor clearColor]];
@@ -135,7 +135,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     NSInteger sections = self.texts.count;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        sections--; // omit undo slide
+    }
     return sections;
 }
 
