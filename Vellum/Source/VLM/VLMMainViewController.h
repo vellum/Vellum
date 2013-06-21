@@ -18,8 +18,10 @@
 
 @end
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
+@class EJAppViewController;
 
+@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
+- (id)initWithEJAppViewController:(EJAppViewController*)appViewController;
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;
 

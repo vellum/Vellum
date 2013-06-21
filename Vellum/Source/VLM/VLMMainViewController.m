@@ -79,12 +79,22 @@
     return self;
 }
 
+- (id)initWithEJAppViewController:(EJAppViewController*)appViewController{
+    self = [super init];
+    if (self) {
+        firstTime = YES;
+        [self setAvc:appViewController];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     CGRect frame = UIScreen.mainScreen.bounds;
     UIView *t = [[UIView alloc] initWithFrame:frame];
-    EJAppViewController *vc = [[EJAppViewController alloc] init];
+    [t setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    //EJAppViewController *vc = [[EJAppViewController alloc] init];
     VLMZoomViewController *z = [[VLMZoomViewController alloc] init];
     VLMUndoViewController *uvc = [[VLMUndoViewController alloc] init];
     
@@ -101,15 +111,16 @@
     [self setPinchAccumulatedScale:1.0f];
     
     [self.view setFrame:frame];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
-    [self.view addSubview:vc.view];
+    //[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    //[self.view addSubview:vc.view];
     [self.view addSubview:z.view];
     [self.view addSubview:uvc.view];
     [self.view addSubview:t];
     [self.view addSubview:h.view];
     [self.view addSubview:ib];
     
-    [self setAvc:vc];
+    //[self setAvc:vc];
     [self setZoomViewController:z];
     [self setTouchCaptureView:t];
     [self setHeaderController:h];
@@ -650,13 +661,13 @@
 {
     if ( firstTime ) {
         firstTime = NO;
-        if (UIInterfaceOrientationIsPortrait(interfaceOrientation)){
+        if (interfaceOrientation==UIInterfaceOrientationPortrait){
             return YES;
         }
         return NO;
     }
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        if (interfaceOrientation==UIInterfaceOrientationMaskPortrait){
+        if (interfaceOrientation==UIInterfaceOrientationPortrait){
             return YES;
         }
         return NO;

@@ -3,10 +3,16 @@
 #import "VLMMainViewController.h"
 #import "GAI.h"
 #import "VLMConstants.h"
+#import "EJAppViewController.h"
+
+@interface AppDelegate ()
+@property (strong, nonatomic) EJAppViewController *avc;
+@end
 
 @implementation AppDelegate
 @synthesize window;
 @synthesize mainViewController;
+@synthesize avc;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -15,11 +21,17 @@
     // Optionally set the idle timer disabled, this prevents the device from sleep when
     // not being interacted with by touch. ie. games with motion control.
     [application setIdleTimerDisabled:YES];
+
     
-    VLMMainViewController *vc = [[VLMMainViewController alloc] init];
+    
+    EJAppViewController *appvc = [[EJAppViewController alloc] init];
+    VLMMainViewController *vc = [[VLMMainViewController alloc] initWithEJAppViewController:appvc];
+    [self setAvc:appvc];
     [self setMainViewController:vc];
     [window setRootViewController:vc];
+    [window insertSubview:appvc.view belowSubview:vc.view];
     
+    [window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
     // google
     // Optional: automatically send uncaught exceptions to Google Analytics.
