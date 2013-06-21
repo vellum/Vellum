@@ -13,6 +13,7 @@ MODE_GRAPHITE = 8
 var BGCOLOR = '#f2f2e8';
 var BGCOLOR_RGBA = 'rgba(242,242,232,0.5)';
 var BRIDGE = new Ejecta.Bridge();
+var FGCOLOR_RGBA = 'rgaa(0,0,0,0.25)';
 
 var w = window.innerWidth
 , h = window.innerHeight
@@ -122,6 +123,9 @@ var drawgraphite = function() {
         , fgcolor = (drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR_RGBA : '#000000'
         ;
         
+        if ( drawmode == MODE_GRAPHITE ){
+            fgcolor = FGCOLOR_RGBA;
+        }
         
         if (drawmode == MODE_SCRIBBLE) {
             //fgcolor = 'rgba(0,0,0,0.2)';
@@ -152,6 +156,11 @@ var drawgraphite = function() {
             
             if (drawmode == MODE_ERASE) {
                 step = 0.75;
+            }
+            
+            if (drawmode == MODE_GRAPHITE){
+                step = 2.5;//0.75;
+                ctx.lineWidth = 0.5;
             }
             for (var i = -currange; i <= currange; i += step) {
                 var pct = i / currange
@@ -218,12 +227,12 @@ var drawpencil = function() {
         , vertexCount = 0
         , currange = curnib * multiplier
         , prevrange = prevnib * multiplier
-        , fgcolor = '#000000'
+        , fgcolor = FGCOLOR_RGBA//'#000000'
         ;
         
         ctx.beginPath();
         ctx.lineWidth = 0.125;
-        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,1)';
         
         for (var i = -currange; i <= currange; i += 1) {
             var pct = i / currange
@@ -250,7 +259,7 @@ var drawpencil = function() {
         if (linwin > 0.5) linwin = 0.5;
         ctx.beginPath();
         ctx.lineWidth = linwin;
-        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,1)';
         
         ctx.moveTo(prevmouse.x, prevmouse.y);
         ctx.lineTo(x, y);
