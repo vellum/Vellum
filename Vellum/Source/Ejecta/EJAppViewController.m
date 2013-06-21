@@ -43,12 +43,9 @@
     } else {
         // non-Retina display
         // if this is a low-res non-retina display (eg iPhone 3GS), double the size of the view
-        if ( frame.size.width <= 320 ){
-            shouldDoubleResolution = YES;
-            frame.size.width *= OLD_DEVICE_SCREEN_MULTIPLIER;
-            frame.size.height *= OLD_DEVICE_SCREEN_MULTIPLIER;
-        }
-        
+        shouldDoubleResolution = YES;
+        frame.size.width *= OLD_DEVICE_SCREEN_MULTIPLIER;
+        frame.size.height *= OLD_DEVICE_SCREEN_MULTIPLIER;
     }
 	EJJavaScriptView *view = [[EJJavaScriptView alloc] initWithFrame:frame];
 	self.view = view;
