@@ -104,8 +104,7 @@
         [self.view addSubview:back];
         
         sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(margin+innermargin, back.frame.origin.y, back.frame.size.width-2*innermargin, back.frame.size.height)];
-        CGFloat contentwidth =[tools.tools count]*(buttonsize+1) + 2*innermargin;
-        [sv setContentSize:CGSizeMake(contentwidth, 2*innermargin + buttonsize)];
+        [sv setContentSize:CGSizeMake(contentw-2*margin-2*innermargin, 2*innermargin + buttonsize)];
         [sv setBackgroundColor:[UIColor clearColor]];
         [sv setCanCancelContentTouches:YES];
         [sv setAlwaysBounceHorizontal:YES];
