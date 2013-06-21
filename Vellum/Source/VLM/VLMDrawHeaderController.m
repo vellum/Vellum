@@ -507,7 +507,7 @@
         
         self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:applicationActivities];
         
-        [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, nil]];
+        [self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypeMessage, nil]];
 
         AppDelegate *del = [[UIApplication sharedApplication] delegate];
         UIViewController * mvc = (UIViewController*)del.mainViewController;
