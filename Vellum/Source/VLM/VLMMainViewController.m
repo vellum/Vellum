@@ -672,10 +672,11 @@
         return NO;
     }
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        if (interfaceOrientation==UIInterfaceOrientationPortrait){
+         if (interfaceOrientation==UIInterfaceOrientationPortrait){
             return YES;
         }
         return NO;
+        
     } else {
         return YES;
     }
@@ -688,7 +689,7 @@
         return UIInterfaceOrientationMaskPortrait;
     }
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationMaskPortrait;
+        return UIInterfaceOrientationMaskAllButUpsideDown;
     } else {
         return UIInterfaceOrientationMaskAll;
     }
