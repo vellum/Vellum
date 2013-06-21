@@ -102,8 +102,12 @@
     [h setDelegate:self];
     
     UIButton *ib = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    //[ib setBackgroundColor:[UIColor redColor]];
     CGFloat margin = 15;
-    [ib setFrame:CGRectMake(frame.size.width-ib.frame.size.width-margin, frame.size.height-ib.frame.size.height - margin, ib.frame.size.width, ib.frame.size.height)];
+    [ib setFrame:CGRectMake(ib.frame.origin.x-margin, ib.frame.origin.y - margin,
+                            ib.frame.size.width+margin*2, ib.frame.size.height+margin*2)];
+
+    [ib setFrame:CGRectMake(frame.size.width-ib.frame.size.width, frame.size.height-ib.frame.size.height, ib.frame.size.width, ib.frame.size.height)];
     [ib addTarget:self action:@selector(infoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [ib setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
 

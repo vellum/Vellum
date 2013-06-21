@@ -70,22 +70,22 @@
               nil];
     UITableView *tableView;
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-    
-    UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
-    [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
-    [h setClipsToBounds:YES];
-    [self.view addSubview:h];
-    [self setHeader:h];
-    
-    UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
-    [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-    [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-    [titlelabel setText:@"Info"];
-    [titlelabel setUserInteractionEnabled:YES];
-    [titlelabel setTextAlignment:NSTextAlignmentCenter];
-    [titlelabel setBackgroundColor:[UIColor clearColor]];
-    [self.header addSubview:titlelabel];
-    
+        
+        UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
+        [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
+        [h setClipsToBounds:YES];
+        [self.view addSubview:h];
+        [self setHeader:h];
+        
+        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
+        [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
+        [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
+        [titlelabel setText:@"Info"];
+        [titlelabel setUserInteractionEnabled:YES];
+        [titlelabel setTextAlignment:NSTextAlignmentCenter];
+        [titlelabel setBackgroundColor:[UIColor clearColor]];
+        [self.header addSubview:titlelabel];
+        
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         [tgr setNumberOfTapsRequired:1];
         [tgr setNumberOfTouchesRequired:1];
