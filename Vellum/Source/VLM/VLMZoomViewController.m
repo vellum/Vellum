@@ -54,6 +54,7 @@
     [self setLabel:lbl];
     
     [self.view.layer setZPosition:1000.0f];
+    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin];
 }
 
 - (void)didReceiveMemoryWarning {

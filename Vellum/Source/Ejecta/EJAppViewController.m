@@ -27,9 +27,12 @@
 
 - (void)loadView {
 	CGRect frame = UIScreen.mainScreen.bounds;
-	if( landscapeMode ) {
+	
+    /*
+    if( landscapeMode ) {
 		frame.size = CGSizeMake(frame.size.height, frame.size.width);
 	}
+    */
     
     
     // from http://stackoverflow.com/questions/3504173/detect-retina-display
@@ -55,27 +58,32 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
+    /*
 	if( landscapeMode ) {
 		// Allow Landscape Left and Right
 		return UIInterfaceOrientationMaskLandscape;
 	}
 	else {
 		if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
+            return UIInterfaceOrientationMaskLandscape;
 			// Allow Portrait UpsideDown on iPad
-			return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+			//return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
 		}
 		else {
 			// Only Allow Portrait
 			return UIInterfaceOrientationMaskPortrait;
 		}
-	}
+	}*/
+    return UIInterfaceOrientationMaskPortrait;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
 	// Deprecated in iOS6 - supportedInterfaceOrientations is the new way to do this
 	// We just use the mask returned by supportedInterfaceOrientations here to check if
 	// this particular orientation is allowed.
-	return ( self.supportedInterfaceOrientations & (1 << orientation) );
+	//return ( self.supportedInterfaceOrientations & (1 << orientation) );
+    return NO;
 }
 
 #pragma mark - additions from DL

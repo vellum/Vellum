@@ -39,7 +39,8 @@
 @property NSInteger lastKnownUndoIndex;
 @property (strong, nonatomic) UIButton *infoButton;
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
-
+@property (assign, nonatomic) UIPopoverController *rightPopover;
+@property BOOL firstTime;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -66,11 +67,14 @@
 @synthesize lastKnownUndoIndex;
 @synthesize infoButton;
 @synthesize flipsidePopoverController;
+@synthesize firstTime;
+@synthesize rightPopover;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        firstTime = YES;
     }
     return self;
 }
@@ -91,7 +95,8 @@
     CGFloat margin = 15;
     [ib setFrame:CGRectMake(frame.size.width-ib.frame.size.width-margin, frame.size.height-ib.frame.size.height - margin, ib.frame.size.width, ib.frame.size.height)];
     [ib addTarget:self action:@selector(infoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [ib setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin];
+
     [self setPinchLastScale:1.0f];
     [self setPinchAccumulatedScale:1.0f];
     
@@ -170,6 +175,12 @@
     }
     [self handleDoubleTap:nil];
 
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
+        name:UIDeviceOrientationDidChangeNotification
+        object:nil];
+    
 }
 
 #pragma mark -
@@ -598,6 +609,7 @@
 
 - (void)flipsideViewControllerDidFinish:(VLMFlipViewController *)controller
 {
+    NSLog(@"HERE");
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -627,13 +639,71 @@
         if ([self.flipsidePopoverController isPopoverVisible]) {
             [self.flipsidePopoverController dismissPopoverAnimated:YES];
         } else {
-            
             [self.flipsidePopoverController presentPopoverFromRect:self.infoButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             
         }
     }
 }
 
+#pragma mark - Rotation Handling
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ( firstTime ) {
+        firstTime = NO;
+        if (UIInterfaceOrientationIsPortrait(interfaceOrientation)){
+            return YES;
+        }
+        return NO;
+    }
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if (interfaceOrientation==UIInterfaceOrientationMaskPortrait){
+            return YES;
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+}
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ( firstTime ) {
+        firstTime = NO;
+        return UIInterfaceOrientationMaskPortrait;
+    }
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+- (void)didRotate:(NSNotification *)notification {
+
+    NSLog(@"didrotate %@", notification);
+
+    switch ([[UIApplication sharedApplication] statusBarOrientation]) {
+        case UIInterfaceOrientationPortrait:
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            break;
+            
+        default:
+            break;
+    }
+    if ( self.flipsidePopoverController != nil ){
+        if ([self.flipsidePopoverController isPopoverVisible]) {
+            [self.flipsidePopoverController dismissPopoverAnimated:NO];
+        }
+    }
+}
 @end

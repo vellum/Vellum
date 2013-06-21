@@ -34,6 +34,7 @@
     //id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41031955-1"];
 
     [self establishAppearanceDefaults];
+
     return YES;
 }
 
@@ -50,7 +51,6 @@
     // set navbar background
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"gray_header_background.png"] forBarMetrics:UIBarMetricsDefault];
     // interestingly, backbutton needs its own adjustment
-    
     // set navbar typography
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIColor colorWithWhite:0.2f alpha:1.0f], UITextAttributeTextColor,
@@ -61,7 +61,7 @@
     
     
     // bar button item background
-[[UIBarButtonItem appearance] setBackgroundImage:clear forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:clear forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackgroundImage:clear forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     
     
@@ -94,12 +94,19 @@
                                                           nil] // end dictionary
                                                 forState:UIControlStateDisabled
      ];
-    [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, BAR_BUTTON_ITEM_VERTICAL_OFFSET) forBarMetrics:UIBarMetricsDefault];
-    
-    [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:BAR_BUTTON_ITEM_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
-    
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:clearfixed forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+
+
+        [[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, BAR_BUTTON_ITEM_VERTICAL_OFFSET) forBarMetrics:UIBarMetricsDefault];
+        
+        [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:BAR_BUTTON_ITEM_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
+        
+    } else {
+        [[UIBarButtonItem appearance] setBackButtonBackgroundVerticalPositionAdjustment:-1.0f forBarMetrics:UIBarMetricsDefault];
+        
+    }
     
 }
 

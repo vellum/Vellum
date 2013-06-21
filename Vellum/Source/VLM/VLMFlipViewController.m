@@ -42,17 +42,6 @@
 	// Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
-    UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
-    [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
-    [h setClipsToBounds:YES];
-    [self.view addSubview:h];
-    [self setHeader:h];
-    
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
-    [tgr setNumberOfTapsRequired:1];
-    [tgr setNumberOfTouchesRequired:1];
-    [h addGestureRecognizer:tgr];
-    
     texts = [NSArray arrayWithObjects:
              @"Draw with one finger.",
              @"Tap header for palette.",
@@ -74,27 +63,47 @@
               @"vellumhelp-06.png",
               @"vellumhelp-07.png",
               nil];
-
-    UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(h.frame, 0, 0.0f)];
+    UITableView *tableView;
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+    
+    UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
+    [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
+    [h setClipsToBounds:YES];
+    [self.view addSubview:h];
+    [self setHeader:h];
+    
+    UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
     [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
     [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
     [titlelabel setText:@"About"];
-    [titlelabel setUserInteractionEnabled:NO];
+    [titlelabel setUserInteractionEnabled:YES];
     [titlelabel setTextAlignment:NSTextAlignmentCenter];
     [titlelabel setBackgroundColor:[UIColor clearColor]];
-    [h addSubview:titlelabel];
+    [self.header addSubview:titlelabel];
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
+        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+        [tgr setNumberOfTapsRequired:1];
+        [tgr setNumberOfTouchesRequired:1];
+        [titlelabel addGestureRecognizer:tgr];
+        
+
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
     [button setFrame:CGRectOffset(button.frame, 0, 2.0f)];
     [button setTitle:@"Done" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
     [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [h addSubview:button];
+    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+    [button setContentMode:UIViewContentModeTopRight];
+    [self.header addSubview:button];
     [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+    } else {
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        
+    }
     tableView.delegate = self;
     tableView.dataSource = self;
     self.tableview = tableView;
@@ -120,9 +129,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    /*
     if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ) {
         return texts.count-1;
-    }
+    }*/
+    
     return texts.count;
 }
 
@@ -151,10 +162,36 @@
 
 #pragma mark GestureRecco
 
-- (void)tapped{
+- (void)tapped:(UIGestureRecognizer *)sender{
     NSLog(@"tapped");
     [self.tableview scrollRectToVisible:CGRectMake(0,1,1,1) animated:YES];
 }
 
+#pragma mark - Rotation Handling
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        if (interfaceOrientation==UIInterfaceOrientationMaskPortrait){
+            return YES;
+        }
+        return NO;
+    } else {
+        return YES;
+    }
+    return NO;
+}
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+    }
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
 @end

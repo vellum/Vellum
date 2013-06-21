@@ -122,6 +122,7 @@
 		BD0C926E176A2D3300A0C89D /* UINavigationBar+Fat.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C926D176A2D3300A0C89D /* UINavigationBar+Fat.m */; };
 		BD0C9277176A383600A0C89D /* VLMFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9276176A383600A0C89D /* VLMFlipViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; };
+		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F5173E282800D08179 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -366,6 +367,8 @@
 		BD0C9276176A383600A0C89D /* VLMFlipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMFlipViewController.m; path = VLM/VLMFlipViewController.m; sourceTree = "<group>"; };
 		BD0C9278176A984500A0C89D /* VLMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTableViewCell.h; path = VLM/VLMTableViewCell.h; sourceTree = "<group>"; };
 		BD0C9279176A984500A0C89D /* VLMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTableViewCell.m; path = VLM/VLMTableViewCell.m; sourceTree = "<group>"; };
+		BD2062BE1772A053008A549F /* VLMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMScrollView.h; path = VLM/VLMScrollView.h; sourceTree = "<group>"; };
+		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD97F5F4173E282800D08179 /* VLMUndoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoViewController.h; path = VLM/VLMUndoViewController.h; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
 				BDFB2E541745F13A006AF1C7 /* VLMActivitySaveToAlbum.h */,
 				BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */,
+				BD2062BE1772A053008A549F /* VLMScrollView.h */,
+				BD2062BF1772A053008A549F /* VLMScrollView.m */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -1130,6 +1135,7 @@
 				BD0C926E176A2D3300A0C89D /* UINavigationBar+Fat.m in Sources */,
 				BD0C9277176A383600A0C89D /* VLMFlipViewController.m in Sources */,
 				BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */,
+				BD2062C01772A053008A549F /* VLMScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

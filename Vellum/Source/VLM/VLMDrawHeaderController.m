@@ -100,13 +100,18 @@
     [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
     [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
     [pb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [pb setAutoresizingMask:UIViewAutoresizingNone];
+    [pb setContentMode:UIViewContentModeTopLeft];
     [self.view addSubview:pb];
     [self setLeftbutton:pb];
+   
     
     UIButton *ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
     [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
     [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
     [ab addTarget:self action:@selector(actionTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [ab setAutoresizingMask:UIViewAutoresizingNone|UIViewAutoresizingFlexibleLeftMargin];
+    [ab setContentMode:UIViewContentModeTopRight];
     [self.view addSubview:ab];
     [self setRightbutton:ab];
     
@@ -114,6 +119,8 @@
     [cancel setBackgroundColor:[UIColor whiteColor]];
     [cancel setUserInteractionEnabled:NO];
     [cancel setAlpha:0];
+    [cancel setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [cancel setContentMode:UIViewContentModeScaleToFill];
     [self.view addSubview:cancel];
     [self setCancelbutton:cancel];
     
@@ -123,6 +130,8 @@
     UIView *titleviewmask = [[UIView alloc] initWithFrame:CGRectMake(winw / 2 - HEADER_LABEL_WIDTH / 2, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
     [titleviewmask setClipsToBounds:YES];
     [titleviewmask setBackgroundColor:[UIColor clearColor]];
+    [titleviewmask setAutoresizingMask:UIViewAutoresizingNone|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
+    [titleviewmask setContentMode:UIViewContentModeCenter];
     [self.view addSubview:titleviewmask];
     
     [self setPagecontrol:[[DDPageControl alloc] init]];
@@ -173,7 +182,14 @@
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(plusLongPressed:)];
     [self.leftbutton addGestureRecognizer:lpgr];
     
+    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.view setAutoresizesSubviews:YES];
+    [self.view setContentMode:UIViewContentModeTop];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -435,14 +451,12 @@
                 [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
                 self.pickerController = picker;
                 
-                
-                [picker.navigationBar setTitleVerticalPositionAdjustment:HEADER_TITLE_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
-
-                
                 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                     self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:picker];// does this need to be a property?
+
                     [self.popovercontroller presentPopoverFromRect:self.leftbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                 } else {
+                    [picker.navigationBar setTitleVerticalPositionAdjustment:HEADER_TITLE_VERTICAL_OFFSET forBarMetrics:UIBarMetricsDefault];
                     UIViewController *vc = (UIViewController*)mvc;
                     [vc presentViewController:picker animated:YES completion:^{}];
                 }
@@ -526,4 +540,11 @@
     return nil;
 }
 
+#pragma mark - rotation
+- (void)didRotate:(NSNotification *)notification {
+    if ( self.popovercontroller && [self.popovercontroller isPopoverVisible]){
+        [self.popovercontroller dismissPopoverAnimated:NO];
+    }
+    NSLog(@"%@", notification);
+}
 @end
