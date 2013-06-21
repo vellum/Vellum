@@ -124,6 +124,20 @@
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BD7137451774340100DEBADB /* about-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373E1774340100DEBADB /* about-07.png */; };
+		BD7137461774340100DEBADB /* about-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373F1774340100DEBADB /* about-06.png */; };
+		BD7137471774340100DEBADB /* about-05.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7137401774340100DEBADB /* about-05.png */; };
+		BD7137481774340100DEBADB /* about-04.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7137411774340100DEBADB /* about-04.png */; };
+		BD7137491774340100DEBADB /* about-03.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7137421774340100DEBADB /* about-03.png */; };
+		BD71374A1774340100DEBADB /* about-02.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7137431774340100DEBADB /* about-02.png */; };
+		BD71374B1774340100DEBADB /* about-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7137441774340100DEBADB /* about-01.png */; };
+		BD71375317743B1000DEBADB /* about-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71374C17743B1000DEBADB /* about-01@2x.png */; };
+		BD71375417743B1000DEBADB /* about-02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71374D17743B1000DEBADB /* about-02@2x.png */; };
+		BD71375517743B1000DEBADB /* about-03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71374E17743B1000DEBADB /* about-03@2x.png */; };
+		BD71375617743B1000DEBADB /* about-04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71374F17743B1000DEBADB /* about-04@2x.png */; };
+		BD71375717743B1000DEBADB /* about-05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375017743B1000DEBADB /* about-05@2x.png */; };
+		BD71375817743B1000DEBADB /* about-06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375117743B1000DEBADB /* about-06@2x.png */; };
+		BD71375917743B1000DEBADB /* about-07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71375217743B1000DEBADB /* about-07@2x.png */; };
 		BD97F5F6173E282800D08179 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F5173E282800D08179 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -142,14 +156,6 @@
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDF01B96176EC30200E538E0 /* vellumhelp-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B8F176EC30200E538E0 /* vellumhelp-01.png */; };
-		BDF01B97176EC30200E538E0 /* vellumhelp-02.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B90176EC30200E538E0 /* vellumhelp-02.png */; };
-		BDF01B98176EC30200E538E0 /* vellumhelp-03.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B91176EC30200E538E0 /* vellumhelp-03.png */; };
-		BDF01B99176EC30200E538E0 /* vellumhelp-04.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B92176EC30200E538E0 /* vellumhelp-04.png */; };
-		BDF01B9A176EC30200E538E0 /* vellumhelp-05.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B93176EC30200E538E0 /* vellumhelp-05.png */; };
-		BDF01B9B176EC30200E538E0 /* vellumhelp-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B94176EC30200E538E0 /* vellumhelp-06.png */; };
-		BDF01B9C176EC30200E538E0 /* vellumhelp-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B95176EC30200E538E0 /* vellumhelp-07.png */; };
-		BDF01B9E176ED12E00E538E0 /* vellumhelp-08.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF01B9D176ED12E00E538E0 /* vellumhelp-08.png */; };
 		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -371,6 +377,20 @@
 		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
+		BD71373E1774340100DEBADB /* about-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07.png"; sourceTree = "<group>"; };
+		BD71373F1774340100DEBADB /* about-06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-06.png"; sourceTree = "<group>"; };
+		BD7137401774340100DEBADB /* about-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-05.png"; sourceTree = "<group>"; };
+		BD7137411774340100DEBADB /* about-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-04.png"; sourceTree = "<group>"; };
+		BD7137421774340100DEBADB /* about-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-03.png"; sourceTree = "<group>"; };
+		BD7137431774340100DEBADB /* about-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-02.png"; sourceTree = "<group>"; };
+		BD7137441774340100DEBADB /* about-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-01.png"; sourceTree = "<group>"; };
+		BD71374C17743B1000DEBADB /* about-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-01@2x.png"; sourceTree = "<group>"; };
+		BD71374D17743B1000DEBADB /* about-02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-02@2x.png"; sourceTree = "<group>"; };
+		BD71374E17743B1000DEBADB /* about-03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-03@2x.png"; sourceTree = "<group>"; };
+		BD71374F17743B1000DEBADB /* about-04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-04@2x.png"; sourceTree = "<group>"; };
+		BD71375017743B1000DEBADB /* about-05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-05@2x.png"; sourceTree = "<group>"; };
+		BD71375117743B1000DEBADB /* about-06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-06@2x.png"; sourceTree = "<group>"; };
+		BD71375217743B1000DEBADB /* about-07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07@2x.png"; sourceTree = "<group>"; };
 		BD97F5F4173E282800D08179 /* VLMUndoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoViewController.h; path = VLM/VLMUndoViewController.h; sourceTree = "<group>"; };
 		BD97F5F5173E282800D08179 /* VLMUndoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoViewController.m; path = VLM/VLMUndoViewController.m; sourceTree = "<group>"; };
 		BD97F5F8173EC27400D08179 /* VLMArcView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMArcView.h; path = VLM/VLMArcView.h; sourceTree = "<group>"; };
@@ -400,14 +420,6 @@
 		BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMZoomViewController.m; path = VLM/VLMZoomViewController.m; sourceTree = "<group>"; };
 		BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPopMenuViewController.h; path = VLM/VLMPopMenuViewController.h; sourceTree = "<group>"; };
 		BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPopMenuViewController.m; path = VLM/VLMPopMenuViewController.m; sourceTree = "<group>"; };
-		BDF01B8F176EC30200E538E0 /* vellumhelp-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-01.png"; sourceTree = "<group>"; };
-		BDF01B90176EC30200E538E0 /* vellumhelp-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-02.png"; sourceTree = "<group>"; };
-		BDF01B91176EC30200E538E0 /* vellumhelp-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-03.png"; sourceTree = "<group>"; };
-		BDF01B92176EC30200E538E0 /* vellumhelp-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-04.png"; sourceTree = "<group>"; };
-		BDF01B93176EC30200E538E0 /* vellumhelp-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-05.png"; sourceTree = "<group>"; };
-		BDF01B94176EC30200E538E0 /* vellumhelp-06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-06.png"; sourceTree = "<group>"; };
-		BDF01B95176EC30200E538E0 /* vellumhelp-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-07.png"; sourceTree = "<group>"; };
-		BDF01B9D176ED12E00E538E0 /* vellumhelp-08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vellumhelp-08.png"; sourceTree = "<group>"; };
 		BDF133F01734B239003B6265 /* VLMPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPanGestureRecognizer.h; path = VLM/VLMPanGestureRecognizer.h; sourceTree = "<group>"; };
 		BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPanGestureRecognizer.m; path = VLM/VLMPanGestureRecognizer.m; sourceTree = "<group>"; };
 		BDF133F317356EA0003B6265 /* VLMPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPinchGestureRecognizer.h; path = VLM/VLMPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -698,14 +710,20 @@
 		B64CE683166682B10087CF94 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BDF01B8F176EC30200E538E0 /* vellumhelp-01.png */,
-				BDF01B90176EC30200E538E0 /* vellumhelp-02.png */,
-				BDF01B91176EC30200E538E0 /* vellumhelp-03.png */,
-				BDF01B92176EC30200E538E0 /* vellumhelp-04.png */,
-				BDF01B93176EC30200E538E0 /* vellumhelp-05.png */,
-				BDF01B94176EC30200E538E0 /* vellumhelp-06.png */,
-				BDF01B95176EC30200E538E0 /* vellumhelp-07.png */,
-				BDF01B9D176ED12E00E538E0 /* vellumhelp-08.png */,
+				BD71374C17743B1000DEBADB /* about-01@2x.png */,
+				BD71374D17743B1000DEBADB /* about-02@2x.png */,
+				BD71374E17743B1000DEBADB /* about-03@2x.png */,
+				BD71374F17743B1000DEBADB /* about-04@2x.png */,
+				BD71375017743B1000DEBADB /* about-05@2x.png */,
+				BD71375117743B1000DEBADB /* about-06@2x.png */,
+				BD71375217743B1000DEBADB /* about-07@2x.png */,
+				BD71373E1774340100DEBADB /* about-07.png */,
+				BD71373F1774340100DEBADB /* about-06.png */,
+				BD7137401774340100DEBADB /* about-05.png */,
+				BD7137411774340100DEBADB /* about-04.png */,
+				BD7137421774340100DEBADB /* about-03.png */,
+				BD7137431774340100DEBADB /* about-02.png */,
+				BD7137441774340100DEBADB /* about-01.png */,
 				BD0C9266176A1D5700A0C89D /* gray_header_background.png */,
 				BD0C9268176A1DE300A0C89D /* clear.png */,
 				BD0C9269176A1DE300A0C89D /* clear50.png */,
@@ -1034,14 +1052,20 @@
 				BD0C9267176A1D5700A0C89D /* gray_header_background.png in Resources */,
 				BD0C926A176A1DE300A0C89D /* clear.png in Resources */,
 				BD0C926B176A1DE300A0C89D /* clear50.png in Resources */,
-				BDF01B96176EC30200E538E0 /* vellumhelp-01.png in Resources */,
-				BDF01B97176EC30200E538E0 /* vellumhelp-02.png in Resources */,
-				BDF01B98176EC30200E538E0 /* vellumhelp-03.png in Resources */,
-				BDF01B99176EC30200E538E0 /* vellumhelp-04.png in Resources */,
-				BDF01B9A176EC30200E538E0 /* vellumhelp-05.png in Resources */,
-				BDF01B9B176EC30200E538E0 /* vellumhelp-06.png in Resources */,
-				BDF01B9C176EC30200E538E0 /* vellumhelp-07.png in Resources */,
-				BDF01B9E176ED12E00E538E0 /* vellumhelp-08.png in Resources */,
+				BD7137451774340100DEBADB /* about-07.png in Resources */,
+				BD7137461774340100DEBADB /* about-06.png in Resources */,
+				BD7137471774340100DEBADB /* about-05.png in Resources */,
+				BD7137481774340100DEBADB /* about-04.png in Resources */,
+				BD7137491774340100DEBADB /* about-03.png in Resources */,
+				BD71374A1774340100DEBADB /* about-02.png in Resources */,
+				BD71374B1774340100DEBADB /* about-01.png in Resources */,
+				BD71375317743B1000DEBADB /* about-01@2x.png in Resources */,
+				BD71375417743B1000DEBADB /* about-02@2x.png in Resources */,
+				BD71375517743B1000DEBADB /* about-03@2x.png in Resources */,
+				BD71375617743B1000DEBADB /* about-04@2x.png in Resources */,
+				BD71375717743B1000DEBADB /* about-05@2x.png in Resources */,
+				BD71375817743B1000DEBADB /* about-06@2x.png in Resources */,
+				BD71375917743B1000DEBADB /* about-07@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

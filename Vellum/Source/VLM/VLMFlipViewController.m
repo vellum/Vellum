@@ -48,20 +48,18 @@
              @"Tap to toggle header.",
              @"Pinch to zoom.",
              @"Double-tap to reset zoom.",
-             //@"Tap Plus to Start Again",
              @"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
              @"Pan vertically with 3 fingers to undo.",
              nil];
     
     images = [NSArray arrayWithObjects:
-              @"vellumhelp-01.png",
-              @"vellumhelp-02.png",
-              @"vellumhelp-08.png",
-              @"vellumhelp-03.png",
-              @"vellumhelp-04.png",
-              //@"vellumhelp-05.png",
-              @"vellumhelp-06.png",
-              @"vellumhelp-07.png",
+              @"about-01.png",
+              @"about-02.png",
+              @"about-05.png",
+              @"about-03.png",
+              @"about-04.png",
+              @"about-06.png",
+              @"about-07.png",
               nil];
     UITableView *tableView;
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
@@ -75,7 +73,7 @@
     UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
     [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
     [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-    [titlelabel setText:@"About"];
+    [titlelabel setText:@"Info"];
     [titlelabel setUserInteractionEnabled:YES];
     [titlelabel setTextAlignment:NSTextAlignmentCenter];
     [titlelabel setBackgroundColor:[UIColor clearColor]];
@@ -139,7 +137,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 385;
+    return 600;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

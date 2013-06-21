@@ -25,8 +25,10 @@
     if (self) {
         // Initialization code
         
-        CGFloat margin = 15;
-        UILabel *llll = [[UILabel alloc] initWithFrame:CGRectMake(margin, margin, 320-margin*2, 60)];
+        CGFloat margin = 25;
+        CGFloat width = 320-margin*2;
+        CGFloat height = 586.0f/320.0f*width;
+        UILabel *llll = [[UILabel alloc] initWithFrame:CGRectMake(margin, margin, width, 60)];
         [llll setBackgroundColor:[UIColor blackColor]];
         [llll setTextColor:[UIColor whiteColor]];
         [llll setTextAlignment:NSTextAlignmentCenter];
@@ -36,7 +38,9 @@
         [self setTitleLabel:llll];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, 60 + margin, 320-margin*2, 320-margin*2)];
+        
+        
+        UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, 60 + margin, width, height)];
         [placeholder setBackgroundColor:[UIColor colorWithWhite:0.8f alpha:1.0f]];
         [self.contentView addSubview:placeholder];
         
@@ -45,10 +49,6 @@
         [placeholder setUserInteractionEnabled:NO];
         [self setContentImageView:iv];
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(margin-5, 382, 320-margin*2 + 5*2, 2)];
-        [line setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
-        [line setUserInteractionEnabled:NO];
-        [self.contentView addSubview:line];
     }
     return self;
 }
