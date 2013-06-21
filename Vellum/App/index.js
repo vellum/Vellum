@@ -11,6 +11,7 @@ MODE_GRAPHITE = 8
 ;
 
 var BGCOLOR = '#f2f2e8';
+var BGCOLOR_RGBA = 'rgba(242,242,232,0.5)';
 var BRIDGE = new Ejecta.Bridge();
 
 var w = window.innerWidth
@@ -18,13 +19,9 @@ var w = window.innerWidth
 , canvas = document.getElementById('canvas')
 , ctx = canvas.getContext('2d')
 , prevmouse = { x: 0, y: 0 }
-
 , targetmouse = { x: 0, y: 0 }
-
 , accum = { x:0, y:0 }
-
 , isRestoringPixels = false
-
 , mousedown = false
 , curnib = 1
 , angle = 0
@@ -122,7 +119,7 @@ var drawgraphite = function() {
         , vertexCount = 0
         , currange = curnib * multiplier
         , prevrange = prevnib * multiplier
-        , fgcolor = (drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR : '#000000'
+        , fgcolor = (drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR_RGBA : '#000000'
         ;
         
         
