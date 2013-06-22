@@ -384,74 +384,74 @@ var is3GS = function(){
 	},
 
     drawpencil = function() {
-    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25
-    , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25
-    , dx = targetmouse.x - x
-    , dy = targetmouse.y - y
-    , dist = Math.sqrt(dx * dx + dy * dy)
-    , prevnib = curnib
-    , pangle = angle
-    , threshold = 0.001 / (zoomlevel * 1000)
-    ;
-    accumdist += dist;
-    if (dist >= threshold) {
-        angle = Math.atan2(dy, dx) - Math.PI / 2;
-        
-        curnib += dist * 1.5;
-        curnib *= 0.125;
-        
-        var multiplier = 0.25
-        , count = 0
-        , cosangle = Math.cos(angle)
-        , sinangle = Math.sin(angle)
-        , cospangle = Math.cos(pangle)
-        , sinpangle = Math.sin(pangle)
-        , vertexCount = 0
-        , currange = curnib * multiplier
-        , prevrange = prevnib * multiplier
-        , fgcolor = FGCOLOR_RGBA//'#000000'
+        var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25
+        , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25
+        , dx = targetmouse.x - x
+        , dy = targetmouse.y - y
+        , dist = Math.sqrt(dx * dx + dy * dy)
+        , prevnib = curnib
+        , pangle = angle
+        , threshold = 0.001 / (zoomlevel * 1000)
         ;
-        
-        ctx.beginPath();
-        ctx.lineWidth = 0.125;
-        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,0.25)';
-        
-        for (var i = -currange; i <= currange; i += 1) {
-            var pct = i / currange
-            , localx = x + cosangle * pct * currange
-            , localy = y + sinangle * pct * currange
-            , localpx = prevmouse.x + cospangle * pct * prevrange
-            , localpy = prevmouse.y + sinpangle * pct * prevrange
+        accumdist += dist;
+        if (dist >= threshold) {
+            angle = Math.atan2(dy, dx) - Math.PI / 2;
+            
+            curnib += dist * 1.5;
+            curnib *= 0.125;
+            
+            var multiplier = 0.25
+            , count = 0
+            , cosangle = Math.cos(angle)
+            , sinangle = Math.sin(angle)
+            , cospangle = Math.cos(pangle)
+            , sinpangle = Math.sin(pangle)
+            , vertexCount = 0
+            , currange = curnib * multiplier
+            , prevrange = prevnib * multiplier
+            , fgcolor = FGCOLOR_RGBA//'#000000'
             ;
             
-            deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-            deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-            ctx.moveTo(localpx + deltax, localpy + deltay);
+            ctx.beginPath();
+            ctx.lineWidth = 0.125;
+            ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,0.25)';
             
-            deltax = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
-            deltay = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
-            ctx.lineTo(localx + deltax, localy + deltay);
+            for (var i = -currange; i <= currange; i += 1) {
+                var pct = i / currange
+                , localx = x + cosangle * pct * currange
+                , localy = y + sinangle * pct * currange
+                , localpx = prevmouse.x + cospangle * pct * prevrange
+                , localpy = prevmouse.y + sinpangle * pct * prevrange
+                ;
+                
+                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+                ctx.moveTo(localpx + deltax, localpy + deltay);
+                
+                deltax = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
+                deltay = (Math.random() > 0.5) ? Math.random() * -prevrange / 2 : Math.random() * prevrange / 2;
+                ctx.lineTo(localx + deltax, localy + deltay);
+            }
+            ctx.stroke();
+            ctx.closePath();
+            
+            var linwin = accumdist;
+            linwin /= (500 / zoomlevel);
+            if (linwin < 0.45) linwin = 0.45;
+            if (linwin > 0.75) linwin = 0.75;
+            
+            ctx.beginPath();
+            ctx.lineWidth = linwin;
+            //ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            
+            ctx.moveTo(prevmouse.x, prevmouse.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.closePath();
         }
-        ctx.stroke();
-        ctx.closePath();
-        
-        var linwin = accumdist;
-        linwin /= (500 / zoomlevel);
-        if (linwin < 0.45) linwin = 0.45;
-        if (linwin > 0.75) linwin = 0.75;
-        linwin = 1;
-        ctx.beginPath();
-        ctx.lineWidth = linwin;
-        //ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-        
-        ctx.moveTo(prevmouse.x, prevmouse.y);
-        ctx.lineTo(x, y);
-        ctx.stroke();
-        ctx.closePath();
-    }
-    prevmouse.x = x;
-    prevmouse.y = y;
-},
+        prevmouse.x = x;
+        prevmouse.y = y;
+    },
 
     drawerase = function() {
     var interpolation_multiplier = 0.5,
