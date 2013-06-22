@@ -186,11 +186,9 @@
     [self.view setAutoresizesSubviews:YES];
     [self.view setContentMode:UIViewContentModeTop];
     
-    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -545,9 +543,9 @@
 
 #pragma mark - rotation
 - (void)didRotate:(NSNotification *)notification {
+    NSLog(@"here: rotation detected in header");
     if ( self.popovercontroller && [self.popovercontroller isPopoverVisible]){
-        [self.popovercontroller dismissPopoverAnimated:NO];
+        [self.popovercontroller dismissPopoverAnimated:YES];
     }
-    NSLog(@"%@", notification);
 }
 @end

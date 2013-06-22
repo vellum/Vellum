@@ -190,12 +190,12 @@
     }
     [self handleDoubleTap:nil];
 
-    /*
+    ///*
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
         name:UIDeviceOrientationDidChangeNotification
         object:nil];
-    */
+    //*/
     
 }
 
@@ -709,24 +709,11 @@
 - (void)didRotate:(NSNotification *)notification {
 
     NSLog(@"didrotate %@", notification);
-
-    switch ([[UIApplication sharedApplication] statusBarOrientation]) {
-        case UIInterfaceOrientationPortrait:
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            break;
-            
-        default:
-            break;
-    }
     if ( self.flipsidePopoverController != nil ){
         if ([self.flipsidePopoverController isPopoverVisible]) {
-            [self.flipsidePopoverController dismissPopoverAnimated:NO];
+            [self.flipsidePopoverController dismissPopoverAnimated:YES];
         }
     }
+    
 }
 @end
