@@ -1,207 +1,389 @@
-var
-MODE_SCRIBBLE = 0,
-MODE_SHADE = 1,
-MODE_INK = 2,
-MODE_SCRATCH = 3,
-MODE_LINE = 4,
-MODE_ERASE = 5,
-MODE_SCRAMBLE = 6, // ?
-MODE_OUTLINE = 7,
-MODE_GRAPHITE = 8
-;
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+                 _   _                             _
+ __   __   ___  | | | |  _   _   _ __ ___         (_)  ___
+ \ \ / /  / _ \ | | | | | | | | | '_ ` _ \        | | / __|
+  \ V /  |  __/ | | | | | |_| | | | | | | |  _    | | \__ \
+   \_/    \___| |_| |_|  \__,_| |_| |_| |_| (_)  _/ | |___/
+                                                |__/
+  @vellumapp is a work in progress by david lu
+  see also: @vellum, http://vellum.cc
 
-var BGCOLOR = '#f2f2e8';
-var BGCOLOR_RGBA = 'rgba(242,242,232,0.5)';
-var BRIDGE = new Ejecta.Bridge();
-var FGCOLOR_RGBA = 'rgaa(0,0,0,0.25)';
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-var w = window.innerWidth
-, h = window.innerHeight
-, canvas = document.getElementById('canvas')
-, ctx = canvas.getContext('2d')
-, prevmouse = { x: 0, y: 0 }
-, targetmouse = { x: 0, y: 0 }
-, accum = { x:0, y:0 }
-, isRestoringPixels = false
-, mousedown = false
-, curnib = 1
-, angle = 0
-, zoomlevel = 1
-, drawmode = MODE_LINE
-, accumdist = 0
-;
+var MODE_SCRIBBLE = 0,
+	MODE_SHADE = 1,
+	MODE_INK = 2,
+	MODE_SCRATCH = 3,
+	MODE_LINE = 4,
+	MODE_ERASE = 5,
+	MODE_SCRAMBLE = 6, // ?
+	MODE_OUTLINE = 7,
+	MODE_GRAPHITE = 8,
+	BGCOLOR = '#f2f2e8',
+    BGCOLOR_RGBA = 'rgba(242,242,232,0.5)',
+    BGCOLOR_RGBA2 = 'rgba(242,242,232,0.75)',
+	BRIDGE = new Ejecta.Bridge(),
+	FGCOLOR_RGBA = 'rgaa(0,0,0,0.425)';
 
-var setDrawingMode = function(mode) {
-    //console.log('setdrawingmode ' + mode);
-    drawmode = mode;
-};
+var w = window.innerWidth,
+	h = window.innerHeight,
+	canvas = document.getElementById('canvas'),
+	ctx = canvas.getContext('2d'),
+	prevmouse = { x: 0, y: 0 },
+	targetmouse = { x: 0, y: 0 },
+	accum = { x:0, y:0 },
+	isRestoringPixels = false,
+	mousedown = false,
+	curnib = 1,
+	angle = 0,
+	zoomlevel = 1,
+	drawmode = MODE_LINE,
+	accumdist = 0;
 
-var animate = function() {
-    if (isRestoringPixels) return;
-    //console.log('animate');
-    if (mousedown) {
-        switch (drawmode) {
-            case MODE_GRAPHITE:
-            case MODE_SCRIBBLE:
-            case MODE_SHADE:
-            case MODE_SCRATCH:
-            case MODE_ERASE:
-                drawgraphite();
-                break;
-            case MODE_OUTLINE:
-            case MODE_LINE:
-                drawpencil();
-                break;
-            case MODE_INK:
-                drawink();
-                break;
-        }
-    }
-};
+var is3GS = function(){
+		if ( window.devicePixelRatio == 1 && w < 768 ) return true;
+		return false;
+	},
+	
+	setDrawingMode = function(mode) {
+	    drawmode = mode;
+	},
 
-var drawink = function() {
-    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25
-    , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25
-    , dx = targetmouse.x - x
-    , dy = targetmouse.y - y
-    , dist = Math.sqrt(dx * dx + dy * dy)
-    , prevnib = curnib
-    , pangle = angle
-    , threshold = 0.001 / (zoomlevel * 1000)
-    ;
-    if (dist >= threshold) {
-        var nib = 20 * dist * 0.005;
-        nib = 5 - nib;
-        if (nib < 0.5) nib = 0.5;
-        
-        nib /= zoomlevel * 0.5;
-        curnib += (nib - curnib) * 0.125;
-        ctx.beginPath();
-        ctx.fillStyle = '#000000';
-        ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
-        ctx.fill();
-        ctx.closePath();
-        
-        ctx.beginPath();
-        ctx.lineWidth = (zoomlevel < 10) ? curnib : 0.5;
-        ctx.strokeStyle = '#000000';
-        ctx.moveTo(x, y);
-        ctx.lineTo(prevmouse.x, prevmouse.y);
-        ctx.stroke();
-        ctx.closePath();
-    }
-    prevmouse.x = x;
-    prevmouse.y = y;
-}
-
-var drawgraphite = function() {
-    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.5
-    , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.5
-    , dx = targetmouse.x - x
-    , dy = targetmouse.y - y
-    , dist = Math.sqrt(dx * dx + dy * dy)
-    , prevnib = curnib
-    , pangle = angle
-    , threshold = 0.001 / (zoomlevel * 1000) //(zoomlevel>10) ? 0.00001 : 1
-    ;
+	animate = function() {
+	    if (isRestoringPixels) { return; }
+	    if (mousedown) {
+	        switch (drawmode) {
+	            case MODE_GRAPHITE:
+	                drawgraphite();
+	                break;
+                
+	            case MODE_SCRIBBLE:
+	                drawscribble();
+	                break;
+                
+	            case MODE_SHADE:
+	                drawshade();
+	                break;
+                
+	            case MODE_SCRATCH:
+	                drawscratch();
+	                break;
+                
+	            case MODE_ERASE:
+	                drawerase();
+	                break;
+                
+	            case MODE_OUTLINE:
+	            case MODE_LINE:
+	                drawpencil();
+	                break;
+                
+	            case MODE_INK:
+	                drawink();
+	                break;
+	        }
+	    }
+	},
+	
+	drawink = function() {
+	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25,
+		    y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25,
+		    dx = targetmouse.x - x,
+		    dy = targetmouse.y - y,
+		    dist = Math.sqrt(dx * dx + dy * dy),
+		    prevnib = curnib,
+		    pangle = angle,
+		    threshold = 0.001 / (zoomlevel * 1000);
     
-    if (dist >= threshold) {
-        angle = Math.atan2(dy, dx) - Math.PI / 2;
+	    if (dist >= threshold) {
+	        var nib = 20 * dist * 0.005;
+	        nib = 5 - nib;
+	        if (nib < 0.5) nib = 0.5;
         
-        curnib += dist * 2.5;
-        curnib *= 0.25;
+	        nib /= zoomlevel * 0.5;
+	        curnib += (nib - curnib) * 0.125;
+	        ctx.beginPath();
+	        ctx.fillStyle = '#000000';
+	        ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
+	        ctx.fill();
+	        ctx.closePath();
         
-        var multiplier = (drawmode == MODE_SCRATCH) ? 0.25 : 1.0
-        , count = 0
-        , cosangle = Math.cos(angle)
-        , sinangle = Math.sin(angle)
-        , cospangle = Math.cos(pangle)
-        , sinpangle = Math.sin(pangle)
-        , vertexCount = 0
-        , currange = curnib * multiplier
-        , prevrange = prevnib * multiplier
-        , fgcolor = (drawmode == MODE_SCRATCH || drawmode == MODE_ERASE) ? BGCOLOR_RGBA : '#000000'
-        ;
-        
-        if ( drawmode == MODE_GRAPHITE ){
-            fgcolor = FGCOLOR_RGBA;
-        }
-        
-        if (drawmode == MODE_SCRIBBLE) {
-            //fgcolor = 'rgba(0,0,0,0.2)';
-        }
-        
-        if (zoomlevel < 10) {
-            ctx.beginPath();
-            
-            if (zoomlevel < 1) {
-                if (drawmode == MODE_SHADE) {
-                    ctx.lineWidth = 0.05; // dots (these look great)
-                } else {
-                    ctx.lineWidth = 0.5; // solid lines MOIRE
-                }
-            } else {
-                if (drawmode == MODE_SHADE) {
-                    ctx.lineWidth = 0.1; // dots (these look great)
-                } else if (drawmode == MODE_SCRATCH) {
-                    ctx.lineWidth = 0.5; //
-                } else if (drawmode == MODE_ERASE) {
-                    ctx.lineWidth = 0.15; //
-                } else {
-                    ctx.lineWidth = 0.45; // these look ok
-                }
-            }
-            ctx.strokeStyle = fgcolor;
-            var step = 1.5;
-            
-            if (drawmode == MODE_ERASE) {
-                step = 0.75;
-            }
-            
-            if (drawmode == MODE_GRAPHITE){
-                step = 2.5;//0.75;
-                ctx.lineWidth = 0.5;
-            }
-            for (var i = -currange; i <= currange; i += step) {
-                var pct = i / currange
-                , localx = x + cosangle * pct * currange
-                , localy = y + sinangle * pct * currange
-                , localpx = prevmouse.x + cospangle * pct * prevrange
-                , localpy = prevmouse.y + sinpangle * pct * prevrange
-                ;
-                
-                var deltax, deltay;
-                
-                if (drawmode == MODE_SCRIBBLE || drawmode == MODE_SHADE) {
-                    deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                    deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                    ctx.moveTo(localpx + deltax, localpy + deltay);
-                    
-                    deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                    deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
-                    ctx.lineTo(localx + deltax, localy + deltay);
-                } else {
-                    ctx.moveTo(localpx, localpy);
-                    ctx.lineTo(localx, localy);
-                }
-            }
-            ctx.stroke();
-            ctx.closePath();
-        } else {
-            ctx.beginPath();
-            ctx.lineWidth = 0.45;
-            ctx.strokeStyle = fgcolor;
-            ctx.moveTo(x, y);
-            ctx.lineTo(prevmouse.x, prevmouse.y);
-            ctx.stroke();
-            ctx.closePath();
-        }
-    }
-    prevmouse.x = x;
-    prevmouse.y = y;
-}
+	        ctx.beginPath();
+	        ctx.lineWidth = (zoomlevel < 10) ? curnib : 0.5;
+	        ctx.strokeStyle = '#000000';
+	        ctx.moveTo(x, y);
+	        ctx.lineTo(prevmouse.x, prevmouse.y);
+	        ctx.stroke();
+	        ctx.closePath();
+	    }
+	    prevmouse.x = x;
+	    prevmouse.y = y;
+	},
 
-var drawpencil = function() {
+	drawgraphite = function() {
+    
+	    var interpolation_multiplier = 0.5,
+		    distance_multiplier = 2.5,
+		    nib_multiplier = 0.25,
+			grr_fg = FGCOLOR_RGBA;
+    
+	    if ( is3GS() ){
+	        interpolation_multiplier = 0.375;
+	        distance_multiplier = 2.0;
+			nib_multiplier = 0.25;
+			grr_fg = 'rgba(0,0,0,0.75)';
+	    }
+    
+	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier,
+		    y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier,
+		    dx = targetmouse.x - x,
+		    dy = targetmouse.y - y,
+		    dist = Math.sqrt(dx * dx + dy * dy),
+		    prevnib = curnib,
+		    pangle = angle,
+		    threshold = 0.001 / (zoomlevel * 1000);
+    
+	    if (dist >= threshold) {
+	        angle = Math.atan2(dy, dx) - Math.PI / 2;
+	        curnib += dist * distance_multiplier;
+	        curnib *= nib_multiplier;
+        
+	        var multiplier = 1.0,
+	        count = 0,
+	        cosangle = Math.cos(angle),
+	        sinangle = Math.sin(angle),
+	        cospangle = Math.cos(pangle),
+	        sinpangle = Math.sin(pangle),
+	        vertexCount = 0,
+	        currange = curnib * multiplier,
+	        prevrange = prevnib * multiplier,
+	        fgcolor = grr_fg;
+        
+        
+	        if (zoomlevel < 10) {
+	            ctx.beginPath();
+	            ctx.strokeStyle = fgcolor;
+	            ctx.lineWidth = 0.45;
+	            var step = 2.5;
+	            if ( is3GS() ){
+	                step = 4;
+	                ctx.strokeStyle = grr_fg;
+	                ctx.lineWidth = 0.5;
+	            }
+	            for (var i = -currange; i <= currange; i += step) {
+	                var pct = i / currange,
+	                localx = x + cosangle * pct * currange,
+	                localy = y + sinangle * pct * currange,
+	                localpx = prevmouse.x + cospangle * pct * prevrange,
+	                localpy = prevmouse.y + sinpangle * pct * prevrange;
+					ctx.moveTo(localpx, localpy);
+	                ctx.lineTo(localx, localy);
+	            }
+            
+	            if (window.devicePixelRatio>1){
+	                ctx.stroke();
+	                ctx.closePath();
+	                ctx.beginPath();
+	                ctx.lineWidth = 0.15;
+                
+	                // interpolate a series of cross hatch marks
+	                for ( var i = 0; i <= dist; i += step ){
+                    
+	                    // interpolated point along line with pressure
+	                    var pct = i / dist,
+		                    curloc = {
+			                    x: x + pct * (x-prevmouse.x),
+			                    y: y + pct * (y-prevmouse.y),
+			                    p: prevrange + pct * (currange-prevrange)
+		                    };
+		                    // now compute endpoints of the cross hatch mark
+		                    var p0 = {
+			                    x:curloc.x + cosangle * -curloc.p,
+			                    y:curloc.y + sinangle * -curloc.p
+		                    },
+		                    p1 = {
+			                    x:curloc.x + cosangle * curloc.p,
+			                    y:curloc.y + sinangle * curloc.p
+		                    };
+	                    ctx.moveTo(p0.x,p0.y);
+	                    ctx.lineTo(p1.x,p1.y);
+	                }
+	            }
+	            ctx.stroke();
+	            ctx.closePath();
+	        } else {
+	            ctx.beginPath();
+	            ctx.lineWidth = 0.45;
+	            ctx.strokeStyle = fgcolor;
+	            ctx.moveTo(x, y);
+	            ctx.lineTo(prevmouse.x, prevmouse.y);
+	            ctx.stroke();
+	            ctx.closePath();
+	        }
+	    }
+	    prevmouse.x = x;
+	    prevmouse.y = y;
+	},
+	
+	drawscribble = function() {
+		var interpolation_multiplier = 0.5,
+		    distance_multiplier = 2.5,
+		    nib_multiplier = 0.25;
+    
+	    if ( is3GS() ){
+	        interpolation_multiplier = 0.375;
+	        distance_multiplier = 2.0;
+			nib_multiplier = 0.25;
+	    }
+    
+		var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier, 
+			y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier, 
+			dx = targetmouse.x - x, 
+			dy = targetmouse.y - y, 
+			dist = Math.sqrt(dx * dx + dy * dy), 
+			prevnib = curnib, 
+			pangle = angle, 
+			threshold = 0.001 / (zoomlevel * 1000);
+    
+	    if (dist >= threshold) {
+	        angle = Math.atan2(dy, dx) - Math.PI / 2;
+	        curnib += dist * distance_multiplier;
+	        curnib *= nib_multiplier;
+        
+	        var multiplier = (drawmode == MODE_SCRATCH) ? 0.25 : 1.0, 
+				count = 0, 
+				cosangle = Math.cos(angle), 
+				sinangle = Math.sin(angle), 
+				cospangle = Math.cos(pangle), 
+				sinpangle = Math.sin(pangle), 
+				vertexCount = 0, 
+				currange = curnib * multiplier, 
+				prevrange = prevnib * multiplier, 
+				fgcolor = '#000000';
+        
+			if (zoomlevel < 10) {
+	            ctx.beginPath();
+	            if (zoomlevel < 1) {
+	                ctx.lineWidth = 0.5; // solid lines MOIRE
+	            } else {
+	                ctx.lineWidth = 0.45; // these look ok
+	            }
+	            ctx.strokeStyle = fgcolor;
+	            var step = 1.5;
+	            for (var i = -currange; i <= currange; i += step) {
+	                var pct = i / currange, 
+						localx = x + cosangle * pct * currange, 
+						localy = y + sinangle * pct * currange, 
+						localpx = prevmouse.x + cospangle * pct * prevrange, 
+						localpy = prevmouse.y + sinpangle * pct * prevrange;
+					var deltax, deltay;
+	                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                ctx.moveTo(localpx + deltax, localpy + deltay);
+	                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                ctx.lineTo(localx + deltax, localy + deltay);
+	            }            
+	            ctx.stroke();
+	            ctx.closePath();
+	        } else {
+	            ctx.beginPath();
+	            ctx.lineWidth = 0.45;
+	            ctx.strokeStyle = fgcolor;
+	            ctx.moveTo(x, y);
+	            ctx.lineTo(prevmouse.x, prevmouse.y);
+	            ctx.stroke();
+	            ctx.closePath();
+	        }
+	    }
+	    prevmouse.x = x;
+	    prevmouse.y = y;
+	},
+	
+	drawshade = function() {
+    
+	    var interpolation_multiplier = 0.5,
+		    distance_multiplier = 2.5,
+		    nib_multiplier = 0.25,
+            step = 1.5;
+    
+	    if ( is3GS() ){
+	        interpolation_multiplier = 0.375;
+	        distance_multiplier = 2.0;
+			nib_multiplier = 0.25;
+			step = 1.1;
+	    }
+    
+	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier, 
+			y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier, 
+			dx = targetmouse.x - x, 
+			dy = targetmouse.y - y, 
+			dist = Math.sqrt(dx * dx + dy * dy), 
+			prevnib = curnib, 
+			pangle = angle, 
+			threshold = 0.001 / (zoomlevel * 1000);
+    
+	    if (dist >= threshold) {
+	        angle = Math.atan2(dy, dx) - Math.PI / 2;
+	        curnib += dist * distance_multiplier;
+	        curnib *= nib_multiplier;
+        
+	        var multiplier = 1.0, 
+				count = 0, 
+				cosangle = Math.cos(angle), 
+				sinangle = Math.sin(angle), 
+				cospangle = Math.cos(pangle), 
+				sinpangle = Math.sin(pangle), 
+				vertexCount = 0, 
+				currange = curnib * multiplier, 
+				prevrange = prevnib * multiplier, 
+				fgcolor = '#000000';
+			
+	        if (zoomlevel < 10) {
+	            ctx.beginPath();
+	            if (zoomlevel < 1) {
+	                ctx.lineWidth = 0.05; // dots
+	            } else {
+	                ctx.lineWidth = 0.1; // dots (these look great)
+	            }
+				if ( is3GS() ){
+					ctx.lineWidth *= 0.5;
+				}
+	            ctx.strokeStyle = fgcolor;
+	            for (var i = -currange; i <= currange; i += step) {
+	                var pct = i / currange, 
+						localx = x + cosangle * pct * currange, 
+						localy = y + sinangle * pct * currange, 
+						localpx = prevmouse.x + cospangle * pct * prevrange, 
+						localpy = prevmouse.y + sinpangle * pct * prevrange;
+                
+	                var deltax, deltay;
+	                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                ctx.moveTo(localpx + deltax, localpy + deltay);
+                
+	                deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+	                ctx.lineTo(localx + deltax, localy + deltay);
+	            }
+	            ctx.stroke();
+	            ctx.closePath();
+	        } else {
+	            ctx.beginPath();
+	            ctx.lineWidth = 0.45;
+	            ctx.strokeStyle = fgcolor;
+	            ctx.moveTo(x, y);
+	            ctx.lineTo(prevmouse.x, prevmouse.y);
+	            ctx.stroke();
+	            ctx.closePath();
+	        }
+	    }
+	    prevmouse.x = x;
+	    prevmouse.y = y;
+	},
+
+    drawpencil = function() {
     var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25
     , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25
     , dx = targetmouse.x - x
@@ -232,7 +414,7 @@ var drawpencil = function() {
         
         ctx.beginPath();
         ctx.lineWidth = 0.125;
-        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,1)';
+        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,0.25)';
         
         for (var i = -currange; i <= currange; i += 1) {
             var pct = i / currange
@@ -255,11 +437,12 @@ var drawpencil = function() {
         
         var linwin = accumdist;
         linwin /= (500 / zoomlevel);
-        if (linwin < 0.25) linwin = 0.25;
-        if (linwin > 0.5) linwin = 0.5;
+        if (linwin < 0.45) linwin = 0.45;
+        if (linwin > 0.75) linwin = 0.75;
+        linwin = 1;
         ctx.beginPath();
         ctx.lineWidth = linwin;
-        ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,1)';
+        //ctx.strokeStyle = 'rgba(0,0,0,0.5)';
         
         ctx.moveTo(prevmouse.x, prevmouse.y);
         ctx.lineTo(x, y);
@@ -268,9 +451,162 @@ var drawpencil = function() {
     }
     prevmouse.x = x;
     prevmouse.y = y;
-}
+},
 
-var drawline = function() {
+    drawerase = function() {
+    var interpolation_multiplier = 0.5,
+	    distance_multiplier = 2.5,
+	    nib_multiplier = 0.25,
+		step = 0.75;
+
+    if ( is3GS() ){
+        interpolation_multiplier = 0.375;
+        distance_multiplier = 4.0;
+		nib_multiplier = 0.125;
+		step = 1.5;
+    }
+    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier, 
+		y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier, 
+		dx = targetmouse.x - x, 
+		dy = targetmouse.y - y, 
+		dist = Math.sqrt(dx * dx + dy * dy), 
+		prevnib = curnib, 
+		pangle = angle, 
+		threshold = 0.001 / (zoomlevel * 1000);
+    
+    if (dist >= threshold) {
+        angle = Math.atan2(dy, dx) - Math.PI / 2;
+        curnib += dist * distance_multiplier;
+        curnib *= nib_multiplier;
+    
+        var multiplier = 1.0, 
+			count = 0, 
+			cosangle = Math.cos(angle), 
+			sinangle = Math.sin(angle), 
+			cospangle = Math.cos(pangle), 
+			sinpangle = Math.sin(pangle), 
+			vertexCount = 0, 
+			currange = curnib * multiplier, 
+			prevrange = prevnib * multiplier, 
+			fgcolor = BGCOLOR_RGBA;
+        
+        if (zoomlevel < 10) {
+            ctx.beginPath();
+            
+            if (zoomlevel < 1) {
+                ctx.lineWidth = 0.5; // solid lines MOIRE
+            } else {
+                ctx.lineWidth = 0.15; //
+            }
+            ctx.strokeStyle = fgcolor;
+            
+            for (var i = -currange; i <= currange; i += step) {
+                var pct = i / currange
+                , localx = x + cosangle * pct * currange
+                , localy = y + sinangle * pct * currange
+                , localpx = prevmouse.x + cospangle * pct * prevrange
+                , localpy = prevmouse.y + sinpangle * pct * prevrange
+                ;
+                ctx.moveTo(localpx, localpy);
+                ctx.lineTo(localx, localy);
+            }
+            ctx.stroke();
+            ctx.closePath();
+        } else {
+            ctx.beginPath();
+            ctx.lineWidth = 0.45;
+            ctx.strokeStyle = fgcolor;
+            ctx.moveTo(x, y);
+            ctx.lineTo(prevmouse.x, prevmouse.y);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+    prevmouse.x = x;
+    prevmouse.y = y;
+},
+
+    drawscratch = function() {
+    
+    var interpolation_multiplier = 0.5;
+    var distance_multiplier = 2.5;
+	var nib_multiplier = 0.25;
+    
+    if ( is3GS() ){
+        interpolation_multiplier = 0.333;
+        distance_multiplier = 1.25;
+		nib_multiplier = 0.25;
+    }
+
+    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier
+	    , y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier
+	    , dx = targetmouse.x - x
+	    , dy = targetmouse.y - y
+	    , dist = Math.sqrt(dx * dx + dy * dy)
+	    , prevnib = curnib
+	    , pangle = angle
+	    , threshold = 0.001 / (zoomlevel * 1000)
+	    ;
+    
+    if (dist >= threshold) {
+        angle = Math.atan2(dy, dx) - Math.PI / 2;
+        
+        curnib += dist * distance_multiplier;
+        curnib *= nib_multiplier;
+        
+        var multiplier = 0.25
+        , count = 0
+        , cosangle = Math.cos(angle)
+        , sinangle = Math.sin(angle)
+        , cospangle = Math.cos(pangle)
+        , sinpangle = Math.sin(pangle)
+        , vertexCount = 0
+        , currange = curnib * multiplier
+        , prevrange = prevnib * multiplier
+        , fgcolor = BGCOLOR_RGBA2
+        ;
+        
+        
+        if (zoomlevel < 10) {
+            ctx.beginPath();
+            
+            if (zoomlevel < 1) {
+                ctx.lineWidth = 0.5; // solid lines MOIRE
+            } else {
+                ctx.lineWidth = 0.5; //
+            }
+            ctx.strokeStyle = fgcolor;
+            var step = 1.5;
+            
+            for (var i = -currange; i <= currange; i += step) {
+                var pct = i / currange
+                , localx = x + cosangle * pct * currange
+                , localy = y + sinangle * pct * currange
+                , localpx = prevmouse.x + cospangle * pct * prevrange
+                , localpy = prevmouse.y + sinpangle * pct * prevrange
+                ;
+                
+                ctx.moveTo(localpx, localpy);
+                ctx.lineTo(localx, localy);
+            }
+            
+            ctx.stroke();
+            ctx.closePath();
+        } else {
+            ctx.beginPath();
+            ctx.lineWidth = 0.45;
+            ctx.strokeStyle = fgcolor;
+            ctx.moveTo(x, y);
+            ctx.lineTo(prevmouse.x, prevmouse.y);
+            ctx.stroke();
+            ctx.closePath();
+        }
+    }
+    prevmouse.x = x;
+    prevmouse.y = y;
+};
+
+var line = function() {
     var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25
     , y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25
     , dx = targetmouse.x - x
@@ -298,7 +634,6 @@ var drawline = function() {
         ctx.fill();
         ctx.closePath();
         
-        
         ctx.beginPath();
         ctx.lineWidth = (zoomlevel < 10) ? curnib : 0.5;
         ctx.strokeStyle = '#000000';
@@ -309,7 +644,7 @@ var drawline = function() {
     }
     prevmouse.x = x;
     prevmouse.y = y;
-}
+};
 
 var setup = function() {
     canvas.width = w;
@@ -322,7 +657,7 @@ var setup = function() {
 
 var beginStroke = function(x, y) {
     cancelQueuedSave();
-    //console.log( 'beginStroke: ' + x + ', ' + y );
+    ////console.log( 'beginStroke: ' + x + ', ' + y );
     accumdist = 0;
     accum = { x:0, y:0 };
     mousedown = true;
@@ -334,7 +669,7 @@ var beginStroke = function(x, y) {
 
 var continueStroke = function(x, y) {
     cancelQueuedSave();
-    //console.log( 'continueStroke: ' + x + ', ' + y );
+    ////console.log( 'continueStroke: ' + x + ', ' + y );
     mousedown = true;
     targetmouse.x = x;
     targetmouse.y = y;
@@ -346,14 +681,14 @@ var continueStroke = function(x, y) {
 
 var endStroke = function(x, y) {
     mousedown = false;
-    //console.log( 'endStroke: ' + x + ', ' + y );
+    ////console.log( 'endStroke: ' + x + ', ' + y );
     //var backingStorePixelRatio = ctx.backingStorePixelRatio;
     saveUndoState();
 };
 
 var setZoom = function(val) {
     zoomlevel = Number(val);
-    //console.log('setzoom:'+zoomlevel);
+    ////console.log('setzoom:'+zoomlevel);
 };
 
 var clearScreen = function() {
@@ -363,13 +698,12 @@ var clearScreen = function() {
     saveUndoStateGuts();
 };
 
-var undoStates = [];
-var lastundostamp = 0;
-var MAX_UNDO_COUNT = 10;
-var undoIndex = 0;
-var backingStorePixelRatio = ctx.backingStorePixelRatio;
-var timerID = null;
-
+var undoStates = [],
+lastundostamp = 0,
+MAX_UNDO_COUNT = 10,
+undoIndex = 0,
+backingStorePixelRatio = ctx.backingStorePixelRatio,
+timerID = null;
 
 // call this while drawing (to prevent temporary lag from glreadpixels)
 var cancelQueuedSave = function() {
@@ -431,17 +765,17 @@ var restoreUndoStateAtIndex = function(index_in) {
     // this state probably never occurs
     // bail if we're already restoring pixels
     if (isRestoringPixels) {
-        console.log('restoring pixels already... bailing');
+        //console.log('restoring pixels already... bailing');
         return;
     }
     
-    console.log('javascriptview: restorestateatindex(' + index_in + ')');
+    //console.log('javascriptview: restorestateatindex(' + index_in + ')');
     // do some bounds checking
     var length = undoStates.length;
     if (length == 0) return;
     if (index_in < 0 || index_in > length - 1) return;
     
-    console.log('\tbounds check ok');
+    //console.log('\tbounds check ok');
     
     // restore pixels from array
     isRestoringPixels = true;
@@ -451,7 +785,7 @@ var restoreUndoStateAtIndex = function(index_in) {
     ctx.putImageDataHD(data, 0, 0);
     undoIndex = index_in;
     
-    console.log('\tcalling out to bridge');
+    //console.log('\tcalling out to bridge');
     // call out to the native side and update these values
     if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
     BRIDGE.undoIndex = undoIndex;
@@ -470,7 +804,7 @@ var clearUndos = function() {
 var clearUndosAfterIndex = function(index_in) {
     var numslotstodelete = undoStates.length - index_in - 1;
     if (numslotstodelete > 0) {
-        console.log('removing undo states after ' + index_in);
+        //console.log('removing undo states after ' + index_in);
         undoStates.splice(index_in + 1, numslotstodelete);
     }
 }

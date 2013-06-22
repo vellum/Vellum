@@ -26,8 +26,8 @@ static VLMToolCollection *sharedToolCollection;
         self.tools = [[NSMutableArray alloc] init];
         
         NSArray *names = [NSArray arrayWithObjects:
-                          @"Graphite",    //0
                           @"Scribble",    //1
+                          @"Graphite",    //0
                           @"Shade",       //2
                           @"Line",        //3
                           @"Ink ",        //4
@@ -35,8 +35,8 @@ static VLMToolCollection *sharedToolCollection;
                           @"Scratch",     //6
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
-                             [NSNumber numberWithBool:YES], //0
                              [NSNumber numberWithBool:YES], //1
+                             [NSNumber numberWithBool:YES], //0
                              [NSNumber numberWithBool:YES], //2
                              [NSNumber numberWithBool:YES], //3
                              [NSNumber numberWithBool:YES], //4
@@ -44,8 +44,8 @@ static VLMToolCollection *sharedToolCollection;
                              [NSNumber numberWithBool:YES], //6
                              nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
-                           @"MODE_GRAPHITE",    //0
                            @"MODE_SCRIBBLE",    //1
+                           @"MODE_GRAPHITE",    //0
                            @"MODE_SHADE",       //2
                            @"MODE_OUTLINE",     //3
                            @"MODE_INK",         //4
@@ -53,8 +53,8 @@ static VLMToolCollection *sharedToolCollection;
                            @"MODE_SCRATCH",     //6
                            nil];
         NSArray *isSubtractives = [NSArray arrayWithObjects:
-                                   [NSNumber numberWithBool:NO], //0
                                    [NSNumber numberWithBool:NO], //1
+                                   [NSNumber numberWithBool:NO], //0
                                    [NSNumber numberWithBool:NO], //2
                                    [NSNumber numberWithBool:NO], //3
                                    [NSNumber numberWithBool:NO], //4

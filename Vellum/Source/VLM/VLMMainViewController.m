@@ -190,11 +190,12 @@
     }
     [self handleDoubleTap:nil];
 
-    
+    /*
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
         name:UIDeviceOrientationDidChangeNotification
         object:nil];
+    */
     
 }
 
@@ -374,7 +375,7 @@
     
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:!h.userInteractionEnabled];
-    [self.infoButton setUserInteractionEnabled:!self.infoButton.userInteractionEnabled];
+    [self.infoButton setUserInteractionEnabled:h.userInteractionEnabled];
     if( self.headerController.isPopoverVisible ){
         if ( h.userInteractionEnabled ){
             [self.pop show];
@@ -389,9 +390,10 @@
                      animations:^{
                          [h setAlpha:(h.userInteractionEnabled) ? 1:0 ];
                          [self.infoButton setAlpha:(h.userInteractionEnabled) ? 1:0 ];
+                         }
+                     completion:^(BOOL finished){
+                         [self.infoButton setUserInteractionEnabled:(self.infoButton.alpha==1)];
                      }
-     
-                     completion:nil
      ];
 }
 

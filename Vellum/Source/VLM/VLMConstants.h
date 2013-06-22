@@ -20,7 +20,7 @@
 
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
-#define OLD_DEVICE_SCREEN_MULTIPLIER 2.0f
+#define OLD_DEVICE_SCREEN_MULTIPLIER 1.5f
 //#define FAT_HEADER
 //#define STYLED_HEADER
 
@@ -39,8 +39,6 @@
 #define TEXT_COLOR [UIColor colorWithHue:0.87f saturation:0.0f brightness:0.12f alpha:1.0f]
 #define FOOTER_TEXT_COLOR [UIColor colorWithWhite:0.2f alpha:1.0f]
 #define DISABLED_TEXT_COLOR [UIColor colorWithWhite:0.1f alpha:0.25f]
-
-
 
 #pragma mark -
 #pragma mark Typefaces

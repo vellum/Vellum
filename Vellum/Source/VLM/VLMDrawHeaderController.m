@@ -186,10 +186,11 @@
     [self.view setAutoresizesSubviews:YES];
     [self.view setContentMode:UIViewContentModeTop];
     
+    /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-
+     */
 }
 
 - (void)didReceiveMemoryWarning {
