@@ -77,7 +77,7 @@
         [self.view addSubview:h];
         [self setHeader:h];
         
-        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
+        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 1, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
         [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
         [titlelabel setText:@"Gestures"];
