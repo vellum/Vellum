@@ -37,6 +37,7 @@
 @property CGRect titlemaskframe;
 @property (nonatomic, strong) UIImage *imageToSave;
 @property (nonatomic, strong) UIImagePickerController *pickerController;
+@property BOOL isPortrait;
 
 - (void)setupHeadingView;
 - (void)longPress:(id)sender;
@@ -65,6 +66,7 @@
 @synthesize popovercontroller;
 @synthesize imageToSave;
 @synthesize pickerController;
+@synthesize isPortrait;
 
 - (id)initWithHeadings:(NSArray *)headings {
     self = [self init];
@@ -72,6 +74,7 @@
         self.index = 0;
         self.titles = [NSArray arrayWithArray:headings];
         self.isPopoverVisible = NO;
+        self.isPortrait = YES;
     }
     return self;
 }
@@ -81,6 +84,7 @@
     if (self) {
         self.index = 0;
         self.isPopoverVisible = NO;
+        self.isPortrait = YES;
     }
     return self;
 }
@@ -91,6 +95,7 @@
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     
     [self setIndex:0];
+    [self setIsPortrait:YES];
     
     [self.view setFrame:CGRectMake(0, 0, winw, HEADER_HEIGHT)];
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -542,8 +547,25 @@
 }
 
 #pragma mark - rotation
+// FIXME: shouldn't be trapping for nonaliased orientation values. proper way to do this is with UIDeviceOrientationPortrait, UIDeviceOrientation PortraitUpsideDown, etc
 - (void)didRotate:(NSNotification *)notification {
     NSLog(@"here: rotation detected in header");
+    
+    BOOL isNowPortrait = self.isPortrait;
+    int type = [[UIDevice currentDevice] orientation];
+    if (type == 1) {
+        isNowPortrait = YES;
+    }else if(type ==2){
+        isNowPortrait = YES;
+    }else if(type ==3){
+        isNowPortrait = NO;
+    }else if(type ==4){
+        isNowPortrait = NO;
+    }
+    if ( isNowPortrait == self.isPortrait ) return;
+    
+    [self setIsPortrait:isNowPortrait];
+
     if ( self.popovercontroller && [self.popovercontroller isPopoverVisible]){
         [self.popovercontroller dismissPopoverAnimated:YES];
     }

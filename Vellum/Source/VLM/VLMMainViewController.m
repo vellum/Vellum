@@ -41,6 +41,7 @@
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 @property (assign, nonatomic) UIPopoverController *rightPopover;
 @property BOOL firstTime;
+@property BOOL isPortrait;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -69,6 +70,7 @@
 @synthesize flipsidePopoverController;
 @synthesize firstTime;
 @synthesize rightPopover;
+@synthesize isPortrait;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -90,7 +92,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setIsPortrait:YES];
     CGRect frame = UIScreen.mainScreen.bounds;
     UIView *t = [[UIView alloc] initWithFrame:frame];
     [t setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
@@ -709,6 +711,22 @@
 - (void)didRotate:(NSNotification *)notification {
 
     NSLog(@"didrotate %@", notification);
+
+    BOOL isNowPortrait = self.isPortrait;
+    int type = [[UIDevice currentDevice] orientation];
+    if (type == 1) {
+        isNowPortrait = YES;
+    }else if(type ==2){
+        isNowPortrait = YES;
+    }else if(type ==3){
+        isNowPortrait = NO;
+    }else if(type ==4){
+        isNowPortrait = NO;
+    }
+    if ( isNowPortrait == self.isPortrait ) return;
+
+    [self setIsPortrait:isNowPortrait];
+    
     if ( self.flipsidePopoverController != nil ){
         if ([self.flipsidePopoverController isPopoverVisible]) {
             [self.flipsidePopoverController dismissPopoverAnimated:YES];
