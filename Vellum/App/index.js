@@ -21,10 +21,10 @@ var MODE_SCRIBBLE = 0,
 	MODE_OUTLINE = 7,
 	MODE_GRAPHITE = 8,
 	BGCOLOR = '#f2f2e8',
-    BGCOLOR_RGBA = 'rgba(242,242,232,0.5)',
-    BGCOLOR_RGBA2 = 'rgba(242,242,232,0.75)',
+    BGCOLOR_RGBA = 'rgba(242,242,232,0.7)',
+    BGCOLOR_RGBA2 = 'rgba(242,242,232,0.7)',
 	BRIDGE = new Ejecta.Bridge(),
-	FGCOLOR_RGBA = 'rgaa(0,0,0,0.425)';
+	FGCOLOR_RGBA = 'rgba(0,0,0,0.25)';
 
 var w = window.innerWidth,
 	h = window.innerHeight,
