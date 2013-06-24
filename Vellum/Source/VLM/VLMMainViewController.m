@@ -579,9 +579,8 @@
 }
 
 - (UIImage*)getPaddedImageForImage:(UIImage*)image AndSize:(CGSize)size{
-    BOOL isRetina = NO;
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00) {
-        isRetina = YES;
+
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00) {    
         CGFloat scale = [[UIScreen mainScreen] scale];
         size.width *= scale;
         size.height *= scale;

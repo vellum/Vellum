@@ -21,10 +21,11 @@ var MODE_SCRIBBLE = 0,
 	MODE_OUTLINE = 7,
 	MODE_GRAPHITE = 8,
 	BGCOLOR = '#f2f2e8',
-    BGCOLOR_RGBA = 'rgba(242,242,232,0.7)',
-    BGCOLOR_RGBA2 = 'rgba(242,242,232,0.7)',
-	BRIDGE = new Ejecta.Bridge(),
-	FGCOLOR_RGBA = 'rgba(0,0,0,0.25)';
+    BGCOLOR_RGBA = 'rgba(242,242,232,1)',
+    BGCOLOR_RGBA2 = 'rgba(242,242,232,20.75)',
+    BRIDGE = new Ejecta.Bridge(),
+    FGCOLOR_RGBA = 'rgba(0,0,0,0.5)',
+    FGCOLOR_RGBA2 = 'rgba(0,0,0,0.5)';
 
 var w = window.innerWidth,
 	h = window.innerHeight,
@@ -409,12 +410,12 @@ var is3GS = function(){
             , vertexCount = 0
             , currange = curnib * multiplier
             , prevrange = prevnib * multiplier
-            , fgcolor = FGCOLOR_RGBA//'#000000'
+            , fgcolor = FGCOLOR_RGBA2//'#000000'
             ;
             
             ctx.beginPath();
             ctx.lineWidth = 0.125;
-            ctx.strokeStyle = FGCOLOR_RGBA;//'rgba(0,0,0,0.25)';
+            ctx.strokeStyle = FGCOLOR_RGBA2;//'rgba(0,0,0,0.25)';
             
             for (var i = -currange; i <= currange; i += 1) {
                 var pct = i / currange
