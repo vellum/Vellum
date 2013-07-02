@@ -16,5 +16,6 @@
 
 - (void)setText:(NSString*)text;
 - (void)reset;
+- (void)setAttributedText:(NSMutableAttributedString *)text;
 + (CGFloat)expectedViewHeightForText:(NSString *)text;
 @end

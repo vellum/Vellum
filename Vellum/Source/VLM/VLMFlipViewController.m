@@ -10,6 +10,7 @@
 #import "VLMConstants.h"
 #import "VLMTableViewCell.h"
 #import "VLMSectionView.h"
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface VLMFlipViewController ()
 @property (nonatomic,strong) UIView *header;
@@ -18,6 +19,7 @@
 @property (nonatomic,strong) NSArray *texts;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
+@property (nonatomic, strong) NSArray *attributedtexts;
 
 @end
 
@@ -28,6 +30,7 @@
 @synthesize tableview;
 @synthesize texts;
 @synthesize images;
+@synthesize attributedtexts;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,11 +53,11 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
     texts = [NSArray arrayWithObjects:
-             @"PAN ANYWHERE to draw.",
+             @"PAN to draw.",
              @"TAP HEADER for palette.",
-             @"TAP ANYWHERE to toggle header.",
+             @"TAP ELSEWHERE to toggle header.",
              @"PINCH to zoom.",
-             @"DOUBLE-TAP ANYWHERE to reset zoom.",
+             @"DOUBLE-TAP to reset zoom.",
              @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
              @"PAN VERTICALLY with 3 fingers to undo.",
              nil];
@@ -68,6 +71,45 @@
               @"about-06.png",
               @"about-07.png",
               nil];
+
+    //if (NSClassFromString(@"NSMutableAttributedString")){
+    //if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0f) {
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")){
+
+        NSArray *sctexts = [NSArray arrayWithObjects:
+                 @"PAN",
+                 @"TAP HEADER",
+                 @"TAP ELSEWHERE",
+                 @"PINCH",
+                 @"DOUBLE-TAP",
+                 @"LONG-PRESS",
+                 @"PAN VERTICALLY",
+                 nil];
+        
+        attributedtexts = [NSArray arrayWithObjects:
+                           [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap header for palette."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."],
+            nil];
+        
+        
+        //UIFont *fontnormal = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
+        //UIFont *fontsmallcaps = [UIFont fontWithName:@"Helvetica-Bold-Italic" size:13.0f];
+
+        for (int i = 0; i < [attributedtexts count]; i++){
+            CGFloat len = [[sctexts objectAtIndex:i] length];
+            NSMutableAttributedString *s = [attributedtexts objectAtIndex:i];
+            //[s addAttribute:NSFontAttributeName value:fontsmallcaps range:NSMakeRange(0, len)];
+            //[s addAttribute:NSFontAttributeName value:fontnormal range:NSMakeRange(len, [s length]-len)];
+            [s addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:1.0f alpha:1.0f] range:NSMakeRange(0, len)];
+            [s addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:1.0f alpha:0.5f] range:NSMakeRange(len, [s length]-len)];
+        }
+    }
+    
     UITableView *tableView;
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         
@@ -160,16 +202,20 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    NSString *text = texts[section];
-    CGFloat winw = 320.0f;
     VLMSectionView *customview = [self dequeueReusableSectionHeaderView];
     if (!customview){
         customview = [[VLMSectionView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 60.0f)];
         [self.reusableSectionHeaderViews addObject:customview];
-        
     }
     [customview reset];
-    [customview setText:text];
+    //if (NSClassFromString(@"NSMutableAttributedString")){
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")){
+        NSMutableAttributedString *text = attributedtexts[section];
+        [customview setAttributedText:text];
+    }else{
+        NSString *text = texts[section];
+        [customview setText:text];
+    }
     return customview;
 }
 

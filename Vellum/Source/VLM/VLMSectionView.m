@@ -35,6 +35,10 @@
     [self.headerLabel setText:text];
 }
 
+- (void)setAttributedText:(NSMutableAttributedString *)text{
+    [self.headerLabel setAttributedText:text];
+}
+
 - (void)reset{
     [self.headerLabel setText:@""];
 }
