@@ -123,6 +123,7 @@
 		BD0C9277176A383600A0C89D /* VLMFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9276176A383600A0C89D /* VLMFlipViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD7137451774340100DEBADB /* about-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373E1774340100DEBADB /* about-07.png */; };
 		BD7137461774340100DEBADB /* about-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373F1774340100DEBADB /* about-06.png */; };
@@ -376,6 +377,8 @@
 		BD0C9279176A984500A0C89D /* VLMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTableViewCell.m; path = VLM/VLMTableViewCell.m; sourceTree = "<group>"; };
 		BD2062BE1772A053008A549F /* VLMScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMScrollView.h; path = VLM/VLMScrollView.h; sourceTree = "<group>"; };
 		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
+		BD3EC62C1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTwoFingerTapGestureRecognizer.h; path = VLM/VLMTwoFingerTapGestureRecognizer.h; sourceTree = "<group>"; };
+		BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTwoFingerTapGestureRecognizer.m; path = VLM/VLMTwoFingerTapGestureRecognizer.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD71373E1774340100DEBADB /* about-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07.png"; sourceTree = "<group>"; };
@@ -923,6 +926,8 @@
 				BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */,
 				BDF133F617357747003B6265 /* VLMTapGestureRecognizer.h */,
 				BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */,
+				BD3EC62C1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.h */,
+				BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */,
 			);
 			name = GestureRecco;
 			sourceTree = "<group>";
@@ -1112,6 +1117,7 @@
 				B64CE67D166682700087CF94 /* EJBindingLocalStorage.m in Sources */,
 				B64CE67E166682700087CF94 /* EJBindingTouchInput.m in Sources */,
 				B64CE67F166682700087CF94 /* AppDelegate.m in Sources */,
+				BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */,
 				B64CE682166682700087CF94 /* main.m in Sources */,
 				B6F114DF1676B4FE001F1324 /* EJBindingCanvas.m in Sources */,
 				B6F114E31676BAFB001F1324 /* EJCanvasContext.m in Sources */,

@@ -12,6 +12,7 @@
 #import "VLMPanGestureRecognizer.h"
 #import "VLMPinchGestureRecognizer.h"
 #import "VLMSinglePanGestureRecognizer.h"
+#import "VLMTwoFingerTapGestureRecognizer.h"
 #import "EJAppViewController.h"
 #import "VLMTapGestureRecognizer.h"
 #import "VLMPopMenuViewController.h"
@@ -151,17 +152,26 @@
     
     VLMTapGestureRecognizer *doubleTap = [[VLMTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     [doubleTap setNumberOfTapsRequired:2];
+    [doubleTap setDelegate:self];
     
     VLMTapGestureRecognizer *singleTap = [[VLMTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [singleTap setNumberOfTapsRequired:1];
     [singleTap setCancelsTouchesInView:NO];
     [singleTap requireGestureRecognizerToFail:doubleTap];
+    [singleTap setDelegate:self];
     
+    VLMTwoFingerTapGestureRecognizer *twoFingerSingleTap = [[VLMTwoFingerTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerSingleTap:)];
+    [twoFingerSingleTap setCancelsTouchesInView:NO];
+    [twoFingerSingleTap setDelegate:self];
+    [twoFingerSingleTap requireGestureRecognizerToFail:pinch];
+    [twoFingerSingleTap requireGestureRecognizerToFail:twoFingerPan];
+
     [t addGestureRecognizer:pinch];
     [t addGestureRecognizer:twoFingerPan];
     [t addGestureRecognizer:oneFingerPan];
     [t addGestureRecognizer:doubleTap];
     [t addGestureRecognizer:singleTap];
+    [t addGestureRecognizer:twoFingerSingleTap];
     
     // only enable 3 finger undo for small screen devices
     // to counter glreadpixels performance problems
@@ -429,6 +439,61 @@
         
     }
 
+}
+
+- (void)handleTwoFingerSingleTap:(id)sender {
+    UIView *h = self.headerController.view;
+
+    NSLog(@"twofingertap");
+    
+    // header hidden
+    if ( !h.userInteractionEnabled ){
+        
+        NSLog(@"\tmake header visible");
+        [self.infoButton setUserInteractionEnabled:YES];
+        [h setUserInteractionEnabled:YES];
+
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             [h setAlpha:1];
+                             [self.infoButton setAlpha:1 ];
+                         }
+                         completion:^(BOOL finished){
+                             
+                         }
+         ];
+        [self.headerController showPopover];
+
+    // header visible
+    } else {
+        
+        UIView *h = self.headerController.view;
+        if( !self.headerController.isPopoverVisible ){
+
+            [self.headerController showPopover];
+
+        } else {
+            [self.pop hide];
+            [self.headerController setIsPopoverVisible:NO];
+            [h setUserInteractionEnabled:NO];
+            [self.infoButton setUserInteractionEnabled:NO];
+        }
+        
+        [UIView animateWithDuration:0.25f
+                              delay:0.0f
+                            options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                         animations:^{
+                             [h setAlpha:(h.userInteractionEnabled) ? 1:0 ];
+                             [self.infoButton setAlpha:(h.userInteractionEnabled) ? 1:0 ];
+                         }
+                         completion:^(BOOL finished){
+                             [self.infoButton setUserInteractionEnabled:(self.infoButton.alpha==1)];
+                         }
+         ];
+
+    }
 }
 
 - (void)enteredForeground {

@@ -237,30 +237,6 @@
     [self togglePopover];
 }
 
-- (void)togglePopover {
-    self.isPopoverVisible = !self.isPopoverVisible;
-    
-    if (self.isPopoverVisible) {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelay:0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.3];
-        [self.cancelbutton setAlpha:0.92];
-        [self.cancelbutton setUserInteractionEnabled:YES];
-        [UIView commitAnimations];
-        
-        [self.delegate showPopover];
-    } else {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelay:0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.3];
-        [self.cancelbutton setAlpha:0];
-        [self.cancelbutton setUserInteractionEnabled:NO];
-        [UIView commitAnimations];
-        [self.delegate hidePopover];
-    }
-}
 
 - (void)tapped {
     [self togglePopover];
@@ -313,6 +289,44 @@
 }
 
 #pragma mark - public ()
+- (void)togglePopover {
+    self.isPopoverVisible = !self.isPopoverVisible;
+    
+    if (self.isPopoverVisible) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.3];
+        [self.cancelbutton setAlpha:0.92];
+        [self.cancelbutton setUserInteractionEnabled:YES];
+        [UIView commitAnimations];
+        
+        [self.delegate showPopover];
+    } else {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:0.3];
+        [self.cancelbutton setAlpha:0];
+        [self.cancelbutton setUserInteractionEnabled:NO];
+        [UIView commitAnimations];
+        [self.delegate hidePopover];
+    }
+}
+
+- (void)showPopover{
+    self.isPopoverVisible = YES;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.3];
+    [self.cancelbutton setAlpha:0.92];
+    [self.cancelbutton setUserInteractionEnabled:YES];
+    [UIView commitAnimations];
+    
+    [self.delegate showPopover];
+    
+}
 
 - (void)resetToZero {
     if ([self.titles count] > 0) {

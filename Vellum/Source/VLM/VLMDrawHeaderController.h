@@ -37,5 +37,6 @@
 - (void)updatePage;
 - (void)dismissPopoverController;
 - (void)cleanupImagePicker;
-
+- (void)togglePopover;
+- (void)showPopover;
 @end
