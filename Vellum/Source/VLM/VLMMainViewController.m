@@ -157,7 +157,7 @@
     VLMTapGestureRecognizer *singleTap = [[VLMTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [singleTap setNumberOfTapsRequired:1];
     [singleTap setCancelsTouchesInView:NO];
-    [singleTap requireGestureRecognizerToFail:doubleTap];
+    //[singleTap requireGestureRecognizerToFail:doubleTap];
     [singleTap setDelegate:self];
     
     VLMTwoFingerTapGestureRecognizer *twoFingerSingleTap = [[VLMTwoFingerTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerSingleTap:)];
@@ -476,7 +476,6 @@
 
         } else {
             [self.pop hide];
-            [self.headerController setIsPopoverVisible:NO];
             [h setUserInteractionEnabled:NO];
             [self.infoButton setUserInteractionEnabled:NO];
         }

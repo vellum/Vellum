@@ -55,6 +55,7 @@
     texts = [NSArray arrayWithObjects:
              @"PAN to draw.",
              @"TAP HEADER for palette.",
+             @"TAP ELSEWHERE WITH 2 FINGERS for palette.",
              @"TAP ELSEWHERE to toggle header.",
              @"PINCH to zoom.",
              @"DOUBLE-TAP to reset zoom.",
@@ -65,6 +66,7 @@
     images = [NSArray arrayWithObjects:
               @"about-01.png",
               @"about-02.png",
+              @"about-08.png",
               @"about-05.png",
               @"about-03.png",
               @"about-04.png",
@@ -79,6 +81,7 @@
         NSArray *sctexts = [NSArray arrayWithObjects:
                  @"PAN",
                  @"TAP HEADER",
+                 @"TAP ELSEWHERE WITH 2 FINGERS",
                  @"TAP ELSEWHERE",
                  @"PINCH",
                  @"DOUBLE-TAP",
@@ -89,6 +92,7 @@
         attributedtexts = [NSArray arrayWithObjects:
                            [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
                            [[NSMutableAttributedString alloc] initWithString:@"Tap header for palette."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere with 2 fingers for palette."],
                            [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
                            [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
                            [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],

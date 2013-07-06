@@ -158,6 +158,8 @@
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDDAC5461787FC6C003ED8C4 /* about-08.png in Resources */ = {isa = PBXBuildFile; fileRef = BDDAC5441787FC6C003ED8C4 /* about-08.png */; };
+		BDDAC5471787FC6C003ED8C4 /* about-08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDDAC5451787FC6C003ED8C4 /* about-08@2x.png */; };
 		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF133F817357747003B6265 /* VLMTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F717357747003B6265 /* VLMTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -426,6 +428,8 @@
 		BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMZoomViewController.m; path = VLM/VLMZoomViewController.m; sourceTree = "<group>"; };
 		BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPopMenuViewController.h; path = VLM/VLMPopMenuViewController.h; sourceTree = "<group>"; };
 		BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPopMenuViewController.m; path = VLM/VLMPopMenuViewController.m; sourceTree = "<group>"; };
+		BDDAC5441787FC6C003ED8C4 /* about-08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-08.png"; sourceTree = "<group>"; };
+		BDDAC5451787FC6C003ED8C4 /* about-08@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-08@2x.png"; sourceTree = "<group>"; };
 		BDF133F01734B239003B6265 /* VLMPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPanGestureRecognizer.h; path = VLM/VLMPanGestureRecognizer.h; sourceTree = "<group>"; };
 		BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMPanGestureRecognizer.m; path = VLM/VLMPanGestureRecognizer.m; sourceTree = "<group>"; };
 		BDF133F317356EA0003B6265 /* VLMPinchGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMPinchGestureRecognizer.h; path = VLM/VLMPinchGestureRecognizer.h; sourceTree = "<group>"; };
@@ -839,6 +843,8 @@
 				BD71375017743B1000DEBADB /* about-05@2x.png */,
 				BD71375117743B1000DEBADB /* about-06@2x.png */,
 				BD71375217743B1000DEBADB /* about-07@2x.png */,
+				BDDAC5451787FC6C003ED8C4 /* about-08@2x.png */,
+				BDDAC5441787FC6C003ED8C4 /* about-08.png */,
 				BD71373E1774340100DEBADB /* about-07.png */,
 				BD71373F1774340100DEBADB /* about-06.png */,
 				BD7137401774340100DEBADB /* about-05.png */,
@@ -1084,6 +1090,8 @@
 				BD71375717743B1000DEBADB /* about-05@2x.png in Resources */,
 				BD71375817743B1000DEBADB /* about-06@2x.png in Resources */,
 				BD71375917743B1000DEBADB /* about-07@2x.png in Resources */,
+				BDDAC5461787FC6C003ED8C4 /* about-08.png in Resources */,
+				BDDAC5471787FC6C003ED8C4 /* about-08@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
