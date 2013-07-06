@@ -23,6 +23,7 @@
         [self.label setTextAlignment:NSTextAlignmentCenter];
         [self.label setTextColor:[UIColor blackColor]];
         [self.label setBackgroundColor:[UIColor clearColor]];
+        [self.label setNumberOfLines:2];
         [self addSubview:self.label];
         [self setBackgroundImage:[UIImage imageNamed:@"menu_default.png"] forState:UIControlStateNormal];
         [self setBackgroundImage:[UIImage imageNamed:@"menu_selected.png"] forState:UIControlStateSelected];

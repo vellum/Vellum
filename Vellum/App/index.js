@@ -1,11 +1,11 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-                 _   _                             _
- __   __   ___  | | | |  _   _   _ __ ___         (_)  ___
- \ \ / /  / _ \ | | | | | | | | | '_ ` _ \        | | / __|
-  \ V /  |  __/ | | | | | |_| | | | | | | |  _    | | \__ \
-   \_/    \___| |_| |_|  \__,_| |_| |_| |_| (_)  _/ | |___/
-                                                |__/
+                _   _                             _
+ __   __  ___  | | | |  _   _   _ __ ___         (_)  ___
+ \ \ / / / _ \ | | | | | | | | | '_ ` _ \        | | / __|
+  \ V / |  __/ | | | | | |_| | | | | | | |  _    | | \__ \
+   \_/   \___| |_| |_|  \__,_| |_| |_| |_| (_)  _/ | |___/
+                                               |__/
   @vellumapp is a work in progress by david lu
   see also: @vellum, http://vellum.cc
 
@@ -20,9 +20,14 @@ var MODE_SCRIBBLE = 0,
 	MODE_SCRAMBLE = 6, // ?
 	MODE_OUTLINE = 7,
 	MODE_GRAPHITE = 8,
-	BGCOLOR = '#f2f2e8',
+    MODE_WASH = 9,
+    MODE_GENTLE_ERASE = 10,
+    MODE_CIRCLE_ERASE = 11,
+    BGCOLOR = '#f2f2e8',
     BGCOLOR_RGBA = 'rgba(242,242,232,1)',
-    BGCOLOR_RGBA2 = 'rgba(242,242,232,20.75)',
+    BGCOLOR_RGBA2 = 'rgba(242,242,232,0.75)',
+    BGCOLOR_RGBA3 = 'rgba(242,242,232,0.25)',
+
     BRIDGE = new Ejecta.Bridge(),
     FGCOLOR_RGBA = 'rgba(0,0,0,0.5)',
     FGCOLOR_RGBA2 = 'rgba(0,0,0,0.5)';
@@ -72,9 +77,14 @@ var is3GS = function(){
 	                break;
                 
 	            case MODE_ERASE:
+	            case MODE_GENTLE_ERASE:
 	                drawerase();
 	                break;
                 
+                case MODE_CIRCLE_ERASE:
+                    circleerase();
+                    break;
+
 	            case MODE_OUTLINE:
 	            case MODE_LINE:
 	                drawpencil();
@@ -491,6 +501,9 @@ var is3GS = function(){
 			prevrange = prevnib * multiplier, 
 			fgcolor = BGCOLOR_RGBA;
         
+        if ( drawmode == MODE_GENTLE_ERASE ){
+            fgcolor = BGCOLOR_RGBA3;
+        }
         if (zoomlevel < 10) {
             ctx.beginPath();
             
@@ -638,6 +651,37 @@ var line = function() {
         ctx.beginPath();
         ctx.lineWidth = (zoomlevel < 10) ? curnib : 0.5;
         ctx.strokeStyle = '#000000';
+        ctx.moveTo(x, y);
+        ctx.lineTo(prevmouse.x, prevmouse.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    prevmouse.x = x;
+    prevmouse.y = y;
+};
+
+var circleerase = function(){
+    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25,
+    y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25,
+    dx = targetmouse.x - x,
+    dy = targetmouse.y - y,
+    dist = Math.sqrt(dx * dx + dy * dy),
+    pangle = angle,
+    threshold = 0.001 / (zoomlevel * 1000);
+    
+    if (dist >= threshold) {
+       
+        curnib = 30;
+        
+        ctx.beginPath();
+        ctx.fillStyle = BGCOLOR_RGBA;
+        ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.lineWidth = curnib;
+        ctx.strokeStyle = BGCOLOR_RGBA;
         ctx.moveTo(x, y);
         ctx.lineTo(prevmouse.x, prevmouse.y);
         ctx.stroke();

@@ -26,40 +26,52 @@ static VLMToolCollection *sharedToolCollection;
         self.tools = [[NSMutableArray alloc] init];
         
         NSArray *names = [NSArray arrayWithObjects:
-                          @"Scribble",    //1
-                          @"Graphite",    //0
-                          @"Shade",       //2
-                          @"Line",        //3
-                          @"Ink ",        //4
-                          @"Erase",       //5
-                          @"Scratch",     //6
+                          @"Scribble",
+                          @"Graphite",
+                          @"Shade",
+                          @"Line",
+                          @"Wash",
+                          @"Ink ",
+                          @"Erase",
+                          @"Scratch",     
+                          @"Gentle Erase",
+                          @"Round Erase",
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
-                             [NSNumber numberWithBool:YES], //1
-                             [NSNumber numberWithBool:YES], //0
-                             [NSNumber numberWithBool:YES], //2
-                             [NSNumber numberWithBool:YES], //3
-                             [NSNumber numberWithBool:YES], //4
-                             [NSNumber numberWithBool:YES], //5
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
+                             [NSNumber numberWithBool:YES],
                              [NSNumber numberWithBool:YES], //6
                              nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
-                           @"MODE_SCRIBBLE",    //1
-                           @"MODE_GRAPHITE",    //0
-                           @"MODE_SHADE",       //2
-                           @"MODE_OUTLINE",     //3
-                           @"MODE_INK",         //4
-                           @"MODE_ERASE",       //5
-                           @"MODE_SCRATCH",     //6
+                           @"MODE_SCRIBBLE",
+                           @"MODE_GRAPHITE",
+                           @"MODE_SHADE",
+                           @"MODE_OUTLINE",
+                           @"MODE_WASH", 
+                           @"MODE_INK",
+                           @"MODE_ERASE",
+                           @"MODE_SCRATCH",
+                           @"MODE_GENTLE_ERASE",
+                           @"MODE_CIRCLE_ERASE",
                            nil];
         NSArray *isSubtractives = [NSArray arrayWithObjects:
-                                   [NSNumber numberWithBool:NO], //1
-                                   [NSNumber numberWithBool:NO], //0
-                                   [NSNumber numberWithBool:NO], //2
-                                   [NSNumber numberWithBool:NO], //3
-                                   [NSNumber numberWithBool:NO], //4
-                                   [NSNumber numberWithBool:YES], //5
-                                   [NSNumber numberWithBool:YES], //6
+                                   [NSNumber numberWithBool:NO],
+                                   [NSNumber numberWithBool:NO],
+                                   [NSNumber numberWithBool:NO],
+                                   [NSNumber numberWithBool:NO],
+                                   [NSNumber numberWithBool:NO], 
+                                   [NSNumber numberWithBool:NO],
+                                   [NSNumber numberWithBool:YES],
+                                   [NSNumber numberWithBool:YES],
+                                   [NSNumber numberWithBool:YES],
+                                   [NSNumber numberWithBool:YES],
                                    nil];
         
         NSInteger selectedIndex = 0;
