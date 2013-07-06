@@ -510,6 +510,12 @@
      ];
     [self.zoomViewController hide];
     [self handleDoubleTap:nil];
+    
+    if( self.headerController.isPopoverVisible ){
+        
+        [self.headerController showPopover];
+        
+    }
 }
 
 
