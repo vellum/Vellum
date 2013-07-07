@@ -468,7 +468,8 @@
 
     // header visible
     } else {
-        
+        /*
+        // this version toggles everything (header and all)
         UIView *h = self.headerController.view;
         if( !self.headerController.isPopoverVisible ){
 
@@ -491,6 +492,9 @@
                              [self.infoButton setUserInteractionEnabled:(self.infoButton.alpha==1)];
                          }
          ];
+         */
+        UIView *h = self.headerController.view;
+        [self.headerController togglePopover];
 
     }
 }
@@ -498,12 +502,14 @@
 - (void)enteredForeground {
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:YES];
+    [self.infoButton setUserInteractionEnabled:YES];
     
     [UIView animateWithDuration:0.25f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          [h setAlpha:1.0f];
+                         [self.infoButton setAlpha:1 ];
                      }
      
                      completion:nil

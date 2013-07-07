@@ -26,7 +26,8 @@ var MODE_SCRIBBLE = 0,
     BGCOLOR = '#f2f2e8',
     BGCOLOR_RGBA = 'rgba(242,242,232,1)',
     BGCOLOR_RGBA2 = 'rgba(242,242,232,0.75)',
-    BGCOLOR_RGBA3 = 'rgba(242,242,232,0.25)',
+BGCOLOR_RGBA3 = 'rgba(242,242,232,0.25)',
+BGCOLOR_RGBA4 = 'rgba(242,242,232,0.666)',
 
     BRIDGE = new Ejecta.Bridge(),
     FGCOLOR_RGBA = 'rgba(0,0,0,0.5)',
@@ -98,8 +99,14 @@ var is3GS = function(){
 	},
 	
 	drawink = function() {
-	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25,
-		    y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25,
+        
+        var interpolation_multiplier = 0.25;
+	    if ( window.devicePixelRatio == 1 ){
+            interpolation_multiplier = 0.5;
+        }
+        
+	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier,
+		    y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier,
 		    dx = targetmouse.x - x,
 		    dy = targetmouse.y - y,
 		    dist = Math.sqrt(dx * dx + dy * dy),
@@ -470,11 +477,19 @@ var is3GS = function(){
 	    nib_multiplier = 0.25,
 		step = 0.75;
 
-    if ( is3GS() ){
+    //if ( is3GS() ){
+    if ( window.devicePixelRatio == 1 ){
         interpolation_multiplier = 0.375;
         distance_multiplier = 4.0;
 		nib_multiplier = 0.125;
 		step = 1.5;
+    } else {
+        if ( canvas.width > 768 && drawmode != MODE_GENTLE_ERASE ){
+            interpolation_multiplier = 0.375;
+            distance_multiplier = 4.0;
+            nib_multiplier = 0.125;
+            step = 1.5;
+        }
     }
     var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier, 
 		y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier, 
@@ -577,7 +592,7 @@ var is3GS = function(){
         , vertexCount = 0
         , currange = curnib * multiplier
         , prevrange = prevnib * multiplier
-        , fgcolor = BGCOLOR_RGBA2
+        , fgcolor = BGCOLOR_RGBA4
         ;
         
         
@@ -661,8 +676,9 @@ var line = function() {
 };
 
 var circleerase = function(){
-    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * 0.25,
-    y = prevmouse.y + (targetmouse.y - prevmouse.y) * 0.25,
+    var interpolation_multiplier = ( window.devicePixelRatio == 1 ) ? 0.5 : 0.25;
+    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier,
+    y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier,
     dx = targetmouse.x - x,
     dy = targetmouse.y - y,
     dist = Math.sqrt(dx * dx + dy * dy),
@@ -672,7 +688,8 @@ var circleerase = function(){
     if (dist >= threshold) {
        
         curnib = 30;
-        
+        curnib /= zoomlevel;
+
         ctx.beginPath();
         ctx.fillStyle = BGCOLOR_RGBA;
         ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
