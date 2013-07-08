@@ -518,7 +518,7 @@
     
     // ios6+
     if( NSClassFromString (@"UIActivityViewController") ) {
-        NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum", nil];
+        NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum /cc @vellumapp", nil];
         
         VLMActivitySaveToAlbum *activity = [[VLMActivitySaveToAlbum alloc] init];
         NSArray *applicationActivities = @[activity];
