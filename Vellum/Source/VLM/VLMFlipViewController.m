@@ -54,9 +54,9 @@
     
     texts = [NSArray arrayWithObjects:
              @"PAN to draw.",
-             @"TAP HEADER for palette.",
-             @"TAP ELSEWHERE WITH 2 FINGERS for palette.",
+             @"TAP HEADER to toggle palette.",
              @"TAP ELSEWHERE to toggle header.",
+             @"TAP WITH 2 FINGERS to toggle palette.",
              @"PINCH to zoom.",
              @"DOUBLE-TAP to reset zoom.",
              @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
@@ -66,8 +66,8 @@
     images = [NSArray arrayWithObjects:
               @"about-01.png",
               @"about-02.png",
-              @"about-08.png",
               @"about-05.png",
+              @"about-08.png",
               @"about-03.png",
               @"about-04.png",
               @"about-06.png",
@@ -81,8 +81,8 @@
         NSArray *sctexts = [NSArray arrayWithObjects:
                  @"PAN",
                  @"TAP HEADER",
-                 @"TAP ELSEWHERE WITH 2 FINGERS",
                  @"TAP ELSEWHERE",
+                 @"TAP WITH 2 FINGERS",
                  @"PINCH",
                  @"DOUBLE-TAP",
                  @"LONG-PRESS",
@@ -91,9 +91,9 @@
         
         attributedtexts = [NSArray arrayWithObjects:
                            [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
-                           [[NSMutableAttributedString alloc] initWithString:@"Tap header for palette."],
-                           [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere with 2 fingers for palette."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
                            [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap with 2 fingers to toggle palette."],
                            [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
                            [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
                            [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
