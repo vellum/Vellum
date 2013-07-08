@@ -35,7 +35,7 @@ static VLMToolCollection *sharedToolCollection;
                           @"Erase",
                           @"Scratch",     
                           @"Gentle Erase",
-                          @"Round Erase",
+                          @"Hard Erase",
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
                              [NSNumber numberWithBool:YES],

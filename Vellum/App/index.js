@@ -101,8 +101,9 @@ var is3GS = function(){
 	drawink = function() {
         
         var interpolation_multiplier = 0.25;
-	    if ( window.devicePixelRatio == 1 ){
-            interpolation_multiplier = 0.5;
+	    if ( window.devicePixelRatio == 1 && zoomlevel < 1 ){
+            //interpolation_multiplier = 0.5;
+            interpolation_multiplier *= 1/zoomlevel;
         }
         
 	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier,
@@ -151,8 +152,13 @@ var is3GS = function(){
 	        distance_multiplier = 2.0;
 			nib_multiplier = 0.25;
 			grr_fg = 'rgba(0,0,0,0.75)';
-	    }
-    
+	    } 
+
+        
+        if ( zoomlevel < 1 ){
+            interpolation_multiplier *= 1/zoomlevel;
+        }
+
 	    var x = prevmouse.x + (targetmouse.x - prevmouse.x) * interpolation_multiplier,
 		    y = prevmouse.y + (targetmouse.y - prevmouse.y) * interpolation_multiplier,
 		    dx = targetmouse.x - x,
