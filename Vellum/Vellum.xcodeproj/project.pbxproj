@@ -124,6 +124,8 @@
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; };
+		BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BD6922F5178FADA400551F02 /* VLMActivityProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD7137451774340100DEBADB /* about-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373E1774340100DEBADB /* about-07.png */; };
 		BD7137461774340100DEBADB /* about-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373F1774340100DEBADB /* about-06.png */; };
@@ -381,6 +383,8 @@
 		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
 		BD3EC62C1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTwoFingerTapGestureRecognizer.h; path = VLM/VLMTwoFingerTapGestureRecognizer.h; sourceTree = "<group>"; };
 		BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTwoFingerTapGestureRecognizer.m; path = VLM/VLMTwoFingerTapGestureRecognizer.m; sourceTree = "<group>"; };
+		BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMActivityProvider.h; path = VLM/VLMActivityProvider.h; sourceTree = "<group>"; };
+		BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMActivityProvider.m; path = VLM/VLMActivityProvider.m; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD71373E1774340100DEBADB /* about-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07.png"; sourceTree = "<group>"; };
@@ -913,6 +917,8 @@
 				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
 				BDB88F14173793FD006134F0 /* VLMMenuButton.h */,
 				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
+				BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */,
+				BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */,
 				BDFB2E541745F13A006AF1C7 /* VLMActivitySaveToAlbum.h */,
 				BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */,
 				BD2062BE1772A053008A549F /* VLMScrollView.h */,
@@ -1119,6 +1125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD6922F5178FADA400551F02 /* VLMActivityProvider.h in Sources */,
 				B630048916C1A2390036D8D4 /* EJBindingTextMetrics.m in Sources */,
 				B64C87AC16B81BAA0097CD5B /* EJGLProgram2D.m in Sources */,
 				B64C87AE16B81BAA0097CD5B /* EJGLProgram2DRadialGradient.m in Sources */,
@@ -1205,6 +1212,7 @@
 				BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */,
 				BD2062C01772A053008A549F /* VLMScrollView.m in Sources */,
 				BD71375C1774A85800DEBADB /* VLMSectionView.m in Sources */,
+				BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import "VLMConstants.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+#import "VLMActivityProvider.h"
 
 #define HEADER_LABEL_WIDTH 175.0f
 #define ACTIONSHEET_CLEARSCREEN 1000
@@ -518,7 +519,8 @@
     
     // ios6+
     if( NSClassFromString (@"UIActivityViewController") ) {
-        NSArray *dataToShare = [NSArray arrayWithObjects:found, @"#madeWithVellum /cc @vellumapp", nil];
+        VLMActivityProvider *activityProvider = [[VLMActivityProvider alloc] init];
+        NSArray *dataToShare = [NSArray arrayWithObjects:found, activityProvider, nil];
         
         VLMActivitySaveToAlbum *activity = [[VLMActivitySaveToAlbum alloc] init];
         NSArray *applicationActivities = @[activity];
