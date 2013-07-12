@@ -60,6 +60,8 @@
     
     
     [self.view.layer setZPosition:1001.0f];
+    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin];
+
 }
 
 - (void)didReceiveMemoryWarning {
