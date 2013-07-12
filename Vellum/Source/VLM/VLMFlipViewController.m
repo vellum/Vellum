@@ -134,7 +134,7 @@
         UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 1, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
         [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-        [titlelabel setText:@"Info"];
+        [titlelabel setText:@"About"];
         [titlelabel setUserInteractionEnabled:YES];
         [titlelabel setTextAlignment:NSTextAlignmentCenter];
         [titlelabel setBackgroundColor:[UIColor clearColor]];
@@ -173,7 +173,7 @@
     [self.view addSubview:self.tableview];
     
     NSArray *buttonTitles = [NSArray arrayWithObjects:
-                             @"Rate Vellum on iTunes",
+                             @"Rate on App Store",
                              @"Follow @vellumapp",
                              @"Gestures",
                              nil];
@@ -184,35 +184,37 @@
     CGFloat buttonheight = 59.0f;
     CGFloat buttonspacing = 1.0f;
 
-    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT*2)];
+    //UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT*2)];
+    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT)];
     [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
+    //[tvHeader setBackgroundColor:[UIColor whiteColor]];
     [tableView setTableHeaderView:tvHeader];
     [tableView setCanCancelContentTouches:YES];
     
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.825f)];
+    //[albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.825f)];
+    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 1.0f)];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [tvHeader addSubview:albumview];
 
     self.coverframe = albumview.frame;
     self.cover = albumview;
 
-    margin = 5.0f;
+    margin = 10.0f;
     vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
     for ( CGFloat i = 0; i < [buttonTitles count]; i++){
+
         UIButton *r = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
         [r setBackgroundColor:[UIColor whiteColor]];
         [r setBackgroundImage:[UIImage imageNamed:@"clear50.png"] forState:UIControlStateHighlighted];
-        
-        
-        [r setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
-        
+        [r setTitleColor:[UIColor colorWithWhite:0.1f alpha:1.0f] forState:UIControlStateNormal];
         [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
-        //[r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        //[r setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, margin+2, 0.0f, 0.0f)];
+        [r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [r setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 20.0f, 0.0f, 0.0f)];
         
-        [r setTitle:buttonTitles[(int)i] forState:UIControlStateNormal];
+        NSString *text = buttonTitles[(int)i];
+        [r setTitle:[text uppercaseString] forState:UIControlStateNormal];
         [r setTag:i];
         [r addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:r];
