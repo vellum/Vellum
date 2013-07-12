@@ -126,6 +126,9 @@
 		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; };
 		BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD6922F5178FADA400551F02 /* VLMActivityProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */; };
+		BD6922F8178FE48100551F02 /* VLMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F7178FE48100551F02 /* VLMTableView.m */; };
+		BD6922FB1790629700551F02 /* albumcover.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6922F91790629700551F02 /* albumcover.png */; };
+		BD6922FC1790629700551F02 /* albumcover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6922FA1790629700551F02 /* albumcover@2x.png */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD7137451774340100DEBADB /* about-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373E1774340100DEBADB /* about-07.png */; };
 		BD7137461774340100DEBADB /* about-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373F1774340100DEBADB /* about-06.png */; };
@@ -385,6 +388,10 @@
 		BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTwoFingerTapGestureRecognizer.m; path = VLM/VLMTwoFingerTapGestureRecognizer.m; sourceTree = "<group>"; };
 		BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMActivityProvider.h; path = VLM/VLMActivityProvider.h; sourceTree = "<group>"; };
 		BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMActivityProvider.m; path = VLM/VLMActivityProvider.m; sourceTree = "<group>"; };
+		BD6922F6178FE48100551F02 /* VLMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTableView.h; path = VLM/VLMTableView.h; sourceTree = "<group>"; };
+		BD6922F7178FE48100551F02 /* VLMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTableView.m; path = VLM/VLMTableView.m; sourceTree = "<group>"; };
+		BD6922F91790629700551F02 /* albumcover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albumcover.png; sourceTree = "<group>"; };
+		BD6922FA1790629700551F02 /* albumcover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "albumcover@2x.png"; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD71373E1774340100DEBADB /* about-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07.png"; sourceTree = "<group>"; };
@@ -840,6 +847,8 @@
 		BDB198471777AFF600CF145E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD6922F91790629700551F02 /* albumcover.png */,
+				BD6922FA1790629700551F02 /* albumcover@2x.png */,
 				BD71374C17743B1000DEBADB /* about-01@2x.png */,
 				BD71374D17743B1000DEBADB /* about-02@2x.png */,
 				BD71374E17743B1000DEBADB /* about-03@2x.png */,
@@ -923,6 +932,8 @@
 				BDFB2E551745F13A006AF1C7 /* VLMActivitySaveToAlbum.m */,
 				BD2062BE1772A053008A549F /* VLMScrollView.h */,
 				BD2062BF1772A053008A549F /* VLMScrollView.m */,
+				BD6922F6178FE48100551F02 /* VLMTableView.h */,
+				BD6922F7178FE48100551F02 /* VLMTableView.m */,
 			);
 			name = Header;
 			sourceTree = "<group>";
@@ -1099,6 +1110,8 @@
 				BD71375917743B1000DEBADB /* about-07@2x.png in Resources */,
 				BDDAC5461787FC6C003ED8C4 /* about-08.png in Resources */,
 				BDDAC5471787FC6C003ED8C4 /* about-08@2x.png in Resources */,
+				BD6922FB1790629700551F02 /* albumcover.png in Resources */,
+				BD6922FC1790629700551F02 /* albumcover@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,6 +1226,7 @@
 				BD2062C01772A053008A549F /* VLMScrollView.m in Sources */,
 				BD71375C1774A85800DEBADB /* VLMSectionView.m in Sources */,
 				BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */,
+				BD6922F8178FE48100551F02 /* VLMTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

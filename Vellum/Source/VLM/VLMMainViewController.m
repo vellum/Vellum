@@ -493,7 +493,7 @@
                          }
          ];
          */
-        UIView *h = self.headerController.view;
+        //UIView *h = self.headerController.view;
         [self.headerController togglePopover];
 
     }

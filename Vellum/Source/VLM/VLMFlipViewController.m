@@ -10,6 +10,9 @@
 #import "VLMConstants.h"
 #import "VLMTableViewCell.h"
 #import "VLMSectionView.h"
+#import "VLMMenuButton.h"
+#import "VLMTableView.h"
+
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface VLMFlipViewController ()
@@ -20,6 +23,8 @@
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
 @property (nonatomic, strong) NSArray *attributedtexts;
+@property (nonatomic, strong) UIImageView *cover;
+@property CGRect coverframe;
 
 @end
 
@@ -31,6 +36,8 @@
 @synthesize texts;
 @synthesize images;
 @synthesize attributedtexts;
+@synthesize cover;
+@synthesize coverframe;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -114,7 +121,8 @@
         }
     }
     
-    UITableView *tableView;
+    VLMTableView *tableView;
+    
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         
         UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
@@ -126,7 +134,7 @@
         UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 1, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
         [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-        [titlelabel setText:@"Gestures"];
+        [titlelabel setText:@"Info"];
         [titlelabel setUserInteractionEnabled:YES];
         [titlelabel setTextAlignment:NSTextAlignmentCenter];
         [titlelabel setBackgroundColor:[UIColor clearColor]];
@@ -150,10 +158,10 @@
         [self.header addSubview:button];
         [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
         
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+        tableView = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
 
     } else {
-        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
+        tableView = [[VLMTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
         
     }
     tableView.delegate = self;
@@ -163,7 +171,53 @@
     self.tableview.separatorColor = [UIColor clearColor];
 
     [self.view addSubview:self.tableview];
+    
+    NSArray *buttonTitles = [NSArray arrayWithObjects:
+                             @"Rate Vellum on iTunes",
+                             @"Follow @vellumapp",
+                             @"Gestures",
+                             nil];
 
+    CGFloat margin = 25.0f;
+    CGFloat vmargintop = margin;
+    CGFloat vmarginbottom = margin;
+    CGFloat buttonheight = 59.0f;
+    CGFloat buttonspacing = 1.0f;
+
+    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT*2)];
+    [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
+    [tableView setTableHeaderView:tvHeader];
+    [tableView setCanCancelContentTouches:YES];
+    
+    UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
+    UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
+    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.825f)];
+    [albumview setContentMode:UIViewContentModeScaleAspectFill];
+    [tvHeader addSubview:albumview];
+
+    self.coverframe = albumview.frame;
+    self.cover = albumview;
+
+    margin = 5.0f;
+    vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
+    for ( CGFloat i = 0; i < [buttonTitles count]; i++){
+        UIButton *r = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
+        [r setBackgroundColor:[UIColor whiteColor]];
+        [r setBackgroundImage:[UIImage imageNamed:@"clear50.png"] forState:UIControlStateHighlighted];
+        
+        
+        [r setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
+        
+        [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
+        //[r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        //[r setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, margin+2, 0.0f, 0.0f)];
+        
+        [r setTitle:buttonTitles[(int)i] forState:UIControlStateNormal];
+        [r setTag:i];
+        [r addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
+        [tvHeader addSubview:r];
+    }
+    [self scrollViewDidScroll:tableview];
 }
 
 - (void)didReceiveMemoryWarning
@@ -195,7 +249,6 @@
 }
 
 #pragma mark - UITableView Delegate Methods
-
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -245,6 +298,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
+
 - (VLMSectionView *)dequeueReusableSectionHeaderView{
     for (VLMSectionView *sectionHeaderView in self.reusableSectionHeaderViews) {
         if (!sectionHeaderView.superview) {
@@ -255,12 +309,45 @@
     return nil;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat y = -scrollView.contentOffset.y;
+    if (y >= 0) {
+        self.cover.frame = CGRectMake(0, scrollView.contentOffset.y, self.coverframe.size.width+y, self.coverframe.size.height+y);
+        self.cover.center = CGPointMake(self.view.center.x, self.cover.center.y);
+    }
+    
+}
 
 #pragma mark GestureRecco
 
 - (void)tapped:(UIGestureRecognizer *)sender{
     NSLog(@"tapped");
     [self.tableview scrollRectToVisible:CGRectMake(0,1,1,1) animated:YES];
+}
+
+- (void)handleTappie:(id)sender{
+    UIButton *b = (UIButton *) sender;
+    int tag = b.tag;
+    NSIndexPath *ipath = [NSIndexPath indexPathForRow:0 inSection:0];
+    switch (tag) {
+        case 0:
+            NSLog(@"rate");
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
+            break;
+
+        case 1:
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+            }
+            break;
+        
+        case 2:
+            [self.tableview scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionTop animated: YES];
+            break;
+    }
 }
 
 #pragma mark - Rotation Handling
@@ -290,4 +377,6 @@
 {
     return UIInterfaceOrientationPortrait;
 }
+
+
 @end
