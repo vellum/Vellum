@@ -149,6 +149,7 @@
 		BD97F5FA173EC27400D08179 /* VLMArcView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD97F5F9173EC27400D08179 /* VLMArcView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
+		BDB25E351791057E004BC43E /* VLMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB25E341791057E004BC43E /* VLMCollectionViewController.m */; };
 		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDB4BF821737A17A004ADC00 /* VLMToolCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDB88EF917373FF6006134F0 /* popcircle_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB88EF317373FF6006134F0 /* popcircle_off.png */; };
@@ -418,6 +419,8 @@
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
 		BDA36CE5172E0F8B00665A50 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPageControl.m; sourceTree = "<group>"; };
+		BDB25E331791057E004BC43E /* VLMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMCollectionViewController.h; path = VLM/VLMCollectionViewController.h; sourceTree = "<group>"; };
+		BDB25E341791057E004BC43E /* VLMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMCollectionViewController.m; path = VLM/VLMCollectionViewController.m; sourceTree = "<group>"; };
 		BDB4BF7D17379FD7004ADC00 /* VLMToolData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMToolData.h; path = VLM/VLMToolData.h; sourceTree = "<group>"; };
 		BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMToolData.m; path = VLM/VLMToolData.m; sourceTree = "<group>"; };
 		BDB4BF801737A17A004ADC00 /* VLMToolCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMToolCollection.h; path = VLM/VLMToolCollection.h; sourceTree = "<group>"; };
@@ -903,6 +906,21 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		BDB25E3217910547004BC43E /* Tool Palette */ = {
+			isa = PBXGroup;
+			children = (
+				BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */,
+				BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */,
+				BDB88F02173755F0006134F0 /* VLMTriangleView.h */,
+				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
+				BDB88F14173793FD006134F0 /* VLMMenuButton.h */,
+				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
+				BDB25E331791057E004BC43E /* VLMCollectionViewController.h */,
+				BDB25E341791057E004BC43E /* VLMCollectionViewController.m */,
+			);
+			name = "Tool Palette";
+			sourceTree = "<group>";
+		};
 		BDB4BF7C17379FB9004ADC00 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,12 +938,7 @@
 				BDB4BF7C17379FB9004ADC00 /* Data */,
 				BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */,
 				BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */,
-				BDCCB3041737F0B000BCB9D6 /* VLMPopMenuViewController.h */,
-				BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */,
-				BDB88F02173755F0006134F0 /* VLMTriangleView.h */,
-				BDB88F03173755F0006134F0 /* VLMTriangleView.m */,
-				BDB88F14173793FD006134F0 /* VLMMenuButton.h */,
-				BDB88F15173793FD006134F0 /* VLMMenuButton.m */,
+				BDB25E3217910547004BC43E /* Tool Palette */,
 				BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */,
 				BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */,
 				BDFB2E541745F13A006AF1C7 /* VLMActivitySaveToAlbum.h */,
@@ -1158,6 +1171,7 @@
 				B64CE678166682700087CF94 /* EJTimer.m in Sources */,
 				B64CE67A166682700087CF94 /* EJBindingAdBanner.m in Sources */,
 				B64CE67B166682700087CF94 /* EJBindingGameCenter.m in Sources */,
+				BDB25E351791057E004BC43E /* VLMCollectionViewController.m in Sources */,
 				B64CE67C166682700087CF94 /* EJBindingHttpRequest.m in Sources */,
 				B64CE67D166682700087CF94 /* EJBindingLocalStorage.m in Sources */,
 				B64CE67E166682700087CF94 /* EJBindingTouchInput.m in Sources */,

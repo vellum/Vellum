@@ -175,26 +175,23 @@
     NSArray *buttonTitles = [NSArray arrayWithObjects:
                              @"Rate on App Store",
                              @"Follow @vellumapp",
+                             @"Suggest Idea",
                              @"Gestures",
                              nil];
 
-    CGFloat margin = 25.0f;
+    CGFloat margin = 20.0f;
     CGFloat vmargintop = margin;
-    CGFloat vmarginbottom = margin;
     CGFloat buttonheight = 59.0f;
     CGFloat buttonspacing = 1.0f;
 
-    //UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT*2)];
-    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT)];
+    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT-10.0f)];
     [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
-    //[tvHeader setBackgroundColor:[UIColor whiteColor]];
     [tableView setTableHeaderView:tvHeader];
     [tableView setCanCancelContentTouches:YES];
     
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.95f)];
-    //[albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 1.0f)];
+    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 240.0f)];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [tvHeader addSubview:albumview];
 
@@ -347,8 +344,12 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
             }
             break;
-        
+
         case 2:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+            break;
+        
+        case 3:
             [self.tableview scrollToRowAtIndexPath: ipath atScrollPosition: UITableViewScrollPositionTop animated: YES];
             break;
     }
