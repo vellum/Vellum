@@ -18,7 +18,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setLabel:[[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)]];
+        [self setLabel:[[UILabel alloc] initWithFrame:CGRectMake(0, 1, frame.size.width, frame.size.height)]];
         [self.label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
         [self.label setTextAlignment:NSTextAlignmentCenter];
         [self.label setTextColor:[UIColor blackColor]];

@@ -147,7 +147,7 @@
         
 
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
-        [button setFrame:CGRectOffset(button.frame, 0, 2.0f)];
+        [button setFrame:CGRectOffset(button.frame, 0, 3.0f)];
         [button setTitle:@"Done" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
