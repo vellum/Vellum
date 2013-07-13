@@ -18,7 +18,7 @@
 @interface VLMFlipViewController ()
 @property (nonatomic,strong) UIView *header;
 @property (nonatomic,strong) UIButton *donebutton;
-@property (nonatomic, weak) UITableView *tableview;
+@property (nonatomic, weak) VLMTableView *tableview;
 @property (nonatomic,strong) NSArray *texts;
 @property (nonatomic,strong) NSArray *images;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
@@ -26,7 +26,7 @@
 @property (nonatomic, strong) UIImageView *cover;
 @property CGRect coverframe;
 
-@end
+@end  
 
 @implementation VLMFlipViewController
 
@@ -44,7 +44,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.contentSizeForViewInPopover = CGSizeMake(320.0, 525.0);
+        self.contentSizeForViewInPopover = CGSizeMake(320.0, 578.0-60);
     }
     return self;
 }
@@ -121,7 +121,7 @@
         }
     }
     
-    VLMTableView *tableView;
+    VLMTableView *tv;
     
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         
@@ -158,15 +158,15 @@
         [self.header addSubview:button];
         [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
         
-        tableView = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
+        tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height-HEADER_HEIGHT)];
 
     } else {
-        tableView = [[VLMTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
+        tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
         
     }
-    tableView.delegate = self;
-    tableView.dataSource = self;
-    self.tableview = tableView;
+    tv.delegate = self;
+    tv.dataSource = self;
+    self.tableview = tv;
     self.tableview.backgroundColor = [UIColor clearColor];
     self.tableview.separatorColor = [UIColor clearColor];
 
@@ -184,14 +184,17 @@
     CGFloat buttonheight = 54.0f;
     CGFloat buttonspacing = 1.0f;
 
-    UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT-10.0f)];
+
+    UIView *tvHeader = [[UIView alloc] initWithFrame:tv.frame];
     [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
-    [tableView setTableHeaderView:tvHeader];
-    //[tableView setCanCancelContentTouches:YES];
-    
+    [tv setTableHeaderView:tvHeader];
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f)];
+    CGRect pf = CGRectMake(0, HEADER_HEIGHT, 320, 320.0f);
+    if ( tv.frame.size.height <= 420 ) {
+        pf = CGRectMake(0, HEADER_HEIGHT, 320, 280.0f);
+    }
+    [albumview setFrame:pf];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [albumview setUserInteractionEnabled:NO];
     [tvHeader addSubview:albumview];
@@ -203,23 +206,24 @@
     vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
     for ( CGFloat i = 0; i < [buttonTitles count]; i++){
 
-        UIButton *r = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
-        [r setBackgroundColor:[UIColor whiteColor]];
-        //[r setBackgroundImage:[UIImage imageNamed:@"clear50.png"] forState:UIControlStateHighlighted];
-        [r setTitleColor:[UIColor colorWithWhite:0.1f alpha:1.0f] forState:UIControlStateNormal];
-        [r setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
-        
-        [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
-        [r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [r setTitleEdgeInsets:UIEdgeInsetsMake(2.0f, 20.0f, 0.0f, 0.0f)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
+        [btn setBackgroundColor:[UIColor whiteColor]];
+        [btn setTitleColor:[UIColor colorWithWhite:0.1f alpha:1.0f] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
+        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(2.0f, 20.0f, 0.0f, 0.0f)];
         
         NSString *text = buttonTitles[(int)i];
-        [r setTitle:[text uppercaseString] forState:UIControlStateNormal];
-        [r setTag:i];
-        [r addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
-        [tvHeader addSubview:r];
+        [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+        [btn setTag:i];
+        [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
+        [tvHeader addSubview:btn];
     }
-    [self scrollViewDidScroll:tableview];
+    //[self scrollViewDidScroll:tableview];
+    self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
+    self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
+
 }
 
 - (void)didReceiveMemoryWarning
