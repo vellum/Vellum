@@ -175,13 +175,13 @@
     NSArray *buttonTitles = [NSArray arrayWithObjects:
                              @"Rate on App Store",
                              @"Follow @vellumapp",
-                             @"Suggest Idea",
+                             @"Suggest an idea",
                              @"Gestures",
                              nil];
 
-    CGFloat margin = 20.0f;
+    CGFloat margin = 25.0f;
     CGFloat vmargintop = margin;
-    CGFloat buttonheight = 59.0f;
+    CGFloat buttonheight = 54.0f;
     CGFloat buttonspacing = 1.0f;
 
     UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT-10.0f)];
@@ -191,7 +191,7 @@
     
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 240.0f)];
+    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f)];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [tvHeader addSubview:albumview];
 
