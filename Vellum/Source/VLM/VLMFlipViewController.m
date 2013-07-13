@@ -193,23 +193,25 @@
     
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    //[albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.825f)];
-    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 1.0f)];
+    [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 0.95f)];
+    //[albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f * 1.0f)];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [tvHeader addSubview:albumview];
 
     self.coverframe = albumview.frame;
     self.cover = albumview;
 
-    margin = 10.0f;
+    //margin = 10.0f;
     vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
     for ( CGFloat i = 0; i < [buttonTitles count]; i++){
 
         UIButton *r = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
         [r setBackgroundColor:[UIColor whiteColor]];
-        [r setBackgroundImage:[UIImage imageNamed:@"clear50.png"] forState:UIControlStateHighlighted];
+        //[r setBackgroundImage:[UIImage imageNamed:@"clear50.png"] forState:UIControlStateHighlighted];
         [r setTitleColor:[UIColor colorWithWhite:0.1f alpha:1.0f] forState:UIControlStateNormal];
-        [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
+        [r setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
+        
+        [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
         [r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [r setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 20.0f, 0.0f, 0.0f)];
         
