@@ -213,7 +213,7 @@
         
         [r.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
         [r setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [r setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 20.0f, 0.0f, 0.0f)];
+        [r setTitleEdgeInsets:UIEdgeInsetsMake(2.0f, 20.0f, 0.0f, 0.0f)];
         
         NSString *text = buttonTitles[(int)i];
         [r setTitle:[text uppercaseString] forState:UIControlStateNormal];
