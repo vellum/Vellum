@@ -142,7 +142,7 @@
         
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         [tgr setNumberOfTapsRequired:1];
-        [tgr setNumberOfTouchesRequired:1];
+        [tgr setNumberOfTouchesRequired:1]; 
         [titlelabel addGestureRecognizer:tgr];
         
 
@@ -187,12 +187,13 @@
     UIView *tvHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-HEADER_HEIGHT-10.0f)];
     [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
     [tableView setTableHeaderView:tvHeader];
-    [tableView setCanCancelContentTouches:YES];
+    //[tableView setCanCancelContentTouches:YES];
     
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
     [albumview setFrame:CGRectMake(0, HEADER_HEIGHT, 320, 320.0f)];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
+    [albumview setUserInteractionEnabled:NO];
     [tvHeader addSubview:albumview];
 
     self.coverframe = albumview.frame;
