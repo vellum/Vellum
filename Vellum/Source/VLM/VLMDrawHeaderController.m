@@ -21,6 +21,7 @@
 #define ACTIONSHEET_CLEARSCREEN 1000
 #define ACTIONSHEET_SHARE 1001
 #define ACTIONSHEET_IMPORT 1002
+//#define DESIGN_DEBUG
 
 @interface VLMDrawHeaderController ()
 
@@ -120,6 +121,8 @@
     [ab setContentMode:UIViewContentModeTopRight];
     [self.view addSubview:ab];
     [self setRightbutton:ab];
+    //[ab setFrame:CGRectOffset(ab.frame, 0, -2.0f)];
+
     
     UIView *cancel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, winw, HEADER_HEIGHT)];
     [cancel setBackgroundColor:[UIColor whiteColor]];
@@ -195,6 +198,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
+    
+#ifdef DESIGN_DEBUG
+    UIView *baseline = [[UIView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT/2.0f, self.view.frame.size.width, 1.0f)];
+    baseline.backgroundColor = [UIColor blueColor];
+    [baseline setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [baseline setContentMode:UIViewContentModeTop];
+    [self.view addSubview:baseline];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
