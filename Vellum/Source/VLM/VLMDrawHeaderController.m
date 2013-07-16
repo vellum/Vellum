@@ -215,7 +215,7 @@
     
     for (int i = 0; i < count; i++) {
         NSString *t = self.titles[i];
-        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i * HEADER_LABEL_WIDTH, 2, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
+        UILabel *A = [[UILabel alloc] initWithFrame:CGRectMake(i * HEADER_LABEL_WIDTH, 0, HEADER_LABEL_WIDTH, HEADER_HEIGHT)];
         [A setText:t];
         [A setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [A setTextColor:[UIColor blackColor]];

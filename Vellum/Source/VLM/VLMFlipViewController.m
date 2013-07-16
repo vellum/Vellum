@@ -131,7 +131,7 @@
         [self.view addSubview:h];
         [self setHeader:h];
         
-        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 1, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
+        UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
         [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
         [titlelabel setText:@"About"];
@@ -147,7 +147,7 @@
         
 
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width-60.0f, 0, 60.0f, HEADER_HEIGHT)];
-        [button setFrame:CGRectOffset(button.frame, 0, 3.0f)];
+        [button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
         [button setTitle:@"Done" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -175,7 +175,7 @@
     NSArray *buttonTitles = [NSArray arrayWithObjects:
                              @"Rate on App Store",
                              @"Follow @vellumapp",
-                             @"Suggest an idea",
+                             @"Suggest idea",
                              @"Gestures",
                              nil];
 
