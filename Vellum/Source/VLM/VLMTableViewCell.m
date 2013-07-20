@@ -41,7 +41,7 @@
         [placeholder addSubview:iv];
         [placeholder setUserInteractionEnabled:NO];
         [self setContentImageView:iv];
-        
+        [self setUserInteractionEnabled:NO];
     }
     return self;
 }

@@ -27,6 +27,7 @@
         [headerLabel setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
         [self addSubview:headerLabel];
         [self setBackgroundColor:[UIColor clearColor]];
+        [self setUserInteractionEnabled:NO];
     }
     return self;
 }

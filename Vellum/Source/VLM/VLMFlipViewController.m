@@ -12,6 +12,7 @@
 #import "VLMSectionView.h"
 #import "VLMMenuButton.h"
 #import "VLMTableView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -169,6 +170,7 @@
     self.tableview = tv;
     self.tableview.backgroundColor = [UIColor clearColor];
     self.tableview.separatorColor = [UIColor clearColor];
+    [self.tableview setCanCancelContentTouches:YES];
 
     [self.view addSubview:self.tableview];
     
@@ -181,46 +183,63 @@
 
     CGFloat margin = 25.0f;
     CGFloat vmargintop = margin;
-    CGFloat buttonheight = 54.0f;
-    CGFloat buttonspacing = 1.0f;
+    CGFloat buttonheight = 55.0f;
+    CGFloat buttonspacing = 5.0f;
 
 
     UIView *tvHeader = [[UIView alloc] initWithFrame:tv.frame];
     [tvHeader setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.95f alpha:1.0f]];
-    [tv setTableHeaderView:tvHeader];
+    [tvHeader setAutoresizingMask:UIViewAutoresizingNone];
+    [tvHeader setAutoresizesSubviews:NO];
+    [tvHeader setUserInteractionEnabled:YES];
+
+    
     UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
     UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-    CGRect pf = CGRectMake(0, HEADER_HEIGHT, 320, 320.0f);
+    CGRect pf = CGRectMake(0, HEADER_HEIGHT, 320, 280.0f);
     if ( tv.frame.size.height <= 420 ) {
-        pf = CGRectMake(0, HEADER_HEIGHT, 320, 280.0f);
+        pf = CGRectMake(0, HEADER_HEIGHT, 320, 140.0f);
     }
     [albumview setFrame:pf];
     [albumview setContentMode:UIViewContentModeScaleAspectFill];
     [albumview setUserInteractionEnabled:NO];
+    [albumview setAutoresizingMask:UIViewAutoresizingNone];
+    [albumview setAutoresizesSubviews:NO];
     [tvHeader addSubview:albumview];
 
     self.coverframe = albumview.frame;
     self.cover = albumview;
+    
+    UIButton *cap = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tvHeader.frame.size.width, tvHeader.frame.size.height)];
+    [cap setBackgroundColor:[UIColor clearColor]];
+    [tvHeader addSubview:cap];
 
-    //margin = 10.0f;
     vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
     for ( CGFloat i = 0; i < [buttonTitles count]; i++){
 
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];
-        [btn setBackgroundColor:[UIColor whiteColor]];
-        [btn setTitleColor:[UIColor colorWithWhite:0.1f alpha:1.0f] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateHighlighted];
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
-        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(2.0f, 20.0f, 0.0f, 0.0f)];
-        
+        [btn setBackgroundColor:[UIColor clearColor]];
+        [btn setTitleColor:[UIColor colorWithWhite:0.0f alpha:0.8f] forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
+
         NSString *text = buttonTitles[(int)i];
         [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
+        
+        CALayer *layer = [btn layer];
+        [layer setMasksToBounds:YES];
+        [layer setCornerRadius:0.0f];
+        [layer setBorderWidth:4.0f];
+        [layer setBorderColor:[[UIColor colorWithWhite:0.0f alpha:0.1f] CGColor]];
+
     }
-    //[self scrollViewDidScroll:tableview];
+    [tv setTableHeaderView:tvHeader];
+
     self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
     self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
 
