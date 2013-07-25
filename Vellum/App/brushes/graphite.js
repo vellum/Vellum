@@ -13,6 +13,9 @@ graphite.prototype = {
 	
 	init : function(){
 		this.context = VLM.state.context;
+        
+        
+        
 	    if ( VLM.utilities.is3GS() ){
 	        this.interpolation_multiplier = 0.375;
 	        this.distance_multiplier = 2.0;
@@ -72,7 +75,7 @@ graphite.prototype = {
             cosangle = Math.cos(angle),
             sinangle = Math.sin(angle),
             cospangle = Math.cos(prev.angle),
-            sinpangle = Math.sin(prev.angle),x
+            sinpangle = Math.sin(prev.angle),
             vertexCount = 0,
             currange = curnib * multiplier,
             prevrange = prev.nib * multiplier,

@@ -152,7 +152,7 @@ var is3GS = function(){
 	        distance_multiplier = 2.0;
 			nib_multiplier = 0.25;
 			grr_fg = 'rgba(0,0,0,0.75)';
-	    } 
+	    } /Users/vellumdavid/github/int/Vellum/Vellum/App/brushes/shade.js
 
         
         if ( zoomlevel < 1 ){
@@ -438,6 +438,7 @@ var is3GS = function(){
             , fgcolor = FGCOLOR_RGBA2//'#000000'
             ;
             
+            "   
             ctx.beginPath();
             ctx.lineWidth = 0.125;
             ctx.strokeStyle = FGCOLOR_RGBA2;//'rgba(0,0,0,0.25)';

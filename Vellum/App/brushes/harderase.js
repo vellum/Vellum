@@ -36,13 +36,14 @@ harderase.prototype = {
 	},
 	
 	tick : function(){
-        var interpolation_multiplier = 0.25;
-	    if ( window.devicePixelRatio == 1 && VLM.state.zoomlevel < 1 ){
+        var interpolation_multiplier = 0.25,
+            ctx = this.context,
+            state = VLM.state,
+            zoomlevel = state.zoomlevel;
+
+	    if ( window.devicePixelRatio == 1 && zoomlevel < 1 ){
             interpolation_multiplier *= 1/zoomlevel;
         }
-        var ctx = this.context,
-        state = VLM.state,
-        zoomlevel = state.zoomlevel;
         
         var prev = this.prev,
             target = this.target,

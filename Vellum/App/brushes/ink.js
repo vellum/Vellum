@@ -42,14 +42,15 @@ ink.prototype = {
 	},
 	
 	tick : function(){
-        var interpolation_multiplier = 0.25;
+        var interpolation_multiplier = 0.25,
+            ctx = this.context,
+            state = VLM.state,
+            zoomlevel = state.zoomlevel;
+        
 	    if ( window.devicePixelRatio == 1 && VLM.state.zoomlevel < 1 ){
             interpolation_multiplier *= 1/zoomlevel;
         }
-        var ctx = this.context,
-        state = VLM.state,
-        zoomlevel = state.zoomlevel;
-        
+
         var prev = this.prev,
             target = this.target,
             x = prev.x + (target.x - prev.x) * interpolation_multiplier,

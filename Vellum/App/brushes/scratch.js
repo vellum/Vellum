@@ -75,7 +75,7 @@ scratch.prototype = {
             cosangle = Math.cos(angle),
             sinangle = Math.sin(angle),
             cospangle = Math.cos(prev.angle),
-            sinpangle = Math.sin(prev.angle),x
+            sinpangle = Math.sin(prev.angle),
             vertexCount = 0,
             ctx = this.context;
 
