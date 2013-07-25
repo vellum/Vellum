@@ -27,6 +27,7 @@
         [self addSubview:self.label];
         [self setBackgroundImage:[UIImage imageNamed:@"menu_default.png"] forState:UIControlStateNormal];
         [self setBackgroundImage:[UIImage imageNamed:@"menu_selected.png"] forState:UIControlStateSelected];
+        [self setAdjustsImageWhenHighlighted:NO];
     }
     return self;
 }

@@ -145,7 +145,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.25];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [self.view setAlpha:1.0];
     [UIView commitAnimations];
     [self.view setUserInteractionEnabled:YES];
@@ -155,7 +155,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.25];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [self.view setAlpha:0.0];
     [UIView commitAnimations];
     [self.view setUserInteractionEnabled:NO];

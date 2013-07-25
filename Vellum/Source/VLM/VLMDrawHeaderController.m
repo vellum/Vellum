@@ -263,7 +263,7 @@
     if (self.index > [self.titles count] - 1) {
         [self setIndex:0];
     }
-    [UIView animateWithDuration:0.3f
+    [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
@@ -309,7 +309,7 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
         [self.cancelbutton setAlpha:0.92];
         [self.cancelbutton setUserInteractionEnabled:YES];
         [UIView commitAnimations];
@@ -319,7 +319,7 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:0.3];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
         [self.cancelbutton setAlpha:0];
         [self.cancelbutton setUserInteractionEnabled:NO];
         [UIView commitAnimations];
@@ -332,7 +332,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.3];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [self.cancelbutton setAlpha:0.92];
     [self.cancelbutton setUserInteractionEnabled:YES];
     [UIView commitAnimations];
@@ -374,7 +374,7 @@
         if (self.ghostlabel.alpha == 1) {
             [self.titleview setFrame:CGRectOffset(titleframe, -self.index * HEADER_LABEL_WIDTH, 0)];
         }
-        [UIView animateWithDuration:shouldAnimate ? 0.3f:0
+        [UIView animateWithDuration:shouldAnimate ? ANIMATION_DURATION:0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -392,7 +392,7 @@
          ];
     } else {
         [self.ghostlabel setText:title];
-        [UIView animateWithDuration:shouldAnimate ? 0.3f:0
+        [UIView animateWithDuration:shouldAnimate ? ANIMATION_DURATION:0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -427,7 +427,7 @@
 }
 
 - (void)updatePage {
-    [UIView animateWithDuration:0.3f
+    [UIView animateWithDuration:ANIMATION_DURATION
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
