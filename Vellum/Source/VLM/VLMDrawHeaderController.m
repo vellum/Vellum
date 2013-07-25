@@ -263,7 +263,7 @@
     if (self.index > [self.titles count] - 1) {
         [self setIndex:0];
     }
-    [UIView animateWithDuration:0.25f
+    [UIView animateWithDuration:0.3f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
@@ -374,7 +374,7 @@
         if (self.ghostlabel.alpha == 1) {
             [self.titleview setFrame:CGRectOffset(titleframe, -self.index * HEADER_LABEL_WIDTH, 0)];
         }
-        [UIView animateWithDuration:shouldAnimate ? 0.25f:0
+        [UIView animateWithDuration:shouldAnimate ? 0.3f:0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -392,7 +392,7 @@
          ];
     } else {
         [self.ghostlabel setText:title];
-        [UIView animateWithDuration:shouldAnimate ? 0.25f:0
+        [UIView animateWithDuration:shouldAnimate ? 0.3f:0
                               delay:0.0f
                             options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                          animations:^{
@@ -427,7 +427,7 @@
 }
 
 - (void)updatePage {
-    [UIView animateWithDuration:0.25f
+    [UIView animateWithDuration:0.3f
                           delay:0.0f
                         options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
                      animations:^{

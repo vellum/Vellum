@@ -17,14 +17,11 @@
 
 @interface VLMPopMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *toolbuttons;
-@property (nonatomic, strong) NSMutableArray *onoffbuttons;
-- (void)onofftapped:(id)sender;
 - (void)menuItemTapped:(id)sender;
 @end
 
 @implementation VLMPopMenuViewController
 @synthesize toolbuttons;
-@synthesize onoffbuttons;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -128,31 +125,7 @@
         [sv addSubview:item];
         [buttons addObject:item];
         [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIButton *onoff = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 40, 40)];
-        [onoff setBackgroundImage:[UIImage imageNamed:@"popcircle_off.png"] forState:UIControlStateNormal];
-        [onoff setBackgroundImage:[UIImage imageNamed:@"popcircle_on.png"] forState:UIControlStateSelected];
-        [onoff setSelected:tool.enabled];
-        [onoff setTag:i];
-        [onoff setShowsTouchWhenHighlighted:YES];
-
-        // removing this for now, people seem to not get it.
-        //[back addSubview:onoff];
-        [onoff addTarget:self action:@selector(onofftapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [onoffbuttons addObject:onoff];
     }
-    /*
-    for ( int i = [tools.tools count]; i < 9; i++ ){
-        CGFloat x = topleft.x + (i % 3) * (buttonsize + 1);
-        CGFloat y = topleft.y + floor(i / 3) * (buttonsize + 1);
-        CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
-        UIView *p = [[UIView alloc] initWithFrame:r];
-        [p setUserInteractionEnabled:NO];
-        [p setBackgroundColor:[UIColor colorWithWhite:0.95f alpha:1.0f]];
-        [back addSubview:p];
-    }
-     */
     
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
@@ -224,17 +197,5 @@
     }
 }
 
-- (void)onofftapped:(id)sender {
-    UIButton *b = (UIButton *)sender;
-    NSInteger tag = b.tag;
-    
-    VLMToolCollection *tools = [VLMToolCollection instance];
-    VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tag];
-    [item setEnabled:!item.enabled];
-    [b setSelected:item.enabled];
-    
-    //update header
-    [self.delegate refreshData];
-}
 
 @end

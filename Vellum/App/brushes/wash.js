@@ -1,8 +1,8 @@
-function ink(){
+function wash(){
 	this.init();
 }
 
-ink.prototype = {
+wash.prototype = {
 	context: null,
 	target : { x:0, y:0 },
 	prev : { x:0, y:0, nib:0 },
