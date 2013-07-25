@@ -74,7 +74,6 @@
 		B66F1E801476B6A40090D208 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B66F1E7F1476B6A40090D208 /* libstdc++.dylib */; };
 		B66F1E811476B6B90090D208 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B66F1E771476B3AC0090D208 /* libicucore.dylib */; };
 		B68037011682A58300833604 /* EJConvertWebGL.m in Sources */ = {isa = PBXBuildFile; fileRef = B68037001682A58200833604 /* EJConvertWebGL.m */; };
-		B68C5B95132E6CD60015092E /* App in Resources */ = {isa = PBXBuildFile; fileRef = B68C5AEF132E6CD60015092E /* App */; };
 		B699669816CC4E6E006B9456 /* EJTextureStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = B699669716CC4E6D006B9456 /* EJTextureStorage.m */; };
 		B699669B16CC55F5006B9456 /* EJSharedTextureCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B699669A16CC55F4006B9456 /* EJSharedTextureCache.m */; };
 		B699669E16CC579E006B9456 /* EJSharedOpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = B699669D16CC579B006B9456 /* EJSharedOpenGLContext.m */; };
@@ -125,6 +124,7 @@
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; };
+		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
 		BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD6922F5178FADA400551F02 /* VLMActivityProvider.h in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */; };
 		BD6922F8178FE48100551F02 /* VLMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F7178FE48100551F02 /* VLMTableView.m */; };
@@ -302,7 +302,6 @@
 		B66F1E7F1476B6A40090D208 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		B68036FF1682A58200833604 /* EJConvertWebGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EJConvertWebGL.h; path = WebGL/EJConvertWebGL.h; sourceTree = "<group>"; };
 		B68037001682A58200833604 /* EJConvertWebGL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJConvertWebGL.m; path = WebGL/EJConvertWebGL.m; sourceTree = "<group>"; };
-		B68C5AEF132E6CD60015092E /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
 		B699669616CC4E6C006B9456 /* EJTextureStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJTextureStorage.h; sourceTree = "<group>"; };
 		B699669716CC4E6D006B9456 /* EJTextureStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJTextureStorage.m; sourceTree = "<group>"; };
 		B699669916CC55F3006B9456 /* EJSharedTextureCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJSharedTextureCache.h; sourceTree = "<group>"; };
@@ -389,6 +388,7 @@
 		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
 		BD3EC62C1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTwoFingerTapGestureRecognizer.h; path = VLM/VLMTwoFingerTapGestureRecognizer.h; sourceTree = "<group>"; };
 		BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTwoFingerTapGestureRecognizer.m; path = VLM/VLMTwoFingerTapGestureRecognizer.m; sourceTree = "<group>"; };
+		BD65F5C317A0BF5B0008D3ED /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
 		BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMActivityProvider.h; path = VLM/VLMActivityProvider.h; sourceTree = "<group>"; };
 		BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMActivityProvider.m; path = VLM/VLMActivityProvider.m; sourceTree = "<group>"; };
 		BD6922F6178FE48100551F02 /* VLMTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTableView.h; path = VLM/VLMTableView.h; sourceTree = "<group>"; };
@@ -521,8 +521,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				BD65F5C317A0BF5B0008D3ED /* App */,
 				BDFB2E6C1747546B006AF1C7 /* CoreData.framework */,
-				B68C5AEF132E6CD60015092E /* App */,
 				B64CE60E166682700087CF94 /* Source */,
 				B64CE683166682B10087CF94 /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -1067,13 +1067,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD65F5C417A0BF5B0008D3ED /* App in Resources */,
 				B64C878A16B800DA0097CD5B /* AlphaTexture.fsh in Resources */,
 				B64C878B16B800DA0097CD5B /* Flat.fsh in Resources */,
 				B64C878C16B800DA0097CD5B /* Pattern.fsh in Resources */,
 				B64C878D16B800DA0097CD5B /* Texture.fsh in Resources */,
 				B64C878E16B800DA0097CD5B /* Vertex.vsh in Resources */,
 				B609F2D416AD877E00A3B2B9 /* RadialGradient.fsh in Resources */,
-				B68C5B95132E6CD60015092E /* App in Resources */,
 				B64CE68F166682B10087CF94 /* Default-568h@2x.png in Resources */,
 				B64CE690166682B10087CF94 /* Default-Landscape.png in Resources */,
 				B64CE691166682B10087CF94 /* Default-Portrait.png in Resources */,

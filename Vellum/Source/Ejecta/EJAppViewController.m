@@ -50,7 +50,22 @@
 	EJJavaScriptView *view = [[EJJavaScriptView alloc] initWithFrame:frame];
 	self.view = view;
 	
+    ///*
+	[view loadScriptAtPath:@"vellum.js"];
+	[view loadScriptAtPath:@"brushes/scribble.js"];
+	[view loadScriptAtPath:@"brushes/graphite.js"];
+	[view loadScriptAtPath:@"brushes/shade.js"];
+	[view loadScriptAtPath:@"brushes/line.js"];
+	[view loadScriptAtPath:@"brushes/ink.js"];
+	[view loadScriptAtPath:@"brushes/erase.js"];
+	[view loadScriptAtPath:@"brushes/scratch.js"];
+	[view loadScriptAtPath:@"brushes/softerase.js"];
+	[view loadScriptAtPath:@"brushes/harderase.js"];
 	[view loadScriptAtPath:@"index.js"];
+    //*/
+	/*[view loadScriptAtPath:@"vellum.js"];
+    [view loadScriptAtPath:@"index copy.js"];
+    //*/
 	[view release];
 }
 
