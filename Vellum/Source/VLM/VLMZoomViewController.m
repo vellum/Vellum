@@ -7,6 +7,7 @@
 //
 
 #import "VLMZoomViewController.h"
+#import "VLMConstants.h"
 
 @interface VLMZoomViewController ()
 
@@ -68,7 +69,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [self.view setAlpha:1.0];
     [UIView commitAnimations];
 }
@@ -77,7 +78,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:0.2];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [self.view setAlpha:0.0];
     [UIView commitAnimations];
 }

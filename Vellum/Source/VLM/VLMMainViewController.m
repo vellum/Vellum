@@ -23,7 +23,7 @@
 #import "VLMUndoViewController.h"
 #import "VLMConstants.h"
 #import "UINavigationBar+Fat.h"
-
+#import "VLMColorMenuViewController.h"
 
 @interface VLMMainViewController ()
 
@@ -43,6 +43,7 @@
 @property (assign, nonatomic) UIPopoverController *rightPopover;
 @property BOOL firstTime;
 @property BOOL isPortrait;
+@property (strong, nonatomic) VLMColorMenuViewController *colorMenuViewController;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -72,6 +73,7 @@
 @synthesize firstTime;
 @synthesize rightPopover;
 @synthesize isPortrait;
+@synthesize colorMenuViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -183,6 +185,11 @@
     [poppy setDelegate:self];
     [self.view addSubview:poppy.view];
     [self setPop:poppy];
+    
+    
+    VLMColorMenuViewController *colory = [[VLMColorMenuViewController alloc] init];
+    [self.view addSubview:colory.view];
+    [self setColorMenuViewController:colory];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(enteredForeground)
@@ -557,10 +564,12 @@
 
 - (void)showPopover {
     [self.pop show];
+    [self.colorMenuViewController hide];
 }
 
 - (void)hidePopover {
     [self.pop hide];
+    [self.colorMenuViewController hide];
 }
 
 #pragma mark - MenuDelegate
@@ -608,6 +617,15 @@
     }
 }
 
+- (void)showColorMenu{
+    [self.colorMenuViewController show];
+}
+- (void)hideColorMenu{
+    [self.colorMenuViewController hide];
+}
+- (BOOL)isColorMenuOpen{
+    return [self.colorMenuViewController isOpen];
+}
 
 #pragma mark - public () for cross js communication
 - (void)updateUndoCount:(NSInteger)count {

@@ -15,7 +15,9 @@
 - (void)updateHeader;
 - (void)updateHeaderWithTitle:(NSString *)title;
 - (void)refreshData;
-
+- (void)showColorMenu;
+- (void)hideColorMenu;
+- (BOOL)isColorMenuOpen;
 @end
 
 @class EJAppViewController;

@@ -14,14 +14,18 @@
 #import "VLMToolData.h"
 #import "VLMScrollView.h"
 #import "VLMConstants.h"
+#import "VLMOpaButton.h"
+
 
 @interface VLMPopMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *toolbuttons;
+@property (nonatomic, strong) NSMutableArray *opabuttons;
 - (void)menuItemTapped:(id)sender;
 @end
 
 @implementation VLMPopMenuViewController
 @synthesize toolbuttons;
+@synthesize opabuttons;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -35,17 +39,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+    NSMutableArray *opas = [[NSMutableArray alloc] init];
+    [self setToolbuttons:buttons];
+    [self setOpabuttons:opas];
+    
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
     CGSize triangleSize = CGSizeMake(16, 8);
     CGFloat margin = 0.0f;
     CGFloat innermargin = 3.0f;
     CGFloat pad = 1;
-    CGFloat buttonsize = 75.0f;//(320 - margin * 2 - innermargin * 2 - pad * 2) / 3;
+    CGFloat buttonsize = 75.0f;
+
     CGPoint topleft;
-    NSMutableArray *buttons = [[NSMutableArray alloc] init];
-    VLMToolCollection *tools = [VLMToolCollection instance];
     UIView *back;
     VLMScrollView *sv;
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         topleft = CGPointMake(innermargin, innermargin);
 
@@ -111,8 +121,8 @@
     }
 
     for (int i = 0; i < [tools.tools count]; i++) {
-        CGFloat x = topleft.x + i * (buttonsize+1);//topleft.x + (i % 3) * (buttonsize + 1);
-        CGFloat y = topleft.y;//topleft.y + floor(i / 3) * (buttonsize + 1);
+        CGFloat x = topleft.x + i * (buttonsize+1);
+        CGFloat y = topleft.y;
         CGRect r = CGRectMake(x, y, buttonsize, buttonsize);
         VLMToolData *tool = (VLMToolData *)(tools.tools[i]);
         
@@ -121,15 +131,19 @@
         [item setUserInteractionEnabled:!tool.selected];
         [item setText:tool.name];
         [item setTag:i];
-        //[back addSubview:item];
         [sv addSubview:item];
         [buttons addObject:item];
         [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        
+        VLMOpaButton *opa = [[VLMOpaButton alloc] initWithFrame:r];
+        [opa setTag:i];
+        [opa addTarget:self action:@selector(selectedItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [sv addSubview:opa];
+        [opabuttons addObject:opa];
     }
     
     [self.view setAlpha:0.0];
     [self.view setUserInteractionEnabled:NO];
-    [self setToolbuttons:buttons];
     
     
 }
@@ -145,20 +159,22 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION];
+    [UIView setAnimationDuration:ANIMATION_DURATION*2];
     [self.view setAlpha:1.0];
     [UIView commitAnimations];
     [self.view setUserInteractionEnabled:YES];
+    [self updatebuttons];
 }
 
 - (void)hide {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION];
+    [UIView setAnimationDuration:ANIMATION_DURATION*2];
     [self.view setAlpha:0.0];
     [UIView commitAnimations];
     [self.view setUserInteractionEnabled:NO];
+    [self updatebuttons];
 }
 
 - (void)updatebuttons {
@@ -166,10 +182,17 @@
         [b setUserInteractionEnabled:YES];
         [b setSelected:NO];
     }
+    for (VLMOpaButton *b in self.opabuttons) {
+        [b hide];
+    }
+    
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMMenuButton *mb = (VLMMenuButton *)[self.toolbuttons objectAtIndex:tools.selectedIndex];
     [mb setUserInteractionEnabled:NO];
     [mb setSelected:YES];
+    
+    VLMOpaButton *op = (VLMOpaButton *)[self.opabuttons objectAtIndex:tools.selectedIndex];
+    [op show];
 }
 
 #pragma mark - private ()
@@ -194,6 +217,19 @@
     if (self.delegate != nil) {
         if (selecteditem.enabled) [self.delegate updateHeader];
         else [self.delegate updateHeaderWithTitle:selecteditem.name];
+    }
+    [self.delegate hideColorMenu];
+
+}
+
+- (void)selectedItemTapped:(id)sender{
+    VLMOpaButton *ob = (VLMOpaButton *)sender;
+    NSInteger tag = ob.tag;
+    NSLog(@"selected item tapped : %i", tag);
+    if ([self.delegate isColorMenuOpen]){
+        [self.delegate hideColorMenu];
+    } else {
+        [self.delegate showColorMenu];
     }
 }
 
