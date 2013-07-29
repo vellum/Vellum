@@ -243,6 +243,10 @@
     self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
     self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
 
+    
+    UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
+    [sgr setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:sgr];
 }
 
 - (void)didReceiveMemoryWarning
@@ -408,4 +412,8 @@
 }
 
 
+# pragma mark - swipe recco
+- (void)hoswipe:(id)sender{
+    [self done];
+}
 @end
