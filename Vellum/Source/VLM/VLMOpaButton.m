@@ -68,7 +68,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION];
+    [UIView setAnimationDuration:ANIMATION_DURATION*2];
     [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h*2)];
     [self setAlpha:0.0f];
     [UIView commitAnimations];
