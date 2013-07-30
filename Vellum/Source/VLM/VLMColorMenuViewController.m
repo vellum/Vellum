@@ -100,6 +100,15 @@
     [line setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [line setContentMode:UIViewContentModeCenter];
 
+    
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(innermargin, self.view.frame.size.height, self.view.frame.size.width-innermargin*2, 1.0f)];
+    [line2 setBackgroundColor:[UIColor grayColor]];
+    [line2 setAlpha:0.05f];
+    [line2 setUserInteractionEnabled:NO];
+    [self.view addSubview:line2];
+    [line2 setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [line2 setContentMode:UIViewContentModeCenter];
+
     [self.view setAlpha:0.0f];
     [self hide];
 }
