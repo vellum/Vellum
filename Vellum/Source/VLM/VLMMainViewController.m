@@ -43,6 +43,7 @@
 @property (assign, nonatomic) UIPopoverController *rightPopover;
 @property BOOL firstTime;
 @property BOOL isPortrait;
+@property BOOL didJustWake;
 @property (strong, nonatomic) VLMColorMenuViewController *colorMenuViewController;
 
 - (void)handleOneFingerPan:(id)sender;
@@ -74,6 +75,7 @@
 @synthesize rightPopover;
 @synthesize isPortrait;
 @synthesize colorMenuViewController;
+@synthesize didJustWake;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -98,6 +100,7 @@
     [self setIsPortrait:YES];
     CGRect frame = UIScreen.mainScreen.bounds;
     UIView *t = [[UIView alloc] initWithFrame:frame];
+    [self setDidJustWake:NO];
     [t setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     //EJAppViewController *vc = [[EJAppViewController alloc] init];
     VLMZoomViewController *z = [[VLMZoomViewController alloc] init];
@@ -404,6 +407,7 @@
     }
     if ( [self.colorMenuViewController isOpen] ){
         [self.colorMenuViewController singleTapToggle];
+        //[self.colorMenuViewController hide];
     }
     
     [UIView animateWithDuration:0.25f
@@ -510,6 +514,7 @@
 }
 
 - (void)enteredForeground {
+    [self setDidJustWake:YES];
     UIView *h = self.headerController.view;
     [h setUserInteractionEnabled:YES];
     [self.infoButton setUserInteractionEnabled:YES];
@@ -532,6 +537,8 @@
         [self.headerController showPopover];
         
     }
+    [self.colorMenuViewController wake];
+
 }
 
 
@@ -567,7 +574,11 @@
 
 - (void)showPopover {
     [self.pop show];
-    [self.colorMenuViewController hide];
+    if (!self.didJustWake){
+        [self.colorMenuViewController hide];
+    } else {
+        [self setDidJustWake:NO];
+    }
 }
 
 - (void)hidePopover {

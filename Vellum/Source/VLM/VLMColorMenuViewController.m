@@ -204,6 +204,7 @@
 }
 
 - (void)singleTapToggle{
+    if ( ![self isOpen] ) return;
     if ( [self isVisible] ){
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDelay:0.0f];
@@ -226,6 +227,18 @@
 - (BOOL)isVisible{
     if ( self.view.alpha == 1.0f ) return YES;
     return NO;
+}
+
+- (void)wake{
+    if ( [self isOpen] && ![self isVisible]){
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0.0f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
+        [self.view setAlpha:1.0f];
+        [UIView commitAnimations];
+        [self.view setUserInteractionEnabled:YES];
+    }
 }
 
 #pragma mark - private ()

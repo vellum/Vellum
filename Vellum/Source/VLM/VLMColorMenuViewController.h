@@ -15,4 +15,5 @@
 - (BOOL)isOpen;
 - (void)singleTapToggle;
 - (BOOL)isVisible;
+- (void)wake;
 @end
