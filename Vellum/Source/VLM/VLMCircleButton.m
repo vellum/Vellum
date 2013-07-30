@@ -16,7 +16,11 @@
 @property (nonatomic, strong) UIView *shade;
 @property (nonatomic, strong) UIView *outie;
 @property (nonatomic, strong) UIView *innie;
+// ios 6
 @property (nonatomic, strong) UILabel *label;
+// ios 5
+@property (nonatomic, strong) UILabel *labelhead;
+@property (nonatomic, strong) UILabel *labeltext;
 @property (nonatomic, strong) UIView *back;
 @end
 
@@ -26,6 +30,7 @@
 @synthesize outie;
 @synthesize innie;
 @synthesize label;
+@synthesize labelhead;
 @synthesize back;
 
 - (id)initWithFrame:(CGRect)frame
@@ -63,6 +68,24 @@
         [self.label setBackgroundColor:[UIColor clearColor]];
         [self.label setNumberOfLines:2];
         [self.back addSubview:self.label];
+        
+        [self setLabelhead:[[UILabel alloc] initWithFrame:CGRectMake(0, 11, frame.size.width, frame.size.height/2.0f)]];
+        [self.labelhead setFont:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f]];
+        [self.labelhead setTextAlignment:NSTextAlignmentCenter];
+        [self.labelhead setTextColor:[UIColor blackColor]];
+        [self.labelhead setBackgroundColor:[UIColor clearColor]];
+        [self.labelhead setNumberOfLines:1];
+        //[self.labelhead setText:@"////"];
+        [self.back addSubview:self.labelhead];
+        
+        [self setLabeltext:[[UILabel alloc] initWithFrame:CGRectMake(0, 25, frame.size.width, frame.size.height/2.0f)]];
+        [self.labeltext setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
+        [self.labeltext setTextAlignment:NSTextAlignmentCenter];
+        [self.labeltext setTextColor:[UIColor blackColor]];
+        [self.labeltext setBackgroundColor:[UIColor clearColor]];
+        [self.labeltext setNumberOfLines:1];
+        //[self.labeltext setText:@"////"];
+        [self.back addSubview:self.labeltext];
         
         [self setShade:[[UIView alloc] initWithFrame:outie.frame]];
         [self.shade setUserInteractionEnabled:NO];
@@ -137,10 +160,14 @@
 
     if ( selected ){
         [self.label setTextColor:[UIColor whiteColor]];
+        [self.labelhead setTextColor:[UIColor whiteColor]];
+        [self.labeltext setTextColor:[UIColor whiteColor]];
         [self.outie setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:0.5f]];
         [self.innie setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
     } else {
         [self.label setTextColor:[UIColor blackColor]];
+        [self.labelhead setTextColor:[UIColor blackColor]];
+        [self.labeltext setTextColor:[UIColor blackColor]];
         [self.outie setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
         [self.innie setBackgroundColor:[UIColor whiteColor]];
         
@@ -157,6 +184,12 @@
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
             [att setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f]} range:NSMakeRange(0, location)];
             [self.label setAttributedText:att];
+            return;
+        } else {
+            NSString *sub1 = [text substringWithRange:NSMakeRange(0, location)];
+            NSString *sub2 = [text substringWithRange:NSMakeRange(location+1, text.length - (location+1))];
+            [self.labelhead setText:sub1];
+            [self.labeltext setText:sub2];
             return;
         }
     }
