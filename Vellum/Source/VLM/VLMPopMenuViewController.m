@@ -139,10 +139,14 @@
         [buttons addObject:item];
         [item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
         
+        NSUInteger location = [tool.name rangeOfString:@" " options:NSCaseInsensitiveSearch].location;
         VLMOpaButton *opa = [[VLMOpaButton alloc] initWithFrame:r];
         [opa setTag:i];
         [opa addTarget:self action:@selector(selectedItemTapped:) forControlEvents:UIControlEventTouchUpInside];
         [sv addSubview:opa];
+        if (location != NSNotFound){
+            [opa shiftY];
+        }
         [opabuttons addObject:opa];
     }
     

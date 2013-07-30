@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VLMToolData.h"
 
 @interface VLMCircleButton : UIButton
 
@@ -15,5 +16,5 @@
 - (void)showWithDelay:(CGFloat)delay;
 - (void)hideWithDelay:(CGFloat)delay;
 - (void)setText:(NSString*)text;
-
+- (void)setTool:(VLMToolData *)tool;
 @end

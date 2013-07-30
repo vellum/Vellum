@@ -89,7 +89,7 @@
     innermargin = 10.0f;
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(innermargin, self.view.frame.size.height-1, self.view.frame.size.width-innermargin*2, 1.0f)];
     [line setBackgroundColor:[UIColor whiteColor]];
-    [line setAlpha:0.5f];
+    [line setAlpha:0.75f];
     [line setUserInteractionEnabled:NO];
     [self.view addSubview:line];
     [line setAutoresizingMask:UIViewAutoresizingFlexibleWidth];

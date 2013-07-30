@@ -162,4 +162,8 @@
     [self.label setText:text];
 }
 
+- (void)setTool:(VLMToolData *)tool{
+    
+}
+
 @end

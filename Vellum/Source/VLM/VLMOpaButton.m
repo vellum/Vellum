@@ -16,6 +16,7 @@
 @interface VLMOpaButton ()
 @property (nonatomic, strong) UIView *shade;
 @property (nonatomic, strong) UIView *contentview;
+@property (nonatomic, strong) UIView *xview;
 @property CGRect contentrect;
 @end
 
@@ -23,6 +24,7 @@
 @synthesize shade;
 @synthesize contentview;
 @synthesize contentrect;
+@synthesize xview;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -47,6 +49,7 @@
         
         VLMCustomXView *b = [[VLMCustomXView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, h)];
         [content addSubview:b];
+        [self setXview:b];
         
         [self setBackgroundColor:[UIColor clearColor]];
         [self setShade:[[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)]];
@@ -143,5 +146,8 @@
         [self setAlpha:1.0f];
         [UIView commitAnimations];
     }
+}
+-(void) shiftY{
+    [self.xview setFrame:CGRectOffset(self.xview.frame, 0, 3.0f)];
 }
 @end
