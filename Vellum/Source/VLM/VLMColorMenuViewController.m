@@ -123,15 +123,11 @@
 
 - (void)show {
     [self updatebuttons];
+    [self resetScroll];
     [self setOpen:YES];
-    //VLMToolCollection *tools = [VLMToolCollection instance];
-    //VLMToolData *tool = [[tools tools] objectAtIndex:[tools selectedIndex]];
-    //UIButton *b = [self.buttons objectAtIndex:tool.selectedColorIndex];
-    
-    //[self.scrollview scrollRectToVisible:CGRectMake(b.frame.origin.x+b.frame.size.width, 1, 1, 1) animated:NO];
-    //[self.scrollview scrollRectToVisible:b.frame animated:NO];
     [self.view setUserInteractionEnabled:YES];
 
+    
     CGFloat offx = [self.scrollview contentOffset].x;
     int start = 0;
     for ( int i = 0; i < [self.buttons count]; i++){
@@ -201,6 +197,7 @@
 
 - (void)update{
     [self updatebuttons];
+    [self resetScroll];
 }
 
 - (void)singleTapToggle{
@@ -260,8 +257,18 @@
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
         [circle setSelected:ind==i];
     }
-
 }
 
+- (void)resetScroll{
+    NSLog(@"resetscroll");
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
+    UIButton *b = [self.buttons objectAtIndex:selectedtool.selectedColorIndex];
+    
+    CGFloat page = floorf((selectedtool.selectedColorIndex*75.0f + 75 + 3) / self.scrollview.frame.size.width);
+    [self.scrollview scrollRectToVisible:CGRectMake(page*self.scrollview.frame.size.width, 0, self.scrollview.frame.size.width, 1) animated:YES];
+    
+
+}
 
 @end
