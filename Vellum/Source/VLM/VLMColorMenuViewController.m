@@ -263,12 +263,8 @@
     NSLog(@"resetscroll");
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
-    UIButton *b = [self.buttons objectAtIndex:selectedtool.selectedColorIndex];
-    
     CGFloat page = floorf((selectedtool.selectedColorIndex*75.0f + 75 + 3) / self.scrollview.frame.size.width);
     [self.scrollview scrollRectToVisible:CGRectMake(page*self.scrollview.frame.size.width, 0, self.scrollview.frame.size.width, 1) animated:YES];
-    
-
 }
 
 @end
