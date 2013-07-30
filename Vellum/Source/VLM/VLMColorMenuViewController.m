@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) UIView *outie;
 @property (nonatomic, strong) UIView *innie;
+@property (nonatomic) BOOL open;
 @end
 
 @implementation VLMColorMenuViewController
@@ -25,6 +26,7 @@
 @synthesize scrollview;
 @synthesize outie;
 @synthesize innie;
+@synthesize open;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -112,7 +114,7 @@
 
 - (void)show {
     [self updatebuttons];
-    
+    [self setOpen:YES];
     //VLMToolCollection *tools = [VLMToolCollection instance];
     //VLMToolData *tool = [[tools tools] objectAtIndex:[tools selectedIndex]];
     //UIButton *b = [self.buttons objectAtIndex:tool.selectedColorIndex];
@@ -143,6 +145,7 @@
 }
 
 - (void)hide {
+    [self setOpen:NO];
     
     for (int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
@@ -183,10 +186,37 @@
 }
 
 - (BOOL)isOpen{
-    return self.view.userInteractionEnabled;
+    return self.open;
+//    return self.view.userInteractionEnabled;
 }
+
 - (void)update{
     [self updatebuttons];
+}
+
+- (void)singleTapToggle{
+    if ( [self isVisible] ){
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0.0f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
+        [self.view setAlpha:0.0f];
+        [UIView commitAnimations];
+        [self.view setUserInteractionEnabled:NO];
+    } else {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDelay:0.0f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationDuration:ANIMATION_DURATION];
+        [self.view setAlpha:1.0f];
+        [UIView commitAnimations];
+        [self.view setUserInteractionEnabled:YES];
+    }
+}
+
+- (BOOL)isVisible{
+    if ( self.view.alpha == 1.0f ) return YES;
+    return NO;
 }
 
 #pragma mark - private ()

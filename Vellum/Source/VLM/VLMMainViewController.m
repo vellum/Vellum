@@ -402,8 +402,8 @@
             [self.pop hide];
         }
     }
-    if ( self.colorMenuViewController.isOpen ){
-        [self.colorMenuViewController hide];
+    if ( [self.colorMenuViewController isOpen] ){
+        [self.colorMenuViewController singleTapToggle];
     }
     
     [UIView animateWithDuration:0.25f

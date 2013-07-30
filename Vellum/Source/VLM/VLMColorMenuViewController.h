@@ -13,4 +13,6 @@
 - (void)show;
 - (void)update;
 - (BOOL)isOpen;
+- (void)singleTapToggle;
+- (BOOL)isVisible;
 @end
