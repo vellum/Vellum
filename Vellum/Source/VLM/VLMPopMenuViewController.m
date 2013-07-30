@@ -203,6 +203,9 @@
     }
     VLMOpaButton *op = (VLMOpaButton *)[self.opabuttons objectAtIndex:tools.selectedIndex];
     [op show];
+    if ([delegate isColorMenuOpen]) {
+        [op open];// force the button into an open state
+    }
 }
 
 #pragma mark - private ()
@@ -220,16 +223,15 @@
     VLMToolData *selecteditem = (VLMToolData *)[tools.tools objectAtIndex:tag];
     [selecteditem setSelected:YES];
     
-    // update buttons
-    [self updatebuttons];
-    
     // update toolheader (and glview)
     if (self.delegate != nil) {
         if (selecteditem.enabled) [self.delegate updateHeader];
         else [self.delegate updateHeaderWithTitle:selecteditem.name];
     }
-    [self.delegate hideColorMenu];
-
+    
+    [self.delegate updateColorMenu];
+    // update buttons
+    [self updatebuttons];
 }
 
 - (void)selectedItemTapped:(id)sender{

@@ -16,5 +16,6 @@
 - (void)showNoAnimation;
 - (void)hideNoAnimation;
 
--(void) shiftY;
+-(void)shiftY;
+-(void)open;
 @end

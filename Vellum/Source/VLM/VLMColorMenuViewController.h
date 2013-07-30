@@ -11,5 +11,6 @@
 @interface VLMColorMenuViewController : UIViewController
 - (void)hide;
 - (void)show;
+- (void)update;
 - (BOOL)isOpen;
 @end

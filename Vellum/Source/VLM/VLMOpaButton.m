@@ -138,15 +138,20 @@
         [UIView commitAnimations];
 
     } else {
-        [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDelay:0.0f];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationDuration:ANIMATION_DURATION *2];
-        [self.contentview setFrame:CGRectOffset(self.contentrect, 0, 0)];
-        [self setAlpha:1.0f];
-        [UIView commitAnimations];
+        [self open];
     }
 }
+-(void)open{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:ANIMATION_DURATION *2];
+    [self.contentview setFrame:CGRectOffset(self.contentrect, 0, 0)];
+    [self setAlpha:1.0f];
+    [UIView commitAnimations];
+
+}
+
 -(void) shiftY{
     [self.xview setFrame:CGRectOffset(self.xview.frame, 0, 3.0f)];
 }

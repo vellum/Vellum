@@ -76,11 +76,11 @@ static VLMToolCollection *sharedToolCollection;
                                    nil];
         
         [self setColorlabels:[NSArray arrayWithObjects:
-                                    @"DARK\n100",
+                                    @"BLACK\n100",
                                     @"75",
                                     @"50",
                                     @"25",
-                                    @"LIGHT\n25",
+                                    @"ERASE\n25",
                                     @"50",
                                     @"75",
                                     @"100",

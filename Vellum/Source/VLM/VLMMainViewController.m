@@ -626,6 +626,9 @@
 - (void)hideColorMenu{
     [self.colorMenuViewController hide];
 }
+- (void)updateColorMenu{
+    [self.colorMenuViewController update];
+}
 - (BOOL)isColorMenuOpen{
     return [self.colorMenuViewController isOpen];
 }

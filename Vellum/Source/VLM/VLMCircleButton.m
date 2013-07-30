@@ -71,6 +71,7 @@
         [self.shade setAlpha:0.0f];
         [self addSubview:self.shade];
         
+        [self hide];
         [self setBackgroundColor:[UIColor clearColor]];
 
     }
@@ -102,7 +103,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:ANIMATION_DURATION];
     [self setFrame:CGRectMake(originalRect.origin.x + originalRect.size.width/2.0f, originalRect.size.height/2.0f, 0.0f, 0.0f)];
-    //[self.back setFrame:CGRectMake(-originalRect.size.width/2.0f, -originalRect.size.height/2.0f, originalRect.size.width, originalRect.size.height)];
+    //[self.back setFrame:CGRectMake(-originalRect.size.width/2.0f, 0, originalRect.size.width, originalRect.size.height)];
     [UIView commitAnimations];
 }
 

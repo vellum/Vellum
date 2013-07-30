@@ -17,6 +17,7 @@
 - (void)refreshData;
 - (void)showColorMenu;
 - (void)hideColorMenu;
+- (void)updateColorMenu;
 - (BOOL)isColorMenuOpen;
 @end
 

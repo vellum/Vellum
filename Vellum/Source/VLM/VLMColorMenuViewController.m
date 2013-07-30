@@ -12,6 +12,7 @@
 #import "VLMScrollView.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+
 @interface VLMColorMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *buttons;
 @property (nonatomic, strong) UIScrollView *scrollview;
@@ -52,7 +53,7 @@
     
     CGPoint topleft;
     topleft = CGPointMake(innermargin, innermargin);
-        
+    
     [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 5.0f, winw, buttonsize + margin*2 + innermargin*2)];
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view setContentMode:UIViewContentModeCenter];
@@ -61,6 +62,8 @@
 
     VLMScrollView *sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [sv setContentSize:CGSizeMake(innermargin*2 + numbuttons * (buttonsize+pad), buttonsize+pad)];
+    [sv setPagingEnabled:YES];
+    
 
     [sv setBackgroundColor:[UIColor clearColor]];
     [sv setCanCancelContentTouches:YES];
@@ -109,12 +112,27 @@
 
 - (void)show {
     [self updatebuttons];
+    
+    //VLMToolCollection *tools = [VLMToolCollection instance];
+    //VLMToolData *tool = [[tools tools] objectAtIndex:[tools selectedIndex]];
+    //UIButton *b = [self.buttons objectAtIndex:tool.selectedColorIndex];
+    
+    //[self.scrollview scrollRectToVisible:CGRectMake(b.frame.origin.x+b.frame.size.width, 1, 1, 1) animated:NO];
+    //[self.scrollview scrollRectToVisible:b.frame animated:NO];
+    [self.view setUserInteractionEnabled:YES];
+
+    CGFloat offx = [self.scrollview contentOffset].x;
+    int start = 0;
     for ( int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
-        [circle show];
+        if (circle.frame.origin.x-offx<0){
+            start = i;
+            [circle showWithDelay:0];
+        } else {
+            [circle showWithDelay:(i-start)*0.1f];
+        }
     }
-    [self.scrollview scrollRectToVisible:CGRectMake(1, 0, 1, 1) animated:NO];
-    [self.view setUserInteractionEnabled:YES];
+
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0f];
@@ -166,6 +184,9 @@
 
 - (BOOL)isOpen{
     return self.view.userInteractionEnabled;
+}
+- (void)update{
+    [self updatebuttons];
 }
 
 #pragma mark - private ()
