@@ -152,7 +152,7 @@
 		BD9D5D7A17A5C9DF00CEA793 /* VLMCustomXView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D7917A5C9DF00CEA793 /* VLMCustomXView.m */; };
 		BD9D5D7D17A5E4A900CEA793 /* VLMCustomBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D7C17A5E4A900CEA793 /* VLMCustomBarView.m */; };
 		BD9D5D8117A617FF00CEA793 /* VLMColorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D8017A617FF00CEA793 /* VLMColorMenuViewController.m */; };
-		BD9D5D8517A62F7100CEA793 /* VLMCircleMaskedView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D8417A62F7100CEA793 /* VLMCircleMaskedView.m */; };
+		BD9D5D8817A72B2C00CEA793 /* VLMCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D8717A72B2C00CEA793 /* VLMCircleButton.m */; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
 		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -429,8 +429,8 @@
 		BD9D5D7C17A5E4A900CEA793 /* VLMCustomBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMCustomBarView.m; path = VLM/VLMCustomBarView.m; sourceTree = "<group>"; };
 		BD9D5D7F17A617FF00CEA793 /* VLMColorMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMColorMenuViewController.h; path = VLM/VLMColorMenuViewController.h; sourceTree = "<group>"; };
 		BD9D5D8017A617FF00CEA793 /* VLMColorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMColorMenuViewController.m; path = VLM/VLMColorMenuViewController.m; sourceTree = "<group>"; };
-		BD9D5D8317A62F7100CEA793 /* VLMCircleMaskedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMCircleMaskedView.h; path = VLM/VLMCircleMaskedView.h; sourceTree = "<group>"; };
-		BD9D5D8417A62F7100CEA793 /* VLMCircleMaskedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMCircleMaskedView.m; path = VLM/VLMCircleMaskedView.m; sourceTree = "<group>"; };
+		BD9D5D8617A72B2C00CEA793 /* VLMCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMCircleButton.h; path = VLM/VLMCircleButton.h; sourceTree = "<group>"; };
+		BD9D5D8717A72B2C00CEA793 /* VLMCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMCircleButton.m; path = VLM/VLMCircleButton.m; sourceTree = "<group>"; };
 		BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMDrawHeaderController.h; path = VLM/VLMDrawHeaderController.h; sourceTree = "<group>"; };
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
@@ -870,8 +870,8 @@
 			children = (
 				BD9D5D7F17A617FF00CEA793 /* VLMColorMenuViewController.h */,
 				BD9D5D8017A617FF00CEA793 /* VLMColorMenuViewController.m */,
-				BD9D5D8317A62F7100CEA793 /* VLMCircleMaskedView.h */,
-				BD9D5D8417A62F7100CEA793 /* VLMCircleMaskedView.m */,
+				BD9D5D8617A72B2C00CEA793 /* VLMCircleButton.h */,
+				BD9D5D8717A72B2C00CEA793 /* VLMCircleButton.m */,
 			);
 			name = Color;
 			sourceTree = "<group>";
@@ -1284,7 +1284,7 @@
 				BD9D5D7A17A5C9DF00CEA793 /* VLMCustomXView.m in Sources */,
 				BD9D5D7D17A5E4A900CEA793 /* VLMCustomBarView.m in Sources */,
 				BD9D5D8117A617FF00CEA793 /* VLMColorMenuViewController.m in Sources */,
-				BD9D5D8517A62F7100CEA793 /* VLMCircleMaskedView.m in Sources */,
+				BD9D5D8817A72B2C00CEA793 /* VLMCircleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

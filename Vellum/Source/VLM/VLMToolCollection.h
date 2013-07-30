@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) NSMutableArray *tools;
 @property (nonatomic) NSInteger selectedIndex;
+@property (nonatomic, strong) NSArray *colorlabels;
 
 + (VLMToolCollection *)instance;
 - (NSMutableArray *)getEnabledTools;

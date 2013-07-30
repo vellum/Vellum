@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
-        yoffset = -2.0f;
+        yoffset = 2.0f;//-2.0f;
     }
     return self;
 }
@@ -28,10 +28,10 @@
     CGFloat midy = roundf(rect.size.height / 2.0f);
     CGFloat midx = roundf(rect.size.width / 2.0f);
     
-    CGFloat w = 12.0f;
+    CGFloat w = 10.0f;
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.0f alpha:0.75f].CGColor);
     CGContextSetLineWidth(context, 1.0f);
     
     CGContextMoveToPoint(context, roundf(midx-w/2.0f), roundf(midy - w/2.0f + yoffset));

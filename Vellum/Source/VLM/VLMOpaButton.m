@@ -63,29 +63,39 @@
 
 - (void)hide{
     [self setUserInteractionEnabled:NO];
-    //[self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h*2)];
-
+    if ([self isSubMenuOpen]) {
+        [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h*2)];
+        return;
+    }
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:ANIMATION_DURATION*2];
     [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h*2)];
-    [self setAlpha:0.0f];
+    //[self setAlpha:0.0f];
     [UIView commitAnimations];
     
 }
 
 - (void)show{
     [self setUserInteractionEnabled:YES];
-    //[self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h)];
-
+    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDelay:0.0f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:ANIMATION_DURATION*2];
     [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h)];
-    [self setAlpha:1.0f];
+    //[self setAlpha:1.0f];
     [UIView commitAnimations];
+}
+- (void)showNoAnimation{
+    [self setUserInteractionEnabled:YES];
+    [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h)];
+}
+- (void)hideNoAnimation{
+    [self setUserInteractionEnabled:NO];
+    [self.contentview setFrame:CGRectOffset(self.contentrect, 0, -h*2)];
 }
 
 

@@ -10,7 +10,9 @@
 
 @interface VLMOpaButton : UIButton
 
-- (void)hide;
 - (void)show;
+- (void)hide;
 
+- (void)showNoAnimation;
+- (void)hideNoAnimation;
 @end

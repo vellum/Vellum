@@ -402,6 +402,9 @@
             [self.pop hide];
         }
     }
+    if ( self.colorMenuViewController.isOpen ){
+        [self.colorMenuViewController hide];
+    }
     
     [UIView animateWithDuration:0.25f
                           delay:0.0f

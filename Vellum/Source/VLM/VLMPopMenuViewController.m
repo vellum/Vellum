@@ -50,7 +50,7 @@
     CGFloat margin = 0.0f;
     CGFloat innermargin = 3.0f;
     CGFloat pad = 1;
-    CGFloat buttonsize = 75.0f;
+    CGFloat buttonsize = 74.0f;
 
     CGPoint topleft;
     UIView *back;
@@ -87,6 +87,10 @@
         [sv setAlwaysBounceHorizontal:YES];
         [sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         [sv setContentMode:UIViewContentModeCenter];
+        
+        [sv setShowsHorizontalScrollIndicator:NO];
+        [sv setShowsVerticalScrollIndicator:NO];
+
         [self.view addSubview:sv];
 
     } else {
@@ -182,15 +186,17 @@
         [b setUserInteractionEnabled:YES];
         [b setSelected:NO];
     }
-    for (VLMOpaButton *b in self.opabuttons) {
-        [b hide];
-    }
     
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMMenuButton *mb = (VLMMenuButton *)[self.toolbuttons objectAtIndex:tools.selectedIndex];
     [mb setUserInteractionEnabled:NO];
     [mb setSelected:YES];
     
+    for (VLMOpaButton *b in self.opabuttons) {
+        if (b.tag != tools.selectedIndex){
+            [b hide];
+        }
+    }
     VLMOpaButton *op = (VLMOpaButton *)[self.opabuttons objectAtIndex:tools.selectedIndex];
     [op show];
 }

@@ -8,15 +8,22 @@
 
 #import "VLMColorMenuViewController.h"
 #import "VLMConstants.h"
-#import "VLMCircleMaskedView.h"
-
+#import "VLMCircleButton.h"
+#import "VLMScrollView.h"
+#import "VLMToolCollection.h"
+#import "VLMToolData.h"
 @interface VLMColorMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *buttons;
-
+@property (nonatomic, strong) UIScrollView *scrollview;
+@property (nonatomic, strong) UIView *outie;
+@property (nonatomic, strong) UIView *innie;
 @end
 
 @implementation VLMColorMenuViewController
 @synthesize buttons;
+@synthesize scrollview;
+@synthesize outie;
+@synthesize innie;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,13 +42,13 @@
     buttons = [[NSMutableArray alloc] init];
 
     [self.view setBackgroundColor:[UIColor clearColor]];
-    [self.view setAlpha:0.0f];
+    //[self.view setAlpha:0.0f];
     CGFloat winw = [[UIScreen mainScreen] bounds].size.width;
 
     CGFloat margin = 0.0f;
     CGFloat innermargin = 3.0f;
     CGFloat pad = 1;
-    CGFloat buttonsize = 75.0f;
+    CGFloat buttonsize = 74.0f;
     
     CGPoint topleft;
     topleft = CGPointMake(innermargin, innermargin);
@@ -50,14 +57,45 @@
     [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.view setContentMode:UIViewContentModeCenter];
 
-    for ( int i = 0; i < 10; i++){
-        VLMCircleMaskedView *circle = [[VLMCircleMaskedView alloc] initWithFrame:CGRectMake(i * 75, 0, buttonsize, buttonsize)];
+    NSInteger numbuttons = [[[VLMToolCollection instance] colorlabels] count];
+
+    VLMScrollView *sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [sv setContentSize:CGSizeMake(innermargin*2 + numbuttons * (buttonsize+pad), buttonsize+pad)];
+
+    [sv setBackgroundColor:[UIColor clearColor]];
+    [sv setCanCancelContentTouches:YES];
+    [sv setAlwaysBounceHorizontal:YES];
+    [sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [sv setContentMode:UIViewContentModeCenter];
+    
+    [sv setShowsHorizontalScrollIndicator:NO];
+    [sv setShowsVerticalScrollIndicator:NO];
+    
+    [self setScrollview:sv];
+    [self.view addSubview:sv];
+    self.scrollview.canCancelContentTouches = YES;
+    
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    for ( int i = 0; i < numbuttons; i++){
+        VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake( innermargin + i * (buttonsize+pad), 0, buttonsize+pad, buttonsize+pad)];
         [circle setTag:i];
-        [self.view addSubview:circle];
+        [sv addSubview:circle];
         [buttons addObject:circle];
+        [circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        NSString *text = [[tools colorlabels] objectAtIndex:i];
+        [circle setText:text];
     }
-    
-    
+
+    innermargin = 10.0f;
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(innermargin, self.view.frame.size.height-1, self.view.frame.size.width-innermargin*2, 1.0f)];
+    [line setBackgroundColor:[UIColor whiteColor]];
+    [line setAlpha:0.5f];
+    [line setUserInteractionEnabled:NO];
+    [self.view addSubview:line];
+    [line setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [line setContentMode:UIViewContentModeCenter];
+
+    [self.view setAlpha:0.0f];
     [self hide];
 }
 
@@ -70,36 +108,87 @@
 #pragma mark - public ()
 
 - (void)show {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDelay:0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION*2];
-    [self.view setAlpha:1.0];
-
+    [self updatebuttons];
     for ( int i = 0; i < [self.buttons count]; i++){
-        VLMCircleMaskedView *circle = (VLMCircleMaskedView*)[self.buttons objectAtIndex:i];
+        VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
         [circle show];
     }
-
-    [UIView commitAnimations];
+    [self.scrollview scrollRectToVisible:CGRectMake(1, 0, 1, 1) animated:NO];
     [self.view setUserInteractionEnabled:YES];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:ANIMATION_DURATION*2];
+    [self.view setAlpha:1.0f];
+    [UIView commitAnimations];
 }
 
 - (void)hide {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDelay:0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION*2];
-    [self.view setAlpha:0.0];
-    for ( int i = 0; i < [self.buttons count]; i++){
-        VLMCircleMaskedView *circle = (VLMCircleMaskedView*)[self.buttons objectAtIndex:i];
-        [circle hide];
+    
+    for (int i = 0; i < [self.buttons count]; i++){
+        VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
+        [circle hideWithDelay:0.0f];
     }
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDelay:0.0f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
+    [self.view setAlpha:0.0f];
     [UIView commitAnimations];
+
+    /*
+     CGPoint offset = [self.scrollview contentOffset];
+     NSInteger firstindex = -1;
+    for (int i = 0; i < [self.buttons count]; i++){
+        VLMCircleMaskedView *circle = (VLMCircleMaskedView*)[self.buttons objectAtIndex:i];
+        CGFloat x = circle.frame.origin.x - offset.x;
+        if (x > 0 && firstindex==-1){
+            firstindex = i;
+        }
+    }
+    NSInteger lastindex = firstindex + (NSInteger)(self.view.frame.size.width/75);
+    if ( lastindex > [self.buttons count]-1 ){
+        lastindex = [self.buttons count]-1;
+    }
+    for (int i = [self.buttons count]-1; i>=0; i--){
+        CGFloat delay = 0;
+        VLMCircleMaskedView *circle = (VLMCircleMaskedView*)[self.buttons objectAtIndex:i];
+        delay = (lastindex-i) * 0.025f;
+        if ( delay < 0 ) delay = 0;
+        [circle hideWithDelay:delay];
+
+    }
+     */
     [self.view setUserInteractionEnabled:NO];
 }
 
 - (BOOL)isOpen{
     return self.view.userInteractionEnabled;
 }
+
+#pragma mark - private ()
+
+- (void)menuItemTapped:(id)sender {
+    VLMCircleButton *mb = (VLMCircleButton *)sender;
+    NSInteger tag = mb.tag;
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
+    [selectedtool setSelectedColorIndex:tag];
+    [self updatebuttons];
+}
+
+- (void)updatebuttons{
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
+    NSInteger ind = [selectedtool selectedColorIndex];
+    for (int i = 0; i < [self.buttons count]; i++){
+        VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
+        [circle setSelected:ind==i];
+    }
+
+}
+
+
 @end

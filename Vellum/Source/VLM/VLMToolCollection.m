@@ -11,6 +11,7 @@
 
 @implementation VLMToolCollection
 @synthesize tools;
+@synthesize colorlabels;
 
 static VLMToolCollection *sharedToolCollection;
 
@@ -74,6 +75,27 @@ static VLMToolCollection *sharedToolCollection;
                                    [NSNumber numberWithBool:YES],
                                    nil];
         
+        [self setColorlabels:[NSArray arrayWithObjects:
+                                    @"DARK\n100",
+                                    @"75",
+                                    @"50",
+                                    @"25",
+                                    @"LIGHT\n25",
+                                    @"50",
+                                    @"75",
+                                    @"100",
+                                    nil]];
+        NSArray *colorindices = [NSArray arrayWithObjects:
+                                  [NSNumber numberWithInt:0],
+                                  [NSNumber numberWithInt:1],
+                                  [NSNumber numberWithInt:0],
+                                  [NSNumber numberWithInt:0],
+                                  [NSNumber numberWithInt:0],
+                                  [NSNumber numberWithInt:7],
+                                  [NSNumber numberWithInt:7],
+                                  [NSNumber numberWithInt:4],
+                                  [NSNumber numberWithInt:7],
+                                  nil];
         NSInteger selectedIndex = 0;
         
         for (int i = 0; i < [names count]; i++) {
@@ -83,6 +105,8 @@ static VLMToolCollection *sharedToolCollection;
             [data setEnabled:[[enableds objectAtIndex:i] boolValue]];
             [data setSelected:(i == selectedIndex)];
             [data setIsSubtractive:[[isSubtractives objectAtIndex:i] boolValue]];
+            NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
+            [data setSelectedColorIndex:sel];
             [self.tools addObject:data];
         }
     }

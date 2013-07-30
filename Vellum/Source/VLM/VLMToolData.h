@@ -15,5 +15,6 @@
 @property (nonatomic) BOOL selected;
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL isSubtractive;
+@property (nonatomic) NSInteger selectedColorIndex;
 - (id)init;
 @end

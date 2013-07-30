@@ -15,6 +15,7 @@
 @synthesize selected;
 @synthesize enabled;
 @synthesize isSubtractive;
+@synthesize selectedColorIndex;
 
 - (id)init {
     if (self = [super init]) {
@@ -23,6 +24,7 @@
         [self setSelected:NO];
         [self setEnabled:YES];
         [self setIsSubtractive:NO];
+        [self setSelectedColorIndex:0];
     }
     return self;
 }
