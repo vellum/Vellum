@@ -152,6 +152,10 @@
 		BD9D5D7D17A5E4A900CEA793 /* VLMCustomBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D7C17A5E4A900CEA793 /* VLMCustomBarView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD9D5D8117A617FF00CEA793 /* VLMColorMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D8017A617FF00CEA793 /* VLMColorMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD9D5D8817A72B2C00CEA793 /* VLMCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD9D5D8717A72B2C00CEA793 /* VLMCircleButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BD9D5D8D17A8B36B00CEA793 /* circlebutton_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9D5D8917A8B36B00CEA793 /* circlebutton_selected.png */; };
+		BD9D5D8E17A8B36B00CEA793 /* circlebutton_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9D5D8A17A8B36B00CEA793 /* circlebutton_selected@2x.png */; };
+		BD9D5D8F17A8B36B00CEA793 /* circlebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9D5D8B17A8B36B00CEA793 /* circlebutton.png */; };
+		BD9D5D9017A8B36B00CEA793 /* circlebutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD9D5D8C17A8B36B00CEA793 /* circlebutton@2x.png */; };
 		BDA36CDF172DC79F00665A50 /* VLMDrawHeaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDA36CE6172E0F8B00665A50 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA36CE5172E0F8B00665A50 /* DDPageControl.m */; };
 		BDB4BF7F17379FD7004ADC00 /* VLMToolData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -430,6 +434,10 @@
 		BD9D5D8017A617FF00CEA793 /* VLMColorMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMColorMenuViewController.m; path = VLM/VLMColorMenuViewController.m; sourceTree = "<group>"; };
 		BD9D5D8617A72B2C00CEA793 /* VLMCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMCircleButton.h; path = VLM/VLMCircleButton.h; sourceTree = "<group>"; };
 		BD9D5D8717A72B2C00CEA793 /* VLMCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMCircleButton.m; path = VLM/VLMCircleButton.m; sourceTree = "<group>"; };
+		BD9D5D8917A8B36B00CEA793 /* circlebutton_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circlebutton_selected.png; sourceTree = "<group>"; };
+		BD9D5D8A17A8B36B00CEA793 /* circlebutton_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circlebutton_selected@2x.png"; sourceTree = "<group>"; };
+		BD9D5D8B17A8B36B00CEA793 /* circlebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circlebutton.png; sourceTree = "<group>"; };
+		BD9D5D8C17A8B36B00CEA793 /* circlebutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circlebutton@2x.png"; sourceTree = "<group>"; };
 		BDA36CDD172DC79F00665A50 /* VLMDrawHeaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMDrawHeaderController.h; path = VLM/VLMDrawHeaderController.h; sourceTree = "<group>"; };
 		BDA36CDE172DC79F00665A50 /* VLMDrawHeaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMDrawHeaderController.m; path = VLM/VLMDrawHeaderController.m; sourceTree = "<group>"; };
 		BDA36CE4172E0F8B00665A50 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPageControl.h; sourceTree = "<group>"; };
@@ -887,6 +895,10 @@
 		BDB198471777AFF600CF145E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BD9D5D8917A8B36B00CEA793 /* circlebutton_selected.png */,
+				BD9D5D8A17A8B36B00CEA793 /* circlebutton_selected@2x.png */,
+				BD9D5D8B17A8B36B00CEA793 /* circlebutton.png */,
+				BD9D5D8C17A8B36B00CEA793 /* circlebutton@2x.png */,
 				BD065EFE179A17080025BFF9 /* black.png */,
 				BD6922F91790629700551F02 /* albumcover.png */,
 				BD6922FA1790629700551F02 /* albumcover@2x.png */,
@@ -1164,6 +1176,10 @@
 				BD6922FB1790629700551F02 /* albumcover.png in Resources */,
 				BD6922FC1790629700551F02 /* albumcover@2x.png in Resources */,
 				BD065EFF179A17080025BFF9 /* black.png in Resources */,
+				BD9D5D8D17A8B36B00CEA793 /* circlebutton_selected.png in Resources */,
+				BD9D5D8E17A8B36B00CEA793 /* circlebutton_selected@2x.png in Resources */,
+				BD9D5D8F17A8B36B00CEA793 /* circlebutton.png in Resources */,
+				BD9D5D9017A8B36B00CEA793 /* circlebutton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -264,7 +264,8 @@
     NSInteger ind = [selectedtool selectedColorIndex];
     for (int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
-        [circle setSelected:ind==i animated:animated];
+        //[circle setSelected:ind==i animated:animated];
+        [circle setSelected:ind==i];
     }
 }
 
