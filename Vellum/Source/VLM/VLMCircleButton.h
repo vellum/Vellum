@@ -17,4 +17,5 @@
 - (void)hideWithDelay:(CGFloat)delay;
 - (void)setText:(NSString*)text;
 - (void)setTool:(VLMToolData *)tool;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 @end

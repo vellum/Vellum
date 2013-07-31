@@ -67,7 +67,6 @@
         [self.label setTextColor:[UIColor blackColor]];
         [self.label setBackgroundColor:[UIColor clearColor]];
         [self.label setNumberOfLines:2];
-        [self.back addSubview:self.label];
         
         [self setLabelhead:[[UILabel alloc] initWithFrame:CGRectMake(0, 11, frame.size.width, frame.size.height/2.0f)]];
         [self.labelhead setFont:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f]];
@@ -76,7 +75,6 @@
         [self.labelhead setBackgroundColor:[UIColor clearColor]];
         [self.labelhead setNumberOfLines:1];
         //[self.labelhead setText:@"////"];
-        [self.back addSubview:self.labelhead];
         
         [self setLabeltext:[[UILabel alloc] initWithFrame:CGRectMake(0, 25, frame.size.width, frame.size.height/2.0f)]];
         [self.labeltext setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
@@ -85,7 +83,14 @@
         [self.labeltext setBackgroundColor:[UIColor clearColor]];
         [self.labeltext setNumberOfLines:1];
         //[self.labeltext setText:@"////"];
-        [self.back addSubview:self.labeltext];
+        
+        
+        if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")){
+            [self.back addSubview:self.label];
+        } else {
+            [self.back addSubview:self.labeltext];
+            [self.back addSubview:self.labelhead];
+        }
         
         [self setShade:[[UIView alloc] initWithFrame:outie.frame]];
         [self.shade setUserInteractionEnabled:NO];
@@ -151,29 +156,30 @@
 
 - (void)setSelected:(BOOL)selected{
     [super setSelected:selected];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDelay:0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    [UIView setAnimationDuration:ANIMATION_DURATION*2];
+    [self setSelected:selected animated:NO];
+}
 
-    [UIView commitAnimations];
-
-    if ( selected ){
-        [self.label setTextColor:[UIColor whiteColor]];
-        [self.labelhead setTextColor:[UIColor whiteColor]];
-        [self.labeltext setTextColor:[UIColor whiteColor]];
-        [self.outie setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:0.5f]];
-        [self.innie setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
-    } else {
-        [self.label setTextColor:[UIColor blackColor]];
-        [self.labelhead setTextColor:[UIColor blackColor]];
-        [self.labeltext setTextColor:[UIColor blackColor]];
-        [self.outie setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f]];
-        [self.innie setBackgroundColor:[UIColor whiteColor]];
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated{
+    [super setSelected:selected];
+    CGFloat delay = 0;
+    CGFloat duration = 0;//animated ? ANIMATION_DURATION*2 : 0;
+    [UIView animateWithDuration:duration delay:delay options:UIViewAnimationCurveEaseInOut animations:^{
+        if ( selected ){
+            [self.label setTextColor:[UIColor whiteColor]];
+            [self.labelhead setTextColor:[UIColor whiteColor]];
+            [self.labeltext setTextColor:[UIColor whiteColor]];
+            [self.outie.layer setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:0.5f].CGColor];
+            [self.innie.layer setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:1.0f].CGColor];
+            
+        } else {
+            [self.label setTextColor:[UIColor blackColor]];
+            [self.labelhead setTextColor:[UIColor blackColor]];
+            [self.labeltext setTextColor:[UIColor blackColor]];
+            [self.outie.layer setBackgroundColor:[UIColor colorWithWhite:1.0f alpha:0.5f].CGColor];
+            [self.innie.layer setBackgroundColor:[UIColor whiteColor].CGColor];
+        }
         
-    }
-    [UIView commitAnimations];
-
+    } completion:nil];
 }
 
 - (void)setText:(NSString*)text{

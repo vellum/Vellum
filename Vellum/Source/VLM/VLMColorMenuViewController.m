@@ -122,7 +122,7 @@
 #pragma mark - public ()
 
 - (void)show {
-    [self updatebuttons];
+    [self updatebuttonsAnimated:NO];
     [self resetScroll];
     [self setOpen:YES];
     [self.view setUserInteractionEnabled:YES];
@@ -196,7 +196,7 @@
 }
 
 - (void)update{
-    [self updatebuttons];
+    [self updatebuttonsAnimated:YES];
     [self resetScroll];
 }
 
@@ -246,16 +246,16 @@
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     [selectedtool setSelectedColorIndex:tag];
-    [self updatebuttons];
+    [self updatebuttonsAnimated:NO];
 }
 
-- (void)updatebuttons{
+- (void)updatebuttonsAnimated:(BOOL)animated{
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     NSInteger ind = [selectedtool selectedColorIndex];
     for (int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
-        [circle setSelected:ind==i];
+        [circle setSelected:ind==i animated:animated];
     }
 }
 
