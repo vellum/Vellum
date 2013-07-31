@@ -14,14 +14,19 @@ graphite.prototype = {
 	init : function(){
 		this.context = VLM.state.context;
         
-        
-        
+        // overwrite fgcolor with whatever is in state
+        var col = VLM.state.color,
+        rgba = col.rgba;
+        this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + rgba[3]*0.5 + ')';
+
 	    if ( VLM.utilities.is3GS() ){
 	        this.interpolation_multiplier = 0.375;
 	        this.distance_multiplier = 2.0;
 			this.nib_multiplier = 0.25;
-			this.grr_fg = 'rgba(0,0,0,0.75)';
+			//this.grr_fg = 'rgba(0,0,0,0.75)';
+            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + rgba[3]*0.75 + ')';
 	    }
+        
 	},
 	
 	begin : function(x,y){

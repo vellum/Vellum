@@ -79,12 +79,12 @@ static VLMToolCollection *sharedToolCollection;
         
         NSArray *colordata = [NSArray arrayWithObjects:
                           [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f],
-                          [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f],
                           [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f],
                           [[VLMColorData alloc] initWithName:@"black" Label:@"25" Opacity:0.25f],
-                          [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f],
+                          [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.10f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n10" Opacity:0.10f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"25" Opacity:0.25f],
                           [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f],
-                          [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f],
                           [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f],
                           nil];
         [self setColors:colordata];

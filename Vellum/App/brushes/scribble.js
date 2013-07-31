@@ -78,6 +78,26 @@ scribble.prototype = {
             fgcolor = '#000000',
             ctx = this.context;
             
+            // overwrite fgcolor with whatever is in state
+            var col = state.color,
+                rgba = col.rgba,
+                alpha = rgba[3];
+            
+            /*
+            // transform it
+            if ( alpha == 1 ){
+                
+            } else if ( alpha == 0.75 ){
+                alpha = 0.66;
+            } else if ( alpha == 0.5 ){
+                alpha = 0.33;
+            } else if ( alpha == 0.25 ){
+                alpha = 0.25;
+            }
+             */
+            
+            fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
+
             if (zoomlevel < 10) {
                 ctx.beginPath();
                 if (zoomlevel < 1) {
