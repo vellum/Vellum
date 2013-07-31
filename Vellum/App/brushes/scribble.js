@@ -83,18 +83,16 @@ scribble.prototype = {
                 rgba = col.rgba,
                 alpha = rgba[3];
             
-            /*
             // transform it
-            if ( alpha == 1 ){
-                
-            } else if ( alpha == 0.75 ){
-                alpha = 0.66;
-            } else if ( alpha == 0.5 ){
-                alpha = 0.33;
-            } else if ( alpha == 0.25 ){
+            if ( alpha > 0.75 ){
+                alpha = 1;
+            } else if ( alpha > 0.5 ){
+                alpha = 0.5;
+            } else if ( alpha > 0.25 ){
                 alpha = 0.25;
+            } else {
+                alpha = 0.1;
             }
-             */
             
             fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
 

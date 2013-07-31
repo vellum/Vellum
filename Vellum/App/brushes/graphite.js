@@ -17,15 +17,28 @@ graphite.prototype = {
         // overwrite fgcolor with whatever is in state
         var col = VLM.state.color,
         rgba = col.rgba;
-        this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + rgba[3]*0.5 + ')';
+        var alpha = rgba[3];
 
+        // transform it
+        if ( alpha > 0.75 ){
+            alpha = 1;
+        } else if ( alpha > 0.5 ){
+            alpha = 0.4;
+        } else if ( alpha > 0.25 ){
+            alpha = 0.2;
+        } else {
+            alpha = 0.1;
+        }
 	    if ( VLM.utilities.is3GS() ){
 	        this.interpolation_multiplier = 0.375;
 	        this.distance_multiplier = 2.0;
 			this.nib_multiplier = 0.25;
 			//this.grr_fg = 'rgba(0,0,0,0.75)';
-            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + rgba[3]*0.75 + ')';
-	    }
+            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
+	    } else {
+            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.5 + ')';
+
+        }
         
 	},
 	

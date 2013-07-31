@@ -84,6 +84,23 @@ line.prototype = {
 	        fgcolor = 'rgba(0,0,0,0.5)',
 	        ctx = this.context;
         
+        // overwrite fgcolor with whatever is in state
+        var col = state.color,
+        rgba = col.rgba,
+        alpha = rgba[3];
+        
+        // transform it
+        if ( alpha > 0.75 ){
+            alpha = 1;
+        } else if ( alpha > 0.5 ){
+            alpha = 0.4;
+        } else if ( alpha > 0.25 ){
+            alpha = 0.2;
+        } else {
+            alpha = 0.1;
+        }
+        
+        fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
 
         ctx.beginPath();
         ctx.lineWidth = 0.125;
