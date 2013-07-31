@@ -55,12 +55,20 @@
     
     CGPoint topleft;
     topleft = CGPointMake(innermargin, innermargin);
-    
-    [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 5.0f, winw, buttonsize + margin*2 + innermargin*2)];
-    [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    NSInteger numbuttons = [[[VLMToolCollection instance] colorlabels] count];
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 5.0f, winw, buttonsize + margin*2 + innermargin*2)];
+        [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    } else {
+
+        CGFloat predictedWidth = innermargin*2 + numbuttons * (pad + buttonsize);
+        [self.view setFrame:CGRectMake((winw-predictedWidth)/2.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 18.0f, predictedWidth, buttonsize + margin*2 + innermargin*2)];
+        [self.view setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+
+    }
     [self.view setContentMode:UIViewContentModeCenter];
 
-    NSInteger numbuttons = [[[VLMToolCollection instance] colorlabels] count];
 
     VLMScrollView *sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [sv setContentSize:CGSizeMake(innermargin*2 + numbuttons * (buttonsize+pad), buttonsize+pad)];
@@ -129,6 +137,7 @@
 
     
     CGFloat offx = [self.scrollview contentOffset].x;
+    CGFloat delayunit = 0.05f;//(self.scrollview.frame.size.width <= 320.0f) ? 0.1f : 0.05f;
     int start = 0;
     for ( int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
@@ -136,7 +145,7 @@
             start = i;
             [circle showWithDelay:0];
         } else {
-            [circle showWithDelay:(i-start)*0.1f];
+            [circle showWithDelay:(i-start)*delayunit];
         }
     }
 
