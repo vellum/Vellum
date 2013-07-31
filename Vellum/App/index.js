@@ -24,7 +24,29 @@ var setDrawingMode = function(mode) {
 		ink.setBrush(mode);
 	},
 
-	animate = function() {
+    setDrawingModeAndColor = function(mode, color, opacity){
+        
+        // set mode
+		var ink = VLM.ink,
+            s = VLM.state;
+		ink.setBrush(mode);
+
+        // set color
+        if ( color == 'black' ){
+            s.color = {
+                'name' : 'black',
+                'rgba' : [0,0,0,Number(opacity)]
+            };
+        } else {
+            s.color = {
+                'name' : 'erase',
+                'rgba' : [242,242,232,Number(opacity)]
+            };
+        }
+        console.log('setting color: ' + s.color);
+    },
+
+    animate = function() {
 	    if (isRestoringPixels) { return; }
 	    if (mousedown) {
 			var ink = VLM.ink;

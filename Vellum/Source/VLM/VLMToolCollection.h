@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSMutableArray *tools;
 @property (nonatomic) NSInteger selectedIndex;
-@property (nonatomic, strong) NSArray *colorlabels;
+@property (nonatomic, strong) NSArray *colors;
 
 + (VLMToolCollection *)instance;
 - (NSMutableArray *)getEnabledTools;
@@ -22,4 +22,5 @@
 - (VLMToolData *)getSelectedToolFromEnabledIndex:(NSInteger)index;
 - (BOOL)isSelectedToolSubtractive;
 - (BOOL)isToggleable;
+
 @end

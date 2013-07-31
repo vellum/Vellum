@@ -8,10 +8,11 @@
 
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+#import "VLMColorData.h"
 
 @implementation VLMToolCollection
 @synthesize tools;
-@synthesize colorlabels;
+@synthesize colors;
 
 static VLMToolCollection *sharedToolCollection;
 
@@ -39,17 +40,17 @@ static VLMToolCollection *sharedToolCollection;
                           @"Hard Erase",
                           nil];
         NSArray *enableds = [NSArray arrayWithObjects:
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             //[NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES],
-                             [NSNumber numberWithBool:YES], //6
-                             nil];
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            //[NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES],
+                            [NSNumber numberWithBool:YES], //6
+                            nil];
         NSArray *jsvals = [NSArray arrayWithObjects:
                            @"VLM.constants.MODE_SCRIBBLE",
                            @"VLM.constants.MODE_GRAPHITE",
@@ -63,28 +64,32 @@ static VLMToolCollection *sharedToolCollection;
                            @"VLM.constants.MODE_CIRCLE_ERASE",
                            nil];
         NSArray *isSubtractives = [NSArray arrayWithObjects:
-                                   [NSNumber numberWithBool:NO],
-                                   [NSNumber numberWithBool:NO],
-                                   [NSNumber numberWithBool:NO],
-                                   [NSNumber numberWithBool:NO],
-                                   //[NSNumber numberWithBool:NO],
-                                   [NSNumber numberWithBool:NO],
-                                   [NSNumber numberWithBool:YES],
-                                   [NSNumber numberWithBool:YES],
-                                   [NSNumber numberWithBool:YES],
-                                   [NSNumber numberWithBool:YES],
-                                   nil];
+                           [NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
+                           //[NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:NO],
+                           [NSNumber numberWithBool:YES],
+                           [NSNumber numberWithBool:YES],
+                           [NSNumber numberWithBool:YES],
+                           [NSNumber numberWithBool:YES],
+                           nil];
+
         
-        [self setColorlabels:[NSArray arrayWithObjects:
-                                    @"BLACK\n100",
-                                    @"75",
-                                    @"50",
-                                    @"25",
-                                    @"ERASE\n25",
-                                    @"50",
-                                    @"75",
-                                    @"100",
-                                    nil]];
+        NSArray *colordata = [NSArray arrayWithObjects:
+                          [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f],
+                          [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f],
+                          [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f],
+                          [[VLMColorData alloc] initWithName:@"black" Label:@"25" Opacity:0.25f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f],
+                          [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f],
+                          nil];
+        [self setColors:colordata];
+        
+         
         NSArray *colorindices = [NSArray arrayWithObjects:
                                   [NSNumber numberWithInt:0],
                                   [NSNumber numberWithInt:1],

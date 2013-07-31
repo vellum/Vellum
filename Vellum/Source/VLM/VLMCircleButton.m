@@ -166,7 +166,9 @@
             [att setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f]} range:NSMakeRange(0, location)];
             [self.label setAttributedText:att];
             return;
+            
         } else {
+            
             NSString *sub1 = [text substringWithRange:NSMakeRange(0, location)];
             NSString *sub2 = [text substringWithRange:NSMakeRange(location+1, text.length - (location+1))];
             [self.labelhead setText:sub1];

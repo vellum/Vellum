@@ -24,6 +24,7 @@
 #import "VLMConstants.h"
 #import "UINavigationBar+Fat.h"
 #import "VLMColorMenuViewController.h"
+#import "VLMColorData.h"
 
 @interface VLMMainViewController ()
 
@@ -191,6 +192,7 @@
     
     
     VLMColorMenuViewController *colory = [[VLMColorMenuViewController alloc] init];
+    [colory setDelegate:self];
     [self.view addSubview:colory.view];
     [self setColorMenuViewController:colory];
     
@@ -592,9 +594,9 @@
     [self updateHeaderWithTitle:nil];
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
-    
+    VLMColorData *color = [[tools colors] objectAtIndex:[item selectedColorIndex]];
     NSString *m = item.javascriptvalue;
-    NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
+    NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
     [self.avc callJS:s];
 }
 
@@ -604,9 +606,10 @@
     
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
+    VLMColorData *color = [[tools colors] objectAtIndex:[item selectedColorIndex]];
     
     NSString *m = item.javascriptvalue;
-    NSString *s = [NSString stringWithFormat:@"setDrawingMode(%@);", m];
+    NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
     [self.avc callJS:s];
 }
 

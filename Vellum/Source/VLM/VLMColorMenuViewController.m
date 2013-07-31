@@ -12,6 +12,7 @@
 #import "VLMScrollView.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
+#import "VLMColorData.h"
 
 @interface VLMColorMenuViewController ()
 @property (nonatomic, strong) NSMutableArray *buttons;
@@ -27,6 +28,7 @@
 @synthesize outie;
 @synthesize innie;
 @synthesize open;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,7 +57,7 @@
     
     CGPoint topleft;
     topleft = CGPointMake(innermargin, innermargin);
-    NSInteger numbuttons = [[[VLMToolCollection instance] colorlabels] count];
+    NSInteger numbuttons = [[[VLMToolCollection instance] colors] count];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 5.0f, winw, buttonsize + margin*2 + innermargin*2)];
@@ -95,7 +97,8 @@
         [sv addSubview:circle];
         [buttons addObject:circle];
         [circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
-        NSString *text = [[tools colorlabels] objectAtIndex:i];
+        VLMColorData *color = [[tools colors] objectAtIndex:i];
+        NSString *text = [color labeltext];
         [circle setText:text];
     }
 
@@ -256,6 +259,11 @@
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     [selectedtool setSelectedColorIndex:tag];
     [self updatebuttonsAnimated:NO];
+    
+    // update glview
+    if (self.delegate != nil) {
+        [self.delegate updateHeader];
+    }
 }
 
 - (void)updatebuttonsAnimated:(BOOL)animated{

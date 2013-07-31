@@ -50,7 +50,7 @@ var VLM = VLM || {};
 	bnbm[c.MODE_CIRCLE_ERASE] = 'harderase';
 	
     c.BGCOLOR = '#f2f2e8';
-	
+ 
 	// write state - container refs and data
 	var s = VLM.state;
 	s.w = window.innerWidth;
@@ -59,7 +59,12 @@ var VLM = VLM || {};
 	s.context = canvas.getContext('2d');
 	s.zoomlevel = 1;
 	s.accumdist = 0;
-
+ 
+    s.color = {
+        'name' : 'black',
+        'rgba' : [0,0,0,1]
+    };
+ 
 	// write some abstractions around brushes
 	var i = VLM.ink;
 	var brush;

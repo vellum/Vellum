@@ -124,6 +124,7 @@
 		BD0C927A176A984600A0C89D /* VLMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C9279176A984500A0C89D /* VLMTableViewCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
+		BD5A60C617A98D8900E42DF5 /* VLMColorData.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5A60C517A986C100E42DF5 /* VLMColorData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
 		BD6922F4178FAA8100551F02 /* VLMActivityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD6922F8178FE48100551F02 /* VLMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F7178FE48100551F02 /* VLMTableView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
@@ -395,6 +396,8 @@
 		BD2062BF1772A053008A549F /* VLMScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMScrollView.m; path = VLM/VLMScrollView.m; sourceTree = "<group>"; };
 		BD3EC62C1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMTwoFingerTapGestureRecognizer.h; path = VLM/VLMTwoFingerTapGestureRecognizer.h; sourceTree = "<group>"; };
 		BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTwoFingerTapGestureRecognizer.m; path = VLM/VLMTwoFingerTapGestureRecognizer.m; sourceTree = "<group>"; };
+		BD5A60C417A986C100E42DF5 /* VLMColorData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLMColorData.h; path = VLM/VLMColorData.h; sourceTree = "<group>"; };
+		BD5A60C517A986C100E42DF5 /* VLMColorData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = VLMColorData.m; path = VLM/VLMColorData.m; sourceTree = "<group>"; };
 		BD65F5C317A0BF5B0008D3ED /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
 		BD6922F2178FAA8100551F02 /* VLMActivityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMActivityProvider.h; path = VLM/VLMActivityProvider.h; sourceTree = "<group>"; };
 		BD6922F3178FAA8100551F02 /* VLMActivityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMActivityProvider.m; path = VLM/VLMActivityProvider.m; sourceTree = "<group>"; };
@@ -978,6 +981,8 @@
 				BDB4BF7E17379FD7004ADC00 /* VLMToolData.m */,
 				BDB4BF801737A17A004ADC00 /* VLMToolCollection.h */,
 				BDB4BF811737A17A004ADC00 /* VLMToolCollection.m */,
+				BD5A60C417A986C100E42DF5 /* VLMColorData.h */,
+				BD5A60C517A986C100E42DF5 /* VLMColorData.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -1206,6 +1211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD5A60C617A98D8900E42DF5 /* VLMColorData.m in Sources */,
 				B630048916C1A2390036D8D4 /* EJBindingTextMetrics.m in Sources */,
 				B64C87AC16B81BAA0097CD5B /* EJGLProgram2D.m in Sources */,
 				B64C87AE16B81BAA0097CD5B /* EJGLProgram2DRadialGradient.m in Sources */,

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VLMMainViewController.h"
 
 @interface VLMColorMenuViewController : UIViewController
+@property (nonatomic, strong) id<VLMMenuDelegate> delegate;
+
 - (void)hide;
 - (void)show;
 - (void)update;
