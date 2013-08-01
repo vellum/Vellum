@@ -13,37 +13,21 @@ ink.prototype = {
 		this.context = VLM.state.context;
         var col = VLM.state.color,
             rgba = col.rgba,
-            hue = 60,
-            sat = 4,
-            lig = 95 * ( 1-rgba[3] );
+            hue,
+            sat,
+            lig;
         
         // black
         if (rgba[0]==0){
-            sat = 4;
+            hue = 0;
+            sat = 0;
+            lig = 100 * (1-rgba[3]);
             var t = tinycolor('hsl(' + hue + ',' + 0 + '%,' + Math.round(lig) + '%)');
             this.color = t.toHexString();
         // erase
         } else {
-            var a = rgba[3];
-            if ( a <= 0.25 ){
-                sat = 4;
-                lig = 95;
-            } else if ( a <= 0.5 ){
-                sat = 4 * 0.66;
-                lig = 95 + 5 * 0.5;
-            }else if ( a<= 0.25 ){
-                sat = 4 * 0.33;
-                lig = 95 + 5 * 0.75;
-            } else {
-                sat = 0;
-                lig = 100;
-            }
-            
-            var t = tinycolor('hsl(' + hue + ',' + Math.round(sat) + '%,' + Math.round(lig) + '%)');
-            this.color = t.toHexString();
+            this.color = 'rgba(242,242,232,1)';
         }
-        console.log(rgba);
-        //242,242,232
 	},
 	
 	begin : function(x,y){

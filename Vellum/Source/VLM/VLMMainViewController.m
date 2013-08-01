@@ -594,7 +594,7 @@
     [self updateHeaderWithTitle:nil];
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
-    VLMColorData *color = [[tools colors] objectAtIndex:[item selectedColorIndex]];
+    VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
     NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
     [self.avc callJS:s];
@@ -606,7 +606,7 @@
     
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
-    VLMColorData *color = [[tools colors] objectAtIndex:[item selectedColorIndex]];
+    VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
     
     NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];

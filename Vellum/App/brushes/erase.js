@@ -65,6 +65,24 @@ erase.prototype = {
 	        threshold = 0.001 / (zoomlevel * 1000),
 			fgcolor = 'rgba(242,242,232,1)';
 			
+        // overwrite fgcolor with whatever is in state
+        var col = state.color,
+        rgba = col.rgba,
+        alpha = rgba[3];
+
+        //fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
+        /*
+        switch(alpha){
+            case 0.25:
+                break;
+            case 0.25:
+                break;
+            case 0.75:
+                break;
+            case 1.0:
+                break;
+        }
+         */
         
 	    if (dist >= threshold) {
 			var angle = Math.atan2(dy, dx) - Math.PI / 2,

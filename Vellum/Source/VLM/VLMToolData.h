@@ -16,5 +16,7 @@
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL isSubtractive;
 @property (nonatomic) NSInteger selectedColorIndex;
+@property (nonatomic,strong) NSArray *colors;
+
 - (id)init;
 @end

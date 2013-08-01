@@ -66,7 +66,13 @@ scratch.prototype = {
 	        threshold = 0.001 / (zoomlevel * 1000),
 			fgcolor = 'rgba(242,242,232,0.666)';
 			
+        // overwrite fgcolor with whatever is in state
+        var col = state.color,
+        rgba = col.rgba,
+        alpha = rgba[3]*0.666;
+        fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
         
+
 	    if (dist >= threshold) {
 			var angle = Math.atan2(dy, dx) - Math.PI / 2,
             curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,

@@ -57,7 +57,9 @@
     
     CGPoint topleft;
     topleft = CGPointMake(innermargin, innermargin);
-    NSInteger numbuttons = [[[VLMToolCollection instance] colors] count];
+    VLMToolCollection *tools = [VLMToolCollection instance];
+    VLMToolData *data = [[tools tools] objectAtIndex:tools.selectedIndex];
+    NSInteger numbuttons = [[data colors] count];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2*innermargin + 5.0f, winw, buttonsize + margin*2 + innermargin*2)];
@@ -90,14 +92,13 @@
     [self.view addSubview:sv];
     self.scrollview.canCancelContentTouches = YES;
     
-    VLMToolCollection *tools = [VLMToolCollection instance];
     for ( int i = 0; i < numbuttons; i++){
         VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake( innermargin + i * (buttonsize+pad), 0, buttonsize+pad, buttonsize+pad)];
         [circle setTag:i];
         [sv addSubview:circle];
         [buttons addObject:circle];
         [circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
-        VLMColorData *color = [[tools colors] objectAtIndex:i];
+        VLMColorData *color = [[data colors] objectAtIndex:i];
         NSString *text = [color labeltext];
         [circle setText:text];
     }
@@ -270,10 +271,16 @@
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     NSInteger ind = [selectedtool selectedColorIndex];
+    
     for (int i = 0; i < [self.buttons count]; i++){
         VLMCircleButton *circle = (VLMCircleButton*)[self.buttons objectAtIndex:i];
         //[circle setSelected:ind==i animated:animated];
         [circle setSelected:ind==i];
+        
+        VLMColorData *color = [[selectedtool colors] objectAtIndex:i];
+        NSString *text = [color labeltext];
+        [circle setText:text];
+
     }
 }
 

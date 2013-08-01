@@ -173,10 +173,16 @@
             NSString *sub2 = [text substringWithRange:NSMakeRange(location+1, text.length - (location+1))];
             [self.labelhead setText:sub1];
             [self.labeltext setText:sub2];
+            [self.label setText:@""];
             return;
         }
     }
     [self.label setText:text];
+    if ( self.labelhead == nil ) return;
+    [self.labelhead setText:@""];
+    if ( self.labeltext == nil ) return;
+    [self.labeltext setText:@""];
+
 }
 
 - (void)setSelected:(BOOL)selected{
