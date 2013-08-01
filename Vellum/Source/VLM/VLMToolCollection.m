@@ -100,27 +100,38 @@ static VLMToolCollection *sharedToolCollection;
             NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
             [data setSelectedColorIndex:sel];
             [self.tools addObject:data];
-            if ( i == 8 || i == 4 ) {
+            if ( i == 4 ) {
                 [data setColors:[NSArray arrayWithObjects:
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"40" Opacity:0.4f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f],
-                                 [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f],
-                                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"40" Opacity:0.4f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES],
+                                 nil]];
+            } else if ( i == 8 ) {
+                [data setColors:[NSArray arrayWithObjects:
+                                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"ERASE\n·" Opacity:0.0f Enabled:NO Subtractive:YES],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
+                                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
+                                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES],
                                  nil]];
             } else {
                 [data setColors:[NSArray arrayWithObjects:
-                             [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f],
-                             [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f],
-                             [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f],
-                             [[VLMColorData alloc] initWithName:@"black" Label:@"25" Opacity:0.25f],
-                             [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f],
-                             [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f],
-                             [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f],
-                             [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f],
+                             [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                             [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
+                             [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
+                             [[VLMColorData alloc] initWithName:@"black" Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO],
+                             [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f Enabled:YES Subtractive:YES],
+                             [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:YES],
+                             [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:YES],
+                             [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES],
                              nil]];
             }
         }

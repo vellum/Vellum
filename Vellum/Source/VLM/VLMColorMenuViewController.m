@@ -277,10 +277,11 @@
         //[circle setSelected:ind==i animated:animated];
         [circle setSelected:ind==i];
         
-        VLMColorData *color = [[selectedtool colors] objectAtIndex:i];
+        VLMColorData *color = (VLMColorData *)[[selectedtool colors] objectAtIndex:i];
         NSString *text = [color labeltext];
+        BOOL en = color.enabled;
         [circle setText:text];
-
+        [circle setEnabled:en];
     }
 }
 

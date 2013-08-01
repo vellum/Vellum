@@ -608,6 +608,20 @@
     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
     VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
     
+    if ( item.isSubtractive ){
+        if (!color.isSubtractive){
+            [self.headerController showSubtitleWithText:@"inverted mode"];
+        } else {
+            [self.headerController hideSubtitle];
+        }
+    } else {
+        if (color.isSubtractive){
+            [self.headerController showSubtitleWithText:@"eraser mode"];
+        } else {
+            [self.headerController hideSubtitle];
+        }
+        
+    }
     NSString *m = item.javascriptvalue;
     NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
     [self.avc callJS:s];

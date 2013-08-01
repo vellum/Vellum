@@ -13,8 +13,10 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *labeltext;
 @property (nonatomic) CGFloat opacity;
+@property (nonatomic) BOOL enabled;
+@property (nonatomic) BOOL isSubtractive;
 - (id)init;
-- (id)initWithName:(NSString*)colorname Label:(NSString*)colorlabel Opacity:(CGFloat)coloropacity;
+- (id)initWithName:(NSString*)colorname Label:(NSString*)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
 @end
 
 

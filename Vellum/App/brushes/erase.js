@@ -67,10 +67,10 @@ erase.prototype = {
 			
         // overwrite fgcolor with whatever is in state
         var col = state.color,
-        rgba = col.rgba,
-        alpha = rgba[3];
+            rgba = col.rgba,
+            alpha = rgba[3];
 
-        //fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
+        fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
         /*
         switch(alpha){
             case 0.25:

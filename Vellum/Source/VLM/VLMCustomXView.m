@@ -32,7 +32,7 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:1.0f alpha:0.75f].CGColor);
-    CGContextSetLineWidth(context, 1.0f);
+    CGContextSetLineWidth(context, 1.5f);
     
     CGContextMoveToPoint(context, roundf(midx-w/2.0f), roundf(midy - w/2.0f + yoffset));
     CGContextAddLineToPoint(context, roundf(midx+w/2.0f), roundf(midy+w/2.0f + yoffset));

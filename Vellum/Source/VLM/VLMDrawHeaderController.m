@@ -39,6 +39,7 @@
 @property CGRect titlemaskframe;
 @property (nonatomic, strong) UIImage *imageToSave;
 @property (nonatomic, strong) UIImagePickerController *pickerController;
+@property (nonatomic, strong) UILabel *subtitlelabel;
 @property BOOL isPortrait;
 
 - (void)setupHeadingView;
@@ -69,6 +70,7 @@
 @synthesize imageToSave;
 @synthesize pickerController;
 @synthesize isPortrait;
+@synthesize subtitlelabel;
 
 - (id)initWithHeadings:(NSArray *)headings {
     self = [self init];
@@ -206,6 +208,15 @@
     [baseline setContentMode:UIViewContentModeTop];
     [self.view addSubview:baseline];
 #endif
+    
+    CGFloat labelheight = 24.0f;
+    [self setSubtitlelabel:[[UILabel alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT-labelheight, self.titlemask.frame.size.width, labelheight)]];
+    [self.subtitlelabel setBackgroundColor:[UIColor clearColor]];
+    [self.subtitlelabel setFont:[UIFont fontWithName:@"Georgia-Italic" size:10.0f]];
+    [self.subtitlelabel setTextColor:[UIColor colorWithHue:177.0f/360.0f saturation:0.20f brightness:0.87f alpha:1.0f]];
+    [self.subtitlelabel setTextAlignment:NSTextAlignmentCenter];
+    [self.subtitlelabel setText:@"erase mode"];
+    [self.titlemask addSubview:self.subtitlelabel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -406,6 +417,34 @@
          
          ];
     }
+}
+
+- (void)showSubtitleWithText:(NSString *)text{
+    [self.subtitlelabel setText:text];
+    [UIView animateWithDuration:ANIMATION_DURATION*2
+                          delay:0.0f
+                        options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [self.subtitlelabel setAlpha:1.0f];
+                     }
+                     completion:^(BOOL finished) {
+                     }
+     
+     ];
+}
+
+- (void)hideSubtitle{
+    [UIView animateWithDuration:ANIMATION_DURATION*2
+                          delay:0.0f
+                        options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [self.subtitlelabel setAlpha:0.0f];
+                     }
+                     completion:^(BOOL finished) {
+                     }
+     
+     ];
+    
 }
 
 - (void)nextPage {

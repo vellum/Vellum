@@ -18,7 +18,6 @@
 - (void)screenCapture:(id)screenshotdelegate;
 - (void)showPopover;
 - (void)hidePopover;
-
 @end
 
 @interface VLMDrawHeaderController : UIViewController<UIActionSheetDelegate, VLMScreenShotDelegate>
@@ -39,4 +38,8 @@
 - (void)cleanupImagePicker;
 - (void)togglePopover;
 - (void)showPopover;
+
+- (void)showSubtitleWithText:(NSString *)text;
+- (void)hideSubtitle;
+
 @end
