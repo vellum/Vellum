@@ -7,9 +7,43 @@ ink.prototype = {
 	target : { x:0, y:0 },
 	prev : { x:0, y:0, nib:0 },
 	interpolation_multiplier : 0.25,
-	
+	color : 'rgba(0,0,0,1)',
+    
 	init : function(){
 		this.context = VLM.state.context;
+        var col = VLM.state.color,
+            rgba = col.rgba,
+            hue = 60,
+            sat = 4,
+            lig = 95 * ( 1-rgba[3] );
+        
+        // black
+        if (rgba[0]==0){
+            sat = 4;
+            var t = tinycolor('hsl(' + hue + ',' + 0 + '%,' + Math.round(lig) + '%)');
+            this.color = t.toHexString();
+        // erase
+        } else {
+            var a = rgba[3];
+            if ( a <= 0.25 ){
+                sat = 4;
+                lig = 95;
+            } else if ( a <= 0.5 ){
+                sat = 4 * 0.66;
+                lig = 95 + 5 * 0.5;
+            }else if ( a<= 0.25 ){
+                sat = 4 * 0.33;
+                lig = 95 + 5 * 0.75;
+            } else {
+                sat = 0;
+                lig = 100;
+            }
+            
+            var t = tinycolor('hsl(' + hue + ',' + Math.round(sat) + '%,' + Math.round(lig) + '%)');
+            this.color = t.toHexString();
+        }
+        console.log(rgba);
+        //242,242,232
 	},
 	
 	begin : function(x,y){
@@ -61,7 +95,7 @@ ink.prototype = {
             prevnib = prev.nib,
             threshold = 0.001 / (zoomlevel * 1000);
         
-        console.log( dist +', ' + threshold);
+        //console.log( dist +', ' + threshold);
 	    if (dist>=threshold) {
             var curnib = prevnib;
 
@@ -73,14 +107,14 @@ ink.prototype = {
 	        curnib += (nib - curnib) * 0.125;
 
 	        ctx.beginPath();
-	        ctx.fillStyle = '#000000';
+	        ctx.fillStyle = this.color;
 	        ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
 	        ctx.fill();
 	        ctx.closePath();
             
 	        ctx.beginPath();
 	        ctx.lineWidth = (zoomlevel < 10) ? curnib : 0.5;
-	        ctx.strokeStyle = '#000000';
+	        ctx.strokeStyle = this.color;
 	        ctx.moveTo(x, y);
 	        ctx.lineTo(prev.x, prev.y);
 	        ctx.stroke();
@@ -94,6 +128,7 @@ ink.prototype = {
     },
 	
 	destroy : function(){
+        //this.context.globalCompositeOperation = 'source-over';
 		this.target = null;
 		this.prev = null;	
 		this.context = null;
