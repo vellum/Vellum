@@ -351,7 +351,7 @@
 #pragma mark GestureRecco
 
 - (void)tapped:(UIGestureRecognizer *)sender{
-    NSLog(@"tapped");
+    //NSLog(@"tapped");
     [self.tableview scrollRectToVisible:CGRectMake(0,1,1,1) animated:YES];
 }
 
@@ -361,7 +361,7 @@
     NSIndexPath *ipath = [NSIndexPath indexPathForRow:0 inSection:0];
     switch (tag) {
         case 0:
-            NSLog(@"rate");
+            //NSLog(@"rate");
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
             break;
 

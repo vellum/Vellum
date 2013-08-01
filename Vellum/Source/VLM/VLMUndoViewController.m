@@ -95,7 +95,7 @@
 }
 
 - (void)update{
-    NSLog(@"undoviewcontroller: update()");
+    //NSLog(@"undoviewcontroller: update()");
     [self.arcView setIndex:self.index];
     [self.arcView setNeedsDisplay];
 }

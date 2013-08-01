@@ -49,7 +49,7 @@
     }
 	EJJavaScriptView *view = [[EJJavaScriptView alloc] initWithFrame:frame];
 	self.view = view;
-	
+	[view loadScriptAtPath:@"tinycolor.js"];	
 	[view loadScriptAtPath:@"vellum.js"];
 	[view loadScriptAtPath:@"brushes/scribble.js"];
 	[view loadScriptAtPath:@"brushes/graphite.js"];

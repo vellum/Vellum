@@ -312,7 +312,7 @@
     if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
     
     if (nextIndex != self.undoViewController.index) {
-        NSLog(@"nextIndex: %d", nextIndex);
+        //NSLog(@"nextIndex: %d", nextIndex);
         NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
         [self.avc callJS:s];
     }
@@ -460,12 +460,12 @@
 - (void)handleTwoFingerSingleTap:(id)sender {
     UIView *h = self.headerController.view;
 
-    NSLog(@"twofingertap");
+    //NSLog(@"twofingertap");
     
     // header hidden
     if ( !h.userInteractionEnabled ){
         
-        NSLog(@"\tmake header visible");
+        //NSLog(@"\tmake header visible");
         [self.infoButton setUserInteractionEnabled:YES];
         [h setUserInteractionEnabled:YES];
 
@@ -649,12 +649,12 @@
 
 #pragma mark - public () for cross js communication
 - (void)updateUndoCount:(NSInteger)count {
-    NSLog(@"mainviewcontroller:updateundocount(%d)", count);
+    //NSLog(@"mainviewcontroller:updateundocount(%d)", count);
     [self.undoViewController setNumStates:count];
 }
 
 - (void)updateUndoIndex:(NSInteger)index {
-    NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
+    //NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
     [self.undoViewController setIndex:index];
     [self.undoViewController update];
 }
@@ -662,7 +662,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage * img = [info objectForKey:UIImagePickerControllerOriginalImage];
-    NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
+    //NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
     EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
     
     UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
@@ -746,7 +746,7 @@
 
 - (void)flipsideViewControllerDidFinish:(VLMFlipViewController *)controller
 {
-    NSLog(@"HERE");
+    //NSLog(@"HERE");
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
@@ -823,7 +823,7 @@
 
 - (void)didRotate:(NSNotification *)notification {
 
-    NSLog(@"didrotate %@", notification);
+    //NSLog(@"didrotate %@", notification);
 
     BOOL isNowPortrait = self.isPortrait;
     int type = [[UIDevice currentDevice] orientation];

@@ -61,7 +61,7 @@ wash.prototype = {
             prevnib = prev.nib,
             threshold = 0.001 / (zoomlevel * 1000);
         
-        console.log( dist +', ' + threshold);
+        //console.log( dist +', ' + threshold);
 	    if (dist>=threshold) {
             var curnib = prevnib;
 

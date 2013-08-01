@@ -237,7 +237,7 @@
 - (void)selectedItemTapped:(id)sender{
     VLMOpaButton *ob = (VLMOpaButton *)sender;
     NSInteger tag = ob.tag;
-    NSLog(@"selected item tapped : %i", tag);
+    //NSLog(@"selected item tapped : %i", tag);
     if ([self.delegate isColorMenuOpen]){
         [self.delegate hideColorMenu];
     } else {

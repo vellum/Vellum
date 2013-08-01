@@ -465,7 +465,7 @@
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"%d", actionSheet.tag);
+    //NSLog(@"%d", actionSheet.tag);
     switch (actionSheet.tag) {
         case ACTIONSHEET_CLEARSCREEN:
             if (buttonIndex == 0) {
@@ -577,7 +577,7 @@
 #pragma mark - rotation
 // FIXME: shouldn't be trapping for nonaliased orientation values. proper way to do this is with UIDeviceOrientationPortrait, UIDeviceOrientation PortraitUpsideDown, etc
 - (void)didRotate:(NSNotification *)notification {
-    NSLog(@"here: rotation detected in header");
+    //NSLog(@"here: rotation detected in header");
     
     BOOL isNowPortrait = self.isPortrait;
     int type = [[UIDevice currentDevice] orientation];

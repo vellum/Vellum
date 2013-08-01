@@ -43,7 +43,7 @@ var setDrawingMode = function(mode) {
                 'rgba' : [242,242,232,Number(opacity)]
             };
         }
-        console.log('setting color: ' + s.color);
+        //console.log('setting color: ' + s.color);
     },
 
     animate = function() {

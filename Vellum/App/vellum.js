@@ -75,10 +75,10 @@ var VLM = VLM || {};
 		
 		var brushname = VLM.constants.BRUSH_NAME_BY_MODE[brushID];
 		if (brushname){
-			console.log('setting brush: ' + brushname);
+			//console.log('setting brush: ' + brushname);
 			brush = eval( "new " + brushname + "()" );
 		} else {
-			console.log('cannot find a matching brush for: ' + brushID);
+			//console.log('cannot find a matching brush for: ' + brushID);
 		}
 	};
 	

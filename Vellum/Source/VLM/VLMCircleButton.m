@@ -140,7 +140,7 @@
 
 -(void)setHighlighted:(BOOL)highlighted
 {
-    NSLog(@"sethighlighted");
+    //NSLog(@"sethighlighted");
     // Check if button is going from not highlighted to highlighted
     if(![self isHighlighted] && highlighted) {
         [self.shade setAlpha:0.5f];
