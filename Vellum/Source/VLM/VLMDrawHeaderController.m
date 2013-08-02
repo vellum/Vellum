@@ -158,6 +158,7 @@
 	[lpr setNumberOfTouchesRequired:1];
 	[titleviewmask addGestureRecognizer:lpr];
     
+    
 	UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(plusLongPressed:)];
 	[self.leftbutton addGestureRecognizer:lpgr];
     
@@ -186,6 +187,17 @@
 	[self.subtitlelabel setText:@""];
 	[self.subtitlelabel setAlpha:0.0f];
 	[self.titlemask addSubview:self.subtitlelabel];
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        CGFloat bighitwidth = HEADER_LABEL_WIDTH * 3;
+        UIView *bighitarea = [[UIView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - bighitwidth)/2, 0, bighitwidth, HEADER_HEIGHT)];
+        [bighitarea setBackgroundColor:[UIColor clearColor]];
+        [bighitarea setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [bighitarea addGestureRecognizer:tgr];
+        [bighitarea addGestureRecognizer:lpr];
+        [self.view addSubview:bighitarea];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
