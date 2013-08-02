@@ -10,6 +10,8 @@
 #import "VLMToolData.h"
 #import "VLMColorData.h"
 
+//#define DEBUG_DEFAULTS 1
+
 @implementation VLMToolCollection
 @synthesize tools;
 //@synthesize colors;
@@ -89,6 +91,13 @@ static VLMToolCollection *sharedToolCollection;
                                   [NSNumber numberWithInt:7],
                                   nil];
         NSInteger selectedIndex = 0;
+        BOOL shouldSynchronize = NO;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+#ifdef DEBUG_DEFAULTS
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+#endif
         
         for (int i = 0; i < [names count]; i++) {
             VLMToolData *data = [[VLMToolData alloc] init];
@@ -97,8 +106,19 @@ static VLMToolCollection *sharedToolCollection;
             [data setEnabled:[[enableds objectAtIndex:i] boolValue]];
             [data setSelected:(i == selectedIndex)];
             [data setIsSubtractive:[[isSubtractives objectAtIndex:i] boolValue]];
+            
             NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
+            NSString *key = [NSString stringWithFormat:@"%@_colorindex", [data name]];
+            if ([defaults objectForKey:key] == nil){
+                NSLog(@"writing key %@   %d", key, sel);
+                [defaults setObject:[NSNumber numberWithInt:sel] forKey:key];
+                shouldSynchronize = YES;
+            } else {
+                NSLog(@"reading key %@   %d", key, sel);
+                sel = [defaults integerForKey:key];
+            }
             [data setSelectedColorIndex:sel];
+            
             [self.tools addObject:data];
             if ( i == 4 ) {
                 [data setColors:[NSArray arrayWithObjects:
@@ -135,6 +155,10 @@ static VLMToolCollection *sharedToolCollection;
                              nil]];
             }
         }
+        if (shouldSynchronize) {
+            [defaults synchronize];
+        }
+
     }
     return self;
 }

@@ -258,7 +258,7 @@
     NSInteger tag = mb.tag;
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
-    [selectedtool setSelectedColorIndex:tag];
+    [selectedtool setSelectedColorIndex:tag andSaveToUserDefaults:YES];
     [self updatebuttonsAnimated:NO];
     
     // update glview

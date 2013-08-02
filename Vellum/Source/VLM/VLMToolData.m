@@ -29,5 +29,13 @@
     }
     return self;
 }
-
+- (void)setSelectedColorIndex:(NSInteger)colorIndex andSaveToUserDefaults:(BOOL)shouldSaveToDefaults{
+    [self setSelectedColorIndex:colorIndex];
+    if (shouldSaveToDefaults) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *key = [NSString stringWithFormat:@"%@_colorindex", [self name]];
+        [defaults setObject:[NSNumber numberWithInt:colorIndex] forKey:key];
+        [defaults synchronize];
+    }
+}
 @end

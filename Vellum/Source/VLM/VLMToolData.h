@@ -19,4 +19,5 @@
 @property (nonatomic,strong) NSArray *colors;
 
 - (id)init;
+- (void)setSelectedColorIndex:(NSInteger)selectedColorIndex andSaveToUserDefaults:(BOOL)shouldSaveToDefaults;
 @end
