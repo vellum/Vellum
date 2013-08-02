@@ -68,6 +68,8 @@
              @"PINCH to zoom.",
              @"DOUBLE-TAP to reset zoom.",
              @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
+             @"TAP SELECTED tool to toggle opacity menu.",
+             @"PAN HORIZONTALLY for erase modes.",
              @"PAN VERTICALLY with 3 fingers to undo.",
              nil];
     
@@ -79,6 +81,8 @@
               @"about-03.png",
               @"about-04.png",
               @"about-06.png",
+              @"about-09.png",
+              @"about-10.png",
               @"about-07.png",
               nil];
 
@@ -87,16 +91,18 @@
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")){
 
         NSArray *sctexts = [NSArray arrayWithObjects:
-                 @"PAN",
-                 @"TAP HEADER",
-                 @"TAP ELSEWHERE",
-                 @"TAP WITH 2 FINGERS",
-                 @"PINCH",
-                 @"DOUBLE-TAP",
-                 @"LONG-PRESS",
-                 @"PAN VERTICALLY",
-                 nil];
-        
+            @"PAN",
+            @"TAP HEADER",
+            @"TAP ELSEWHERE",
+            @"TAP WITH 2 FINGERS",
+            @"PINCH",
+            @"DOUBLE-TAP",
+            @"LONG-PRESS",
+            @"TAP SELECTED",
+            @"PAN HORIZONTALLY",
+            @"PAN VERTICALLY",
+            nil];
+
         attributedtexts = [NSArray arrayWithObjects:
                            [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
                            [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
@@ -105,6 +111,8 @@
                            [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
                            [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
                            [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
+                           [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
                            [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."],
             nil];
         
@@ -178,7 +186,7 @@
                              @"Rate on App Store",
                              @"Follow @vellumapp",
                              @"Suggest idea",
-                             @"Gestures",
+                             @"Gestures (New)",
                              nil];
 
     CGFloat margin = 25.0f;
