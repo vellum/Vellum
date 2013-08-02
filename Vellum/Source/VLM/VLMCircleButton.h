@@ -15,6 +15,6 @@
 - (void)hide;
 - (void)showWithDelay:(CGFloat)delay;
 - (void)hideWithDelay:(CGFloat)delay;
-- (void)setText:(NSString*)text;
+- (void)setText:(NSString *)text;
 
 @end

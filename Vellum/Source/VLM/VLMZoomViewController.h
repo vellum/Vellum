@@ -11,8 +11,8 @@
 
 @interface VLMZoomViewController : UIViewController
 {
-    UILabel *label;
-    CGFloat zoomlevel;
+	UILabel *label;
+	CGFloat zoomlevel;
 }
 
 @property (nonatomic, retain) UILabel *label;

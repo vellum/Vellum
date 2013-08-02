@@ -18,59 +18,58 @@
 @synthesize travelthreshold;
 
 - (id)init {
-    if (self = [super init]) {
-        [self setNumberOfTouches:0];
-        [self setPrevious1:CGPointZero];
-        [self setPrevious2:CGPointZero];
-        [self setTravelthreshold:VLM_TAP_MAX_TRAVEL_DISTANCE];
-        [self setTravel1:0];
-        [self setTravel2:0];
-        [self setNumberOfTouchesRequired:2];
-        [self setNumberOfTapsRequired:1];
-    }
-    return self;
+	if (self = [super init]) {
+		[self setNumberOfTouches:0];
+		[self setPrevious1:CGPointZero];
+		[self setPrevious2:CGPointZero];
+		[self setTravelthreshold:VLM_TAP_MAX_TRAVEL_DISTANCE];
+		[self setTravel1:0];
+		[self setTravel2:0];
+		[self setNumberOfTouchesRequired:2];
+		[self setNumberOfTapsRequired:1];
+	}
+	return self;
 }
 
 - (id)initWithTarget:(id)target action:(SEL)action {
-    if (self = [super initWithTarget:target action:action]) {
-        [self setNumberOfTouches:0];
-        [self setPrevious1:CGPointZero];
-        [self setPrevious2:CGPointZero];
-        [self setTravelthreshold:VLM_TAP_MAX_TRAVEL_DISTANCE];
-        [self setTravel1:0];
-        [self setTravel2:0];
-        [self setNumberOfTouchesRequired:2];
-        [self setNumberOfTapsRequired:1];
-
-    }
-    return self;
+	if (self = [super initWithTarget:target action:action]) {
+		[self setNumberOfTouches:0];
+		[self setPrevious1:CGPointZero];
+		[self setPrevious2:CGPointZero];
+		[self setTravelthreshold:VLM_TAP_MAX_TRAVEL_DISTANCE];
+		[self setTravel1:0];
+		[self setTravel2:0];
+		[self setNumberOfTouchesRequired:2];
+		[self setNumberOfTapsRequired:1];
+	}
+	return self;
 }
 
 // note: should override reset but i'm lazy
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSArray *touchesfromevent = [[event allTouches] allObjects];
-    int touchcount = [touchesfromevent count];
-    [self setNumberOfTouches:touchcount];
-    [super touchesBegan:touches withEvent:event];
+	NSArray *touchesfromevent = [[event allTouches] allObjects];
+	int touchcount = [touchesfromevent count];
+	[self setNumberOfTouches:touchcount];
+	[super touchesBegan:touches withEvent:event];
     
-    //NSLog(@"began %i", touchcount);
+	//NSLog(@"began %i", touchcount);
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    return;
-    // ignore pans this is bad
+	return;
+	// ignore pans this is bad
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    //NSArray *touchesfromevent = [touches allObjects];
-    //int touchcount = [touchesfromevent count];
-    //NSLog(@"ended %i", touchcount);
+	[super touchesEnded:touches withEvent:event];
+	//NSArray *touchesfromevent = [touches allObjects];
+	//int touchcount = [touchesfromevent count];
+	//NSLog(@"ended %i", touchcount);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
+	[super touchesCancelled:touches withEvent:event];
 }
 
 @end

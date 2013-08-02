@@ -20,11 +20,10 @@
 - (void)hidePopover;
 @end
 
-@interface VLMDrawHeaderController : UIViewController<UIActionSheetDelegate, VLMScreenShotDelegate>
+@interface VLMDrawHeaderController : UIViewController <UIActionSheetDelegate, VLMScreenShotDelegate>
 
-@property (nonatomic, retain) NSObject<VLMHeaderDelegate> *delegate;
+@property (nonatomic, retain) NSObject <VLMHeaderDelegate> *delegate;
 @property (nonatomic) BOOL isPopoverVisible;
-@property (nonatomic, strong) DDPageControl *pagecontrol;
 
 - (id)initWithHeadings:(NSArray *)headings;
 - (void)setHeadings:(NSArray *)headings;

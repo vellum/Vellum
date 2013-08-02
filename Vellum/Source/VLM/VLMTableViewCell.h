@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VLMTableViewCell : UITableViewCell
-- (void)setContentImage:(NSString*)imageName;
+- (void)setContentImage:(NSString *)imageName;
 @end

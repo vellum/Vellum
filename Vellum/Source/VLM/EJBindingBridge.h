@@ -8,9 +8,9 @@
 
 #import "EJBindingBase.h"
 
-@interface EJBindingBridge : EJBindingBase{
-    NSInteger undoCount;
-    NSInteger undoIndex;
-    BOOL isIPad;
+@interface EJBindingBridge : EJBindingBase {
+	NSInteger undoCount;
+	NSInteger undoIndex;
+	BOOL isIPad;
 }
 @end

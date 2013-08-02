@@ -12,39 +12,35 @@
 @implementation VLMActivitySaveToAlbum
 
 - (NSString *)activityType {
-    return @"UIActivityTypeSaveToVellumAlbum";
+	return @"UIActivityTypeSaveToVellumAlbum";
 }
 
 - (NSString *)activityTitle {
-    return @"Save to \nPhoto Album";
+	return @"Save to \nPhoto Album";
 }
 
 - (UIImage *)activityImage {
-    return [UIImage imageNamed:@"camera.png"];
+	return [UIImage imageNamed:@"camera.png"];
 }
 
-
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
-    
-    return YES;
-
+	return YES;
 }
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {
-    for (id item in activityItems) {
-        if ([item isKindOfClass:[UIImage class]]) self.shareImage = item;
-        else if ([item isKindOfClass:[NSString class]]) {
-            self.shareString = item;
-        }
-        else NSLog(@"Unknown item type %@", item);
-    }
+	for (id item in activityItems) {
+		if ([item isKindOfClass:[UIImage class]]) self.shareImage = item;
+		else if ([item isKindOfClass:[NSString class]]) {
+			self.shareString = item;
+		}
+		else NSLog(@"Unknown item type %@", item);
+	}
 }
 
 - (void)performActivity {
-    ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-    [library saveImage:self.shareImage toAlbum:@"Vellum" withCompletionBlock:nil];
-    [self activityDidFinish:YES];
+	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+	[library saveImage:self.shareImage toAlbum:@"Vellum" withCompletionBlock:nil];
+	[self activityDidFinish:YES];
 }
-
 
 @end

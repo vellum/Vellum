@@ -16,7 +16,6 @@
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL isSubtractive;
 - (id)init;
-- (id)initWithName:(NSString*)colorname Label:(NSString*)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
+- (id)initWithName:(NSString *)colorname Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
+
 @end
-
-

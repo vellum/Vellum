@@ -11,7 +11,6 @@
 #import "VLMFlipViewController.h"
 
 @protocol VLMMenuDelegate <NSObject>
-
 - (void)updateHeader;
 - (void)updateHeaderWithTitle:(NSString *)title;
 - (void)refreshData;
@@ -23,9 +22,8 @@
 
 @class EJAppViewController;
 
-@interface VLMMainViewController : UIViewController<UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
-- (id)initWithEJAppViewController:(EJAppViewController*)appViewController;
+@interface VLMMainViewController : UIViewController <UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
+- (id)initWithEJAppViewController:(EJAppViewController *)appViewController;
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;
-
 @end

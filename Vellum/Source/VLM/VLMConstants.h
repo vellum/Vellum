@@ -51,5 +51,3 @@
 #define FOOTER_FONT @"AmericanTypewriter"
 #define TEXTBUTTON_FONT @"HelveticaNeue-Bold"
 #define PHOTO_LABEL @"AmericanTypewriter"
-
-

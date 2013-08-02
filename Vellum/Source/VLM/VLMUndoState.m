@@ -18,26 +18,26 @@
 @synthesize image;
 
 - (id)init {
-    if (self = [super init]) {
-        NSString *prefixString = @"undo_";
-        NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
-        NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];
-        [self setFileName:uniqueFileName];
-        [self setTimeStamp:[[NSDate date] timeIntervalSince1970]];
-    }
-    return self;
+	if (self = [super init]) {
+		NSString *prefixString = @"undo_";
+		NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+		NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];
+		[self setFileName:uniqueFileName];
+		[self setTimeStamp:[[NSDate date] timeIntervalSince1970]];
+	}
+	return self;
 }
 
 - (id)initWithImage:(UIImage *)existingImage {
-    if (self = [super init]) {
-        NSString *prefixString = @"undo_";
-        NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
-        NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];
-        [self setFileName:uniqueFileName];
-        [self setTimeStamp:[[NSDate date] timeIntervalSince1970]];
-        [self setImage:existingImage];
-    }
-    return self;
+	if (self = [super init]) {
+		NSString *prefixString = @"undo_";
+		NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+		NSString *uniqueFileName = [NSString stringWithFormat:@"%@_%@", prefixString, guid];
+		[self setFileName:uniqueFileName];
+		[self setTimeStamp:[[NSDate date] timeIntervalSince1970]];
+		[self setImage:existingImage];
+	}
+	return self;
 }
 
 #pragma mark - ()

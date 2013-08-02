@@ -17,7 +17,7 @@
 
 
 
-@interface VLMFlipViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface VLMFlipViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) id <VLMFlipsideViewControllerDelegate> delegate;
 
 @end

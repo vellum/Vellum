@@ -17,25 +17,28 @@
 @synthesize isSubtractive;
 @synthesize selectedColorIndex;
 @synthesize colors;
+
 - (id)init {
-    if (self = [super init]) {
-        [self setName:@""];
-        [self setJavascriptvalue:@""];
-        [self setSelected:NO];
-        [self setEnabled:YES];
-        [self setIsSubtractive:NO];
-        [self setColors:nil];
-        [self setSelectedColorIndex:0];
-    }
-    return self;
+	if (self = [super init]) {
+		[self setName:@""];
+		[self setJavascriptvalue:@""];
+		[self setSelected:NO];
+		[self setEnabled:YES];
+		[self setIsSubtractive:NO];
+		[self setColors:nil];
+		[self setSelectedColorIndex:0];
+	}
+	return self;
 }
-- (void)setSelectedColorIndex:(NSInteger)colorIndex andSaveToUserDefaults:(BOOL)shouldSaveToDefaults{
-    [self setSelectedColorIndex:colorIndex];
-    if (shouldSaveToDefaults) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *key = [NSString stringWithFormat:@"%@_colorindex", [self name]];
-        [defaults setObject:[NSNumber numberWithInt:colorIndex] forKey:key];
-        [defaults synchronize];
-    }
+
+- (void)setSelectedColorIndex:(NSInteger)colorIndex andSaveToUserDefaults:(BOOL)shouldSaveToDefaults {
+	[self setSelectedColorIndex:colorIndex];
+	if (shouldSaveToDefaults) {
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSString *key = [NSString stringWithFormat:@"%@_colorindex", [self name]];
+		[defaults setObject:[NSNumber numberWithInt:colorIndex] forKey:key];
+		[defaults synchronize];
+	}
 }
+
 @end
