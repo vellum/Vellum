@@ -44,7 +44,7 @@
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
 		// Custom initialization
-		self.contentSizeForViewInPopover = CGSizeMake(320.0, 578.0 - 60);
+		self.contentSizeForViewInPopover = CGSizeMake(320.0, 578.0);
 	}
 	return self;
 }
@@ -128,46 +128,53 @@
 	}
     
 	VLMTableView *tv;
+    CGFloat targetwidth;
+    CGFloat targetheight;
     
 	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-		UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEADER_HEIGHT)];
-		[h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
-		[h setClipsToBounds:YES];
-		[self.view addSubview:h];
-		[self setHeader:h];
+		targetwidth = self.view.frame.size.width;
+        targetheight = self.view.frame.size.height - HEADER_HEIGHT;
         
-		UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
-		[titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-		[titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-		[titlelabel setText:@"About"];
-		[titlelabel setUserInteractionEnabled:YES];
-		[titlelabel setTextAlignment:NSTextAlignmentCenter];
-		[titlelabel setBackgroundColor:[UIColor clearColor]];
-		[self.header addSubview:titlelabel];
-        
-		UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-		[tgr setNumberOfTapsRequired:1];
-		[tgr setNumberOfTouchesRequired:1];
-		[titlelabel addGestureRecognizer:tgr];
-        
-        
-		UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width - 60.0f, 0, 60.0f, HEADER_HEIGHT)];
-		[button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
-		[button setTitle:@"Done" forState:UIControlStateNormal];
-		[button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
-		[button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-		[button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
-		[button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
-		[button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-		[button setContentMode:UIViewContentModeTopRight];
-		[self.header addSubview:button];
-		[button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
-        
-		tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, self.view.frame.size.width, self.view.frame.size.height - HEADER_HEIGHT)];
 	}
 	else {
-		tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentSizeForViewInPopover.width, self.contentSizeForViewInPopover.height)];
+		targetwidth = self.contentSizeForViewInPopover.width;
+        targetheight = self.contentSizeForViewInPopover.height - HEADER_HEIGHT;
 	}
+    
+    tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, targetwidth, targetheight)];
+    
+    UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, targetwidth, HEADER_HEIGHT)];
+    [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
+    [h setClipsToBounds:YES];
+    [self.view addSubview:h];
+    [self setHeader:h];
+    
+    UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
+    [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
+    [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
+    [titlelabel setText:@"About"];
+    [titlelabel setUserInteractionEnabled:YES];
+    [titlelabel setTextAlignment:NSTextAlignmentCenter];
+    [titlelabel setBackgroundColor:[UIColor clearColor]];
+    [self.header addSubview:titlelabel];
+    
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    [tgr setNumberOfTapsRequired:1];
+    [tgr setNumberOfTouchesRequired:1];
+    [titlelabel addGestureRecognizer:tgr];
+    
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width - 60.0f, 0, 60.0f, HEADER_HEIGHT)];
+    [button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
+    [button setTitle:@"Done" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
+    [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+    [button setContentMode:UIViewContentModeTopRight];
+    [self.header addSubview:button];
+    [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
 	tv.delegate = self;
 	tv.dataSource = self;
 	self.tableview = tv;
