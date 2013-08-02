@@ -127,7 +127,6 @@
 		BD0EE4B417AB2AB4004D8276 /* about-10.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0EE4AE17AB2AB4004D8276 /* about-10.png */; };
 		BD0EE4B517AB2AB4004D8276 /* about-10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0EE4AF17AB2AB4004D8276 /* about-10@2x.png */; };
 		BD0EE4B617AB2AB4004D8276 /* about-09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0EE4B017AB2AB4004D8276 /* about-09@2x.png */; };
-		BD0EE4B717AB2AB4004D8276 /* about-08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD0EE4B117AB2AB4004D8276 /* about-08@2x.png */; };
 		BD2062C01772A053008A549F /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2062BF1772A053008A549F /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD3EC62E1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BD3EC62D1787CC45004B72AF /* VLMTwoFingerTapGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD5A60C617A98D8900E42DF5 /* VLMColorData.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5A60C517A986C100E42DF5 /* VLMColorData.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
@@ -179,7 +178,6 @@
 		BDBF1AC5172499D50001B908 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1AC4172499D50001B908 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDBF1ACC1724CDC00001B908 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBF1ACB1724CDC00001B908 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDCCB3061737F0B000BCB9D6 /* VLMPopMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCCB3051737F0B000BCB9D6 /* VLMPopMenuViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDDAC5461787FC6C003ED8C4 /* about-08.png in Resources */ = {isa = PBXBuildFile; fileRef = BDDAC5441787FC6C003ED8C4 /* about-08.png */; };
 		BDDAC5471787FC6C003ED8C4 /* about-08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDDAC5451787FC6C003ED8C4 /* about-08@2x.png */; };
 		BDF133F21734B239003B6265 /* VLMPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F11734B239003B6265 /* VLMPanGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDF133F517356EA0003B6265 /* VLMPinchGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF133F417356EA0003B6265 /* VLMPinchGestureRecognizer.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -194,7 +192,6 @@
 		BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E581745F9D8006AF1C7 /* camera@2x.png */; };
 		BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */; };
 		BDFB2E5E1745F9D8006AF1C7 /* camera~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */; };
-		BDFB2E6D1747546B006AF1C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E6C1747546B006AF1C7 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -513,7 +510,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F463A41636C3FB00FC89C1 /* SystemConfiguration.framework in Frameworks */,
-				BDFB2E6D1747546B006AF1C7 /* CoreData.framework in Frameworks */,
 				BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */,
 				B60FA92A1702297C00078D20 /* MediaPlayer.framework in Frameworks */,
 				B6D6E09A16F7D03F009AB75F /* StoreKit.framework in Frameworks */,
@@ -1177,7 +1173,6 @@
 				BD0C9265176A1A2100A0C89D /* white.png in Resources */,
 				BD0C9267176A1D5700A0C89D /* gray_header_background.png in Resources */,
 				BD0C926A176A1DE300A0C89D /* clear.png in Resources */,
-				BD0EE4B717AB2AB4004D8276 /* about-08@2x.png in Resources */,
 				BD0C926B176A1DE300A0C89D /* clear50.png in Resources */,
 				BD0EE4B217AB2AB4004D8276 /* about-08.png in Resources */,
 				BD7137451774340100DEBADB /* about-07.png in Resources */,
@@ -1196,7 +1191,6 @@
 				BD71375717743B1000DEBADB /* about-05@2x.png in Resources */,
 				BD71375817743B1000DEBADB /* about-06@2x.png in Resources */,
 				BD71375917743B1000DEBADB /* about-07@2x.png in Resources */,
-				BDDAC5461787FC6C003ED8C4 /* about-08.png in Resources */,
 				BDDAC5471787FC6C003ED8C4 /* about-08@2x.png in Resources */,
 				BD6922FB1790629700551F02 /* albumcover.png in Resources */,
 				BD6922FC1790629700551F02 /* albumcover@2x.png in Resources */,
