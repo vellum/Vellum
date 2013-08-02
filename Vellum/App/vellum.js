@@ -59,6 +59,8 @@ var VLM = VLM || {};
 	s.context = canvas.getContext('2d');
 	s.zoomlevel = 1;
 	s.accumdist = 0;
+    s.isRetina = (window.devicePixelRatio == 2);
+    s.isIpad = false;// overwrite this in index.js
  
     s.color = {
         'name' : 'black',

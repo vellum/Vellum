@@ -62,6 +62,7 @@ var setDrawingMode = function(mode) {
 	    clearScreen();
 		setDrawingMode(VLM.constants.MODE_SCRIBBLE);
 	    setInterval(animate, 16);
+        VLM.state.isIPad = BRIDGE.isIPad;
 	},
 
 	beginStroke = function(x, y) {
