@@ -55,8 +55,6 @@
     CGFloat pad = 1;
     CGFloat buttonsize = 74.0f;
     
-    CGPoint topleft;
-    topleft = CGPointMake(innermargin, innermargin);
     VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *data = [[tools tools] objectAtIndex:tools.selectedIndex];
     NSInteger numbuttons = [[data colors] count];

@@ -1,7 +1,6 @@
 
 #import "AppDelegate.h"
 #import "VLMMainViewController.h"
-#import "GAI.h"
 #import "VLMConstants.h"
 #import "EJAppViewController.h"
 
@@ -22,8 +21,6 @@
     // not being interacted with by touch. ie. games with motion control.
     [application setIdleTimerDisabled:YES];
 
-    
-
     EJAppViewController *appvc = [[EJAppViewController alloc] init];
     VLMMainViewController *vc = [[VLMMainViewController alloc] initWithEJAppViewController:appvc];
     [self setAvc:appvc];
@@ -32,19 +29,6 @@
     [window insertSubview:appvc.view belowSubview:vc.view];
     
     [window setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
-    
-    // google
-    // Optional: automatically send uncaught exceptions to Google Analytics.
-    [GAI sharedInstance].trackUncaughtExceptions = YES;
-
-    // Optional: set debug to YES for extra debugging information.
-    [GAI sharedInstance].debug = YES;
-    
-    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    [GAI sharedInstance].dispatchInterval = 120; // 120s
-    
-    // Create tracker instance.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-41031955-1"];
 
 #if STYLED_HEADER
     [self establishAppearanceDefaults];

@@ -190,7 +190,6 @@
                              nil];
 
     CGFloat margin = 25.0f;
-    CGFloat vmargintop = margin;
     CGFloat buttonheight = 55.0f;
     CGFloat buttonspacing = 5.0f;
 
@@ -222,7 +221,7 @@
     [cap setBackgroundColor:[UIColor clearColor]];
     [tvHeader addSubview:cap];
 
-    vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
+    CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight+buttonspacing) - margin;
     for ( CGFloat i = 0; i < [buttonTitles count]; i++){
 
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i*(buttonheight+buttonspacing), 320-margin*2, buttonheight)];

@@ -194,8 +194,6 @@
 		BDFB2E5C1745F9D8006AF1C7 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E581745F9D8006AF1C7 /* camera@2x.png */; };
 		BDFB2E5D1745F9D8006AF1C7 /* camera~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E591745F9D8006AF1C7 /* camera~ipad.png */; };
 		BDFB2E5E1745F9D8006AF1C7 /* camera~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDFB2E5A1745F9D8006AF1C7 /* camera~ipad@2x.png */; };
-		BDFB2E6A174753F7006AF1C7 /* libGoogleAnalytics_debug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E68174753F7006AF1C7 /* libGoogleAnalytics_debug.a */; };
-		BDFB2E6B174753F7006AF1C7 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E69174753F7006AF1C7 /* libGoogleAnalytics.a */; };
 		BDFB2E6D1747546B006AF1C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E6C1747546B006AF1C7 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -536,8 +534,6 @@
 				B6CFCCD91332F152001F17AF /* AVFoundation.framework in Frameworks */,
 				B6AC4A061359E7A5003C4982 /* iAd.framework in Frameworks */,
 				B6243666166684420046B8C7 /* libJavaScriptCore.a in Frameworks */,
-				BDFB2E6A174753F7006AF1C7 /* libGoogleAnalytics_debug.a in Frameworks */,
-				BDFB2E6B174753F7006AF1C7 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

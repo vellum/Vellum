@@ -64,8 +64,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    NSArray *touchesfromevent = [touches allObjects];
-    int touchcount = [touchesfromevent count];
+    //NSArray *touchesfromevent = [touches allObjects];
+    //int touchcount = [touchesfromevent count];
     //NSLog(@"ended %i", touchcount);
 }
 
