@@ -178,7 +178,7 @@ graphite.prototype = {
                 var step = 2.5;
                 if ( !state.isRetina ){
                     if ( !state.isIPad ){
-                        step = 5;
+                        //step = 5;
                         ctx.lineWidth = 0.45;//0.9;
                     }
                 }
