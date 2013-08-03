@@ -43,6 +43,15 @@ graphite.prototype = {
 
             } else {
                 
+                if ( alpha > 0.75 ){
+                    alpha = 1;
+                } else if ( alpha > 0.5 ){
+                    alpha = 0.4;
+                } else if ( alpha > 0.25 ){
+                    alpha = 0.2;
+                } else {
+                    alpha = 0.1;
+                }
                 console.log('this is a non-retina ipad');
                 this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
 
