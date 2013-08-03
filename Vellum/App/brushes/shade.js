@@ -32,7 +32,7 @@ shade.prototype = {
                 this.interpolation_multiplier = 0.375;
                 this.distance_multiplier = 2.0;
                 this.nib_multiplier = 0.25;
-                this.step = 1.0;
+                this.step = 0.5;
 
             }
         }
