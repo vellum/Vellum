@@ -8,6 +8,7 @@ ink.prototype = {
 	prev : { x:0, y:0, nib:0 },
 	interpolation_multiplier : 0.25,
 	color : 'rgba(0,0,0,1)',
+    tickcount:0,
     
 	init : function(){
 		this.context = VLM.state.context;
@@ -43,6 +44,8 @@ ink.prototype = {
         if ( window.devicePixelRatio == 1 && state.zoomlevel < 1 ){
             this.interpolation_multiplier *= 1/state.zoomlevel;
         }
+        
+        this.tickcount = 0;
 	},
 	
 	continue : function(x,y){
@@ -60,13 +63,18 @@ ink.prototype = {
 	},  
 	
 	tick : function(){
+        this.tickcount++;
+        
+        
         var interpolation_multiplier = 0.25,
             ctx = this.context,
             state = VLM.state,
             zoomlevel = state.zoomlevel;
         
-	    if ( window.devicePixelRatio == 1 && VLM.state.zoomlevel < 1 ){
-            interpolation_multiplier *= 1/zoomlevel;
+        if ( !state.isRetina ){
+            if (zoomlevel < 1 ){
+                interpolation_multiplier *= 1/zoomlevel;
+            }
         }
 
         var prev = this.prev,

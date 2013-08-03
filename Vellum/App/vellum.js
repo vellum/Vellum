@@ -90,6 +90,7 @@ var VLM = VLM || {};
 	
 	i.beginStroke = function(x,y){
 		brush.begin(x,y);
+// console.log('beginstroke');
 	};
 	
 	i.continueStroke = function(x,y){

@@ -566,6 +566,7 @@
 	[self.avc callJS:@"clearScreen();"];
 	if ([[VLMToolCollection instance] isSelectedToolSubtractive]) {
 		[self.headerController resetToZero];
+        [self updateHeader];
 	}
 }
 

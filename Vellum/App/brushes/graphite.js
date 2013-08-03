@@ -75,7 +75,8 @@ graphite.prototype = {
                 this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
 
                 
-            } else {
+            }
+            else {
                 
                 console.log('this is a non-retina iphone');
                 
@@ -95,8 +96,12 @@ graphite.prototype = {
                 this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
 
             }
-            
+   
         }
+        
+        this.begin(0,0);
+        this.end(0,0);
+        
        
         /*
 	    if ( VLM.utilities.is3GS() ){
@@ -139,6 +144,7 @@ graphite.prototype = {
 	},
 	
 	tick : function(){
+        
         this.tickcount = this.tickcount + 1;
         var state = VLM.state;
         /*
