@@ -84,7 +84,7 @@ static VLMToolCollection *sharedToolCollection;
 		                         [NSNumber numberWithInt:1],
 		                         [NSNumber numberWithInt:1],
 		                         [NSNumber numberWithInt:1],
-		                         [NSNumber numberWithInt:0],
+		                         [NSNumber numberWithInt:1],
 		                         [NSNumber numberWithInt:7],
 		                         [NSNumber numberWithInt:7],
 		                         [NSNumber numberWithInt:4],
