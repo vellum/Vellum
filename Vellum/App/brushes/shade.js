@@ -22,7 +22,7 @@ shade.prototype = {
                 this.interpolation_multiplier = 0.375;
                 this.distance_multiplier = 2.0;
                 this.nib_multiplier = 0.25;
-                this.step = 1.1;
+                this.step = 1.0;
                 
             }
         } else {
@@ -32,7 +32,7 @@ shade.prototype = {
                 this.interpolation_multiplier = 0.375;
                 this.distance_multiplier = 2.0;
                 this.nib_multiplier = 0.25;
-                this.step = 1.1;
+                this.step = 1.0;
 
             }
         }
@@ -128,7 +128,7 @@ shade.prototype = {
 				}
 
                 ctx.strokeStyle = fgcolor;
-                var step = 1.5;
+                var step = this.step;//1.5;
                 for (var i = -currange; i <= currange; i += step) {
                     var pct = i / currange,
                     localx = x + cosangle * pct * currange,
