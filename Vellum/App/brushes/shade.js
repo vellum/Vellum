@@ -13,12 +13,29 @@ shade.prototype = {
 	
 	init : function(){
 		this.context = VLM.state.context;
-	    if ( VLM.utilities.is3GS() ){
-	        this.interpolation_multiplier = 0.375;
-	        this.distance_multiplier = 2.0;
-			this.nib_multiplier = 0.25;
-			this.step = 1.1;
-	    }
+        
+        var state = VLM.state;
+        if ( state.isIPad ){
+            if ( state.isRetina ){
+                
+            } else {
+                this.interpolation_multiplier = 0.375;
+                this.distance_multiplier = 2.0;
+                this.nib_multiplier = 0.25;
+                this.step = 1.1;
+                
+            }
+        } else {
+            if ( state.isRetina ){
+                
+            } else {
+                this.interpolation_multiplier = 0.375;
+                this.distance_multiplier = 2.0;
+                this.nib_multiplier = 0.25;
+                this.step = 1.1;
+
+            }
+        }
 	},
 	
 	begin : function(x,y){

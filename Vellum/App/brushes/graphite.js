@@ -10,25 +10,86 @@ graphite.prototype = {
     distance_multiplier : 2.5,
     nib_multiplier : 0.25,
 	grr_fg : 'rgba(0,0,0,0.5)',
-	
+	tickcount : 0,
+    
 	init : function(){
 		this.context = VLM.state.context;
+        
+        
         
         // overwrite fgcolor with whatever is in state
         var col = VLM.state.color,
         rgba = col.rgba;
         var alpha = rgba[3];
 
-        // transform it
-        if ( alpha > 0.75 ){
-            alpha = 1;
-        } else if ( alpha > 0.5 ){
-            alpha = 0.4;
-        } else if ( alpha > 0.25 ){
-            alpha = 0.2;
+        
+        var state = VLM.state;
+        if (state.isIPad){
+        
+            if (state.isRetina){
+
+                console.log('this is a retina ipad');
+                
+                if ( alpha > 0.75 ){
+                    alpha = 1;
+                } else if ( alpha > 0.5 ){
+                    alpha = 0.4;
+                } else if ( alpha > 0.25 ){
+                    alpha = 0.2;
+                } else {
+                    alpha = 0.1;
+                }
+                this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
+
+            } else {
+                
+                console.log('this is a non-retina ipad');
+                this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
+
+            }
+            
         } else {
-            alpha = 0.1;
+            
+            if (state.isRetina){
+                
+                console.log('this is a retina iphone');
+                if ( alpha > 0.75 ){
+                    alpha = 1;
+                } else if ( alpha > 0.5 ){
+                    alpha = 0.4;
+                } else if ( alpha > 0.25 ){
+                    alpha = 0.2;
+                } else {
+                    alpha = 0.1;
+                }
+
+                this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
+
+                
+            } else {
+                
+                console.log('this is a non-retina iphone');
+                
+                this.interpolation_multiplier = 0.375;
+                this.distance_multiplier = 0.75;
+                this.nib_multiplier = 0.5;
+                
+                if ( alpha > 0.75 ){
+                    alpha = 0.9;
+                } else if ( alpha > 0.5 ){
+                    alpha = 0.6;
+                } else if ( alpha > 0.25 ){
+                    alpha = 0.3;
+                } else {
+                    alpha = 0.15;
+                }
+                this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
+
+            }
+            
         }
+       
+        /*
 	    if ( VLM.utilities.is3GS() ){
 	        this.interpolation_multiplier = 0.375;
 	        this.distance_multiplier = 2.0;
@@ -39,7 +100,7 @@ graphite.prototype = {
             this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.5 + ')';
 
         }
-        
+        */
 	},
 	
 	begin : function(x,y){
@@ -51,6 +112,7 @@ graphite.prototype = {
 		prev.nib = 0;
 		target.x = x;
 		target.y = y;
+        this.tickcount = 0;
 	},
 	
 	continue : function(x,y){
@@ -68,6 +130,14 @@ graphite.prototype = {
 	},
 	
 	tick : function(){
+        this.tickcount = this.tickcount + 1;
+        var state = VLM.state;
+        /*
+        if ( !state.isRetina ){
+            if ( this.tickcount % 2 == 0 ) return;
+        }
+         */
+
         var prev = this.prev,
             target = this.target,
             interpolation_multiplier = this.interpolation_multiplier,
@@ -81,7 +151,6 @@ graphite.prototype = {
             dx = target.x-x,
             dy = target.y-y,
 	        dist = Math.sqrt(dx * dx + dy * dy),
-	        state = VLM.state,
 	        zoomlevel = state.zoomlevel,
 	        threshold = 0.001 / (zoomlevel * 1000);
         
@@ -99,6 +168,7 @@ graphite.prototype = {
             prevrange = prev.nib * multiplier,
             ctx = this.context;
             
+            
             if (zoomlevel < 10) {
                 ctx.beginPath();
                 ctx.strokeStyle = this.grr_fg;
@@ -106,12 +176,21 @@ graphite.prototype = {
                 
 				// FIXME: this should be an instance variable 
                 var step = 2.5;
+                if ( !state.isRetina ){
+                    if ( !state.isIPad ){
+                        step = 5;
+                        ctx.lineWidth = 0.45;//0.9;
+                    }
+                }
+                
+                /*
 				var ut = VLM.utilities;
 				if ( ut.is3GS() ){
 	                step = 4;
-	                ctx.strokeStyle = this.grr_fg;
-	                ctx.lineWidth = 0.5;
+	                //ctx.strokeStyle = this.grr_fg;
+	                //ctx.lineWidth = 0.5;
 				}
+                */
                 for (var i = -currange; i <= currange; i += step) {
                     var pct = i / currange,
                     localx = x + cosangle * pct * currange,
