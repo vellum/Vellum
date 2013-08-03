@@ -2,6 +2,7 @@
 #import "VLMMainViewController.h"
 #import "VLMConstants.h"
 #import "EJAppViewController.h"
+#import "Flurry.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) EJAppViewController *avc;
@@ -32,6 +33,8 @@
 #if STYLED_HEADER
 	[self establishAppearanceDefaults];
 #endif
+    
+    [Flurry startSession:@"83417d5908b1b9c7eb727c45fdab1b3f"];
 	return YES;
 }
 

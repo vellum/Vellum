@@ -135,6 +135,7 @@
 		BD6922F8178FE48100551F02 /* VLMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6922F7178FE48100551F02 /* VLMTableView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD6922FB1790629700551F02 /* albumcover.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6922F91790629700551F02 /* albumcover.png */; };
 		BD6922FC1790629700551F02 /* albumcover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD6922FA1790629700551F02 /* albumcover@2x.png */; };
+		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
 		BD70E7E3173CA91400AD2FED /* VLMUndoState.m in Sources */ = {isa = PBXBuildFile; fileRef = BD70E7E2173CA91400AD2FED /* VLMUndoState.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BD7137451774340100DEBADB /* about-07.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373E1774340100DEBADB /* about-07.png */; };
 		BD7137461774340100DEBADB /* about-06.png in Resources */ = {isa = PBXBuildFile; fileRef = BD71373F1774340100DEBADB /* about-06.png */; };
@@ -412,6 +413,8 @@
 		BD6922F7178FE48100551F02 /* VLMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMTableView.m; path = VLM/VLMTableView.m; sourceTree = "<group>"; };
 		BD6922F91790629700551F02 /* albumcover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albumcover.png; sourceTree = "<group>"; };
 		BD6922FA1790629700551F02 /* albumcover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "albumcover@2x.png"; sourceTree = "<group>"; };
+		BD70C07417ADC6D0003FBCE9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/Flurry.h"; sourceTree = "<group>"; };
+		BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.2.a; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/libFlurry_4.2.2.a"; sourceTree = "<group>"; };
 		BD70E7E1173CA91400AD2FED /* VLMUndoState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMUndoState.h; path = VLM/VLMUndoState.h; sourceTree = "<group>"; };
 		BD70E7E2173CA91400AD2FED /* VLMUndoState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMUndoState.m; path = VLM/VLMUndoState.m; sourceTree = "<group>"; };
 		BD71373E1774340100DEBADB /* about-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about-07.png"; sourceTree = "<group>"; };
@@ -522,6 +525,7 @@
 				B6CFCCD91332F152001F17AF /* AVFoundation.framework in Frameworks */,
 				B6AC4A061359E7A5003C4982 /* iAd.framework in Frameworks */,
 				B6243666166684420046B8C7 /* libJavaScriptCore.a in Frameworks */,
+				BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +728,8 @@
 		B64CE652166682700087CF94 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				BD70C07417ADC6D0003FBCE9 /* Flurry.h */,
+				BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */,
 				B63D255C16E8DE23007E6034 /* SocketRocket */,
 				B64CE653166682700087CF94 /* JavaScriptCore */,
 			);
@@ -1316,6 +1322,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Source/lib\"",
+					"\"$(SRCROOT)/Source/lib/Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry\"",
 				);
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = Vellum;
@@ -1339,6 +1346,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Source/lib\"",
+					"\"$(SRCROOT)/Source/lib/Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry\"",
 				);
 				PRODUCT_NAME = Vellum;
 				PROVISIONING_PROFILE = "";
