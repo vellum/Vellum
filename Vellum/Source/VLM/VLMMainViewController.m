@@ -25,6 +25,7 @@
 #import "UINavigationBar+Fat.h"
 #import "VLMColorMenuViewController.h"
 #import "VLMColorData.h"
+#import "Flurry.h"
 
 @interface VLMMainViewController ()
 
@@ -46,6 +47,8 @@
 @property BOOL isPortrait;
 @property BOOL didJustWake;
 @property (strong, nonatomic) VLMColorMenuViewController *colorMenuViewController;
+@property BOOL previouslyCleared;
+@property BOOL previouslySelectedTool;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -77,6 +80,8 @@
 @synthesize isPortrait;
 @synthesize colorMenuViewController;
 @synthesize didJustWake;
+@synthesize previouslyCleared;
+@synthesize previouslySelectedTool;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -98,6 +103,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    [self setPreviouslyCleared:NO];
+    [self setPreviouslySelectedTool:NO];
 	[self setIsPortrait:YES];
 	CGRect frame = UIScreen.mainScreen.bounds;
 	UIView *t = [[UIView alloc] initWithFrame:frame];
@@ -568,6 +575,12 @@
 		[self.headerController resetToZero];
         [self updateHeader];
 	}
+    if (self.previouslyCleared){
+        [Flurry endTimedEvent:@"ClearScreen" withParameters:nil];
+    } else {
+        [self setPreviouslyCleared:YES];
+    }
+    [Flurry logEvent:@"ClearScreen" withParameters:nil timed:YES];
 }
 
 - (void)screenCapture:(id)screenshotdelegate {
@@ -584,23 +597,27 @@
 	else {
 		[self setDidJustWake:NO];
 	}
+    [Flurry logEvent:@"ShowToolMenu" timed:YES];
 }
 
 - (void)hidePopover {
 	[self.pop hide];
 	[self.colorMenuViewController hide];
+    [Flurry endTimedEvent:@"ShowToolMenu" withParameters:nil];
 }
 
 #pragma mark - MenuDelegate
 
 - (void)updateHeader {
 	[self updateHeaderWithTitle:nil];
+    /*
 	VLMToolCollection *tools = [VLMToolCollection instance];
 	VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
 	VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
 	NSString *m = item.javascriptvalue;
 	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
 	[self.avc callJS:s];
+     */
 }
 
 - (void)updateHeaderWithTitle:(NSString *)title {
@@ -630,6 +647,23 @@
 	NSString *m = item.javascriptvalue;
 	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
 	[self.avc callJS:s];
+    
+    NSDictionary *logparams = [NSDictionary dictionaryWithObjectsAndKeys:
+                               title, @"ToolName",
+                               item.javascriptvalue, @"ToolJS",
+                               color.name, @"ColorName",
+                               color.labeltext, @"ColorLabel",
+                               color.opacity, @"ColorOpacity",
+                               color.isSubtractive, @"ColorIsEraser",
+                               nil];
+    
+    if (self.previouslySelectedTool){
+        [Flurry endTimedEvent:@"SelectTool" withParameters:nil];
+    } else {
+        [self setPreviouslySelectedTool:YES];
+    }
+    [Flurry logEvent:@"SelectTool" withParameters:logparams timed:YES];
+    
 }
 
 - (void)refreshData {
@@ -656,10 +690,12 @@
 
 - (void)showColorMenu {
 	[self.colorMenuViewController show];
+    [Flurry logEvent:@"ShowColorMenu" timed:YES];
 }
 
 - (void)hideColorMenu {
 	[self.colorMenuViewController hide];
+    [Flurry endTimedEvent:@"ShowColorMenu" withParameters:nil];
 }
 
 - (void)updateColorMenu {

@@ -87,7 +87,7 @@ static VLMToolCollection *sharedToolCollection;
 		                         [NSNumber numberWithInt:1],
 		                         [NSNumber numberWithInt:7],
 		                         [NSNumber numberWithInt:7],
-		                         [NSNumber numberWithInt:4],
+		                         [NSNumber numberWithInt:5],
 		                         [NSNumber numberWithInt:7],
 		                         nil];
 		NSInteger selectedIndex = 0;
@@ -110,12 +110,12 @@ static VLMToolCollection *sharedToolCollection;
 			NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
 			NSString *key = [NSString stringWithFormat:@"%@_colorindex", [data name]];
 			if ([defaults objectForKey:key] == nil) {
-				NSLog(@"writing key %@   %d", key, sel);
+				//NSLog(@"writing key %@   %d", key, sel);
 				[defaults setObject:[NSNumber numberWithInt:sel] forKey:key];
 				shouldSynchronize = YES;
 			}
 			else {
-				NSLog(@"reading key %@   %d", key, sel);
+				//NSLog(@"reading key %@   %d", key, sel);
 				sel = [defaults integerForKey:key];
 			}
 			[data setSelectedColorIndex:sel];

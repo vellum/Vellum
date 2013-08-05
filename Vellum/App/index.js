@@ -29,7 +29,6 @@ var setDrawingMode = function(mode) {
         // set mode
 		var ink = VLM.ink,
             s = VLM.state;
-		ink.setBrush(mode);
 
         // set color
         if ( color == 'black' ){
@@ -43,6 +42,9 @@ var setDrawingMode = function(mode) {
                 'rgba' : [242,242,232,Number(opacity)]
             };
         }
+
+		ink.setBrush(mode);
+
         //console.log('setting color: ' + s.color);
     },
 

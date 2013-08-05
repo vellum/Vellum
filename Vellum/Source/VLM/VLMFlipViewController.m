@@ -13,6 +13,7 @@
 #import "VLMMenuButton.h"
 #import "VLMTableView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Flurry.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -254,6 +255,8 @@
 	UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
 	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
 	[self.view addGestureRecognizer:sgr];
+    
+    [Flurry logPageView];
 }
 
 - (void)didReceiveMemoryWarning {
