@@ -42,7 +42,8 @@
 }
 
 - (void)setText:(NSString *)text {
-	[self.label setText:text];
+    NSString *formatted = [text stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
+	[self.label setText:formatted];
 }
 
 // from http://stackoverflow.com/questions/15237956/how-to-animate-transition-from-one-state-to-another-for-uicontrol-uibutton

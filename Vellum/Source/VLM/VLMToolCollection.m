@@ -37,7 +37,7 @@ static VLMToolCollection *sharedToolCollection;
 		                  @"Ink",
 		                  @"Erase",
 		                  @"Scratch",
-		                  @"Gentle Erase",
+		                  @"Soft Erase",
 		                  @"Hard Erase",
 		                  nil];
         

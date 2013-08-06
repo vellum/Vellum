@@ -35,6 +35,24 @@
 #endif
     
     [Flurry startSession:@"83417d5908b1b9c7eb727c45fdab1b3f"];
+    /*
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
+    [Flurry setVersion:version];
+    
+    BOOL isIpad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+    BOOL isRetina = NO;
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
+        && [[UIScreen mainScreen] scale] == 2.0) {
+        isRetina = YES;
+    }
+    NSDictionary *logparams = [NSDictionary dictionaryWithObjectsAndKeys:
+                       [NSNumber numberWithBool:isIpad], @"isTablet",
+                       [NSNumber numberWithBool:isRetina], @"isRetina",
+                       nil];
+    [Flurry logEvent:@"Start" withParameters:logparams];
+     */
+    
 	return YES;
 }
 
