@@ -26,8 +26,10 @@
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
 @property (nonatomic, strong) NSArray *attributedtexts;
 @property (nonatomic, strong) UIImageView *cover;
+@property (nonatomic, strong) UILabel *headerlabel;
 @property CGRect coverframe;
 @property NSInteger tappedID;
+@property BOOL invertheader;
 @end
 
 @implementation VLMFlipViewController
@@ -41,6 +43,8 @@
 @synthesize cover;
 @synthesize coverframe;
 @synthesize tappedID;
+@synthesize invertheader;
+@synthesize headerlabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -55,6 +59,7 @@
 	[super viewDidLoad];
     
     [self setTappedID:0];
+    [self setInvertheader:NO];
     
 	// Improve scrolling performance by reusing UITableView section headers
 	self.reusableSectionHeaderViews = [NSMutableSet setWithCapacity:3];
@@ -148,19 +153,20 @@
     tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, targetwidth, targetheight)];
     
     UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, targetwidth, HEADER_HEIGHT)];
-    [h setBackgroundColor:[UIColor colorWithPatternImage:NAVIGATION_HEADER_BACKGROUND_IMAGE]];
+    [h setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
     [h setClipsToBounds:YES];
     [self.view addSubview:h];
     [self setHeader:h];
     
     UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
     [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-    [titlelabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
+    [titlelabel setTextColor:[UIColor colorWithWhite:0.0f alpha:0.8f]];
     [titlelabel setText:@"About"];
     [titlelabel setUserInteractionEnabled:YES];
     [titlelabel setTextAlignment:NSTextAlignmentCenter];
     [titlelabel setBackgroundColor:[UIColor clearColor]];
     [self.header addSubview:titlelabel];
+    [self setHeaderlabel:titlelabel];
     
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [tgr setNumberOfTapsRequired:1];
@@ -171,12 +177,13 @@
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width - 60.0f, 0, 60.0f, HEADER_HEIGHT)];
     [button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
     [button setTitle:@"Done" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithWhite:0.0f alpha:0.8f] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
     [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
     [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
     [button setContentMode:UIViewContentModeTopRight];
+    [self setDonebutton:button];
     [self.header addSubview:button];
     [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
 	tv.delegate = self;
@@ -342,11 +349,51 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
 	CGFloat y = -scrollView.contentOffset.y;
 	if (y >= 0) {
 		self.cover.frame = CGRectMake(0, scrollView.contentOffset.y, self.coverframe.size.width + y, self.coverframe.size.height + y);
 		self.cover.center = CGPointMake(self.view.center.x, self.cover.center.y);
 	}
+    //NSLog(@"scrolled %f", y);
+    
+    if (y >= -300){
+        if (self.invertheader){
+            [self setInvertheader:NO];
+            NSLog(@"header white");
+            [UIView animateWithDuration:ANIMATION_DURATION * 2
+                                  delay:0
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                             animations: ^{
+                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
+
+                             }
+             
+                             completion: ^(BOOL finished) {
+                             }
+             
+             ];
+
+        }
+    }else{
+        if (!self.invertheader){
+            [self setInvertheader:YES];
+            NSLog(@"header gray");
+            [UIView animateWithDuration:ANIMATION_DURATION * 2
+                                  delay:0
+                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+                             animations: ^{
+                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
+                             }
+             
+                             completion: ^(BOOL finished) {
+                             }
+             
+             ];
+
+        }
+        
+    }
 }
 
 #pragma mark GestureRecco
