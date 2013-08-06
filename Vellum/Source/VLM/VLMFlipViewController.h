@@ -15,9 +15,7 @@
 - (void)flipsideViewControllerDidFinish:(VLMFlipViewController *)controller;
 @end
 
-
-
-@interface VLMFlipViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface VLMFlipViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 @property (weak, nonatomic) id <VLMFlipsideViewControllerDelegate> delegate;
 
 @end

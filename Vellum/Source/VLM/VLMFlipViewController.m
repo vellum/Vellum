@@ -27,7 +27,7 @@
 @property (nonatomic, strong) NSArray *attributedtexts;
 @property (nonatomic, strong) UIImageView *cover;
 @property CGRect coverframe;
-
+@property NSInteger tappedID;
 @end
 
 @implementation VLMFlipViewController
@@ -40,6 +40,7 @@
 @synthesize attributedtexts;
 @synthesize cover;
 @synthesize coverframe;
+@synthesize tappedID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,6 +53,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    
+    [self setTappedID:0];
     
 	// Improve scrolling performance by reusing UITableView section headers
 	self.reusableSectionHeaderViews = [NSMutableSet setWithCapacity:3];
@@ -285,7 +288,6 @@
 
 #pragma mark - UITableView Delegate Methods
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	NSString *text = texts[section];
 	return [VLMSectionView expectedViewHeightForText:text];
@@ -358,29 +360,103 @@
 	UIButton *b = (UIButton *)sender;
 	int tag = b.tag;
 	NSIndexPath *ipath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UIAlertView *a;
+    BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
+    BOOL hasChrome = [[UIApplication sharedApplication] canOpenURL:
+                      [NSURL URLWithString:@"googlechrome://"]];
+    BOOL hasTweetbot = [[UIApplication sharedApplication] canOpenURL:
+                        [NSURL URLWithString:@"tweetbot://"]];
 	switch (tag) {
 		case 0:
-			//NSLog(@"rate");
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
+			[self setTappedID:0];
+            a = [[UIAlertView alloc] initWithTitle:@"Open in App Store?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            [a setDelegate:self];
+            [a show];
 			break;
             
 		case 1:
-			if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-			}
-			else {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-			}
+            if (!hasTwitter && !hasChrome && !hasTweetbot){
+                [self setTappedID:1];
+                a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [a setDelegate:self];
+                [a show];
+            } else {
+                [self setTappedID:2];
+                /*
+                a = [[UIAlertView alloc] initWithTitle:@"Open @vellum in" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                if (hasTwitter)[a addButtonWithTitle:@"Twitter"];
+                //if (hasTweetbot)[a addButtonWithTitle:@"Tweetbot"];
+                [a addButtonWithTitle:@"Safari"];
+                //if (hasChrome)[a addButtonWithTitle:@"Chrome"];
+                 */
+                a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [a setDelegate:self];
+                [a show];
+            }
 			break;
             
 		case 2:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+            if (true){//if (!hasChrome){
+                [self setTappedID:3];
+                a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [a setDelegate:self];
+                [a show];
+            } else {
+                [self setTappedID:4];
+                a = [[UIAlertView alloc] initWithTitle:@"Open in" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Safari", @"Chrome", nil];
+                [a setDelegate:self];
+                [a show];
+            }
 			break;
             
 		case 3:
 			[self.tableview scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 			break;
 	}
+}
+
+#pragma mark - UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"clicked %d", buttonIndex);
+    if (buttonIndex==0) return;
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    switch (self.tappedID) {
+        case 0:
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
+            break;
+        case 1:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+            break;
+        case 2:
+            if ([title isEqualToString:@"Twitter"]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+            } else if ([title isEqualToString:@"Tweetbot"]){
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot://vellum"]];
+
+            } else if ([title isEqualToString:@"Chrome"]){
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://twitter.com/vellumapp"]];
+            } else if ([title isEqualToString:@"Safari"]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+            }
+            break;
+        case 3:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+            break;
+        case 4:
+            if ([title isEqualToString:@"Chrome"]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://vellum.uservoice.com"]];
+            } else if ([title isEqualToString:@"Safari"]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+            }
+
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - Rotation Handling
