@@ -27,6 +27,13 @@
 #import "VLMColorData.h"
 #import "Flurry.h"
 
+#define FLURRY_TOOLS_OPEN @"ToolMenuVisible"
+#define FLURRY_TOOLS_CLOSED @"ToolMenuHidden"
+#define FLURRY_COLORS_OPEN @"ColorMenuVisible"
+#define FLURRY_COLORS_CLOSED @"ColorMenuHidden"
+#define FLURRY_PATH_MENU @"Menu"
+#define FLURRY_CLEAR @"ClearScreen"
+
 @interface VLMMainViewController ()
 
 @property (strong, nonatomic) VLMDrawHeaderController *headerController;
@@ -227,6 +234,11 @@
 	                                             name:UIDeviceOrientationDidChangeNotification
 	                                           object:nil];
 	//*/
+    
+    [Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
+    [Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
+    [Flurry logEvent:FLURRY_CLEAR timed:YES];
+
 }
 
 #pragma mark -
@@ -575,12 +587,8 @@
 		[self.headerController resetToZero];
         [self updateHeader];
 	}
-    if (self.previouslyCleared){
-        [Flurry endTimedEvent:@"ClearScreen" withParameters:nil];
-    } else {
-        [self setPreviouslyCleared:YES];
-    }
-    [Flurry logEvent:@"ClearScreen" withParameters:nil timed:YES];
+    [Flurry endTimedEvent:FLURRY_CLEAR withParameters:nil];
+    [Flurry logEvent:FLURRY_CLEAR withParameters:nil timed:YES];
 }
 
 - (void)screenCapture:(id)screenshotdelegate {
@@ -597,13 +605,16 @@
 	else {
 		[self setDidJustWake:NO];
 	}
-    [Flurry logEvent:@"ShowToolMenu" timed:YES];
+    [Flurry endTimedEvent:FLURRY_TOOLS_CLOSED withParameters:nil];
+    [Flurry logEvent:FLURRY_TOOLS_OPEN timed:YES];
+    [Flurry logEvent:FLURRY_PATH_MENU];
 }
 
 - (void)hidePopover {
 	[self.pop hide];
 	[self.colorMenuViewController hide];
-    [Flurry endTimedEvent:@"ShowToolMenu" withParameters:nil];
+    [Flurry endTimedEvent:FLURRY_TOOLS_OPEN withParameters:nil];
+    [Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
 }
 
 #pragma mark - MenuDelegate
@@ -648,21 +659,14 @@
 	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
 	[self.avc callJS:s];
     
-    NSDictionary *logparams = [NSDictionary dictionaryWithObjectsAndKeys:
-                               title, @"ToolName",
-                               item.javascriptvalue, @"ToolJS",
-                               color.name, @"ColorName",
-                               color.labeltext, @"ColorLabel",
-                               color.opacity, @"ColorOpacity",
-                               color.isSubtractive, @"ColorIsEraser",
-                               nil];
+    NSString *name = [item.name stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //NSString *eventpath = [NSString stringWithFormat:@"%@ - %@", FLURRY_PATH_MENU, name];
+    //[Flurry logEvent:eventpath];
+
+    NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, color.opacity, (color.isSubtractive)? @"_erase" : @""];
+    [Flurry logEvent:eventpath2];
     
-    if (self.previouslySelectedTool){
-        [Flurry endTimedEvent:@"SelectTool" withParameters:nil];
-    } else {
-        [self setPreviouslySelectedTool:YES];
-    }
-    [Flurry logEvent:@"SelectTool" withParameters:logparams timed:YES];
+    //NSLog(eventpath2);
     
 }
 
@@ -690,12 +694,14 @@
 
 - (void)showColorMenu {
 	[self.colorMenuViewController show];
-    [Flurry logEvent:@"ShowColorMenu" timed:YES];
+    [Flurry endTimedEvent:FLURRY_COLORS_CLOSED withParameters:nil];
+    [Flurry logEvent:FLURRY_COLORS_OPEN timed:YES];
 }
 
 - (void)hideColorMenu {
 	[self.colorMenuViewController hide];
-    [Flurry endTimedEvent:@"ShowColorMenu" withParameters:nil];
+    [Flurry endTimedEvent:FLURRY_COLORS_OPEN withParameters:nil];
+    [Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
 }
 
 - (void)updateColorMenu {
