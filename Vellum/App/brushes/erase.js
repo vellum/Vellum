@@ -10,6 +10,7 @@ erase.prototype = {
     distance_multiplier : 2.5,
     nib_multiplier : 0.25,
 	step : 0.75,
+    alive : false,
 
 	init : function(){
 		this.context = VLM.state.context;
@@ -18,7 +19,7 @@ erase.prototype = {
 	        this.distance_multiplier = 4.0;
 			this.nib_multiplier = 0.125;
 			this.step = 1.5;
-	    } 
+	    }
 	},
 	
 	begin : function(x,y){
@@ -33,6 +34,8 @@ erase.prototype = {
 	},
 	
 	continue : function(x,y){
+        this.alive = true;
+
         var prev = this.prev,
             target = this.target;
 		target.x = x;
@@ -40,6 +43,8 @@ erase.prototype = {
 	},
     
 	end : function(x,y){
+        this.alive = false;
+
 	    var prev = this.prev,
 	        target = this.target;
 	    target.x = x;
@@ -47,6 +52,8 @@ erase.prototype = {
 	},
 	
 	tick : function(){
+        if ( !this.alive ) return;
+        
         var prev = this.prev,
             target = this.target,
             interpolation_multiplier = this.interpolation_multiplier,
