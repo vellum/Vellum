@@ -95,9 +95,10 @@
 		B6F463A41636C3FB00FC89C1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F463A31636C3FA00FC89C1 /* SystemConfiguration.framework */; };
 		B6F629D116F353C800F16BAC /* EJBindingCanvasStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */; };
 		B870BDE916F2E11A00827F01 /* EJBindingWebGLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */; };
-		BD0C926E176A2D3300A0C89D /* UINavigationBar+Fat.m in Sources */ = {isa = PBXBuildFile; fileRef = BD0C926D176A2D3300A0C89D /* UINavigationBar+Fat.m */; };
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
 		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
+		BDE52DC717B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE52DC617B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDE52DCB17B2FF8200794512 /* UINavigationBar+Fat.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE52DCA17B2FF8200794512 /* UINavigationBar+Fat.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8F0A17B2F8E800D5B3A9 /* about-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8ECD17B2F8E800D5B3A9 /* about-01.png */; };
 		BDEE8F0B17B2F8E800D5B3A9 /* about-01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8ECE17B2F8E800D5B3A9 /* about-01@2x.png */; };
 		BDEE8F0C17B2F8E800D5B3A9 /* about-02.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8ECF17B2F8E800D5B3A9 /* about-02.png */; };
@@ -191,7 +192,6 @@
 		BDEE8FB317B2FD5900D5B3A9 /* VLMUndoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F9017B2FD5900D5B3A9 /* VLMUndoViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8FB417B2FD5900D5B3A9 /* VLMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F9317B2FD5900D5B3A9 /* VLMMainViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8FB517B2FD5900D5B3A9 /* VLMZoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F9617B2FD5900D5B3A9 /* VLMZoomViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc "; }; };
 		BDFB2E531745EADF006AF1C7 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
@@ -361,11 +361,13 @@
 		B6F629D016F353C700F16BAC /* EJBindingCanvasStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJBindingCanvasStyle.m; sourceTree = "<group>"; };
 		B870BDE716F2E10400827F01 /* EJBindingWebGLExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EJBindingWebGLExtensions.h; path = WebGL/EJBindingWebGLExtensions.h; sourceTree = "<group>"; };
 		B870BDE816F2E11A00827F01 /* EJBindingWebGLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EJBindingWebGLExtensions.m; path = WebGL/EJBindingWebGLExtensions.m; sourceTree = "<group>"; };
-		BD0C926C176A2D3300A0C89D /* UINavigationBar+Fat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Fat.h"; sourceTree = "<group>"; };
-		BD0C926D176A2D3300A0C89D /* UINavigationBar+Fat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Fat.m"; sourceTree = "<group>"; };
 		BD65F5C317A0BF5B0008D3ED /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
 		BD70C07417ADC6D0003FBCE9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/Flurry.h"; sourceTree = "<group>"; };
 		BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.2.a; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/libFlurry_4.2.2.a"; sourceTree = "<group>"; };
+		BDE52DC517B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALAssetsLibrary+CustomPhotoAlbum.h"; path = "Source/ALAssetsLibrary Category/ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
+		BDE52DC617B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ALAssetsLibrary+CustomPhotoAlbum.m"; path = "Source/ALAssetsLibrary Category/ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		BDE52DC917B2FF8200794512 /* UINavigationBar+Fat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Fat.h"; sourceTree = "<group>"; };
+		BDE52DCA17B2FF8200794512 /* UINavigationBar+Fat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Fat.m"; sourceTree = "<group>"; };
 		BDEE8ECD17B2F8E800D5B3A9 /* about-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about-01.png"; path = "images/about-01.png"; sourceTree = "<group>"; };
 		BDEE8ECE17B2F8E800D5B3A9 /* about-01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about-01@2x.png"; path = "images/about-01@2x.png"; sourceTree = "<group>"; };
 		BDEE8ECF17B2F8E800D5B3A9 /* about-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "about-02.png"; path = "images/about-02.png"; sourceTree = "<group>"; };
@@ -492,8 +494,6 @@
 		BDEE8F9317B2FD5900D5B3A9 /* VLMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMMainViewController.m; sourceTree = "<group>"; };
 		BDEE8F9517B2FD5900D5B3A9 /* VLMZoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLMZoomViewController.h; sourceTree = "<group>"; };
 		BDEE8F9617B2FD5900D5B3A9 /* VLMZoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMZoomViewController.m; sourceTree = "<group>"; };
-		BDFB2E4F1745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
-		BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		BDFB2E521745EADF006AF1C7 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -613,10 +613,9 @@
 				BDA36CE3172E034A00665A50 /* DD */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
-				BD0C926C176A2D3300A0C89D /* UINavigationBar+Fat.h */,
-				BD0C926D176A2D3300A0C89D /* UINavigationBar+Fat.m */,
 				B64CE64F166682700087CF94 /* Prefix.pch */,
 				B64CE661166682700087CF94 /* main.m */,
+				BDE52DC817B2FF8200794512 /* UINavigationBar Category */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -908,6 +907,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		BDE52DC817B2FF8200794512 /* UINavigationBar Category */ = {
+			isa = PBXGroup;
+			children = (
+				BDE52DC917B2FF8200794512 /* UINavigationBar+Fat.h */,
+				BDE52DCA17B2FF8200794512 /* UINavigationBar+Fat.m */,
+			);
+			path = "UINavigationBar Category";
+			sourceTree = "<group>";
+		};
 		BDEE8F4A17B2FA4300D5B3A9 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,8 +1078,8 @@
 		BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */ = {
 			isa = PBXGroup;
 			children = (
-				BDFB2E4F1745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
-				BDFB2E501745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
+				BDE52DC517B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.h */,
+				BDE52DC617B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m */,
 			);
 			name = "ALAssetsLibrary Category";
 			path = ..;
@@ -1231,6 +1239,7 @@
 				B64C87AE16B81BAA0097CD5B /* EJGLProgram2DRadialGradient.m in Sources */,
 				B64CE662166682700087CF94 /* EJAppViewController.m in Sources */,
 				B64CE663166682700087CF94 /* EJAudioSourceAVAudio.m in Sources */,
+				BDE52DC717B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
 				B64CE664166682700087CF94 /* EJAudioSourceOpenAL.m in Sources */,
 				B64CE665166682700087CF94 /* EJBindingAudio.m in Sources */,
 				B64CE666166682700087CF94 /* EJOpenALBuffer.m in Sources */,
@@ -1286,8 +1295,6 @@
 				B6D6E0A316F7E7D8009AB75F /* EJBindingIAPTransaction.m in Sources */,
 				B6D6E0A616F7E81B009AB75F /* EJBindingIAPProduct.m in Sources */,
 				B60FA92817021E0900078D20 /* EJBindingVideo.m in Sources */,
-				BDFB2E511745EA1B006AF1C7 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */,
-				BD0C926E176A2D3300A0C89D /* UINavigationBar+Fat.m in Sources */,
 				BDEE8F4917B2FA2400D5B3A9 /* DDPageControl.m in Sources */,
 				BDEE8F9717B2FD5900D5B3A9 /* AppDelegate.m in Sources */,
 				BDEE8F9817B2FD5900D5B3A9 /* EJBindingBridge.m in Sources */,
@@ -1318,6 +1325,7 @@
 				BDEE8FB117B2FD5900D5B3A9 /* VLMArcView.m in Sources */,
 				BDEE8FB217B2FD5900D5B3A9 /* VLMUndoState.m in Sources */,
 				BDEE8FB317B2FD5900D5B3A9 /* VLMUndoViewController.m in Sources */,
+				BDE52DCB17B2FF8200794512 /* UINavigationBar+Fat.m in Sources */,
 				BDEE8FB417B2FD5900D5B3A9 /* VLMMainViewController.m in Sources */,
 				BDEE8FB517B2FD5900D5B3A9 /* VLMZoomViewController.m in Sources */,
 			);
