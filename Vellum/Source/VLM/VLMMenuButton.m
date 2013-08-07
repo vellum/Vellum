@@ -42,7 +42,7 @@
 }
 
 - (void)setText:(NSString *)text {
-    NSString *formatted = [text stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
+	NSString *formatted = [text stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
 	[self.label setText:formatted];
 }
 

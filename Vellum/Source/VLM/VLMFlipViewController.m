@@ -58,8 +58,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    [self setTappedID:0];
-    [self setInvertheader:NO];
+	[self setTappedID:0];
+	[self setInvertheader:NO];
     
 	// Improve scrolling performance by reusing UITableView section headers
 	self.reusableSectionHeaderViews = [NSMutableSet setWithCapacity:3];
@@ -137,55 +137,54 @@
 	}
     
 	VLMTableView *tv;
-    CGFloat targetwidth;
-    CGFloat targetheight;
+	CGFloat targetwidth;
+	CGFloat targetheight;
     
 	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 		targetwidth = self.view.frame.size.width;
-        targetheight = self.view.frame.size.height - HEADER_HEIGHT;
-        
+		targetheight = self.view.frame.size.height - HEADER_HEIGHT;
 	}
 	else {
 		targetwidth = self.contentSizeForViewInPopover.width;
-        targetheight = self.contentSizeForViewInPopover.height - HEADER_HEIGHT;
+		targetheight = self.contentSizeForViewInPopover.height - HEADER_HEIGHT;
 	}
     
-    tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, targetwidth, targetheight)];
+	tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, targetwidth, targetheight)];
     
-    UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, targetwidth, HEADER_HEIGHT)];
-    [h setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
-    [h setClipsToBounds:YES];
-    [self.view addSubview:h];
-    [self setHeader:h];
+	UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, targetwidth, HEADER_HEIGHT)];
+	[h setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
+	[h setClipsToBounds:YES];
+	[self.view addSubview:h];
+	[self setHeader:h];
     
-    UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
-    [titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-    [titlelabel setTextColor:[UIColor colorWithWhite:0.0f alpha:0.8f]];
-    [titlelabel setText:@"About"];
-    [titlelabel setUserInteractionEnabled:YES];
-    [titlelabel setTextAlignment:NSTextAlignmentCenter];
-    [titlelabel setBackgroundColor:[UIColor clearColor]];
-    [self.header addSubview:titlelabel];
-    [self setHeaderlabel:titlelabel];
+	UILabel *titlelabel = [[UILabel alloc] initWithFrame:CGRectOffset(CGRectMake(0, 0, h.frame.size.width, h.frame.size.height), 0, 0.0f)];
+	[titlelabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
+	[titlelabel setTextColor:[UIColor colorWithWhite:0.0f alpha:0.8f]];
+	[titlelabel setText:@"About"];
+	[titlelabel setUserInteractionEnabled:YES];
+	[titlelabel setTextAlignment:NSTextAlignmentCenter];
+	[titlelabel setBackgroundColor:[UIColor clearColor]];
+	[self.header addSubview:titlelabel];
+	[self setHeaderlabel:titlelabel];
     
-    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-    [tgr setNumberOfTapsRequired:1];
-    [tgr setNumberOfTouchesRequired:1];
-    [titlelabel addGestureRecognizer:tgr];
+	UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+	[tgr setNumberOfTapsRequired:1];
+	[tgr setNumberOfTouchesRequired:1];
+	[titlelabel addGestureRecognizer:tgr];
     
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width - 60.0f, 0, 60.0f, HEADER_HEIGHT)];
-    [button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
-    [button setTitle:@"Done" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithWhite:0.0f alpha:0.8f] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
-    [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
-    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-    [button setContentMode:UIViewContentModeTopRight];
-    [self setDonebutton:button];
-    [self.header addSubview:button];
-    [button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(h.frame.size.width - 60.0f, 0, 60.0f, HEADER_HEIGHT)];
+	[button setFrame:CGRectOffset(button.frame, 0, 1.0f)];
+	[button setTitle:@"Done" forState:UIControlStateNormal];
+	[button setTitleColor:[UIColor colorWithWhite:0.0f alpha:0.8f] forState:UIControlStateNormal];
+	[button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+	[button.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12.0f]];
+	[button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+	[button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+	[button setContentMode:UIViewContentModeTopRight];
+	[self setDonebutton:button];
+	[self.header addSubview:button];
+	[button addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
 	tv.delegate = self;
 	tv.dataSource = self;
 	self.tableview = tv;
@@ -266,7 +265,7 @@
 	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
 	[self.view addGestureRecognizer:sgr];
     
-    [Flurry logPageView];
+	[Flurry logPageView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -349,51 +348,47 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
 	CGFloat y = -scrollView.contentOffset.y;
 	if (y >= 0) {
 		self.cover.frame = CGRectMake(0, scrollView.contentOffset.y, self.coverframe.size.width + y, self.coverframe.size.height + y);
 		self.cover.center = CGPointMake(self.view.center.x, self.cover.center.y);
 	}
-    //NSLog(@"scrolled %f", y);
+	//NSLog(@"scrolled %f", y);
     
-    if (y >= -300){
-        if (self.invertheader){
-            [self setInvertheader:NO];
-            NSLog(@"header white");
-            [UIView animateWithDuration:ANIMATION_DURATION * 2
-                                  delay:0
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                             animations: ^{
-                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
-
+	if (y >= -300) {
+		if (self.invertheader) {
+			[self setInvertheader:NO];
+			NSLog(@"header white");
+			[UIView animateWithDuration:ANIMATION_DURATION * 2
+			                      delay:0
+			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+			                 animations: ^{
+                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
                              }
              
-                             completion: ^(BOOL finished) {
-                             }
-             
-             ];
-
-        }
-    }else{
-        if (!self.invertheader){
-            [self setInvertheader:YES];
-            NSLog(@"header gray");
-            [UIView animateWithDuration:ANIMATION_DURATION * 2
-                                  delay:0
-                                options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
-                             animations: ^{
-                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f/360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
-                             }
-             
-                             completion: ^(BOOL finished) {
+			                 completion: ^(BOOL finished) {
                              }
              
              ];
-
-        }
-        
-    }
+		}
+	}
+	else {
+		if (!self.invertheader) {
+			[self setInvertheader:YES];
+			NSLog(@"header gray");
+			[UIView animateWithDuration:ANIMATION_DURATION * 2
+			                      delay:0
+			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+			                 animations: ^{
+                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
+                             }
+             
+			                 completion: ^(BOOL finished) {
+                             }
+             
+             ];
+		}
+	}
 }
 
 #pragma mark GestureRecco
@@ -407,53 +402,55 @@
 	UIButton *b = (UIButton *)sender;
 	int tag = b.tag;
 	NSIndexPath *ipath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UIAlertView *a;
-    BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
-    BOOL hasChrome = [[UIApplication sharedApplication] canOpenURL:
-                      [NSURL URLWithString:@"googlechrome://"]];
-    BOOL hasTweetbot = [[UIApplication sharedApplication] canOpenURL:
-                        [NSURL URLWithString:@"tweetbot://"]];
+	UIAlertView *a;
+	BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
+	BOOL hasChrome = [[UIApplication sharedApplication] canOpenURL:
+	                  [NSURL URLWithString:@"googlechrome://"]];
+	BOOL hasTweetbot = [[UIApplication sharedApplication] canOpenURL:
+	                    [NSURL URLWithString:@"tweetbot://"]];
 	switch (tag) {
 		case 0:
 			[self setTappedID:0];
-            a = [[UIAlertView alloc] initWithTitle:@"Open in App Store?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-            [a setDelegate:self];
-            [a show];
+			a = [[UIAlertView alloc] initWithTitle:@"Open in App Store?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+			[a setDelegate:self];
+			[a show];
 			break;
             
 		case 1:
-            if (!hasTwitter && !hasChrome && !hasTweetbot){
-                [self setTappedID:1];
-                a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                [a setDelegate:self];
-                [a show];
-            } else {
-                [self setTappedID:2];
-                /*
-                a = [[UIAlertView alloc] initWithTitle:@"Open @vellum in" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                if (hasTwitter)[a addButtonWithTitle:@"Twitter"];
-                //if (hasTweetbot)[a addButtonWithTitle:@"Tweetbot"];
-                [a addButtonWithTitle:@"Safari"];
-                //if (hasChrome)[a addButtonWithTitle:@"Chrome"];
-                 */
-                a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                [a setDelegate:self];
-                [a show];
-            }
+			if (!hasTwitter && !hasChrome && !hasTweetbot) {
+				[self setTappedID:1];
+				a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+				[a setDelegate:self];
+				[a show];
+			}
+			else {
+				[self setTappedID:2];
+				/*
+                 a = [[UIAlertView alloc] initWithTitle:@"Open @vellum in" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                 if (hasTwitter)[a addButtonWithTitle:@"Twitter"];
+                 //if (hasTweetbot)[a addButtonWithTitle:@"Tweetbot"];
+                 [a addButtonWithTitle:@"Safari"];
+                 //if (hasChrome)[a addButtonWithTitle:@"Chrome"];
+				 */
+				a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+				[a setDelegate:self];
+				[a show];
+			}
 			break;
             
 		case 2:
-            if (true){//if (!hasChrome){
-                [self setTappedID:3];
-                a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                [a setDelegate:self];
-                [a show];
-            } else {
-                [self setTappedID:4];
-                a = [[UIAlertView alloc] initWithTitle:@"Open in" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Safari", @"Chrome", nil];
-                [a setDelegate:self];
-                [a show];
-            }
+			if (true) { //if (!hasChrome){
+				[self setTappedID:3];
+				a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+				[a setDelegate:self];
+				[a show];
+			}
+			else {
+				[self setTappedID:4];
+				a = [[UIAlertView alloc] initWithTitle:@"Open in" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Safari", @"Chrome", nil];
+				[a setDelegate:self];
+				[a show];
+			}
 			break;
             
 		case 3:
@@ -463,47 +460,54 @@
 }
 
 #pragma mark - UIAlertView Delegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"clicked %d", buttonIndex);
-    if (buttonIndex==0) return;
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    switch (self.tappedID) {
-        case 0:
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSLog(@"clicked %d", buttonIndex);
+	if (buttonIndex == 0) return;
+	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+	switch (self.tappedID) {
+		case 0:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
-            break;
-        case 1:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-            break;
-        case 2:
-            if ([title isEqualToString:@"Twitter"]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-            } else if ([title isEqualToString:@"Tweetbot"]){
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot://vellum"]];
-
-            } else if ([title isEqualToString:@"Chrome"]){
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://twitter.com/vellumapp"]];
-            } else if ([title isEqualToString:@"Safari"]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-            } else {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-            }
-            break;
-        case 3:
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
-            break;
-        case 4:
-            if ([title isEqualToString:@"Chrome"]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://vellum.uservoice.com"]];
-            } else if ([title isEqualToString:@"Safari"]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
-            }
-
-            break;
+			break;
             
-        default:
-            break;
-    }
+		case 1:
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+			break;
+            
+		case 2:
+			if ([title isEqualToString:@"Twitter"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+			}
+			else if ([title isEqualToString:@"Tweetbot"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot://vellum"]];
+			}
+			else if ([title isEqualToString:@"Chrome"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://twitter.com/vellumapp"]];
+			}
+			else if ([title isEqualToString:@"Safari"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+			}
+			else {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+			}
+			break;
+            
+		case 3:
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+			break;
+            
+		case 4:
+			if ([title isEqualToString:@"Chrome"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://vellum.uservoice.com"]];
+			}
+			else if ([title isEqualToString:@"Safari"]) {
+				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
+			}
+            
+			break;
+            
+		default:
+			break;
+	}
 }
 
 #pragma mark - Rotation Handling

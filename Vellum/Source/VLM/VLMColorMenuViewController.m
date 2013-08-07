@@ -199,7 +199,7 @@
 
 - (BOOL)isOpen {
 	return self.open;
-    //    return self.view.userInteractionEnabled;
+	//    return self.view.userInteractionEnabled;
 }
 
 - (void)update {

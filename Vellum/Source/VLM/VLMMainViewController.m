@@ -110,8 +110,8 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    [self setPreviouslyCleared:NO];
-    [self setPreviouslySelectedTool:NO];
+	[self setPreviouslyCleared:NO];
+	[self setPreviouslySelectedTool:NO];
 	[self setIsPortrait:YES];
 	CGRect frame = UIScreen.mainScreen.bounds;
 	UIView *t = [[UIView alloc] initWithFrame:frame];
@@ -235,10 +235,9 @@
 	                                           object:nil];
 	//*/
     
-    [Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
-    [Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
-    [Flurry logEvent:FLURRY_CLEAR timed:YES];
-
+	[Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
+	[Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
+	[Flurry logEvent:FLURRY_CLEAR timed:YES];
 }
 
 #pragma mark -
@@ -585,10 +584,10 @@
 	[self.avc callJS:@"clearScreen();"];
 	if ([[VLMToolCollection instance] isSelectedToolSubtractive]) {
 		[self.headerController resetToZero];
-        [self updateHeader];
+		[self updateHeader];
 	}
-    [Flurry endTimedEvent:FLURRY_CLEAR withParameters:nil];
-    [Flurry logEvent:FLURRY_CLEAR withParameters:nil timed:YES];
+	[Flurry endTimedEvent:FLURRY_CLEAR withParameters:nil];
+	[Flurry logEvent:FLURRY_CLEAR withParameters:nil timed:YES];
 }
 
 - (void)screenCapture:(id)screenshotdelegate {
@@ -605,30 +604,30 @@
 	else {
 		[self setDidJustWake:NO];
 	}
-    [Flurry endTimedEvent:FLURRY_TOOLS_CLOSED withParameters:nil];
-    [Flurry logEvent:FLURRY_TOOLS_OPEN timed:YES];
-    [Flurry logEvent:FLURRY_PATH_MENU];
+	[Flurry endTimedEvent:FLURRY_TOOLS_CLOSED withParameters:nil];
+	[Flurry logEvent:FLURRY_TOOLS_OPEN timed:YES];
+	[Flurry logEvent:FLURRY_PATH_MENU];
 }
 
 - (void)hidePopover {
 	[self.pop hide];
 	[self.colorMenuViewController hide];
-    [Flurry endTimedEvent:FLURRY_TOOLS_OPEN withParameters:nil];
-    [Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
+	[Flurry endTimedEvent:FLURRY_TOOLS_OPEN withParameters:nil];
+	[Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
 }
 
 #pragma mark - MenuDelegate
 
 - (void)updateHeader {
 	[self updateHeaderWithTitle:nil];
-    /*
-	VLMToolCollection *tools = [VLMToolCollection instance];
-	VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
-	VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
-	NSString *m = item.javascriptvalue;
-	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
-	[self.avc callJS:s];
-     */
+	/*
+     VLMToolCollection *tools = [VLMToolCollection instance];
+     VLMToolData *item = (VLMToolData *)[tools.tools objectAtIndex:tools.selectedIndex];
+     VLMColorData *color = [[item colors] objectAtIndex:[item selectedColorIndex]];
+     NSString *m = item.javascriptvalue;
+     NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
+     [self.avc callJS:s];
+	 */
 }
 
 - (void)updateHeaderWithTitle:(NSString *)title {
@@ -659,15 +658,14 @@
 	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
 	[self.avc callJS:s];
     
-    NSString *name = [item.name stringByReplacingOccurrencesOfString:@" " withString:@""];
-    //NSString *eventpath = [NSString stringWithFormat:@"%@ - %@", FLURRY_PATH_MENU, name];
-    //[Flurry logEvent:eventpath];
-
-    NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, color.opacity, (color.isSubtractive)? @"_erase" : @""];
-    [Flurry logEvent:eventpath2];
+	NSString *name = [item.name stringByReplacingOccurrencesOfString:@" " withString:@""];
+	//NSString *eventpath = [NSString stringWithFormat:@"%@ - %@", FLURRY_PATH_MENU, name];
+	//[Flurry logEvent:eventpath];
     
-    //NSLog(eventpath2);
+	NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, color.opacity, (color.isSubtractive) ? @"_erase":@""];
+	[Flurry logEvent:eventpath2];
     
+	//NSLog(eventpath2);
 }
 
 - (void)refreshData {
@@ -694,14 +692,14 @@
 
 - (void)showColorMenu {
 	[self.colorMenuViewController show];
-    [Flurry endTimedEvent:FLURRY_COLORS_CLOSED withParameters:nil];
-    [Flurry logEvent:FLURRY_COLORS_OPEN timed:YES];
+	[Flurry endTimedEvent:FLURRY_COLORS_CLOSED withParameters:nil];
+	[Flurry logEvent:FLURRY_COLORS_OPEN timed:YES];
 }
 
 - (void)hideColorMenu {
 	[self.colorMenuViewController hide];
-    [Flurry endTimedEvent:FLURRY_COLORS_OPEN withParameters:nil];
-    [Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
+	[Flurry endTimedEvent:FLURRY_COLORS_OPEN withParameters:nil];
+	[Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
 }
 
 - (void)updateColorMenu {

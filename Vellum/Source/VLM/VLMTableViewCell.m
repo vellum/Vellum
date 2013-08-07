@@ -55,7 +55,7 @@
 	if ([imageName isEqualToString:self.path]) return;
 	UIImage *image = [UIImage imageNamed:imageName];
 	[self.contentImageView setImage:image];
-    //    [self.contentImageView setAlpha:1.0f];
+	//    [self.contentImageView setAlpha:1.0f];
 }
 
 @end
