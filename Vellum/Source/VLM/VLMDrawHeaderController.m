@@ -531,14 +531,14 @@
 	// ios6+
 	if (NSClassFromString(@"UIActivityViewController")) {
 		VLMActivityProvider *activityProvider = [[VLMActivityProvider alloc] init];
-		NSArray *dataToShare = [NSArray arrayWithObjects:found, activityProvider, nil];
+		NSArray *dataToShare = @[found, activityProvider];
         
 		VLMActivitySaveToAlbum *activity = [[VLMActivitySaveToAlbum alloc] init];
 		NSArray *applicationActivities = @[activity];
         
 		self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:applicationActivities];
         
-		[self.activityViewController setExcludedActivityTypes:[NSArray arrayWithObjects:UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypeMessage, nil]];
+		[self.activityViewController setExcludedActivityTypes:@[UIActivityTypeAssignToContact, UIActivityTypeCopyToPasteboard, UIActivityTypePrint, UIActivityTypeSaveToCameraRoll, UIActivityTypeMessage]];
         
 		AppDelegate *del = [[UIApplication sharedApplication] delegate];
 		UIViewController *mvc = (UIViewController *)del.mainViewController;

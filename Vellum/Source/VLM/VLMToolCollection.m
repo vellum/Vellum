@@ -29,7 +29,7 @@ static VLMToolCollection *sharedToolCollection;
 	if (self = [super init]) {
 		self.tools = [[NSMutableArray alloc] init];
         
-		NSArray *names = [NSArray arrayWithObjects:
+		NSArray *names = @[
 		                  @"Scribble",
 		                  @"Graphite",
 		                  @"Shade",
@@ -38,22 +38,20 @@ static VLMToolCollection *sharedToolCollection;
 		                  @"Erase",
 		                  @"Scratch",
 		                  @"Soft Erase",
-		                  @"Hard Erase",
-		                  nil];
+		                  @"Hard Erase"];
         
-		NSArray *enableds = [NSArray arrayWithObjects:
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     [NSNumber numberWithBool:YES],
-		                     nil];
+		NSArray *enableds = @[
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES,
+		                     @YES];
         
-		NSArray *jsvals = [NSArray arrayWithObjects:
+		NSArray *jsvals = @[
 		                   @"VLM.constants.MODE_SCRIBBLE",
 		                   @"VLM.constants.MODE_GRAPHITE",
 		                   @"VLM.constants.MODE_SHADE",
@@ -62,34 +60,31 @@ static VLMToolCollection *sharedToolCollection;
 		                   @"VLM.constants.MODE_ERASE",
 		                   @"VLM.constants.MODE_SCRATCH",
 		                   @"VLM.constants.MODE_GENTLE_ERASE",
-		                   @"VLM.constants.MODE_CIRCLE_ERASE",
-		                   nil];
+		                   @"VLM.constants.MODE_CIRCLE_ERASE"];
         
-		NSArray *isSubtractives = [NSArray arrayWithObjects:
-		                           [NSNumber numberWithBool:NO],
-		                           [NSNumber numberWithBool:NO],
-		                           [NSNumber numberWithBool:NO],
-		                           [NSNumber numberWithBool:NO],
-		                           [NSNumber numberWithBool:NO],
-		                           [NSNumber numberWithBool:YES],
-		                           [NSNumber numberWithBool:YES],
-		                           [NSNumber numberWithBool:YES],
-		                           [NSNumber numberWithBool:YES],
-		                           nil];
+		NSArray *isSubtractives = @[
+		                           @NO,
+		                           @NO,
+		                           @NO,
+		                           @NO,
+		                           @NO,
+		                           @YES,
+		                           @YES,
+		                           @YES,
+		                           @YES];
         
 		// FIXME : there should be some code here that reads from local storage
 		// if the values don't exist, write them in and add a version number in case data needs to be migrated to a future version
-		NSArray *colorindices = [NSArray arrayWithObjects:
-		                         [NSNumber numberWithInt:2],
-		                         [NSNumber numberWithInt:1],
-		                         [NSNumber numberWithInt:1],
-		                         [NSNumber numberWithInt:1],
-		                         [NSNumber numberWithInt:1],
-		                         [NSNumber numberWithInt:7],
-		                         [NSNumber numberWithInt:7],
-		                         [NSNumber numberWithInt:5],
-		                         [NSNumber numberWithInt:7],
-		                         nil];
+		NSArray *colorindices = @[
+		                         @2,
+		                         @1,
+		                         @1,
+		                         @1,
+		                         @1,
+		                         @7,
+		                         @7,
+		                         @5,
+		                         @7];
 		NSInteger selectedIndex = 0;
 		BOOL shouldSynchronize = NO;
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -122,7 +117,7 @@ static VLMToolCollection *sharedToolCollection;
             
 			[self.tools addObject:data];
 			if (i == 4) {
-				[data setColors:[NSArray arrayWithObjects:
+				[data setColors:@[
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f Enabled:YES Subtractive:NO],
@@ -130,11 +125,10 @@ static VLMToolCollection *sharedToolCollection;
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES],
-				                 nil]];
+				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
 			}
 			else if (i == 8) {
-				[data setColors:[NSArray arrayWithObjects:
+				[data setColors:@[
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
@@ -142,11 +136,10 @@ static VLMToolCollection *sharedToolCollection;
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"ERASE\n·" Opacity:0.0f Enabled:NO Subtractive:YES],
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES],
-				                 nil]];
+				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
 			}
 			else {
-				[data setColors:[NSArray arrayWithObjects:
+				[data setColors:@[
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
@@ -154,8 +147,7 @@ static VLMToolCollection *sharedToolCollection;
 				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f Enabled:YES Subtractive:YES],
 				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:YES],
 				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES],
-				                 nil]];
+				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
 			}
 		}
 		if (shouldSynchronize) {

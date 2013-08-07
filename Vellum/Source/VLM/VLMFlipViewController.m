@@ -67,7 +67,7 @@
 	// Do any additional setup after loading the view.
 	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
-	texts = [NSArray arrayWithObjects:
+	texts = @[
 	         @"PAN to draw.",
 	         @"TAP HEADER to toggle palette.",
 	         @"TAP ELSEWHERE to toggle header.",
@@ -77,10 +77,9 @@
 	         @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
 	         @"TAP SELECTED tool to toggle opacity menu.",
 	         @"PAN HORIZONTALLY for erase modes.",
-	         @"PAN VERTICALLY with 3 fingers to undo.",
-	         nil];
+	         @"PAN VERTICALLY with 3 fingers to undo."];
     
-	images = [NSArray arrayWithObjects:
+	images = @[
 	          @"about-01.png",
 	          @"about-02.png",
 	          @"about-05.png",
@@ -90,13 +89,12 @@
 	          @"about-06.png",
 	          @"about-09.png",
 	          @"about-10.png",
-	          @"about-07.png",
-	          nil];
+	          @"about-07.png"];
     
 	//if (NSClassFromString(@"NSMutableAttributedString")){
 	//if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0f) {
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")) {
-		NSArray *sctexts = [NSArray arrayWithObjects:
+		NSArray *sctexts = @[
 		                    @"PAN",
 		                    @"TAP HEADER",
 		                    @"TAP ELSEWHERE",
@@ -106,10 +104,9 @@
 		                    @"LONG-PRESS",
 		                    @"TAP SELECTED",
 		                    @"PAN HORIZONTALLY",
-		                    @"PAN VERTICALLY",
-		                    nil];
+		                    @"PAN VERTICALLY"];
         
-		attributedtexts = [NSArray arrayWithObjects:
+		attributedtexts = @[
 		                   [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
 		                   [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
 		                   [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
@@ -119,8 +116,7 @@
 		                   [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
 		                   [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
 		                   [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."],
-		                   nil];
+		                   [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
         
         
 		//UIFont *fontnormal = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
@@ -194,12 +190,11 @@
     
 	[self.view addSubview:self.tableview];
     
-	NSArray *buttonTitles = [NSArray arrayWithObjects:
+	NSArray *buttonTitles = @[
 	                         @"Rate on App Store",
 	                         @"Follow @vellumapp",
 	                         @"Suggest idea",
-	                         @"Gestures (New)",
-	                         nil];
+	                         @"Gestures (New)"];
     
 	CGFloat margin = 25.0f;
 	CGFloat buttonheight = 55.0f;
