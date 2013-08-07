@@ -11,22 +11,23 @@
 
 -(void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
 {
-    //write the image data to the assets library (camera roll)
-    [self writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation 
-                        completionBlock:^(NSURL* assetURL, NSError* error) {
-                              
-                          //error handling
-                          if (error!=nil) {
-                              completionBlock(error);
-                              return;
-                          }
+    NSData *data = UIImagePNGRepresentation(image);
 
-                          //add the asset to the custom photo album
-                          [self addAssetURL: assetURL 
-                                    toAlbum:albumName 
-                        withCompletionBlock:completionBlock];
-                          
-                      }];
+    [self writeImageDataToSavedPhotosAlbum:data metadata:nil completionBlock:^(NSURL* assetURL, NSError* error) {
+        
+        //error handling
+        if (error!=nil) {
+            completionBlock(error);
+            return;
+        }
+        
+        //add the asset to the custom photo album
+        [self addAssetURL: assetURL
+                  toAlbum:albumName
+      withCompletionBlock:completionBlock];
+        
+    }];
+
 }
 
 -(void)addAssetURL:(NSURL*)assetURL toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
