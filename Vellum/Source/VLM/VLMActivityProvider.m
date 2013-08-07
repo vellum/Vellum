@@ -13,7 +13,7 @@
 - (id)activityViewController:(UIActivityViewController *)activityViewController
          itemForActivityType:(NSString *)activityType {
 	if ([activityType isEqualToString:UIActivityTypePostToTwitter])
-		return @"#madeWithVellum cc/ @vellumapp ";
+		return @".@vellumapp ";
 	if ([activityType isEqualToString:UIActivityTypePostToFacebook])
 		return @"Made with Vellum (http://vellumapp.com) ";
 	if ([activityType isEqualToString:UIActivityTypeMessage])
