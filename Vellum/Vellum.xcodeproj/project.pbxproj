@@ -160,7 +160,7 @@
 		BDEE8F4517B2F8E800D5B3A9 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8F0817B2F8E800D5B3A9 /* subtlenet@2X.png */; };
 		BDEE8F4617B2F8E800D5B3A9 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8F0917B2F8E800D5B3A9 /* white.png */; };
 		BDEE8F4917B2FA2400D5B3A9 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F4817B2FA2400D5B3A9 /* DDPageControl.m */; };
-		BDEE8F9717B2FD5900D5B3A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F4F17B2FD5900D5B3A9 /* AppDelegate.m */; };
+		BDEE8F9717B2FD5900D5B3A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F4F17B2FD5900D5B3A9 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8F9817B2FD5900D5B3A9 /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F5117B2FD5900D5B3A9 /* EJBindingBridge.m */; };
 		BDEE8F9917B2FD5900D5B3A9 /* VLMFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F5417B2FD5900D5B3A9 /* VLMFlipViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8F9A17B2FD5900D5B3A9 /* VLMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F5617B2FD5900D5B3A9 /* VLMScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
