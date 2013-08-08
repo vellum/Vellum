@@ -419,15 +419,13 @@
 				[a show];
 			}
 			else {
-				[self setTappedID:2];
-				/*
-                 a = [[UIAlertView alloc] initWithTitle:@"Open @vellum in" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-                 if (hasTwitter)[a addButtonWithTitle:@"Twitter"];
-                 //if (hasTweetbot)[a addButtonWithTitle:@"Tweetbot"];
-                 [a addButtonWithTitle:@"Safari"];
-                 //if (hasChrome)[a addButtonWithTitle:@"Chrome"];
-				 */
-				a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [self setTappedID:2];
+                
+                if (!hasTwitter){
+                    a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                } else {
+                    a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                }
 				[a setDelegate:self];
 				[a show];
 			}
@@ -459,9 +457,11 @@
 	NSLog(@"clicked %d", buttonIndex);
 	if (buttonIndex == 0) return;
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
+
 	switch (self.tappedID) {
 		case 0:
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=338779283"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://appstore.com/vellum"]];
 			break;
             
 		case 1:
@@ -482,7 +482,11 @@
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
 			}
 			else {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+                if ( hasTwitter){
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+                } else {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+                }
 			}
 			break;
             
@@ -499,7 +503,6 @@
 			}
             
 			break;
-            
 		default:
 			break;
 	}
