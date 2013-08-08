@@ -11,8 +11,8 @@
 
 -(void)saveImage:(UIImage*)image toAlbum:(NSString*)albumName withCompletionBlock:(SaveImageCompletion)completionBlock
 {
+    
     NSData *data = UIImagePNGRepresentation(image);
-
     [self writeImageDataToSavedPhotosAlbum:data metadata:nil completionBlock:^(NSURL* assetURL, NSError* error) {
         
         //error handling
@@ -27,6 +27,22 @@
       withCompletionBlock:completionBlock];
         
     }];
+    
+    /*
+     [self writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation completionBlock:^(NSURL* assetURL, NSError* error) {
+     if (error!=nil) {
+     completionBlock(error);
+     return;
+     }
+     
+     //add the asset to the custom photo album
+     [self addAssetURL: assetURL
+     toAlbum:albumName
+     withCompletionBlock:completionBlock];
+     
+     }];
+
+     */
 
 }
 
