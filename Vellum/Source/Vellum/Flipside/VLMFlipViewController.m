@@ -119,14 +119,9 @@
 		                   [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
         
         
-		//UIFont *fontnormal = [UIFont fontWithName:@"Helvetica-Bold" size:18.0f];
-		//UIFont *fontsmallcaps = [UIFont fontWithName:@"Helvetica-Bold-Italic" size:13.0f];
-        
 		for (int i = 0; i < [attributedtexts count]; i++) {
 			CGFloat len = [[sctexts objectAtIndex:i] length];
 			NSMutableAttributedString *s = [attributedtexts objectAtIndex:i];
-			//[s addAttribute:NSFontAttributeName value:fontsmallcaps range:NSMakeRange(0, len)];
-			//[s addAttribute:NSFontAttributeName value:fontnormal range:NSMakeRange(len, [s length]-len)];
 			[s addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:1.0f alpha:1.0f] range:NSMakeRange(0, len)];
 			[s addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithWhite:1.0f alpha:0.5f] range:NSMakeRange(len, [s length] - len)];
 		}
@@ -148,7 +143,7 @@
 	tv = [[VLMTableView alloc] initWithFrame:CGRectMake(0, HEADER_HEIGHT, targetwidth, targetheight)];
     
 	UIView *h = [[UIView alloc] initWithFrame:CGRectMake(0, 0, targetwidth, HEADER_HEIGHT)];
-	[h setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
+	[h setBackgroundColor:[UIColor colorWithHue:189.0f / 360.0f saturation:0.18f brightness:0.71f alpha:1.0f]];
 	[h setClipsToBounds:YES];
 	[self.view addSubview:h];
 	[self setHeader:h];
@@ -208,12 +203,14 @@
 	[tvHeader setUserInteractionEnabled:YES];
     
     
-	UIImage *albumcover = [UIImage imageNamed:@"albumcover.png"];
+	UIImage *albumcover = [UIImage imageNamed:@"gradient.png"];
 	UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-	CGRect pf = CGRectMake(0, HEADER_HEIGHT, 320, 280.0f);
+	CGRect pf = CGRectMake(0, 0, tv.frame.size.width, 550);
+    /*
 	if (tv.frame.size.height <= 420) {
 		pf = CGRectMake(0, HEADER_HEIGHT, 320, 140.0f);
 	}
+    */
 	[albumview setFrame:pf];
 	[albumview setContentMode:UIViewContentModeScaleAspectFill];
 	[albumview setUserInteractionEnabled:NO];
@@ -228,32 +225,46 @@
 	[cap setBackgroundColor:[UIColor clearColor]];
 	[tvHeader addSubview:cap];
     
-	CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight + buttonspacing) - margin;
+	CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight + buttonspacing);
+    vmargintop/=2.0f;
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
 		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
-		[btn setBackgroundColor:[UIColor clearColor]];
-		[btn setTitleColor:[UIColor colorWithWhite:0.0f alpha:0.8f] forState:UIControlStateNormal];
-		[btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
-		[btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-		[btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-		[btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
         
-		NSString *text = buttonTitles[(int)i];
-		[btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
-		[btn setTag:i];
-		[btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
-		[tvHeader addSubview:btn];
+        if ( i < [buttonTitles count]-1 ){
+            [btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.33f]];
+            [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
+            [btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
+            [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
+            
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+            
+            NSString *text = buttonTitles[(int)i];
+            [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+            [btn setTag:i];
+            [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
+            [tvHeader addSubview:btn];
+        } else {
+            [btn setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
+            [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
+            [btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
+            [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+            
+            NSString *text = buttonTitles[(int)i];
+            [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+            [btn setTag:i];
+            [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
+            [tvHeader addSubview:btn];
+
+        }
         
-		CALayer *layer = [btn layer];
-		[layer setMasksToBounds:YES];
-		[layer setCornerRadius:0.0f];
-		[layer setBorderWidth:4.0f];
-		[layer setBorderColor:[[UIColor colorWithWhite:0.0f alpha:0.1f] CGColor]];
+        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [btn setContentEdgeInsets:UIEdgeInsetsMake(0, 20.0f, 0, 0)];
 	}
 	[tv setTableHeaderView:tvHeader];
     
-	self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
-	self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
+	//self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
+	//self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
     
     
 	UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
@@ -345,10 +356,8 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	CGFloat y = -scrollView.contentOffset.y;
 	if (y >= 0) {
-		self.cover.frame = CGRectMake(0, scrollView.contentOffset.y, self.coverframe.size.width + y, self.coverframe.size.height + y);
-		self.cover.center = CGPointMake(self.view.center.x, self.cover.center.y);
+		self.cover.frame = CGRectMake(0, scrollView.contentOffset.y, self.coverframe.size.width, self.coverframe.size.height + y);
 	}
-	//NSLog(@"scrolled %f", y);
     
 	if (y >= -300) {
 		if (self.invertheader) {
@@ -358,7 +367,11 @@
 			                      delay:0
 			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 			                 animations: ^{
-                                 [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.04f brightness:0.88f alpha:1.0f]];
+                                 [self.header setBackgroundColor:[UIColor colorWithHue:189.0f / 360.0f saturation:0.18f brightness:0.71f alpha:1.0f]];
+                                 //[self.headerlabel setTextColor:[UIColor whiteColor]];
+                                 //[self.donebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                                 //[self.donebutton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+                                 
                              }
              
 			                 completion: ^(BOOL finished) {
@@ -376,6 +389,9 @@
 			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 			                 animations: ^{
                                  [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
+                                 //[self.headerlabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
+                                 //[self.donebutton setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
+                                 //[self.donebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
                              }
              
 			                 completion: ^(BOOL finished) {

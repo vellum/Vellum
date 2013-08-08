@@ -749,7 +749,11 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	[picker dismissModalViewControllerAnimated:YES];
-	// do nothing
+
+    // ios 7 correction
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+	UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
