@@ -98,6 +98,7 @@
 		BD2BBDA117B4298D00DA3C64 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2BBD9F17B4298D00DA3C64 /* gradient.png */; };
 		BD2BBDA217B4298D00DA3C64 /* gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2BBDA017B4298D00DA3C64 /* gradient@2x.png */; };
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
+		BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FC11817B576D500984495 /* VLMAboutButton.m */; };
 		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
 		BD992BA617B4370600894192 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = BD992BA517B4370600894192 /* orange.png */; };
 		BDC30B8717B4678A00018E70 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8617B4678A00018E70 /* Icon.png */; };
@@ -380,6 +381,8 @@
 		BD2BBD9F17B4298D00DA3C64 /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gradient.png; path = images/gradient.png; sourceTree = "<group>"; };
 		BD2BBDA017B4298D00DA3C64 /* gradient@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient@2x.png"; path = "images/gradient@2x.png"; sourceTree = "<group>"; };
 		BD65F5C317A0BF5B0008D3ED /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
+		BD6FC11717B576D500984495 /* VLMAboutButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLMAboutButton.h; sourceTree = "<group>"; };
+		BD6FC11817B576D500984495 /* VLMAboutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMAboutButton.m; sourceTree = "<group>"; };
 		BD70C07417ADC6D0003FBCE9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/Flurry.h"; sourceTree = "<group>"; };
 		BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.2.a; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/libFlurry_4.2.2.a"; sourceTree = "<group>"; };
 		BD992BA517B4370600894192 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.png; path = images/orange.png; sourceTree = "<group>"; };
@@ -1006,6 +1009,8 @@
 				BDEE8F5A17B2FD5900D5B3A9 /* VLMTableView.m */,
 				BDEE8F5B17B2FD5900D5B3A9 /* VLMTableViewCell.h */,
 				BDEE8F5C17B2FD5900D5B3A9 /* VLMTableViewCell.m */,
+				BD6FC11717B576D500984495 /* VLMAboutButton.h */,
+				BD6FC11817B576D500984495 /* VLMAboutButton.m */,
 			);
 			path = Flipside;
 			sourceTree = "<group>";
@@ -1392,6 +1397,7 @@
 				BDE52DCB17B2FF8200794512 /* UINavigationBar+Fat.m in Sources */,
 				BDEE8FB417B2FD5900D5B3A9 /* VLMMainViewController.m in Sources */,
 				BDEE8FB517B2FD5900D5B3A9 /* VLMZoomViewController.m in Sources */,
+				BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

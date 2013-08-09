@@ -14,6 +14,7 @@
 #import "VLMTableView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Flurry.h"
+#import "VLMAboutButton.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -189,7 +190,7 @@
                            @"Rate on App Store",
                            @"Follow @vellumapp",
                            @"Suggest Idea",
-                           @"Gesture Reference"];
+                           @"Reference"];
     
 	CGFloat margin = 25.0f;
 	CGFloat buttonheight = 50.0f;
@@ -222,49 +223,48 @@
     
 	CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight + buttonspacing);
 	vmargintop /= 2.0f;
+    vmargintop -= HEADER_HEIGHT/2;
     
     NSArray *imagetitles = @[@"AboutIcon-star.png", @"AboutIcon-twitter.png", @"AboutIcon-idea.png", @"AboutIcon-reference.png"];
     
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
-		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
+		VLMAboutButton *btn = [[VLMAboutButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
         
 		if (i < [buttonTitles count] - 1) {
-			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.5f]];
+			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.2f]];
 		}
 		else {
 			[btn setBackgroundColor:[UIColor colorWithHue:190.0f / 360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
 		}
-        [btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
-        [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         NSString *text = buttonTitles[(int)i];
-        [btn setTitle:[text lowercaseString] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16.0f]];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        [btn setTitle:[text capitalizedString] forState:UIControlStateNormal];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
 
+        UIView *vv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, btn.frame.size.height, btn.frame.size.height)];
+        [vv setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.05f]];
+        [vv setUserInteractionEnabled:NO];
+        [btn addSubview:vv];
+        
         UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imagetitles objectAtIndex:i]]];
         [iv setUserInteractionEnabled:NO];
         [iv setFrame:CGRectMake(0, 0, 50, 50)];
-        [iv setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.2f]];
         [btn addSubview:iv];
         
 		[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 60.0f, 0, 0)];
 	}
 	[tv setTableHeaderView:tvHeader];
-    
-	//self.cover.frame = CGRectMake(0, 0, self.coverframe.size.width, self.coverframe.size.height);
-	//self.cover.center = CGPointMake(tv.center.x, self.cover.center.y);
-    
+    [tv flashScrollIndicators];
     
 	UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
 	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
 	[self.view addGestureRecognizer:sgr];
     
-    
-	[tv flashScrollIndicators];
 	[Flurry logPageView];
 }
 
