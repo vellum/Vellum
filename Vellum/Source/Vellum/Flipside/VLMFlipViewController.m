@@ -203,14 +203,9 @@
 	[tvHeader setUserInteractionEnabled:YES];
     
     
-	UIImage *albumcover = [UIImage imageNamed:@"gradient.png"];
+	UIImage *albumcover = (tv.frame.size.height<=420) ? [UIImage imageNamed:@"gradient-3.5.png"] : [UIImage imageNamed:@"gradient.png"];
 	UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
-	CGRect pf = CGRectMake(0, 0, tv.frame.size.width, 550);
-    /*
-	if (tv.frame.size.height <= 420) {
-		pf = CGRectMake(0, HEADER_HEIGHT, 320, 140.0f);
-	}
-    */
+	CGRect pf = CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height);
 	[albumview setFrame:pf];
 	[albumview setContentMode:UIViewContentModeScaleAspectFill];
 	[albumview setUserInteractionEnabled:NO];
