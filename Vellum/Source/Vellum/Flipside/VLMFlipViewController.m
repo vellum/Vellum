@@ -222,6 +222,7 @@
     
 	CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight + buttonspacing);
     vmargintop/=2.0f;
+    
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
 		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
         
