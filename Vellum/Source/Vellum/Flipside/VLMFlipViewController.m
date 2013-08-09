@@ -240,7 +240,7 @@
         [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
         [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16.0f]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [btn setTitle:[text capitalizedString] forState:UIControlStateNormal];
+        [btn setTitle:text forState:UIControlStateNormal];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
