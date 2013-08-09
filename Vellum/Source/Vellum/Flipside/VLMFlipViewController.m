@@ -68,55 +68,55 @@
 	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
 	texts = @[
-	         @"PAN to draw.",
-	         @"TAP HEADER to toggle palette.",
-	         @"TAP ELSEWHERE to toggle header.",
-	         @"TAP WITH 2 FINGERS to toggle palette.",
-	         @"PINCH to zoom.",
-	         @"DOUBLE-TAP to reset zoom.",
-	         @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
-	         @"TAP SELECTED tool to toggle opacity menu.",
-	         @"PAN HORIZONTALLY for erase modes.",
-	         @"PAN VERTICALLY with 3 fingers to undo."];
+           @"PAN to draw.",
+           @"TAP HEADER to toggle palette.",
+           @"TAP ELSEWHERE to toggle header.",
+           @"TAP WITH 2 FINGERS to toggle palette.",
+           @"PINCH to zoom.",
+           @"DOUBLE-TAP to reset zoom.",
+           @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
+           @"TAP SELECTED tool to toggle opacity menu.",
+           @"PAN HORIZONTALLY for erase modes.",
+           @"PAN VERTICALLY with 3 fingers to undo."];
     
 	images = @[
-	          @"about-01.png",
-	          @"about-02.png",
-	          @"about-05.png",
-	          @"about-08.png",
-	          @"about-03.png",
-	          @"about-04.png",
-	          @"about-06.png",
-	          @"about-09.png",
-	          @"about-10.png",
-	          @"about-07.png"];
+	        @"about-01.png",
+         @"about-02.png",
+         @"about-05.png",
+         @"about-08.png",
+         @"about-03.png",
+         @"about-04.png",
+         @"about-06.png",
+         @"about-09.png",
+         @"about-10.png",
+         @"about-07.png"];
     
 	//if (NSClassFromString(@"NSMutableAttributedString")){
 	//if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0f) {
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")) {
 		NSArray *sctexts = @[
-		                    @"PAN",
-		                    @"TAP HEADER",
-		                    @"TAP ELSEWHERE",
-		                    @"TAP WITH 2 FINGERS",
-		                    @"PINCH",
-		                    @"DOUBLE-TAP",
-		                    @"LONG-PRESS",
-		                    @"TAP SELECTED",
-		                    @"PAN HORIZONTALLY",
-		                    @"PAN VERTICALLY"];
+                       @"PAN",
+                       @"TAP HEADER",
+                       @"TAP ELSEWHERE",
+                       @"TAP WITH 2 FINGERS",
+                       @"PINCH",
+                       @"DOUBLE-TAP",
+                       @"LONG-PRESS",
+                       @"TAP SELECTED",
+                       @"PAN HORIZONTALLY",
+                       @"PAN VERTICALLY"];
         
 		attributedtexts = @[
-		                   [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Tap with 2 fingers to toggle palette."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
-		                   [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
+                      [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Tap with 2 fingers to toggle palette."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
+                      [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
         
         
 		for (int i = 0; i < [attributedtexts count]; i++) {
@@ -186,14 +186,14 @@
 	[self.view addSubview:self.tableview];
     
 	NSArray *buttonTitles = @[
-	                         @"Rate on App Store",
-	                         @"Follow @vellumapp",
-	                         @"Suggest idea",
-	                         @"Gestures (New)"];
+                           @"Rate on App Store",
+                           @"Follow @vellumapp",
+                           @"Suggest idea",
+                           @"Gesture Reference"];
     
 	CGFloat margin = 25.0f;
-	CGFloat buttonheight = 55.0f;
-	CGFloat buttonspacing = 5.0f;
+	CGFloat buttonheight = 50.0f;
+	CGFloat buttonspacing = 1.0f;
     
     
 	UIView *tvHeader = [[UIView alloc] initWithFrame:tv.frame];
@@ -203,7 +203,7 @@
 	[tvHeader setUserInteractionEnabled:YES];
     
     
-	UIImage *albumcover = (tv.frame.size.height<=420) ? [UIImage imageNamed:@"gradient-3.5.png"] : [UIImage imageNamed:@"gradient.png"];
+	UIImage *albumcover = (tv.frame.size.height <= 420) ? [UIImage imageNamed:@"gradient-3.5.png"] : [UIImage imageNamed:@"gradient.png"];
 	UIImageView *albumview = [[UIImageView alloc] initWithImage:albumcover];
 	CGRect pf = CGRectMake(0, 0, tv.frame.size.width, tv.frame.size.height);
 	[albumview setFrame:pf];
@@ -221,41 +221,38 @@
 	[tvHeader addSubview:cap];
     
 	CGFloat vmargintop = tvHeader.frame.size.height - [buttonTitles count] * (buttonheight + buttonspacing);
-    vmargintop/=2.0f;
+	vmargintop /= 2.0f;
+    
+    NSArray *imagetitles = @[@"AboutIcon-star.png", @"AboutIcon-twitter.png", @"AboutIcon-idea.png", @"AboutIcon-reference.png"];
     
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
 		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
         
-        if ( i < [buttonTitles count]-1 ){
-            [btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.33f]];
-            [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-            [btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
-            [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-            
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-            
-            NSString *text = buttonTitles[(int)i];
-            [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
-            [btn setTag:i];
-            [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
-            [tvHeader addSubview:btn];
-        } else {
-            [btn setBackgroundColor:[UIColor colorWithHue:190.0f/360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
-            [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-            [btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
-            [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
-            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-            
-            NSString *text = buttonTitles[(int)i];
-            [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
-            [btn setTag:i];
-            [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
-            [tvHeader addSubview:btn];
+		if (i < [buttonTitles count] - 1) {
+			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.75f]];
+			[btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
+		}
+		else {
+			[btn setBackgroundColor:[UIColor colorWithHue:190.0f / 360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
+			[btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
+		}
+        [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        NSString *text = buttonTitles[(int)i];
+        [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+        [btn setTag:i];
+        [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
+        [tvHeader addSubview:btn];
 
-        }
+        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imagetitles objectAtIndex:i]]];
+        [iv setUserInteractionEnabled:NO];
+        [iv setFrame:CGRectMake(0, 0, 50, 50)];
+        [iv setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.2f]];
+        [btn addSubview:iv];
         
-        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-        [btn setContentEdgeInsets:UIEdgeInsetsMake(0, 20.0f, 0, 0)];
+		[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 60.0f, 0, 0)];
 	}
 	[tv setTableHeaderView:tvHeader];
     
@@ -267,6 +264,8 @@
 	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
 	[self.view addGestureRecognizer:sgr];
     
+    
+	[tv flashScrollIndicators];
 	[Flurry logPageView];
 }
 
@@ -367,7 +366,6 @@
                                  //[self.headerlabel setTextColor:[UIColor whiteColor]];
                                  //[self.donebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                                  //[self.donebutton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-                                 
                              }
              
 			                 completion: ^(BOOL finished) {
@@ -431,13 +429,14 @@
 				[a show];
 			}
 			else {
-                [self setTappedID:2];
+				[self setTappedID:2];
                 
-                if (!hasTwitter){
-                    a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                } else {
-                    a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                }
+				if (!hasTwitter) {
+					a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+				}
+				else {
+					a = [[UIAlertView alloc] initWithTitle:@"Open in Twitter?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+				}
 				[a setDelegate:self];
 				[a show];
 			}
@@ -469,8 +468,8 @@
 	NSLog(@"clicked %d", buttonIndex);
 	if (buttonIndex == 0) return;
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
-
+	BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
+    
 	switch (self.tappedID) {
 		case 0:
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://appstore.com/vellum"]];
@@ -494,11 +493,12 @@
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
 			}
 			else {
-                if ( hasTwitter){
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-                } else {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-                }
+				if (hasTwitter) {
+					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+				}
+				else {
+					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+				}
 			}
 			break;
             
@@ -515,6 +515,7 @@
 			}
             
 			break;
+            
 		default:
 			break;
 	}
