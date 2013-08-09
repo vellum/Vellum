@@ -188,7 +188,7 @@
 	NSArray *buttonTitles = @[
                            @"Rate on App Store",
                            @"Follow @vellumapp",
-                           @"Suggest idea",
+                           @"Suggest Idea",
                            @"Gesture Reference"];
     
 	CGFloat margin = 25.0f;
@@ -229,18 +229,17 @@
 		UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
         
 		if (i < [buttonTitles count] - 1) {
-			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.75f]];
-			[btn setBackgroundImage:[UIImage imageNamed:@"black.png"] forState:UIControlStateHighlighted];
+			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.5f]];
 		}
 		else {
 			[btn setBackgroundColor:[UIColor colorWithHue:190.0f / 360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
-			[btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
 		}
+        [btn setBackgroundImage:[UIImage imageNamed:@"orange.png"] forState:UIControlStateHighlighted];
         [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0f]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         NSString *text = buttonTitles[(int)i];
-        [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+        [btn setTitle:[text lowercaseString] forState:UIControlStateNormal];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
