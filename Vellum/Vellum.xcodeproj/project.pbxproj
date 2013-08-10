@@ -100,6 +100,7 @@
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
 		BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FC11817B576D500984495 /* VLMAboutButton.m */; };
 		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
+		BD8B234917B5C74B002463BF /* AboutIcon-home.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B234817B5C74B002463BF /* AboutIcon-home.png */; };
 		BD992BA617B4370600894192 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = BD992BA517B4370600894192 /* orange.png */; };
 		BDC30B8717B4678A00018E70 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8617B4678A00018E70 /* Icon.png */; };
 		BDC30B8917B4679E00018E70 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8817B4679E00018E70 /* Icon@2x.png */; };
@@ -385,6 +386,7 @@
 		BD6FC11817B576D500984495 /* VLMAboutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMAboutButton.m; sourceTree = "<group>"; };
 		BD70C07417ADC6D0003FBCE9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/Flurry.h"; sourceTree = "<group>"; };
 		BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.2.a; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/libFlurry_4.2.2.a"; sourceTree = "<group>"; };
+		BD8B234817B5C74B002463BF /* AboutIcon-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AboutIcon-home.png"; path = "images/AboutIcon-home.png"; sourceTree = "<group>"; };
 		BD992BA517B4370600894192 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.png; path = images/orange.png; sourceTree = "<group>"; };
 		BDC30B8617B4678A00018E70 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BDC30B8817B4679E00018E70 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -909,6 +911,7 @@
 				BDEE8EDF17B2F8E800D5B3A9 /* about-10.png */,
 				BDEE8EE017B2F8E800D5B3A9 /* about-10@2x.png */,
 				BDC30BC217B5573900018E70 /* AboutIcon-idea.png */,
+				BD8B234817B5C74B002463BF /* AboutIcon-home.png */,
 				BDC30BC317B5573900018E70 /* AboutIcon-reference.png */,
 				BDC30BC417B5573900018E70 /* AboutIcon-star.png */,
 				BDC30BC517B5573900018E70 /* AboutIcon-twitter.png */,
@@ -1277,6 +1280,7 @@
 				BDC30BC817B5573900018E70 /* AboutIcon-star.png in Resources */,
 				BDC30BC917B5573900018E70 /* AboutIcon-twitter.png in Resources */,
 				BDC30BCB17B55A3700018E70 /* black80.png in Resources */,
+				BD8B234917B5C74B002463BF /* AboutIcon-home.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

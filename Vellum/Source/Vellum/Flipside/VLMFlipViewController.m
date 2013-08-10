@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Flurry.h"
 #import "VLMAboutButton.h"
+//#define USE_ICONS 1
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -190,7 +191,8 @@
                            @"Rate on App Store",
                            @"Follow @vellumapp",
                            @"Suggest Idea",
-                           @"Reference"];
+                           @"Visit vellumapp.com",
+                           @"Gestures & Such"];
     
 	CGFloat margin = 25.0f;
 	CGFloat buttonheight = 50.0f;
@@ -225,7 +227,7 @@
 	vmargintop /= 2.0f;
     vmargintop -= HEADER_HEIGHT/2;
     
-    NSArray *imagetitles = @[@"AboutIcon-star.png", @"AboutIcon-twitter.png", @"AboutIcon-idea.png", @"AboutIcon-reference.png"];
+    NSArray *imagetitles = @[@"AboutIcon-star.png", @"AboutIcon-twitter.png", @"AboutIcon-idea.png", @"AboutIcon-home.png", @"AboutIcon-reference.png"];
     
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
 		VLMAboutButton *btn = [[VLMAboutButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
@@ -238,25 +240,32 @@
 		}
         NSString *text = buttonTitles[(int)i];
         [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16.0f]];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-        [btn setTitle:text forState:UIControlStateNormal];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
+
+#ifdef USE_ICONS
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16.0f]];
+        [btn setTitle:text forState:UIControlStateNormal];
 
         UIView *vv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, btn.frame.size.height, btn.frame.size.height)];
         [vv setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.05f]];
         [vv setUserInteractionEnabled:NO];
         [btn addSubview:vv];
-        
+
         UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imagetitles objectAtIndex:i]]];
         [iv setUserInteractionEnabled:NO];
         [iv setFrame:CGRectMake(0, 0, 50, 50)];
         [btn addSubview:iv];
         
-		[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 60.0f, 0, 0)];
+#else
+        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
+        [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
+		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 15.0f, 0, 0)];
+#endif
+		[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 	}
 	[tv setTableHeaderView:tvHeader];
     [tv flashScrollIndicators];
@@ -362,9 +371,6 @@
 			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 			                 animations: ^{
                                  [self.header setBackgroundColor:[UIColor colorWithHue:189.0f / 360.0f saturation:0.18f brightness:0.71f alpha:1.0f]];
-                                 //[self.headerlabel setTextColor:[UIColor whiteColor]];
-                                 //[self.donebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                                 //[self.donebutton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
                              }
              
 			                 completion: ^(BOOL finished) {
@@ -382,9 +388,6 @@
 			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
 			                 animations: ^{
                                  [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
-                                 //[self.headerlabel setTextColor:[UIColor colorWithWhite:0.2f alpha:1.0f]];
-                                 //[self.donebutton setTitleColor:[UIColor colorWithWhite:0.2f alpha:1.0f] forState:UIControlStateNormal];
-                                 //[self.donebutton setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
                              }
              
 			                 completion: ^(BOOL finished) {
@@ -429,7 +432,6 @@
 			}
 			else {
 				[self setTappedID:2];
-                
 				if (!hasTwitter) {
 					a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
 				}
@@ -442,21 +444,18 @@
 			break;
             
 		case 2:
-			if (true) { //if (!hasChrome){
-				[self setTappedID:3];
-				a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-				[a setDelegate:self];
-				[a show];
-			}
-			else {
-				[self setTappedID:4];
-				a = [[UIAlertView alloc] initWithTitle:@"Open in" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Safari", @"Chrome", nil];
-				[a setDelegate:self];
-				[a show];
-			}
+            [self setTappedID:3];
+            a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            [a setDelegate:self];
+            [a show];
 			break;
-            
 		case 3:
+            [self setTappedID:4];
+            a = [[UIAlertView alloc] initWithTitle:@"Open in Safari?" message:@"" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            [a setDelegate:self];
+            [a show];
+            break;
+		case 4:
 			[self.tableview scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionTop animated:YES];
 			break;
 	}
@@ -464,6 +463,7 @@
 
 #pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+
 	NSLog(@"clicked %d", buttonIndex);
 	if (buttonIndex == 0) return;
 	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
@@ -479,26 +479,12 @@
 			break;
             
 		case 2:
-			if ([title isEqualToString:@"Twitter"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-			}
-			else if ([title isEqualToString:@"Tweetbot"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tweetbot://vellum"]];
-			}
-			else if ([title isEqualToString:@"Chrome"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://twitter.com/vellumapp"]];
-			}
-			else if ([title isEqualToString:@"Safari"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-			}
-			else {
-				if (hasTwitter) {
-					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
-				}
-				else {
-					[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
-				}
-			}
+            if (hasTwitter) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=vellumapp"]];
+            }
+            else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/vellumapp"]];
+            }
 			break;
             
 		case 3:
@@ -506,13 +492,7 @@
 			break;
             
 		case 4:
-			if ([title isEqualToString:@"Chrome"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"googlechrome://vellum.uservoice.com"]];
-			}
-			else if ([title isEqualToString:@"Safari"]) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellum.uservoice.com"]];
-			}
-            
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vellumapp.com"]];
 			break;
             
 		default:
