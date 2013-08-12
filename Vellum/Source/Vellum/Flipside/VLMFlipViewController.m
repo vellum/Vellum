@@ -227,10 +227,9 @@
 	vmargintop /= 2.0f;
     vmargintop -= HEADER_HEIGHT/2;
     
-    NSArray *imagetitles = @[@"AboutIcon-star.png", @"AboutIcon-twitter.png", @"AboutIcon-idea.png", @"AboutIcon-home.png", @"AboutIcon-reference.png"];
-    
 	for (CGFloat i = 0; i < [buttonTitles count]; i++) {
-		VLMAboutButton *btn = [[VLMAboutButton alloc] initWithFrame:CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight)];
+        CGRect targetframe = CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight);
+		VLMAboutButton *btn = [[VLMAboutButton alloc] initWithFrame:targetframe index:i];
         
 		if (i < [buttonTitles count] - 1) {
 			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.2f]];
@@ -238,34 +237,12 @@
 		else {
 			[btn setBackgroundColor:[UIColor colorWithHue:190.0f / 360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
 		}
+
         NSString *text = buttonTitles[(int)i];
-        [btn setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [btn setTag:i];
         [btn addTarget:self action:@selector(handleTappie:) forControlEvents:UIControlEventTouchUpInside];
         [tvHeader addSubview:btn];
-
-#ifdef USE_ICONS
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16.0f]];
-        [btn setTitle:text forState:UIControlStateNormal];
-
-        UIView *vv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, btn.frame.size.height, btn.frame.size.height)];
-        [vv setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.05f]];
-        [vv setUserInteractionEnabled:NO];
-        [btn addSubview:vv];
-
-        UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imagetitles objectAtIndex:i]]];
-        [iv setUserInteractionEnabled:NO];
-        [iv setFrame:CGRectMake(0, 0, 50, 50)];
-        [btn addSubview:iv];
-        
-		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 60.0f, 0, 0)];
-#else
-        [btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14.0f]];
         [btn setTitle:[text uppercaseString] forState:UIControlStateNormal];
-		[btn setContentEdgeInsets:UIEdgeInsetsMake(0, 15.0f, 0, 0)];
-#endif
-		[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 	}
 	[tv setTableHeaderView:tvHeader];
     [tv flashScrollIndicators];
@@ -385,7 +362,7 @@
 			NSLog(@"header gray");
 			[UIView animateWithDuration:ANIMATION_DURATION * 2
 			                      delay:0
-			                    options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionBeginFromCurrentState
+			                    options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
 			                 animations: ^{
                                  [self.header setBackgroundColor:[UIColor colorWithHue:60.0f / 360.0f saturation:0.0f brightness:0.88f alpha:1.0f]];
                              }

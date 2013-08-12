@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VLMAboutButton : UIButton
-
+- (id)initWithFrame:(CGRect)frame index:(NSInteger)index;
 @end
