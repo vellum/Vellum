@@ -9,11 +9,9 @@
 
 @interface EJJavaScriptView () {
     BOOL requestedScreenShot;
-    BOOL requestedUndoScreenShot;
     BOOL requestedRestoreScreenShot;
 }
 - (void)screenShot;
-- (void)undoScreenShot;
 @end
 
 #pragma mark -
@@ -318,10 +316,6 @@
         requestedScreenShot = NO;
         [self screenShot];
     }
-    if (requestedUndoScreenShot) {
-        requestedUndoScreenShot = NO;
-        [self undoScreenShot];
-    }
 }
 
 
@@ -423,10 +417,6 @@
     requestedScreenShot = YES;
 }
 
-- (void)requestUndoScreenShot {
-    requestedUndoScreenShot = YES;
-}
-
 - (void)screenShot {
     if ([self.screenRenderingContext isKindOfClass:[EJCanvasContext2D class]]) {
         EJCanvasContext2D *ctx = (EJCanvasContext2D *)self.screenRenderingContext;
@@ -435,20 +425,6 @@
             [screenShotDelegate screenShotFound:image];
         }
     }
-}
-
-- (void)undoScreenShot {
-    if ([self.screenRenderingContext isKindOfClass:[EJCanvasContext2D class]]) {
-        EJCanvasContext2D *ctx = (EJCanvasContext2D *)self.screenRenderingContext;
-        UIImage *image = [ctx getImageFromGL];
-        if (self.undoScreenShotDelegate != nil) {
-            [undoScreenShotDelegate screenShotFound:image];
-        }
-    }
-}
-
-- (void)requestRestoreUndoScreenShot {
-    requestedRestoreScreenShot = YES;
 }
 
 - (void)injectScreenShot:(UIImage*)image{

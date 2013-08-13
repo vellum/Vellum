@@ -443,7 +443,6 @@
 
 	NSLog(@"clicked %d", buttonIndex);
 	if (buttonIndex == 0) return;
-	NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 	BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
     
 	switch (self.tappedID) {

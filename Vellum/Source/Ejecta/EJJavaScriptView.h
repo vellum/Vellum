@@ -118,10 +118,7 @@
 #pragma mark - VLM Additions
 @property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
 @property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
-
 - (void)requestScreenShot;
-- (void)requestUndoScreenShot;
-- (void)requestRestoreUndoScreenShot;
 - (void)injectScreenShot:(UIImage*)image;
 
 @end
