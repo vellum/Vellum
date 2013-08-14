@@ -30,7 +30,7 @@
         
 		[self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        
+        [self setBackgroundColor:[UIColor clearColor]];
         
 		UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, width, height)];
 		[placeholder setBackgroundColor:[UIColor colorWithWhite:0.8f alpha:1.0f]];
