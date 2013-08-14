@@ -96,7 +96,7 @@
 		BD2BBDA117B4298D00DA3C64 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2BBD9F17B4298D00DA3C64 /* gradient.png */; };
 		BD2BBDA217B4298D00DA3C64 /* gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2BBDA017B4298D00DA3C64 /* gradient@2x.png */; };
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
-		BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FC11817B576D500984495 /* VLMAboutButton.m */; };
+		BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FC11817B576D500984495 /* VLMAboutButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
 		BD8B234917B5C74B002463BF /* AboutIcon-home.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B234817B5C74B002463BF /* AboutIcon-home.png */; };
 		BD96EAC917BAF6340049D25F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD96EAC817BAF6340049D25F /* GameKit.framework */; };
@@ -1536,6 +1536,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DDEBUG";
 				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv6 armv7";
 			};
@@ -1558,6 +1559,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv6 armv7";
 			};
