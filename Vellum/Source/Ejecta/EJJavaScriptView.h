@@ -4,7 +4,7 @@
 #import "EJConvert.h"
 #import "EJCanvasContext.h"
 #import "EJPresentable.h"
-
+#import "EJTexture.h"
 #import "EJSharedOpenALManager.h"
 #import "EJSharedTextureCache.h"
 #import "EJSharedOpenGLContext.h"
@@ -79,7 +79,6 @@
     
     // VLM Additions
     NSObject<VLMScreenShotDelegate> *screenShotDelegate;
-    NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
     
 }
 
@@ -117,8 +116,6 @@
 
 #pragma mark - VLM Additions
 @property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *screenShotDelegate;
-@property (nonatomic, retain) NSObject<VLMScreenShotDelegate> *undoScreenShotDelegate;
 - (void)requestScreenShot;
 - (void)injectScreenShot:(UIImage*)image;
-
 @end

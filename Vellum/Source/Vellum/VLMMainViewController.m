@@ -238,6 +238,8 @@
 	[Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
 	[Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
 	[Flurry logEvent:FLURRY_CLEAR timed:YES];
+    
+    [self loadExistingDrawing];
 }
 
 #pragma mark -
@@ -259,6 +261,29 @@
 }
 
 #pragma mark - ()
+
+- (void)loadExistingDrawing{
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
+    if (doesFileExist) {
+        NSLog(@"file exists.. attempting to restore...");
+        UIImage *img = [[UIImage alloc] initWithContentsOfFile:filePath];
+        EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
+        UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
+        [jsv injectScreenShot:padded];
+        [self.avc callJS:@"saveUndoState();"];
+        
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+    else {
+        NSLog(@"prev drawing does not exist");
+    }
+
+}
 
 - (void)handleOneFingerPan:(id)sender {
 	VLMSinglePanGestureRecognizer *pgr = (VLMSinglePanGestureRecognizer *)sender;
@@ -722,6 +747,27 @@
 	[self.undoViewController update];
 }
 
+- (void)saveStateBeforeTerminating{
+    NSLog(@"savestatebeforeterminating - requesting screenshot");
+    
+    EJJavaScriptView *jsv = (EJJavaScriptView *)self.avc.view;
+    [jsv setScreenShotDelegate:self];
+    [jsv requestScreenShot];
+    
+}
+
+- (void)saveImageToDocuments:(UIImage*)image{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
+    BOOL success = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+    if ( success ){
+        NSLog(@"SAVE TEXTURE SUCCESS");
+        
+    } else {
+        NSLog(@"SAVE TEXTURE FAILED");
+    }
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -912,6 +958,18 @@
 			[self.flipsidePopoverController dismissPopoverAnimated:YES];
 		}
 	}
+}
+
+#pragma mark - VLMScreenshotDelegate
+- (void)screenShotFound:(UIImage *)found {
+    NSLog(@"found screenshot");
+    //[self performSelectorInBackground:@selector(saveImageToDocuments:) withObject:found];
+    [self saveImageToDocuments:found];
+
+}
+
+- (UIImage *)screenshotToRestore {
+	return nil;
 }
 
 @end

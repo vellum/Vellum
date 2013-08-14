@@ -22,8 +22,9 @@
 
 @class EJAppViewController;
 
-@interface VLMMainViewController : UIViewController <UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate>
+@interface VLMMainViewController : UIViewController <UIGestureRecognizerDelegate, VLMHeaderDelegate, VLMMenuDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, VLMFlipsideViewControllerDelegate, VLMScreenShotDelegate>
 - (id)initWithEJAppViewController:(EJAppViewController *)appViewController;
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;
+- (void)saveStateBeforeTerminating;
 @end
