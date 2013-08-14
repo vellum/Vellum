@@ -50,11 +50,11 @@
 #pragma mark -
 
 - (void)applicationWillResignActive:(UIApplication *)application{
-    
+    //[self.mainViewController saveStateInBackground];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application{
-    [self.mainViewController saveStateBeforeTerminating];
+    //[self.mainViewController saveStateBeforeTerminating];
 }
 
 #pragma mark -

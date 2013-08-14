@@ -27,4 +27,5 @@
 - (void)updateUndoCount:(NSInteger)count;
 - (void)updateUndoIndex:(NSInteger)index;
 - (void)saveStateBeforeTerminating;
+- (void)saveStateInBackground;
 @end
