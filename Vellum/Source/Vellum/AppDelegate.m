@@ -57,6 +57,12 @@
     //[self.mainViewController saveStateBeforeTerminating];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self.mainViewController saveStateBeforeTerminating];
+}
+
+
 #pragma mark -
 #pragma mark appearance
 

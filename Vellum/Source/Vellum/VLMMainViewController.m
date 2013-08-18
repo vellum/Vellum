@@ -33,7 +33,7 @@
 #define FLURRY_COLORS_CLOSED @"ColorMenuHidden"
 #define FLURRY_PATH_MENU @"Menu"
 #define FLURRY_CLEAR @"ClearScreen"
-#define USE_INCREMENTAL_SAVE 1
+//#define USE_INCREMENTAL_SAVE 1
 
 @interface VLMMainViewController ()
 
@@ -650,14 +650,14 @@
 		[self.headerController resetToZero];
 		[self updateHeader];
 	}
-#ifdef USE_INCREMENTAL_SAVE
+//#ifdef USE_INCREMENTAL_SAVE
     if ( self.shouldRemoveExistingFile ){
         [self removeExistingDrawing];
     } else {
         // don't remove file first time through, since we might want to restore it
         [self setShouldRemoveExistingFile:YES];
     }
-#endif
+//#endif
 	[Flurry endTimedEvent:FLURRY_CLEAR withParameters:nil];
 	[Flurry logEvent:FLURRY_CLEAR withParameters:nil timed:YES];
 }
