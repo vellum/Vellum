@@ -420,6 +420,39 @@
 		}
 	}
 }
-
+- (UIImage *)imageFromPixels {
+	UIImage *newImage = nil;
+    
+	int scaledWidth = self.width  * self.contentScale;
+	int scaledHeight = self.height * self.contentScale;
+	int nrOfColorComponents = 4; // RGBA
+	int bitsPerColorComponent = 8;
+	int rawImageDataLength = scaledWidth * scaledHeight * nrOfColorComponents;
+	BOOL interpolateAndSmoothPixels = NO;
+	CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast;
+	CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+    
+	CGDataProviderRef dataProviderRef;
+	CGColorSpaceRef colorSpaceRef;
+	CGImageRef imageRef;
+    
+	@try {
+		dataProviderRef = CGDataProviderCreateWithData(NULL, self.pixels.bytes, rawImageDataLength, nil);
+		colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+		imageRef = CGImageCreate(
+                                 width, height,
+                                 bitsPerColorComponent, bitsPerColorComponent * nrOfColorComponents, width * nrOfColorComponents,
+                                 colorSpaceRef, bitmapInfo, dataProviderRef, NULL, interpolateAndSmoothPixels, renderingIntent
+                                 );
+		newImage = [[UIImage alloc] initWithCGImage:imageRef scale:self.contentScale orientation:UIImageOrientationUp];
+	}
+	@finally {
+		CGDataProviderRelease(dataProviderRef);
+		CGColorSpaceRelease(colorSpaceRef);
+		CGImageRelease(imageRef);
+	}
+    
+	return newImage;
+}
 
 @end

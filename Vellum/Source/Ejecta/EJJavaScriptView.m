@@ -39,7 +39,6 @@
 
 #pragma mark - VLM Additions
 @synthesize screenShotDelegate;
-@synthesize undoScreenShotDelegate;
 #pragma mark - 
 
 - (id)initWithFrame:(CGRect)frame {
@@ -414,6 +413,11 @@
 #pragma mark - VLM Additions
 
 - (void)requestScreenShot {
+    
+    if (isPaused){
+        [self screenShot];
+        return;
+    }
     requestedScreenShot = YES;
 }
 

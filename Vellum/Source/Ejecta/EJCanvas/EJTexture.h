@@ -60,4 +60,7 @@ typedef enum {
 @property (readonly, nonatomic) GLenum format;
 @property (readonly, nonatomic) short width, height;
 
+
+- (UIImage *)imageFromPixels;
+
 @end

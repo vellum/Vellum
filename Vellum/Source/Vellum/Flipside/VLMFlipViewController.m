@@ -251,6 +251,18 @@
 	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
 	[self.view addGestureRecognizer:sgr];
     
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
+    UILabel *versionlabel = [[UILabel alloc] initWithFrame:CGRectMake(margin + 15, tvHeader.frame.size.height-60.0f, tvHeader.frame.size.width-margin*2-15*2, 60.0f)];
+    [versionlabel setText:[NSString stringWithFormat:@"Version %@", version]];
+    [versionlabel setTextAlignment:NSTextAlignmentLeft];
+    [versionlabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:10.0f]];
+    [versionlabel setTextColor:[UIColor colorWithWhite:0.2f alpha:0.1f]];
+    [versionlabel setBackgroundColor:[UIColor clearColor]];
+    
+
+    [tvHeader addSubview:versionlabel];
+    
 	[Flurry logPageView];
 }
 

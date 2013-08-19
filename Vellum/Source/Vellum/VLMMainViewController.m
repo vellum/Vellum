@@ -33,6 +33,7 @@
 #define FLURRY_COLORS_CLOSED @"ColorMenuHidden"
 #define FLURRY_PATH_MENU @"Menu"
 #define FLURRY_CLEAR @"ClearScreen"
+//#define USE_INCREMENTAL_SAVE 1
 
 @interface VLMMainViewController ()
 
@@ -56,6 +57,8 @@
 @property (strong, nonatomic) VLMColorMenuViewController *colorMenuViewController;
 @property BOOL previouslyCleared;
 @property BOOL previouslySelectedTool;
+@property BOOL shouldSaveInBackground;
+@property BOOL shouldRemoveExistingFile;
 
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
@@ -89,6 +92,8 @@
 @synthesize didJustWake;
 @synthesize previouslyCleared;
 @synthesize previouslySelectedTool;
+@synthesize shouldSaveInBackground;
+@synthesize shouldRemoveExistingFile;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -110,8 +115,10 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+    [self setShouldSaveInBackground:NO];
 	[self setPreviouslyCleared:NO];
 	[self setPreviouslySelectedTool:NO];
+    [self setShouldRemoveExistingFile:NO];
 	[self setIsPortrait:YES];
 	CGRect frame = UIScreen.mainScreen.bounds;
 	UIView *t = [[UIView alloc] initWithFrame:frame];
@@ -238,6 +245,8 @@
 	[Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
 	[Flurry logEvent:FLURRY_COLORS_CLOSED timed:YES];
 	[Flurry logEvent:FLURRY_CLEAR timed:YES];
+    
+    [self loadExistingDrawing];
 }
 
 #pragma mark -
@@ -279,6 +288,9 @@
 	else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
 		NSString *s = [NSString stringWithFormat:@"endStroke(%f,%f);", p.x, p.y];
 		[self.avc callJS:s];
+        
+        // EXPERIMENTAL FEATURE - may cause perf problems outside of iphone 5
+        [self saveStateInBackground];
 		return;
 	}
 	NSString *s = [NSString stringWithFormat:@"continueStroke(%f,%f);", p.x, p.y];
@@ -562,6 +574,58 @@
 	[self.colorMenuViewController wake];
 }
 
+- (void)loadExistingDrawing{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
+    if (doesFileExist) {
+        NSLog(@"file exists.. attempting to restore...");
+        UIImage *img = [[UIImage alloc] initWithContentsOfFile:filePath];
+        EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
+        UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
+        [jsv injectScreenShot:padded];
+        [self.avc callJS:@"saveUndoState();"];
+        
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+    else {
+        NSLog(@"prev drawing does not exist");
+    }
+    
+}
+
+- (void)removeExistingDrawing{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
+    if (doesFileExist) {
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+}
+
+- (void)saveImageToDocuments:(UIImage*)image{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
+    if (doesFileExist) {
+        [fileManager removeItemAtPath:filePath error:nil];
+    }
+    BOOL success = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+    if ( success ){
+        NSLog(@"SAVE TEXTURE SUCCESS");
+        
+    } else {
+        NSLog(@"SAVE TEXTURE FAILED");
+    }
+}
+
 #pragma mark - VLMHeaderDelegate
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title {
@@ -586,6 +650,14 @@
 		[self.headerController resetToZero];
 		[self updateHeader];
 	}
+//#ifdef USE_INCREMENTAL_SAVE
+    if ( self.shouldRemoveExistingFile ){
+        [self removeExistingDrawing];
+    } else {
+        // don't remove file first time through, since we might want to restore it
+        [self setShouldRemoveExistingFile:YES];
+    }
+//#endif
 	[Flurry endTimedEvent:FLURRY_CLEAR withParameters:nil];
 	[Flurry logEvent:FLURRY_CLEAR withParameters:nil timed:YES];
 }
@@ -722,6 +794,29 @@
 	[self.undoViewController update];
 }
 
+- (void)saveStateBeforeTerminating{
+    NSLog(@"savestatebeforeterminating - requesting screenshot");
+    
+    EJJavaScriptView *jsv = (EJJavaScriptView *)self.avc.view;
+    [jsv setScreenShotDelegate:self];
+    [jsv requestScreenShot];
+    
+}
+
+- (void)saveStateInBackground{
+#ifdef USE_INCREMENTAL_SAVE
+    NSLog(@"SAVESTATEINBACKGROUND");
+    
+    // NOTE: may want to have a flag that indicates that it's locked
+    // to prevent this from being called while already saving
+    
+    [self setShouldSaveInBackground:YES];
+    EJJavaScriptView *jsv = (EJJavaScriptView *)self.avc.view;
+    [jsv setScreenShotDelegate:self];
+    [jsv requestScreenShot];
+#endif
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -740,7 +835,11 @@
 		[picker dismissModalViewControllerAnimated:YES];
 	}
 	[self.headerController cleanupImagePicker];
-    
+
+#ifdef USE_INCREMENTAL_SAVE
+    [self saveStateInBackground];
+#endif
+
     // ios 7 correction
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 	UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
@@ -912,6 +1011,21 @@
 			[self.flipsidePopoverController dismissPopoverAnimated:YES];
 		}
 	}
+}
+
+#pragma mark - VLMScreenshotDelegate
+- (void)screenShotFound:(UIImage *)found {
+    NSLog(@"found screenshot");
+    if (self.shouldSaveInBackground){
+        [self performSelectorInBackground:@selector(saveImageToDocuments:) withObject:found];
+        [self setShouldSaveInBackground:NO];
+    } else {
+        [self saveImageToDocuments:found];
+    }
+}
+
+- (UIImage *)screenshotToRestore {
+	return nil;
 }
 
 @end

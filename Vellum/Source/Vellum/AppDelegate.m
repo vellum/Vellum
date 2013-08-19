@@ -4,6 +4,8 @@
 #import "EJAppViewController.h"
 #import "Flurry.h"
 
+//#define FLURRY_ENABLED 1
+
 @interface AppDelegate ()
 @property (strong, nonatomic) EJAppViewController *avc;
 @end
@@ -33,28 +35,33 @@
 #if STYLED_HEADER
 	[self establishAppearanceDefaults];
 #endif
-    
+
+#ifdef FLURRY_ENABLED
 	[Flurry startSession:@"83417d5908b1b9c7eb727c45fdab1b3f"];
-	/*
-     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-     NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
-     [Flurry setVersion:version];
-     
-     BOOL isIpad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
-     BOOL isRetina = NO;
-     if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
-     && [[UIScreen mainScreen] scale] == 2.0) {
-     isRetina = YES;
-     }
-     NSDictionary *logparams = [NSDictionary dictionaryWithObjectsAndKeys:
-     [NSNumber numberWithBool:isIpad], @"isTablet",
-     [NSNumber numberWithBool:isRetina], @"isRetina",
-     nil];
-     [Flurry logEvent:@"Start" withParameters:logparams];
-	 */
+#endif
+    
+    // check if state should be restored
+    
+    
     
 	return YES;
 }
+
+#pragma mark -
+
+- (void)applicationWillResignActive:(UIApplication *)application{
+    //[self.mainViewController saveStateInBackground];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application{
+    //[self.mainViewController saveStateBeforeTerminating];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [self.mainViewController saveStateBeforeTerminating];
+}
+
 
 #pragma mark -
 #pragma mark appearance
