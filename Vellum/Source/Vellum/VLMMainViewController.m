@@ -459,6 +459,11 @@
                      }
      
      ];
+    
+    if (![UIApplication sharedApplication].statusBarHidden){
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+
 }
 
 - (void)handleDoubleTap:(id)sender {
