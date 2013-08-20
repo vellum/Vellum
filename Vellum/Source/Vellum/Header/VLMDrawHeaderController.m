@@ -102,9 +102,28 @@
 	[self.view setBackgroundColor:[UIColor whiteColor]];
 	[self.view setClipsToBounds:YES];
     
-	UIButton *pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-	[pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
-	[pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
+	UIButton *pb;
+	UIButton *ab;
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+        
+        pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
+        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
+
+        ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+        [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
+        [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
+        
+    } else {
+        
+        pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, HEADER_HEIGHT)];
+        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off_ipad"] forState:UIControlStateNormal];
+        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on_ipad"] forState:UIControlStateHighlighted];
+
+        ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - 160, 0, 160, HEADER_HEIGHT)];
+        [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off_ipad"] forState:UIControlStateNormal];
+        [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on_ipad"] forState:UIControlStateHighlighted];
+    }
 	[pb addTarget:self action:@selector(plusTapped:) forControlEvents:UIControlEventTouchUpInside];
 	[pb setAutoresizingMask:UIViewAutoresizingNone];
 	[pb setContentMode:UIViewContentModeTopLeft];
@@ -112,9 +131,6 @@
 	[self setLeftbutton:pb];
     
     
-	UIButton *ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-	[ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
-	[ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
 	[ab addTarget:self action:@selector(actionTapped:) forControlEvents:UIControlEventTouchUpInside];
 	[ab setAutoresizingMask:UIViewAutoresizingNone | UIViewAutoresizingFlexibleLeftMargin];
 	[ab setContentMode:UIViewContentModeTopRight];
@@ -272,7 +288,7 @@
 		[actionSheet setTag:ACTIONSHEET_IMPORT];
         
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-			CGRect c = self.leftbutton.frame;
+			CGRect c = CGRectMake(self.leftbutton.frame.origin.x, self.leftbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
 			[actionSheet showFromRect:c inView:self.view animated:YES];
 		}
 		else {
@@ -482,7 +498,7 @@
 				if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 					self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:picker]; // does this need to be a property?
                     
-					[self.popovercontroller presentPopoverFromRect:self.leftbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+					[self.popovercontroller presentPopoverFromRect:CGRectMake(self.leftbutton.frame.origin.x, self.leftbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 				}
 				else {
 #if FAT_HEADER
@@ -515,7 +531,7 @@
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 		UIButton *btn = (UIButton *)sender;
-		CGRect c = btn.frame;
+		CGRect c = CGRectMake(self.leftbutton.frame.origin.x, self.leftbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
 		[actionSheet showFromRect:c inView:self.view animated:YES];
 	}
 	else {
@@ -545,8 +561,9 @@
 		UIViewController *mvc = (UIViewController *)del.mainViewController;
         
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            CGRect c = CGRectMake(self.rightbutton.frame.origin.x + self.rightbutton.frame.size.width - HEADER_HEIGHT, self.rightbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
 			self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:self.activityViewController];
-			[self.popovercontroller presentPopoverFromRect:self.rightbutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+			[self.popovercontroller presentPopoverFromRect:c inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		}
 		else {
 			[mvc presentViewController:self.activityViewController animated:YES completion: ^{}];
