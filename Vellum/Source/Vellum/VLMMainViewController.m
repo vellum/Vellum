@@ -365,7 +365,7 @@
 			[self setPinchLastPoint:CGPointMake(location.x / bounds.size.width, location.y / bounds.size.height)]; // this is now a percentage value
 		}
 		else {
-			// 3gs gets this
+			// 3gs & non-retina ipads gets this
 			[self setPinchLastPoint:CGPointMake(location.x / (bounds.size.width * OLD_DEVICE_SCREEN_MULTIPLIER), location.y / (bounds.size.height * OLD_DEVICE_SCREEN_MULTIPLIER))]; // this is now a percentage value
 		}
 		[self setPinchLastScale:1.0f];
@@ -870,11 +870,18 @@
 }
 
 - (UIImage *)getPaddedImageForImage:(UIImage *)image AndSize:(CGSize)size {
-	if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00) {
-		CGFloat scale = [[UIScreen mainScreen] scale];
-		size.width *= scale;
-		size.height *= scale;
-	}
+    if (!self.avc.shouldDoubleResolution) {
+        CGFloat scale = OLD_DEVICE_SCREEN_MULTIPLIER;
+        size.width *= scale;
+        size.height *= scale;
+    }
+    else {
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00) {
+            CGFloat scale = [[UIScreen mainScreen] scale];
+            size.width *= scale;
+            size.height *= scale;
+        }
+    }
     
 	CGSize inputSize = image.size;
 	CGRect outputRect = CGRectMake(0, 0, size.width, size.height);
