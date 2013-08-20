@@ -137,7 +137,6 @@
 	[self.view addSubview:ab];
 	[self setRightbutton:ab];
     
-    
 	UIView *cancel = [[UIView alloc] initWithFrame:CGRectMake(0, 0, winw, HEADER_HEIGHT)];
 	[cancel setBackgroundColor:[UIColor whiteColor]];
 	[cancel setUserInteractionEnabled:NO];
@@ -530,7 +529,6 @@
 	[actionSheet setTag:ACTIONSHEET_CLEARSCREEN];
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		UIButton *btn = (UIButton *)sender;
 		CGRect c = CGRectMake(self.leftbutton.frame.origin.x, self.leftbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
 		[actionSheet showFromRect:c inView:self.view animated:YES];
 	}
@@ -545,6 +543,8 @@
 
 #pragma mark - VLMScreenshotDelegate
 - (void)screenShotFound:(UIImage *)found {
+    CGRect c = CGRectMake(self.rightbutton.frame.origin.x + self.rightbutton.frame.size.width - HEADER_HEIGHT, self.rightbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
+
 	// ios6+
 	if (NSClassFromString(@"UIActivityViewController")) {
 		VLMActivityProvider *activityProvider = [[VLMActivityProvider alloc] init];
@@ -561,7 +561,6 @@
 		UIViewController *mvc = (UIViewController *)del.mainViewController;
         
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            CGRect c = CGRectMake(self.rightbutton.frame.origin.x + self.rightbutton.frame.size.width - HEADER_HEIGHT, self.rightbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT);
 			self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:self.activityViewController];
 			[self.popovercontroller presentPopoverFromRect:c inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 		}
@@ -578,8 +577,6 @@
 	self.imageToSave = found;
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-		UIButton *btn = self.rightbutton;
-		CGRect c = btn.frame;
 		[actionSheet showFromRect:c inView:self.view animated:YES];
 	}
 	else {
