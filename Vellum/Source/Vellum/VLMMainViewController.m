@@ -590,8 +590,9 @@
         NSLog(@"file exists.. attempting to restore...");
         UIImage *img = [[UIImage alloc] initWithContentsOfFile:filePath];
         EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
-        UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
-        [jsv injectScreenShot:padded];
+        //UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
+        //[jsv injectScreenShot:padded];
+        [jsv injectScreenShot:img];
         [self.avc callJS:@"saveUndoState();"];
         
         [fileManager removeItemAtPath:filePath error:nil];
