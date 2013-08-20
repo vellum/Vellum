@@ -247,9 +247,11 @@
 	[tv setTableHeaderView:tvHeader];
     [tv flashScrollIndicators];
     
-	UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
-	[sgr setDirection:UISwipeGestureRecognizerDirectionRight];
-	[self.view addGestureRecognizer:sgr];
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+        UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hoswipe:)];
+        [sgr setDirection:UISwipeGestureRecognizerDirectionRight];
+        [self.view addGestureRecognizer:sgr];
+	}
     
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *version = [info objectForKey:@"CFBundleShortVersionString"];
