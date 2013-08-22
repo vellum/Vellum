@@ -590,11 +590,27 @@
     BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
     if (doesFileExist) {
         NSLog(@"file exists.. attempting to restore...");
-        UIImage *img = [[UIImage alloc] initWithContentsOfFile:filePath];
+        UIImage *image = [[UIImage alloc] initWithContentsOfFile:filePath];
         EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
-        //UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
-        //[jsv injectScreenShot:padded];
-        [jsv injectScreenShot:img];
+        
+        
+        // upside down and flipped
+        UIImage *flipped = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationDownMirrored];
+        
+        // draw rotated image into a new image so we have a properly rotated image
+        float scale = image.scale;
+        short sx = scale * 0;
+        short sy = scale * 0;
+        short sw = scale * image.size.width;
+        short sh = scale * image.size.height;
+        UIGraphicsBeginImageContext(CGSizeMake(sw, sh));
+        CGContextRef aContext = UIGraphicsGetCurrentContext();
+        CGContextSetBlendMode(aContext, kCGBlendModeCopy);
+        [flipped drawInRect:CGRectMake(sx, sy, sw, sh)];
+        UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [jsv injectScreenShot:ret];
         [self.avc callJS:@"saveUndoState();"];
         
         [fileManager removeItemAtPath:filePath error:nil];
@@ -617,6 +633,7 @@
 }
 
 - (void)saveImageToDocuments:(UIImage*)image{
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedstate.png"];
     
@@ -625,7 +642,8 @@
     if (doesFileExist) {
         [fileManager removeItemAtPath:filePath error:nil];
     }
-    BOOL success = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+
+    BOOL success = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES]; // PNG doesn't maintain orientation
     if ( success ){
         NSLog(@"SAVE TEXTURE SUCCESS");
         
