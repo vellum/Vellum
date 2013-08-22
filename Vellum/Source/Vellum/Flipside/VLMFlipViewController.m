@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Flurry.h"
 #import "VLMAboutButton.h"
+#import "AppDelegate.h"
 //#define USE_ICONS 1
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -282,7 +283,8 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	NSInteger sections = self.texts.count;
     
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+	//if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    if (![AppDelegate isUndoCapable]) {
 		sections--; // omit undo slide
 	}
 	return sections;

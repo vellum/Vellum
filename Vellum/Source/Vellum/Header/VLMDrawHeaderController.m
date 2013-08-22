@@ -211,7 +211,17 @@
 		[bighitarea addGestureRecognizer:tgr];
 		[bighitarea addGestureRecognizer:lpr];
 		[self.view addSubview:bighitarea];
-	}
+	} else {
+
+		CGFloat bighitwidth = winw - 60*2;
+		UIView *bighitarea = [[UIView alloc] initWithFrame:CGRectMake(60, 0, bighitwidth, HEADER_HEIGHT)];
+		[bighitarea setBackgroundColor:[UIColor clearColor]];
+		[bighitarea setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+		[bighitarea addGestureRecognizer:tgr];
+		[bighitarea addGestureRecognizer:lpr];
+		[self.view addSubview:bighitarea];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
