@@ -12,5 +12,6 @@
 	NSInteger undoCount;
 	NSInteger undoIndex;
 	BOOL isIPad;
+    BOOL isUndoCapable;
 }
 @end

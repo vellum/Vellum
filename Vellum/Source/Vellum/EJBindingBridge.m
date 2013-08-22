@@ -62,5 +62,17 @@ EJ_BIND_GET(isIPad, ctx)
 	return JSValueMakeBoolean(ctx, (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad));
 }
 
+// isUndoCapable
+EJ_BIND_SET(isUndoCapable, ctx, value)
+{
+	// do nothing. not settable.
+}
+
+EJ_BIND_GET(isUndoCapable, ctx)
+{
+    BOOL retVal = [AppDelegate isUndoCapable];
+	return JSValueMakeBoolean(ctx, retVal);
+}
+
 
 @end

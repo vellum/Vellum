@@ -52,3 +52,9 @@
 #define FOOTER_FONT @"AmericanTypewriter"
 #define TEXTBUTTON_FONT @"HelveticaNeue-Bold"
 #define PHOTO_LABEL @"AmericanTypewriter"
+
+
+#pragma mark - Utilities
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+

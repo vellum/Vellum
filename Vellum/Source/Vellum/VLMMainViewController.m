@@ -26,6 +26,7 @@
 #import "VLMColorMenuViewController.h"
 #import "VLMColorData.h"
 #import "Flurry.h"
+#import "AppDelegate.h"
 
 #define FLURRY_TOOLS_OPEN @"ToolMenuVisible"
 #define FLURRY_TOOLS_CLOSED @"ToolMenuHidden"
@@ -202,7 +203,8 @@
     
 	// only enable 3 finger undo for small screen devices
 	// to counter glreadpixels performance problems
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+	//if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    if ([AppDelegate isUndoCapable]){
 		[t addGestureRecognizer:threeFingerPan];
 	}
     

@@ -4,7 +4,7 @@
 #import "EJAppViewController.h"
 #import "Flurry.h"
 
-	#define FLURRY_ENABLED 1
+//#define FLURRY_ENABLED 1
 
 @interface AppDelegate ()
 @property (strong, nonatomic) EJAppViewController *avc;
@@ -136,4 +136,35 @@
 #endif
 }
 
+
++ (BOOL)isUndoCapable{
+    BOOL isIpad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+    BOOL isRetina = NO;
+    BOOL retVal = NO;
+    
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]
+        && [[UIScreen mainScreen] scale] == 2.0) {
+        isRetina = YES;
+    }
+NSLog( @"is retina : %@", isRetina ? @"YES" : @"NO" );
+NSLog( @"is ipad : %@", isIpad ? @"YES" : @"NO" );
+NSLog( @"is ios6+ : %@", SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") ? @"YES" : @"NO" );
+
+    
+    
+    // iphone - yes
+    if (!isIpad) {
+        retVal = YES;
+        
+        // ipad2 and ipad mini - yes
+    } else {
+        if (!isRetina && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")){
+            retVal = YES;
+        }
+    }    
+    NSLog( @"isundocapable : %@", retVal ? @"YES" : @"NO" );
+
+    
+    return retVal;
+}
 @end

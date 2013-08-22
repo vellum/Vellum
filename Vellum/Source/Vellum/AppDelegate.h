@@ -6,4 +6,5 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate>
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 @property (nonatomic, strong) VLMMainViewController *mainViewController;
++ (BOOL)isUndoCapable;
 @end

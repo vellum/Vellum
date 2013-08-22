@@ -126,8 +126,11 @@ var cancelQueuedSave = function() {
 	saveUndoState = function() {
 	    // disable undo for ipad, since glreadpixels is slow and blocks drawing operations
 	    if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
-	    if ( BRIDGE.isIPad ) return;
-    
+	    //
+        if ( !BRIDGE.isUndoCapable ) return;
+        
+        if ( accum.x + accum.y < 5 ) return;
+        
         // FIXME: restore the accum stuff to prevent saving undo states everyt eime
 	    //if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
     
