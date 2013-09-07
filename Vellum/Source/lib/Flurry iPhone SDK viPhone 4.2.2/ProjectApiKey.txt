@@ -1,2 +1,0 @@
-Project: vellum
-API Key: 83417d5908b1b9c7eb727c45fdab1b3f

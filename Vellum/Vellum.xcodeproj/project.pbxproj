@@ -97,7 +97,6 @@
 		BD2BBDA217B4298D00DA3C64 /* gradient@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD2BBDA017B4298D00DA3C64 /* gradient@2x.png */; };
 		BD65F5C417A0BF5B0008D3ED /* App in Resources */ = {isa = PBXBuildFile; fileRef = BD65F5C317A0BF5B0008D3ED /* App */; };
 		BD6FC11917B576D500984495 /* VLMAboutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FC11817B576D500984495 /* VLMAboutButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */; };
 		BD7B3B7117C32CA8003AE3F5 /* button_action_off_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B6D17C32CA8003AE3F5 /* button_action_off_ipad.png */; };
 		BD7B3B7217C32CA8003AE3F5 /* button_action_off_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B6E17C32CA8003AE3F5 /* button_action_off_ipad@2x.png */; };
 		BD7B3B7317C32CA8003AE3F5 /* button_action_on_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B6F17C32CA8003AE3F5 /* button_action_on_ipad.png */; };
@@ -107,6 +106,7 @@
 		BD7B3B7B17C32CB0003AE3F5 /* button_plus_on_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B7717C32CB0003AE3F5 /* button_plus_on_ipad.png */; };
 		BD7B3B7C17C32CB0003AE3F5 /* button_plus_on_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B7817C32CB0003AE3F5 /* button_plus_on_ipad@2x.png */; };
 		BD8B234917B5C74B002463BF /* AboutIcon-home.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B234817B5C74B002463BF /* AboutIcon-home.png */; };
+		BD9192B317DAF05E008F1E5F /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */; };
 		BD96EAC917BAF6340049D25F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD96EAC817BAF6340049D25F /* GameKit.framework */; };
 		BD96EACB17BAF6370049D25F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD96EACA17BAF6370049D25F /* StoreKit.framework */; };
 		BD992BA617B4370600894192 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = BD992BA517B4370600894192 /* orange.png */; };
@@ -410,6 +410,8 @@
 		BD7B3B7717C32CB0003AE3F5 /* button_plus_on_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_plus_on_ipad.png; path = images/button_plus_on_ipad.png; sourceTree = "<group>"; };
 		BD7B3B7817C32CB0003AE3F5 /* button_plus_on_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_plus_on_ipad@2x.png"; path = "images/button_plus_on_ipad@2x.png"; sourceTree = "<group>"; };
 		BD8B234817B5C74B002463BF /* AboutIcon-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AboutIcon-home.png"; path = "images/AboutIcon-home.png"; sourceTree = "<group>"; };
+		BD9192B117DAF05E008F1E5F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = "<group>"; };
+		BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.3.a; path = Flurry/libFlurry_4.2.3.a; sourceTree = "<group>"; };
 		BD96EAC817BAF6340049D25F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		BD96EACA17BAF6370049D25F /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BD992BA517B4370600894192 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orange.png; path = images/orange.png; sourceTree = "<group>"; };
@@ -593,8 +595,8 @@
 				B6CFCCD91332F152001F17AF /* AVFoundation.framework in Frameworks */,
 				B6AC4A061359E7A5003C4982 /* iAd.framework in Frameworks */,
 				B6243666166684420046B8C7 /* libJavaScriptCore.a in Frameworks */,
-				BD70C07617ADC6D0003FBCE9 /* libFlurry_4.2.2.a in Frameworks */,
 				BD96EACB17BAF6370049D25F /* StoreKit.framework in Frameworks */,
+				BD9192B317DAF05E008F1E5F /* libFlurry_4.2.3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1024,6 +1026,8 @@
 		BDEE8F4A17B2FA4300D5B3A9 /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
+				BD9192B117DAF05E008F1E5F /* Flurry.h */,
+				BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */,
 				BD70C07417ADC6D0003FBCE9 /* Flurry.h */,
 				BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */,
 			);
@@ -1512,7 +1516,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Source/lib\"",
-					"\"$(SRCROOT)/Source/lib/Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry\"",
+					"\"$(SRCROOT)/Source/lib/Flurry\"",
 				);
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = Vellum;
@@ -1539,7 +1543,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Source/lib\"",
-					"\"$(SRCROOT)/Source/lib/Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry\"",
+					"\"$(SRCROOT)/Source/lib/Flurry\"",
 				);
 				PRODUCT_NAME = Vellum;
 				PROVISIONING_PROFILE = "";
