@@ -16,7 +16,9 @@
 		self.contentScaleFactor = contentScale;
 		eaglLayer.contentsScale = contentScale;
 
-		eaglLayer.opaque = TRUE;
+		//eaglLayer.opaque = TRUE;
+        eaglLayer.opaque = FALSE;
+        eaglLayer.backgroundColor = [[UIColor clearColor] CGColor];
 		
 		eaglLayer.drawableProperties = @{
 			kEAGLDrawablePropertyRetainedBacking: @(retainedBacking),

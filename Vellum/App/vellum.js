@@ -108,8 +108,9 @@ var VLM = VLM || {};
 	i.clearScreen = function(){
 		var state = VLM.state,
 			ctx = state.context;
-	    ctx.fillStyle = VLM.constants.BGCOLOR;
-	    ctx.fillRect(0, 0, state.w, state.h);
+	    //ctx.fillStyle = VLM.constants.BGCOLOR;
+	    //ctx.fillRect(0, 0, state.w, state.h);
+        ctx.clearRect(0, 0, state.w, state.h);
 	};
 	
 	var u = VLM.utilities;

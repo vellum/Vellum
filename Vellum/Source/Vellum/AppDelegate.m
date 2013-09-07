@@ -4,7 +4,7 @@
 #import "EJAppViewController.h"
 #import "Flurry.h"
 
-#define FLURRY_ENABLED 1
+//#define FLURRY_ENABLED 1
 
 @interface AppDelegate ()
 @property (strong, nonatomic) EJAppViewController *avc;
