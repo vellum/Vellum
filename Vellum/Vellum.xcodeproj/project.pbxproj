@@ -399,8 +399,6 @@
 		BD65F5C317A0BF5B0008D3ED /* App */ = {isa = PBXFileReference; lastKnownFileType = folder; path = App; sourceTree = "<group>"; };
 		BD6FC11717B576D500984495 /* VLMAboutButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLMAboutButton.h; sourceTree = "<group>"; };
 		BD6FC11817B576D500984495 /* VLMAboutButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLMAboutButton.m; sourceTree = "<group>"; };
-		BD70C07417ADC6D0003FBCE9 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/Flurry.h"; sourceTree = "<group>"; };
-		BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.2.a; path = "Flurry iPhone SDK viPhone 4.2.2/Flurry-iOS-4.2.2/Flurry/libFlurry_4.2.2.a"; sourceTree = "<group>"; };
 		BD7B3B6D17C32CA8003AE3F5 /* button_action_off_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_action_off_ipad.png; path = images/button_action_off_ipad.png; sourceTree = "<group>"; };
 		BD7B3B6E17C32CA8003AE3F5 /* button_action_off_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_action_off_ipad@2x.png"; path = "images/button_action_off_ipad@2x.png"; sourceTree = "<group>"; };
 		BD7B3B6F17C32CA8003AE3F5 /* button_action_on_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_action_on_ipad.png; path = images/button_action_on_ipad.png; sourceTree = "<group>"; };
@@ -1028,8 +1026,6 @@
 			children = (
 				BD9192B117DAF05E008F1E5F /* Flurry.h */,
 				BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */,
-				BD70C07417ADC6D0003FBCE9 /* Flurry.h */,
-				BD70C07517ADC6D0003FBCE9 /* libFlurry_4.2.2.a */,
 			);
 			name = Flurry;
 			sourceTree = "<group>";
