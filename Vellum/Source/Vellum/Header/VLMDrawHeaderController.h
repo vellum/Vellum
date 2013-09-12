@@ -20,7 +20,7 @@
 - (void)hidePopover;
 @end
 
-@interface VLMDrawHeaderController : UIViewController <UIActionSheetDelegate, VLMScreenShotDelegate>
+@interface VLMDrawHeaderController : UIViewController <UIActionSheetDelegate, VLMScreenShotDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, retain) NSObject <VLMHeaderDelegate> *delegate;
 @property (nonatomic) BOOL isPopoverVisible;

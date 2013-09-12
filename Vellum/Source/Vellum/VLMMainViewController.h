@@ -28,4 +28,6 @@
 - (void)updateUndoIndex:(NSInteger)index;
 - (void)saveStateBeforeTerminating;
 - (void)saveStateInBackground;
+- (void)hideStatusBarIfNeeded;
+
 @end

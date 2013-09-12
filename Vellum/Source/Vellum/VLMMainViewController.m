@@ -461,11 +461,6 @@
                      }
      
      ];
-    
-    if (![UIApplication sharedApplication].statusBarHidden){
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
-
 }
 
 - (void)handleDoubleTap:(id)sender {
@@ -649,6 +644,19 @@
         
     } else {
         NSLog(@"SAVE TEXTURE FAILED");
+    }
+}
+
+- (void)hideStatusBarIfNeeded{
+    // ios 7 correction
+    if (![UIApplication sharedApplication].statusBarHidden){
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        } else {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        }
+        //UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        //[self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
     }
 }
 
@@ -866,19 +874,12 @@
     [self saveStateInBackground];
 #endif
 
-    // ios 7 correction
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-	UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    [self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
+    [self hideStatusBarIfNeeded];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
 	[picker dismissModalViewControllerAnimated:YES];
-
-    // ios 7 correction
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-	UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    [self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
+    [self hideStatusBarIfNeeded];
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {

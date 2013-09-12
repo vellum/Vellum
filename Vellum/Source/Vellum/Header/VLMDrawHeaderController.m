@@ -485,6 +485,10 @@
 }
 
 #pragma mark - UIActionSheetDelegate
+// FIXME: in ios7-ipad, the status bar appears when imagepicker is opened (seemingly not controllable)
+// and needs to be explicitly removed when:
+// - cancelling the popover (not sure if handled)
+// - selecting an image (handled)
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
 	//NSLog(@"%d", actionSheet.tag);
@@ -502,10 +506,12 @@
 				UIImagePickerController *picker = [[UIImagePickerController alloc] init];
 				[picker setDelegate:mvc];
 				[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+                [picker setContentSizeForViewInPopover:CGSizeMake(320.0f, 768.0f)];
 				self.pickerController = picker;
                 
 				if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
 					self.popovercontroller = [[UIPopoverController alloc] initWithContentViewController:picker]; // does this need to be a property?
+                    [self.popovercontroller setDelegate:self];
                     
 					[self.popovercontroller presentPopoverFromRect:CGRectMake(self.leftbutton.frame.origin.x, self.leftbutton.frame.origin.y, HEADER_HEIGHT, HEADER_HEIGHT) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 				}
@@ -596,6 +602,14 @@
 
 - (UIImage *)screenshotToRestore {
 	return nil;
+}
+
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    VLMMainViewController *mvc = (VLMMainViewController *)del.mainViewController;
+    [mvc hideStatusBarIfNeeded];
 }
 
 #pragma mark - rotation
