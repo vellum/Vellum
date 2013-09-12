@@ -506,7 +506,7 @@
 				UIImagePickerController *picker = [[UIImagePickerController alloc] init];
 				[picker setDelegate:mvc];
 				[picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-                [picker setContentSizeForViewInPopover:CGSizeMake(320.0f, 768.0f)];
+                [picker setContentSizeForViewInPopover:CGSizeMake(320.0f, 568.0f)];
 				self.pickerController = picker;
                 
 				if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
