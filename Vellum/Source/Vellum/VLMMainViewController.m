@@ -647,19 +647,6 @@
     }
 }
 
-- (void)hideStatusBarIfNeeded{
-    // ios 7 correction
-    if (![UIApplication sharedApplication].statusBarHidden){
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-        } else {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        }
-        //UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        //[self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
-    }
-}
-
 #pragma mark - VLMHeaderDelegate
 
 - (void)updateIndex:(NSInteger)index AndTitle:(NSString *)title {
@@ -849,6 +836,22 @@
     [jsv setScreenShotDelegate:self];
     [jsv requestScreenShot];
 #endif
+}
+
+- (void)hideStatusBarIfNeeded{
+    // ios 7 correction
+    if (![UIApplication sharedApplication].statusBarHidden){
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        /*
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+        } else {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        }
+         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+         [self.view setFrame:CGRectMake(0,0,window.frame.size.width, window.frame.size.height)];
+         */
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
