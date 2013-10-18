@@ -47,20 +47,23 @@
         frame.size.width *= OLD_DEVICE_SCREEN_MULTIPLIER;
         frame.size.height *= OLD_DEVICE_SCREEN_MULTIPLIER;
     }
+    
+    
 	EJJavaScriptView *view = [[EJJavaScriptView alloc] initWithFrame:frame];
 	self.view = view;
-	[view loadScriptAtPath:@"tinycolor.js"];	
-	[view loadScriptAtPath:@"vellum.js"];
-	[view loadScriptAtPath:@"brushes/scribble.js"];
-	[view loadScriptAtPath:@"brushes/graphite.js"];
-	[view loadScriptAtPath:@"brushes/shade.js"];
-	[view loadScriptAtPath:@"brushes/line.js"];
-	[view loadScriptAtPath:@"brushes/ink.js"];
-	//[view loadScriptAtPath:@"brushes/wash.js"];
-	[view loadScriptAtPath:@"brushes/erase.js"];
-	[view loadScriptAtPath:@"brushes/scratch.js"];
-	[view loadScriptAtPath:@"brushes/softerase.js"];
-	[view loadScriptAtPath:@"brushes/harderase.js"];
+    [view loadScriptAtPath:@"lib/createjs/0.7/easeljs-NEXT.min.js"];
+    //[view loadScriptAtPath:@"lib/pitaru/easeljs-patch_DL.js"];
+	[view loadScriptAtPath:@"lib/tinycolor/tinycolor.js"];
+	[view loadScriptAtPath:@"vellum/vellum.js"];
+	[view loadScriptAtPath:@"vellum/brushes/scribble.js"];
+	[view loadScriptAtPath:@"vellum/brushes/graphite.js"];
+	[view loadScriptAtPath:@"vellum/brushes/shade.js"];
+	[view loadScriptAtPath:@"vellum/brushes/line.js"];
+	[view loadScriptAtPath:@"vellum/brushes/ink.js"];
+	[view loadScriptAtPath:@"vellum/brushes/erase.js"];
+	[view loadScriptAtPath:@"vellum/brushes/scratch.js"];
+	[view loadScriptAtPath:@"vellum/brushes/softerase.js"];
+	[view loadScriptAtPath:@"vellum/brushes/harderase.js"];
 	[view loadScriptAtPath:@"index.js"];
 	[view release];
 }

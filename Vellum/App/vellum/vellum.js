@@ -56,6 +56,11 @@ var VLM = VLM || {};
 	s.w = window.innerWidth;
 	s.h = window.innerHeight;
 	s.canvas = document.getElementById('canvas');
+    s.stage = new createjs.Stage(s.canvas);
+
+	/// TEST
+	s.stage.autoClear = true;
+ 
 	s.context = canvas.getContext('2d');
 	s.zoomlevel = 1;
 	s.accumdist = 0;
@@ -108,8 +113,14 @@ var VLM = VLM || {};
 	i.clearScreen = function(){
 		var state = VLM.state,
 			ctx = state.context;
-	    ctx.fillStyle = VLM.constants.BGCOLOR;
-	    ctx.fillRect(0, 0, state.w, state.h);
+	
+		var stage = s.stage,
+			layer0 = new createjs.Shape();
+ 
+		stage.removeAllChildren();
+		layer0.graphics.beginFill(VLM.constants.BGCOLOR).drawRect(0, 0, state.w, state.h);
+		stage.addChild(layer0);
+		stage.update();
 	};
 	
 	var u = VLM.utilities;

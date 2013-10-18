@@ -6,6 +6,8 @@
 //
 //
 
+// FIXME: removed injectscreenshot calls to fiddle with createjs
+
 #import "VLMMainViewController.h"
 #import "VLMDrawHeaderController.h"
 #import "VLMZoomViewController.h"
@@ -605,7 +607,7 @@
         UIImage *ret = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        [jsv injectScreenShot:ret];
+        //[jsv injectScreenShot:ret];
         [self.avc callJS:@"saveUndoState();"];
         
         [fileManager removeItemAtPath:filePath error:nil];
@@ -862,7 +864,7 @@
     
 	UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
     
-	[jsv injectScreenShot:padded];
+	//[jsv injectScreenShot:padded];
 	[self.avc callJS:@"saveUndoState();"];
     
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

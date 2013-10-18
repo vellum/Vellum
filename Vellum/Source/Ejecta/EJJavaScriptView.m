@@ -202,7 +202,7 @@
 
 - (void)loadScript:(NSString *)script sourceURL:(NSString *)sourceURL {
 	if( !script || script.length == 0 ) {
-		NSLog(@"Error: No or empty script given");
+		NSLog(@"Error: No or empty script given (%@)", sourceURL);
 		return;
 	}
     

@@ -63,7 +63,10 @@ var setDrawingMode = function(mode) {
 	    ctx.lineWidth = 1;
 	    clearScreen();
 		setDrawingMode(VLM.constants.MODE_SCRIBBLE);
-	    setInterval(animate, 16);
+	    //setInterval(animate, 16);
+        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener("tick", animate);
+        
         VLM.state.isIPad = BRIDGE.isIPad;
 	},
 
