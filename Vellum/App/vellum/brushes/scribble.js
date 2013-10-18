@@ -47,9 +47,6 @@ scribble.prototype = {
 		target.x = x;
 		target.y = y;
 		
-		//stage.update();
-		
-		
 	},
 	
 	end : function(x,y){
@@ -58,7 +55,6 @@ scribble.prototype = {
 		target.x = x;
 		target.y = y;
 		
-		//stage.update();
 	},
 	
 	tick : function(){
@@ -117,18 +113,18 @@ scribble.prototype = {
 			if (zoomlevel < 10) {
 				
 				
-				//ctx.beginPath();
+				ctx.beginPath();
 				
 				
 				if (zoomlevel < 1) {
-					//ctx.lineWidth = 0.5; // solid lines MOIRE
+					ctx.lineWidth = 0.5; // solid lines MOIRE
 					g.setStrokeStyle(0.5);
 					
 				} else {
-					//ctx.lineWidth = 0.45; // these look ok
+					ctx.lineWidth = 0.45; // these look ok
 					g.setStrokeStyle(0.45);
 				}
-				//ctx.strokeStyle = fgcolor;
+				ctx.strokeStyle = fgcolor;
 				g.beginStroke(fgcolor);
 				
 				var step = 1.5;
@@ -149,21 +145,20 @@ scribble.prototype = {
 					deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
 
 
-					//ctx.lineTo(localx + deltax, localy + deltay);
+					ctx.lineTo(localx + deltax, localy + deltay);
 					g.lineTo(localx + deltax, localy + deltay);
 
 
 				}
 				
-				//ctx.stroke();
-				//ctx.closePath();
+				ctx.stroke();
+				ctx.closePath();
 			} else {
 				g.setStrokeStyle(0.45);
 				g.beginStroke(fgcolor);
 				g.moveTo(x, y);
 				g.lineTo(prev.x, prev.y);
 				
-				/*
 				ctx.beginPath();
 				ctx.lineWidth = 0.45;
 				ctx.strokeStyle = fgcolor;
@@ -171,12 +166,12 @@ scribble.prototype = {
 				ctx.lineTo(prev.x, prev.y);
 				ctx.stroke();
 				ctx.closePath();
-				*/
+				
 				
 			}
 			currentShape.updateCache("source-overlay");
 			g.clear();
-			stage.update();
+			//stage.update();
 			
 			prev.angle = angle;
 			prev.nib = curnib;
