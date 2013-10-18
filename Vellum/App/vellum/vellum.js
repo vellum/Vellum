@@ -59,7 +59,7 @@ var VLM = VLM || {};
     s.stage = new createjs.Stage(s.canvas);
 
 	/// TEST
-	s.stage.autoClear = true;
+	//s.stage.autoClear = true;
  
 	s.context = canvas.getContext('2d');
 	s.zoomlevel = 1;

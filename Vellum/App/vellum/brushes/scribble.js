@@ -138,7 +138,7 @@ scribble.prototype = {
 					deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
 					deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
 
-					//ctx.moveTo(localpx + deltax, localpy + deltay);
+					ctx.moveTo(localpx + deltax, localpy + deltay);
 					g.moveTo(localpx + deltax, localpy + deltay);
 
 					deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
