@@ -1,11 +1,11 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-                _   _                             _
- __   __  ___  | | | |  _   _   _ __ ___         (_)  ___
- \ \ / / / _ \ | | | | | | | | | '_ ` _ \        | | / __|
-  \ V / |  __/ | | | | | |_| | | | | | | |  _    | | \__ \
+				_   _							 _
+ __   __  ___  | | | |  _   _   _ __ ___		 (_)  ___
+ \ \ / / / _ \ | | | | | | | | | '_ ` _ \		| | / __|
+  \ V / |  __/ | | | | | |_| | | | | | | |  _	| | \__ \
    \_/   \___| |_| |_|  \__,_| |_| |_| |_| (_)  _/ | |___/
-                                               |__/
+											   |__/
   @vellumapp is a work in progress by david lu
   see also: @vellum, http://vellum.cc
 
@@ -42,15 +42,15 @@ var VLM = VLM || {};
 	bnbm[c.MODE_SHADE] = 'shade';
 	bnbm[c.MODE_LINE] = 'line';
 	bnbm[c.MODE_INK] = 'ink';
-    bnbm[c.MODE_ERASE] = 'erase';
-    bnbm[c.MODE_SCRATCH] = 'scratch';
+	bnbm[c.MODE_ERASE] = 'erase';
+	bnbm[c.MODE_SCRATCH] = 'scratch';
 	bnbm[c.MODE_GRAPHITE] = 'graphite';
 	bnbm[c.MODE_WASH] = 'wash';
 	bnbm[c.MODE_GENTLE_ERASE] = 'softerase';
 	bnbm[c.MODE_CIRCLE_ERASE] = 'harderase';
 	
-    c.BGCOLOR = '#f2f2e8';
- 
+	c.BGCOLOR = '#f2f2e8';
+
 	// write state - container refs and data
 	var s = VLM.state;
 	s.w = window.innerWidth;
@@ -59,13 +59,13 @@ var VLM = VLM || {};
 	s.context = canvas.getContext('2d');
 	s.zoomlevel = 1;
 	s.accumdist = 0;
-    s.isRetina = (window.devicePixelRatio == 2);
-    s.isIpad = false;// overwrite this in index.js
+	s.isRetina = (window.devicePixelRatio == 2);
+	s.isIpad = false;// overwrite this in index.js
  
-    s.color = {
-        'name' : 'black',
-        'rgba' : [0,0,0,1]
-    };
+	s.color = {
+		'name' : 'black',
+		'rgba' : [0,0,0,1]
+	};
  
 	// write some abstractions around brushes
 	var i = VLM.ink;
@@ -108,8 +108,8 @@ var VLM = VLM || {};
 	i.clearScreen = function(){
 		var state = VLM.state,
 			ctx = state.context;
-	    ctx.fillStyle = VLM.constants.BGCOLOR;
-	    ctx.fillRect(0, 0, state.w, state.h);
+		ctx.fillStyle = VLM.constants.BGCOLOR;
+		ctx.fillRect(0, 0, state.w, state.h);
 	};
 	
 	var u = VLM.utilities;

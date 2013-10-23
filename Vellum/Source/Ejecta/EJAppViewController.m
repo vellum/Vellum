@@ -55,6 +55,7 @@
 	[view loadScriptAtPath:@"brushes/graphite.js"];
 	[view loadScriptAtPath:@"brushes/shade.js"];
 	[view loadScriptAtPath:@"brushes/line.js"];
+	//[view loadScriptAtPath:@"brushes/linework.js"];
 	[view loadScriptAtPath:@"brushes/ink.js"];
 	//[view loadScriptAtPath:@"brushes/wash.js"];
 	[view loadScriptAtPath:@"brushes/erase.js"];

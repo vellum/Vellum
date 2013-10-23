@@ -7,9 +7,9 @@ line.prototype = {
 	target : { x:0, y:0 },
 	prev : { x:0, y:0, nib:0, angle:0 },
 	interpolation_multiplier : 0.25,
-    distance_multiplier : 1.5,
+    distance_multiplier : 2,//1.5,
     nib_multiplier : 0.125,
-	step : 1.5,
+	step : 0.25,
 	accumdist : 0,
 	
 	init : function(){
@@ -22,7 +22,7 @@ line.prototype = {
 			prev.x = x;
 		prev.y = y;
 		prev.angle = 0;
-		prev.nib = 0;
+		prev.nib = 5;
 		target.x = x;
 		target.y = y;
 		this.accumdist = 0;
@@ -71,8 +71,14 @@ line.prototype = {
             return;
         }
 		var angle = Math.atan2(dy, dx) - Math.PI / 2,
-	        curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,
-	        multiplier = 0.25,
+            curnib = prev.nib + (dist * distance_multiplier - prev.nib) * nib_multiplier;
+        
+        if (state.isIPad){
+            if ( curnib > 10 ) curnib = 10;
+        } else {
+            if ( curnib > 4 ) curnib = 4;
+        }
+	    var multiplier = 0.25,
 	        count = 0,
 	        cosangle = Math.cos(angle),
 	        sinangle = Math.sin(angle),
@@ -88,24 +94,41 @@ line.prototype = {
         var col = state.color,
         rgba = col.rgba,
         alpha = rgba[3];
-        
+        var fgg;
+
         // transform it
-        if ( alpha > 0.75 ){
-            alpha = 1;
-        } else if ( alpha > 0.5 ){
-            alpha = 0.4;
-        } else if ( alpha > 0.25 ){
-            alpha = 0.2;
+        if (state.isIPad){
+            
+            if ( alpha > 0.75 ){
+                alpha = 0.5;
+            } else if ( alpha > 0.5 ){
+                alpha = 0.25;
+            } else if ( alpha > 0.25 ){
+                alpha = 0.1;
+            } else {
+                alpha = 0.05;
+            }
+            fgg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.66  + ')';
         } else {
-            alpha = 0.1;
+            if ( alpha > 0.75 ){
+                alpha = 1.0;
+            } else if ( alpha > 0.5 ){
+                alpha = 0.5;
+            } else if ( alpha > 0.25 ){
+                alpha = 0.25;
+            } else {
+                alpha = 0.1;
+            }
+            fgg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.5 + ')';
         }
-        
         fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
 
         ctx.beginPath();
         ctx.lineWidth = 0.125;
-        ctx.strokeStyle = fgcolor;
+        ctx.strokeStyle = fgg;//color;
+        
         var step = 1;
+        
         for (var i = -currange; i <= currange; i += step) {
             var pct = i / currange,
             localx = x + cosangle * pct * currange,
@@ -127,9 +150,15 @@ line.prototype = {
         linwin /= (500 / zoomlevel);
         if (linwin < 0.45) linwin = 0.45;
         if (linwin > 0.75) linwin = 0.75;
+        ctx.strokeStyle = fgcolor;
 
         ctx.beginPath();
-        ctx.lineWidth = 0.5;
+        
+        if (state.isIPad){
+            ctx.lineWidth = 1.5;
+        } else {
+            ctx.lineWidth = 0.5;
+        }
         ctx.moveTo(prev.x, prev.y);
         ctx.lineTo(x, y);
         ctx.stroke();
