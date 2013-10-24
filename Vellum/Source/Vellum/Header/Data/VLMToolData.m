@@ -17,6 +17,7 @@
 @synthesize isSubtractive;
 @synthesize selectedColorIndex;
 @synthesize colors;
+@synthesize isBezierRequired;
 
 - (id)init {
 	if (self = [super init]) {
@@ -27,6 +28,7 @@
 		[self setIsSubtractive:NO];
 		[self setColors:nil];
 		[self setSelectedColorIndex:0];
+        [self setIsBezierRequired:NO];
 	}
 	return self;
 }

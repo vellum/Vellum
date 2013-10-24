@@ -143,6 +143,13 @@
 		BDC30BCB17B55A3700018E70 /* black80.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30BCA17B55A3700018E70 /* black80.png */; };
 		BDC7B9B217E27775003C869A /* AppIcon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC7B9B017E27775003C869A /* AppIcon57x57.png */; };
 		BDC7B9B317E27775003C869A /* AppIcon57x57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC7B9B117E27775003C869A /* AppIcon57x57@2x.png */; };
+		BDD593EE18175AD300D016AF /* AbstractBezierPathElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593E518175AD300D016AF /* AbstractBezierPathElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593EF18175AD300D016AF /* CurveToPathElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593E718175AD300D016AF /* CurveToPathElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593F018175AD300D016AF /* LineToPathElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593E918175AD300D016AF /* LineToPathElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593F118175AD300D016AF /* MoveToPathElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593EB18175AD300D016AF /* MoveToPathElement.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593F218175AD300D016AF /* SegmentSmoother.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593ED18175AD300D016AF /* SegmentSmoother.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593F518175ADF00D016AF /* SmoothStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593F418175ADF00D016AF /* SmoothStroke.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		BDD593F918177D0000D016AF /* UIColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD593F818177D0000D016AF /* UIColor+Components.m */; };
 		BDE52DC717B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE52DC617B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDE52DCB17B2FF8200794512 /* UINavigationBar+Fat.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE52DCA17B2FF8200794512 /* UINavigationBar+Fat.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8F0A17B2F8E800D5B3A9 /* about-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8ECD17B2F8E800D5B3A9 /* about-01.png */; };
@@ -448,6 +455,20 @@
 		BDC30BCA17B55A3700018E70 /* black80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = black80.png; path = images/black80.png; sourceTree = "<group>"; };
 		BDC7B9B017E27775003C869A /* AppIcon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon57x57.png; sourceTree = "<group>"; };
 		BDC7B9B117E27775003C869A /* AppIcon57x57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon57x57@2x.png"; sourceTree = "<group>"; };
+		BDD593E418175AD300D016AF /* AbstractBezierPathElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractBezierPathElement.h; sourceTree = "<group>"; };
+		BDD593E518175AD300D016AF /* AbstractBezierPathElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractBezierPathElement.m; sourceTree = "<group>"; };
+		BDD593E618175AD300D016AF /* CurveToPathElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveToPathElement.h; sourceTree = "<group>"; };
+		BDD593E718175AD300D016AF /* CurveToPathElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveToPathElement.m; sourceTree = "<group>"; };
+		BDD593E818175AD300D016AF /* LineToPathElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineToPathElement.h; sourceTree = "<group>"; };
+		BDD593E918175AD300D016AF /* LineToPathElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineToPathElement.m; sourceTree = "<group>"; };
+		BDD593EA18175AD300D016AF /* MoveToPathElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveToPathElement.h; sourceTree = "<group>"; };
+		BDD593EB18175AD300D016AF /* MoveToPathElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveToPathElement.m; sourceTree = "<group>"; };
+		BDD593EC18175AD300D016AF /* SegmentSmoother.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentSmoother.h; sourceTree = "<group>"; };
+		BDD593ED18175AD300D016AF /* SegmentSmoother.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentSmoother.m; sourceTree = "<group>"; };
+		BDD593F318175ADF00D016AF /* SmoothStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SmoothStroke.h; path = Vector/SmoothStroke.h; sourceTree = "<group>"; };
+		BDD593F418175ADF00D016AF /* SmoothStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SmoothStroke.m; path = Vector/SmoothStroke.m; sourceTree = "<group>"; };
+		BDD593F718177D0000D016AF /* UIColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Components.h"; path = "Source/UIColor Category/UIColor+Components.h"; sourceTree = "<group>"; };
+		BDD593F818177D0000D016AF /* UIColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Components.m"; path = "Source/UIColor Category/UIColor+Components.m"; sourceTree = "<group>"; };
 		BDE52DC517B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALAssetsLibrary+CustomPhotoAlbum.h"; path = "Source/ALAssetsLibrary Category/ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		BDE52DC617B2FF2200794512 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ALAssetsLibrary+CustomPhotoAlbum.m"; path = "Source/ALAssetsLibrary Category/ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
 		BDE52DC917B2FF8200794512 /* UINavigationBar+Fat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Fat.h"; sourceTree = "<group>"; };
@@ -704,7 +725,9 @@
 		B64CE60E166682700087CF94 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BDD593E218175A4200D016AF /* Vector */,
 				BDEE8F4D17B2FD5900D5B3A9 /* Vellum */,
+				BDD593F618177CEF00D016AF /* UIColor Category */,
 				BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */,
 				BDA36CE3172E034A00665A50 /* DD */,
 				B64CE60F166682700087CF94 /* Ejecta */,
@@ -1016,6 +1039,44 @@
 				BDEE8F0917B2F8E800D5B3A9 /* white.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		BDD593E218175A4200D016AF /* Vector */ = {
+			isa = PBXGroup;
+			children = (
+				BDD593E318175A6400D016AF /* Smoothing Helpers */,
+				BDD593F318175ADF00D016AF /* SmoothStroke.h */,
+				BDD593F418175ADF00D016AF /* SmoothStroke.m */,
+			);
+			name = Vector;
+			sourceTree = "<group>";
+		};
+		BDD593E318175A6400D016AF /* Smoothing Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BDD593E418175AD300D016AF /* AbstractBezierPathElement.h */,
+				BDD593E518175AD300D016AF /* AbstractBezierPathElement.m */,
+				BDD593E618175AD300D016AF /* CurveToPathElement.h */,
+				BDD593E718175AD300D016AF /* CurveToPathElement.m */,
+				BDD593E818175AD300D016AF /* LineToPathElement.h */,
+				BDD593E918175AD300D016AF /* LineToPathElement.m */,
+				BDD593EA18175AD300D016AF /* MoveToPathElement.h */,
+				BDD593EB18175AD300D016AF /* MoveToPathElement.m */,
+				BDD593EC18175AD300D016AF /* SegmentSmoother.h */,
+				BDD593ED18175AD300D016AF /* SegmentSmoother.m */,
+			);
+			name = "Smoothing Helpers";
+			path = Vellum;
+			sourceTree = "<group>";
+		};
+		BDD593F618177CEF00D016AF /* UIColor Category */ = {
+			isa = PBXGroup;
+			children = (
+				BDD593F718177D0000D016AF /* UIColor+Components.h */,
+				BDD593F818177D0000D016AF /* UIColor+Components.m */,
+			);
+			name = "UIColor Category";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BDE52DC817B2FF8200794512 /* UINavigationBar Category */ = {
@@ -1399,6 +1460,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD593EE18175AD300D016AF /* AbstractBezierPathElement.m in Sources */,
+				BDD593F018175AD300D016AF /* LineToPathElement.m in Sources */,
+				BDD593EF18175AD300D016AF /* CurveToPathElement.m in Sources */,
+				BDD593F118175AD300D016AF /* MoveToPathElement.m in Sources */,
+				BDD593F218175AD300D016AF /* SegmentSmoother.m in Sources */,
+				BDD593F518175ADF00D016AF /* SmoothStroke.m in Sources */,
 				B630048916C1A2390036D8D4 /* EJBindingTextMetrics.m in Sources */,
 				B64C87AC16B81BAA0097CD5B /* EJGLProgram2D.m in Sources */,
 				B64C87AE16B81BAA0097CD5B /* EJGLProgram2DRadialGradient.m in Sources */,
@@ -1438,6 +1505,7 @@
 				B6F1154D167A7D17001F1324 /* EJBindingCanvasContextWebGL.m in Sources */,
 				B6F11550167A7DA1001F1324 /* EJCanvasContextWebGL.m in Sources */,
 				B6F11556167BD59D001F1324 /* EJBindingWebGLObjects.m in Sources */,
+				BDD593F918177D0000D016AF /* UIColor+Components.m in Sources */,
 				B68037011682A58300833604 /* EJConvertWebGL.m in Sources */,
 				B664B98B1699F3380093E04E /* EJBindingCanvasPattern.m in Sources */,
 				B664B98E1699F49C0093E04E /* EJCanvasPattern.m in Sources */,

@@ -34,7 +34,6 @@ static VLMToolCollection *sharedToolCollection;
 		                  @"Graphite",
 		                  @"Shade",
 		                  @"Line",
-                          //@"Linework",
 		                  @"Ink",
 		                  @"Erase",
 		                  @"Scratch",
@@ -46,7 +45,6 @@ static VLMToolCollection *sharedToolCollection;
 		                     @YES,
 		                     @YES,
 		                     @YES,
-		                     //@YES,
 		                     @YES,
 		                     @YES,
 		                     @YES,
@@ -58,7 +56,6 @@ static VLMToolCollection *sharedToolCollection;
 		                   @"VLM.constants.MODE_GRAPHITE",
 		                   @"VLM.constants.MODE_SHADE",
 		                   @"VLM.constants.MODE_LINE",
-		                   //@"VLM.constants.MODE_LINEWORK",
 		                   @"VLM.constants.MODE_INK",
 		                   @"VLM.constants.MODE_ERASE",
 		                   @"VLM.constants.MODE_SCRATCH",
@@ -70,7 +67,6 @@ static VLMToolCollection *sharedToolCollection;
 		                           @NO,
 		                           @NO,
 		                           @NO,
-		                           //@NO,
 		                           @NO,
 		                           @YES,
 		                           @YES,
@@ -84,13 +80,26 @@ static VLMToolCollection *sharedToolCollection;
 		                         @1,
 		                         @1,
 		                         @1,
-		                         //@1,
 		                         @1,
 		                         @7,
 		                         @7,
 		                         @5,
 		                         @7];
-		NSInteger selectedIndex = 0;
+
+		
+        NSArray *isBezierRequireds = @[
+                                       @NO,
+                                       @NO,
+                                       @NO,
+                                       @YES,
+                                       @NO,
+                                       @NO,
+                                       @NO,
+                                       @NO,
+                                       @NO];
+
+        
+        NSInteger selectedIndex = 0;
 		BOOL shouldSynchronize = NO;
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
@@ -106,6 +115,7 @@ static VLMToolCollection *sharedToolCollection;
 			[data setEnabled:[[enableds objectAtIndex:i] boolValue]];
 			[data setSelected:(i == selectedIndex)];
 			[data setIsSubtractive:[[isSubtractives objectAtIndex:i] boolValue]];
+            [data setIsBezierRequired:[[isBezierRequireds objectAtIndex:i] boolValue]];
             
 			NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
 			NSString *key = [NSString stringWithFormat:@"%@_colorindex", [data name]];

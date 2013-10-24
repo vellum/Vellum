@@ -5,7 +5,7 @@
 //  Created by David Lu on 4/21/13.
 //
 //
-
+#import "UIColor+Components.h"
 #import "VLMMainViewController.h"
 #import "VLMDrawHeaderController.h"
 #import "VLMZoomViewController.h"
@@ -27,6 +27,10 @@
 #import "VLMColorData.h"
 #import "Flurry.h"
 #import "AppDelegate.h"
+#import "SmoothStroke.h"
+#import "AbstractBezierPathElement.h"
+#import "LineToPathElement.h"
+#import "CurveToPathElement.h"
 
 #define FLURRY_TOOLS_OPEN @"ToolMenuVisible"
 #define FLURRY_TOOLS_CLOSED @"ToolMenuHidden"
@@ -38,6 +42,7 @@
 
 @interface VLMMainViewController ()
 
+@property (strong,nonatomic) SmoothStroke* curStroke;
 @property (strong, nonatomic) VLMDrawHeaderController *headerController;
 @property (strong, nonatomic) UIView *touchCaptureView;
 @property (strong, nonatomic) VLMZoomViewController *zoomViewController;
@@ -95,6 +100,7 @@
 @synthesize previouslySelectedTool;
 @synthesize shouldSaveInBackground;
 @synthesize shouldRemoveExistingFile;
+@synthesize curStroke;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -274,17 +280,27 @@
 - (void)handleOneFingerPan:(id)sender {
 	VLMSinglePanGestureRecognizer *pgr = (VLMSinglePanGestureRecognizer *)sender;
 	CGPoint p = [pgr locationInView:self.avc.view];
-	p.x += 1 / self.zoomViewController.zoomlevel * JOT_X_OFFSET;
-	p.y += 1 / self.zoomViewController.zoomlevel * JOT_Y_OFFSET;
+	//p.x += 1 / self.zoomViewController.zoomlevel * JOT_X_OFFSET;
+	//p.y += 1 / self.zoomViewController.zoomlevel * JOT_Y_OFFSET;
     
+    
+    VLMToolCollection *tools = [VLMToolCollection instance];
+	VLMToolData *selectedtool = (VLMToolData *)[tools getSelectedToolFromEnabledIndex:tools.selectedIndex];
+    BOOL isBezierRequired = selectedtool.isBezierRequired;
+        
 	if ([pgr state] == UIGestureRecognizerStateBegan) {
+        
 		NSString *s = [NSString stringWithFormat:@"beginStroke(%f,%f);", p.x, p.y];
 		[self.avc callJS:s];
 		s = [NSString stringWithFormat:@"setZoom( %f );", self.zoomViewController.zoomlevel];
 		[self.avc callJS:s];
         
+        CGFloat strokeWidth = 1;
         
-		//[self.undoManager dropAllAfterCurrent];
+        if ( isBezierRequired ){
+            self.curStroke = [[SmoothStroke alloc] init];
+            [self addLineToAndRenderStroke:self.curStroke toPoint:p toWidth:strokeWidth toColor:[UIColor blackColor]];
+        }
 		return;
 	}
 	else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
@@ -295,8 +311,15 @@
         [self saveStateInBackground];
 		return;
 	}
-	NSString *s = [NSString stringWithFormat:@"continueStroke(%f,%f);", p.x, p.y];
-	[self.avc callJS:s];
+    
+    if (isBezierRequired){
+        CGFloat strokeWidth = 1;
+        [self addLineToAndRenderStroke:self.curStroke toPoint:p toWidth:strokeWidth toColor:[UIColor blackColor]];
+        
+    } else {
+        NSString *s = [NSString stringWithFormat:@"continueStroke(%f,%f);", p.x, p.y];
+        [self.avc callJS:s];
+    }
 }
 
 - (void)handleTwoFingerPan:(id)sender {
@@ -1064,5 +1087,74 @@
 - (UIImage *)screenshotToRestore {
 	return nil;
 }
+
+    
+    
+#pragma mark - Vector shit
+    
+-(void) renderElement:(AbstractBezierPathElement*)element fromPreviousElement:(AbstractBezierPathElement*)previousElement{
+    // setup the correct initial width
+    //__block CGFloat lastWidth;
+    /*
+    CGFloat lastWidth;
+    if(previousElement){
+        lastWidth = previousElement.width;
+    }else{
+        lastWidth = element.width;
+    }
+     */
+    CGFloat scale = 1;
+    
+    
+    
+    // fetch the vertex data from the element
+    struct Vertex* vertexBuffer = [element generatedVertexArrayWithPreviousElement:previousElement forScale:scale];
+    
+    // if the element has any data, then draw it
+    //
+    int numberOfSteps = element.numberOfSteps;
+    NSMutableString *points = [NSMutableString stringWithString:@""];
+    
+    for(int step = 0; step < numberOfSteps; step++) {
+        CGFloat x = vertexBuffer[step].Position[0];
+        CGFloat y = vertexBuffer[step].Position[1];
+        [points appendFormat:@"{x:%f,y:%f}", x, y];
+        if (step < numberOfSteps - 1 ){
+            [points appendString:@","];
+        }
+        //CGFloat size = vertexBuffer[step].Size;
+    }
+    NSString *s = [NSString stringWithFormat:@"continueStrokeWithPoints([%@]);", points];
+    //NSLog(@"%@", s);
+    [self.avc callJS:s];
+}
+    
+    /**
+     * Drawings a line onscreen based on where the user touches
+     *
+     * this will add the end point to the current stroke, and will
+     * then render that new stroke segment to the gl context
+     *
+     * it will smooth a rounded line from the previous segment, and will
+     * also smooth the width and color transition
+     */
+- (void) addLineToAndRenderStroke:(SmoothStroke*)currentStroke toPoint:(CGPoint)end toWidth:(CGFloat)width toColor:(UIColor*)color{
+    
+    
+    if(![currentStroke addPoint:end withWidth:width andColor:color]) return;
+
+    // fetch the current and previous elements
+    // of the stroke. these will help us
+    // step over their length for drawing
+    AbstractBezierPathElement* previousElement = [currentStroke.segments lastObject];
+    
+    //
+    // ok, now we have the current + previous stroke segment
+    // so let's set to drawing it!
+    [self renderElement:[currentStroke.segments lastObject] fromPreviousElement:previousElement];
+}
+    
+    
+
 
 @end

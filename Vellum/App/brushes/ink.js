@@ -55,6 +55,7 @@ ink.prototype = {
 		target.y = y;
 	},
     
+    
 	end : function(x,y){
 	    var prev = this.prev,
 	        target = this.target;

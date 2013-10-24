@@ -146,9 +146,9 @@
         && [[UIScreen mainScreen] scale] == 2.0) {
         isRetina = YES;
     }
-NSLog( @"is retina : %@", isRetina ? @"YES" : @"NO" );
-NSLog( @"is ipad : %@", isIpad ? @"YES" : @"NO" );
-NSLog( @"is ios6+ : %@", SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") ? @"YES" : @"NO" );
+//NSLog( @"is retina : %@", isRetina ? @"YES" : @"NO" );
+//NSLog( @"is ipad : %@", isIpad ? @"YES" : @"NO" );
+//NSLog( @"is ios6+ : %@", SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") ? @"YES" : @"NO" );
 
     
     
@@ -162,7 +162,7 @@ NSLog( @"is ios6+ : %@", SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") ? @"YES
             retVal = YES;
         }
     }    
-    NSLog( @"isundocapable : %@", retVal ? @"YES" : @"NO" );
+    //NSLog( @"isundocapable : %@", retVal ? @"YES" : @"NO" );
 
     
     return retVal;

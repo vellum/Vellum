@@ -17,6 +17,7 @@
 @property (nonatomic) BOOL isSubtractive;
 @property (nonatomic) NSInteger selectedColorIndex;
 @property (nonatomic, strong) NSArray *colors;
+@property (nonatomic) BOOL isBezierRequired;
 
 - (id)init;
 - (void)setSelectedColorIndex:(NSInteger)selectedColorIndex andSaveToUserDefaults:(BOOL)shouldSaveToDefaults;
