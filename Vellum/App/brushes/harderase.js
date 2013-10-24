@@ -45,7 +45,7 @@ harderase.prototype = {
 			ctx = this.context,
 			state = VLM.state,
 			zoomlevel = state.zoomlevel,
-            curnib = 30 / zoomlevel,
+            curnib = Math.round( 30 / zoomlevel ),
 			start = arr[ 0 ],
 			end = arr[ arr.length-1 ],
 			dx = end.x - start.x,
@@ -53,7 +53,7 @@ harderase.prototype = {
 
 
 		this.accumdist += Math.sqrt( dy*dy + dx*dx );
-		if ( this.accumdist < 5 ) {
+		if ( this.accumdist < 5/zoomlevel  ) {
             this.prev.x = end.x;
             this.prev.y = end.y;
             return;
@@ -80,9 +80,10 @@ harderase.prototype = {
             ctx.fillStyle = this.color;
             for ( var i = 0; i < arr.length; i++ ){
                 var p = arr[ i ];
-                ctx.arc(p.x, p.y, curnib / 2, 0, Math.PI * 2, true);
+            //    ctx.arc(p.x, p.y, curnib / 2, 0, Math.PI * 2, true);
             }
-            ctx.arc(origin.x, origin.y, curnib / 2, 0, Math.PI * 2, true);
+            ctx.arc(origin.x, origin.y, curnib * 0.5, 0, Math.PI * 2, true);
+            ctx.arc(end.x, end.y, curnib * 0.5, 0, Math.PI * 2, true);
             ctx.fill();
             ctx.closePath();
         }
