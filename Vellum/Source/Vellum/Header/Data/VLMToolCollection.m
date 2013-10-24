@@ -96,7 +96,7 @@ static VLMToolCollection *sharedToolCollection;
                                        @NO,
                                        @NO,
                                        @NO,
-                                       @NO];
+                                       @YES];
 
         
         NSInteger selectedIndex = 0;

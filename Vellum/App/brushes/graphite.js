@@ -102,19 +102,6 @@ graphite.prototype = {
         this.begin(0,0);
         this.end(0,0);
         
-       
-        /*
-	    if ( VLM.utilities.is3GS() ){
-	        this.interpolation_multiplier = 0.375;
-	        this.distance_multiplier = 2.0;
-			this.nib_multiplier = 0.25;
-			//this.grr_fg = 'rgba(0,0,0,0.75)';
-            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.75 + ')';
-	    } else {
-            this.grr_fg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha*0.5 + ')';
-
-        }
-        */
 	},
 	
 	begin : function(x,y){
@@ -147,11 +134,6 @@ graphite.prototype = {
         
         this.tickcount = this.tickcount + 1;
         var state = VLM.state;
-        /*
-        if ( !state.isRetina ){
-            if ( this.tickcount % 2 == 0 ) return;
-        }
-         */
 
         var prev = this.prev,
             target = this.target,
@@ -161,8 +143,6 @@ graphite.prototype = {
 
 		var x = prev.x + (target.x - prev.x) * interpolation_multiplier,
 	        y = prev.y + (target.y - prev.y) * interpolation_multiplier,
-	        //dx = x - prev.x,
-	        //dy = y - prev.y,
             dx = target.x-x,
             dy = target.y-y,
 	        dist = Math.sqrt(dx * dx + dy * dy),
@@ -193,19 +173,10 @@ graphite.prototype = {
                 var step = 2.5;
                 if ( !state.isRetina ){
                     if ( !state.isIPad ){
-                        //step = 5;
                         ctx.lineWidth = 0.45;//0.9;
                     }
                 }
                 
-                /*
-				var ut = VLM.utilities;
-				if ( ut.is3GS() ){
-	                step = 4;
-	                //ctx.strokeStyle = this.grr_fg;
-	                //ctx.lineWidth = 0.5;
-				}
-                */
                 for (var i = -currange; i <= currange; i += step) {
                     var pct = i / currange,
                     localx = x + cosangle * pct * currange,

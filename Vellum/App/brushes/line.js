@@ -6,7 +6,6 @@ function line(){
 line.prototype = {
 	context: null,
 	prev : { x:0, y:0 },
-	bezierRequired : true,
 	count : 0,
 	
 	init : function(){

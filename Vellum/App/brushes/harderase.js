@@ -3,101 +3,98 @@ function harderase(){
 }
 
 harderase.prototype = {
+
 	context: null,
-	target : { x:0, y:0 },
 	prev : { x:0, y:0 },
+	accumdist : 0,
 	interpolation_multiplier : ( window.devicePixelRatio == 1 ) ? 0.5 : 0.25,
 	color : '#000000',
 	init : function(){
-		this.context = VLM.state.context;
-        
-        // overwrite fgcolor with whatever is in state
-        var col = VLM.state.color,
-        rgba = col.rgba,
-        hue,
-        sat,
-        lig;
-        
-        // black
-        if (rgba[0]==0){
-            hue = 0;
-            sat = 0;
-            lig = 100 * (1-rgba[3]);
-            var t = tinycolor('hsl(' + hue + ',' + 0 + '%,' + Math.round(lig) + '%)');
-            this.color = t.toHexString();
-            // erase
-        } else {
-            this.color = 'rgba(242,242,232,1)';
-        }
 
+		this.context = VLM.state.context;
+
+		var col = VLM.state.color,
+			rgba = col.rgba,
+			hue,
+			sat,
+			lig;
+		
+		// black
+		if (rgba[0]==0){
+			hue = 0;
+			sat = 0;
+			lig = 100 * (1-rgba[3]);
+			var t = tinycolor('hsl(' + hue + ',' + 0 + '%,' + Math.round(lig) + '%)');
+			this.color = t.toHexString();
+			// erase
+		} else {
+			this.color = 'rgba(242,242,232,1)';
+		}
 	},
 	
 	begin : function(x,y){
-        var prev = this.prev,
-            target = this.target;
-        prev.x = x;
+		var prev = this.prev;
+		prev.x = x;
 		prev.y = y;
-		target.x = x;
-		target.y = y;
+		this.accumdist = 0;
 	},
 	
-	continue : function(x,y){
-        var prev = this.prev,
-            target = this.target;
-		target.x = x;
-		target.y = y;
-	},
-    
-	end : function(x,y){
-	    var prev = this.prev,
-	        target = this.target;
-	    target.x = x;
-	    target.y = y;
-	},
-	
-	tick : function(){
-        var interpolation_multiplier = 0.25,
-            ctx = this.context,
-            state = VLM.state,
-            zoomlevel = state.zoomlevel;
+	continue : function(arr){
+		var prev = this.prev,
+            origin = prev,
+			ctx = this.context,
+			state = VLM.state,
+			zoomlevel = state.zoomlevel,
+            curnib = 30 / zoomlevel,
+			start = arr[ 0 ],
+			end = arr[ arr.length-1 ],
+			dx = end.x - start.x,
+			dy = end.y - start.y;
 
-	    if ( window.devicePixelRatio == 1 && zoomlevel < 1 ){
-            interpolation_multiplier *= 1/zoomlevel;
+
+		this.accumdist += Math.sqrt( dy*dy + dx*dx );
+		if ( this.accumdist < 5 ) {
+            this.prev.x = end.x;
+            this.prev.y = end.y;
+            return;
         }
         
-        var prev = this.prev,
-            target = this.target,
-            x = prev.x + (target.x - prev.x) * interpolation_multiplier,
-            y = prev.y + (target.y - prev.y) * interpolation_multiplier,
-            dx = target.x-x,
-            dy = target.y-y,
-            dist = Math.sqrt(dx * dx + dy * dy),
-            threshold = 0.001 / (zoomlevel * 1000);
-
-	    if (dist>=threshold) {
-            var curnib = 30 / zoomlevel;
-            ctx.beginPath();
-            ctx.fillStyle = this.color;//'rgba(242,242,232,1)';
-            ctx.arc(x, y, curnib / 2, 0, Math.PI * 2, true);
-            ctx.fill();
-            ctx.closePath();
-            
+        if ( true ){
             ctx.beginPath();
             ctx.lineWidth = curnib;
-            ctx.strokeStyle = this.color;//'rgba(242,242,232,1)';
-            ctx.moveTo(x, y);
-            ctx.lineTo(prev.x, prev.y);
+            ctx.strokeStyle = this.color;
+            for ( var i = 0; i < arr.length; i++ ){
+                var p = arr[ i ],
+                x = p.x,
+                y = p.y;
+                ctx.moveTo( prev.x, prev.y );
+                ctx.lineTo( x, y );
+                prev.x = p.x;
+                prev.y = p.y;
+            }
             ctx.stroke();
             ctx.closePath();
             
-	    }
-	    prev.x = x;
-	    prev.y = y;
-
-    },
+            prev = origin;
+            ctx.beginPath();
+            ctx.fillStyle = this.color;
+            for ( var i = 0; i < arr.length; i++ ){
+                var p = arr[ i ];
+                ctx.arc(p.x, p.y, curnib / 2, 0, Math.PI * 2, true);
+            }
+            ctx.arc(origin.x, origin.y, curnib / 2, 0, Math.PI * 2, true);
+            ctx.fill();
+            ctx.closePath();
+        }
+	},
+	
+	end : function(x,y){
+	},
+	
+	tick : function(){
+	},
 	
 	destroy : function(){
-		this.target = null;
 		this.prev = null;	
 		this.context = null;
 		this.interpolation_multiplier = null;
