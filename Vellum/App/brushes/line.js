@@ -48,13 +48,13 @@ line.prototype = {
 			fgdecoration = 'rgba(' + rgba[ 0 ] + ',' + rgba[ 1 ] + ',' + rgba[ 2 ] + ',' + alpha * 0.66 * scalar  + ')';
 		} else {
 			if ( alpha > 0.75 ){
-				alpha = 1.0;
+				alpha = 0.5;//1.0;
 			} else if ( alpha > 0.5 ){
-				alpha = 0.5;
+				alpha = 0.25;//0.5;
 			} else if ( alpha > 0.25 ){
-				alpha = 0.25;
+				alpha = 0.1;//0.25;
 			} else {
-				alpha = 0.1;
+				alpha = 0.05;//0.1;
 			}
 			fgdecoration = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha * 0.5 * scalar  + ')';
 		}
@@ -69,7 +69,7 @@ line.prototype = {
 
 			ctx.strokeStyle = fgcolor;
 			ctx.fillStyle = fgdecoration;
-			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 0.5 * ( scalar + 0.2 );
+			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 1.5 * ( scalar + 0.2 );
 			ctx.moveTo( prev.x, prev.y );
 			ctx.lineTo( x, y );
 
