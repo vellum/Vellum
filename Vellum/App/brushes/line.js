@@ -6,7 +6,6 @@ function line(){
 line.prototype = {
 	context: null,
 	prev : { x:0, y:0 },
-	count : 0,
 	
 	init : function(){
 		this.context = VLM.state.context;
@@ -16,24 +15,25 @@ line.prototype = {
 		var prev = this.prev;
 		prev.x = x;
 		prev.y = y;
-		this.count = 0;
 	},
 	
-	continue : function(arr){
+	continue : function(obj){
 		
-		var scalar = this.count / 8;
+        var arr = obj.arr,
+            travel = obj.travel,
+            scalar = travel / 15;
+
 		if ( scalar > 1 ) scalar = 1;
 		
 		var prev = this.prev,
-			origin = null,
+			origin = { x: prev.x, y:prev.y, angle:prev.angle},
 			state = VLM.state,
 			zoomlevel = state.zoomlevel,
 			col = state.color,
 			rgba = col.rgba,
 			alpha = rgba[ 3 ],
-			fgg = ''; // spotted alpha
+			fgdecoration = '';
 		
-		origin = { x: prev.x, y:prev.y, angle:prev.angle};
 		
 		if (state.isIPad){
 			if ( alpha > 0.75 ){
@@ -45,7 +45,7 @@ line.prototype = {
 			} else {
 				alpha = 0.05;
 			}
-			fgg = 'rgba(' + rgba[ 0 ] + ',' + rgba[ 1 ] + ',' + rgba[ 2 ] + ',' + alpha * 0.66 * scalar  + ')';
+			fgdecoration = 'rgba(' + rgba[ 0 ] + ',' + rgba[ 1 ] + ',' + rgba[ 2 ] + ',' + alpha * 0.66 * scalar  + ')';
 		} else {
 			if ( alpha > 0.75 ){
 				alpha = 1.0;
@@ -56,48 +56,27 @@ line.prototype = {
 			} else {
 				alpha = 0.1;
 			}
-			fgg = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha * 0.5 * scalar  + ')';
+			fgdecoration = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha * 0.5 * scalar  + ')';
 		}
 		fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha * scalar  + ')';
 		ctx.beginPath();
-
-		// draw base mark, which is just a thick line 
 		for ( var i = 0; i < arr.length; i++ ){
-			this.count++;
-			ctx.strokeStyle = fgcolor;
-			ctx.fillStyle = fgg;
-			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 0.5 * ( scalar + 0.2 );
-	
 			var lw = ctx.lineWidth,
-				p = arr[ i ],
-				x = p[ 'x' ],
-				y = p[ 'y' ];
+                p = arr[ i ],
+                x = p.x,
+                y = p.y,
+                len = arr.length + 8;
+
+			ctx.strokeStyle = fgcolor;
+			ctx.fillStyle = fgdecoration;
+			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 0.5 * ( scalar + 0.2 );
 			ctx.moveTo( prev.x, prev.y );
 			ctx.lineTo( x, y );
-			
-			for ( var j = 0; j < 24; j++ ) {
+
+            if ( len > 20 ) len = 20;
+			for ( var j = 0; j < len; j++ ) {
 				ctx.fillRect( x + Math.random() * lw - Math.random() * lw, y + Math.random() * lw - Math.random() * lw, 0.25, 0.25);
 			}
-			/*
-			var lw = ctx.lineWidth,
-				p = arr[ i ],
-				x = p[ 'x' ],
-				y = p[ 'y' ];
-			ctx.moveTo( prev.x, prev.y );
-			ctx.lineTo( x, y );
-			
-			
-			/*
-			var dx = p.x - prev.x,
-				dy = p.y - prev.y,
-				numsteps = Math.sqrt( dx*dx + dy*dy ) * 20;
-			for ( var j = 0; j < numsteps; j++ ) {
-				var localx = prev.x + ( x - prev.x ) * j/numsteps,
-					localy = prev.y + ( y - prev.y ) * j/numsteps;
-					
-				ctx.fillRect( localx + Math.random() * lw - Math.random() * lw, localy + Math.random() * lw - Math.random() * lw, 0.25, 0.25 );
-			}
-			*/
 			prev.x = p.x;
 			prev.y = p.y;
 		}
@@ -105,12 +84,9 @@ line.prototype = {
 		ctx.closePath();
 	},
 	
-	end : function(x,y){
-	},
+	end : function(x,y){},
 	
-	tick : function(){
-		
-	},
+	tick : function(){},
 	
 	destroy : function(){
 		this.context = null;

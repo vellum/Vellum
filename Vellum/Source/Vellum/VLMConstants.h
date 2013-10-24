@@ -19,8 +19,16 @@
 #define NAVIGATION_HEADER_TITLE_SIZE 15.0f
 #define ANIMATION_DURATION 0.2f
 
+
+// OLD JOT STYLUS
 #define JOT_X_OFFSET 4.0f // compensate for jot stylus
 #define JOT_Y_OFFSET 6.0f
+
+// BLUETOOTH JOT
+#define JOT_X_OFFSET_BT -9.0f // compensate for jot stylus
+#define JOT_Y_OFFSET_BT 7.0f
+
+
 //#define OLD_DEVICE_SCREEN_MULTIPLIER 1.5f
 #define OLD_DEVICE_SCREEN_MULTIPLIER 1.25f
 //#define FAT_HEADER

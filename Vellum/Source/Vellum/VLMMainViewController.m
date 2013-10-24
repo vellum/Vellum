@@ -65,7 +65,9 @@
 @property BOOL previouslySelectedTool;
 @property BOOL shouldSaveInBackground;
 @property BOOL shouldRemoveExistingFile;
-
+@property CGFloat travelDistance;
+@property CGPoint previousTouchLocation;
+    
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
 - (void)handleThreeFingerPan:(id)sender;
@@ -101,7 +103,9 @@
 @synthesize shouldSaveInBackground;
 @synthesize shouldRemoveExistingFile;
 @synthesize curStroke;
-
+@synthesize travelDistance;
+@synthesize previousTouchLocation;
+    
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
@@ -280,8 +284,8 @@
 - (void)handleOneFingerPan:(id)sender {
 	VLMSinglePanGestureRecognizer *pgr = (VLMSinglePanGestureRecognizer *)sender;
 	CGPoint p = [pgr locationInView:self.avc.view];
-	//p.x += 1 / self.zoomViewController.zoomlevel * JOT_X_OFFSET;
-	//p.y += 1 / self.zoomViewController.zoomlevel * JOT_Y_OFFSET;
+	p.x += 1 / self.zoomViewController.zoomlevel * JOT_X_OFFSET;
+	p.y += 1 / self.zoomViewController.zoomlevel * JOT_Y_OFFSET;
     
     
     VLMToolCollection *tools = [VLMToolCollection instance];
@@ -289,12 +293,13 @@
     BOOL isBezierRequired = selectedtool.isBezierRequired;
         
 	if ([pgr state] == UIGestureRecognizerStateBegan) {
-        
+        [self setTravelDistance:0];
+        [self setPreviousTouchLocation:[pgr locationInView:self.view]];
+
 		NSString *s = [NSString stringWithFormat:@"beginStroke(%f,%f);", p.x, p.y];
 		[self.avc callJS:s];
 		s = [NSString stringWithFormat:@"setZoom( %f );", self.zoomViewController.zoomlevel];
 		[self.avc callJS:s];
-        
         CGFloat strokeWidth = 1;
         
         if ( isBezierRequired ){
@@ -311,9 +316,17 @@
         [self saveStateInBackground];
 		return;
 	}
-    
+
     if (isBezierRequired){
         CGFloat strokeWidth = 1;
+        CGPoint cur = [pgr locationInView:self.view];
+        CGPoint prev = self.previousTouchLocation;
+        CGFloat dx = cur.x-prev.x;
+        CGFloat dy = cur.y-prev.y;
+        CGFloat dist = sqrt(dx*dx+dy*dy);
+        [self setPreviousTouchLocation:cur];
+        [self setTravelDistance:self.travelDistance + dist];
+        
         [self addLineToAndRenderStroke:self.curStroke toPoint:p toWidth:strokeWidth toColor:[UIColor blackColor]];
         
     } else {
@@ -1124,7 +1137,7 @@
         }
         //CGFloat size = vertexBuffer[step].Size;
     }
-    NSString *s = [NSString stringWithFormat:@"continueStrokeWithPoints([%@]);", points];
+    NSString *s = [NSString stringWithFormat:@"continueStrokeWithPoints({travel:%f, arr:[%@]});", self.travelDistance, points];
     //NSLog(@"%@", s);
     [self.avc callJS:s];
 }
