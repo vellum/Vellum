@@ -318,12 +318,12 @@
 	}
 
     if (isBezierRequired){
-        CGFloat strokeWidth = 1;
         CGPoint cur = [pgr locationInView:self.view];
         CGPoint prev = self.previousTouchLocation;
         CGFloat dx = cur.x-prev.x;
         CGFloat dy = cur.y-prev.y;
         CGFloat dist = sqrt(dx*dx+dy*dy);
+        CGFloat strokeWidth = dist;
         [self setPreviousTouchLocation:cur];
         [self setTravelDistance:self.travelDistance + dist];
         
@@ -1131,7 +1131,8 @@
     for(int step = 0; step < numberOfSteps; step++) {
         CGFloat x = vertexBuffer[step].Position[0];
         CGFloat y = vertexBuffer[step].Position[1];
-        [points appendFormat:@"{x:%f,y:%f}", x, y];
+        CGFloat p = vertexBuffer[step].Size;
+        [points appendFormat:@"{x:%f,y:%f,p:%f}", x, y, p];
         if (step < numberOfSteps - 1 ){
             [points appendString:@","];
         }

@@ -4,11 +4,10 @@ function ink(){
 
 ink.prototype = {
 	context: null,
-	target : { x:0, y:0 },
-	prev : { x:0, y:0, nib:0 },
-	interpolation_multiplier : 0.25,
+	prev : { x:0, y:0, nib:0, angle:0 },
 	color : 'rgba(0,0,0,1)',
-    tickcount:0,
+    todo:[],
+    index:0,
     
 	init : function(){
 		this.context = VLM.state.context;
@@ -25,6 +24,7 @@ ink.prototype = {
             lig = 100 * (1-rgba[3]);
             var t = tinycolor('hsl(' + hue + ',' + 0 + '%,' + Math.round(lig) + '%)');
             this.color = t.toHexString();
+
         // erase
         } else {
             this.color = 'rgba(242,242,232,1)';
@@ -32,38 +32,74 @@ ink.prototype = {
 	},
 	
 	begin : function(x,y){
-        var prev = this.prev,
-            target = this.target;
+        var prev = this.prev;
+
         prev.x = x;
 		prev.y = y;
 		prev.nib = 0;
-		target.x = x;
-		target.y = y;
+        prev.angle = 0;
         
-        var state = VLM.state;
-        if ( window.devicePixelRatio == 1 && state.zoomlevel < 1 ){
-            this.interpolation_multiplier *= 1/state.zoomlevel;
-        }
-        
-        this.tickcount = 0;
 	},
 	
-	continue : function(x,y){
-        var prev = this.prev,
-            target = this.target;
-		target.x = x;
-		target.y = y;
+	continue : function(obj){
+        var arr = obj.arr,
+            prev = this.prev,
+            state = VLM.state,
+            ctx = this.context;
+        
+        ctx.beginPath();
+        ctx.strokeStyle = this.color;
+        ctx.fillStyle = this.color;
+        var nib = prev.nib;
+        for ( var i = 0; i < arr.length; i++ ){
+            var p = arr[ i ],
+                x = p.x,
+                y = p.y,
+                dx = x - prev.x,
+                dy = y - prev.y;
+            
+            var angle = Math.atan2(dy, dx) - Math.PI / 2,
+                cosangle = Math.cos(angle),
+                sinangle = Math.sin(angle),
+                pangle = prev.angle,
+                cospangle = Math.cos(pangle),
+                sinpangle = Math.sin(pangle);
+
+            nib += (p.p - nib) * 0.125;
+            
+            /*
+            ctx.lineWidth = p.p;
+            ctx.moveTo(prev.x,prev.y);
+            ctx.lineTo(x, y);
+             */
+            var a0 = { x: prev.x + cospangle * -prev.nib, y: prev.y + sinpangle * -prev.nib },
+                a1 = { x: prev.x + cospangle * prev.nib, y: prev.y + sinpangle * prev.nib },
+                b0 = { x: x + cosangle * -nib, y: y + sinangle * -nib },
+                b1 = { x: x + cosangle * nib, y: y + sinangle * nib };
+            ctx.moveTo( a0.x, a0.y );
+            ctx.lineTo( a1.x, a1.y );
+            ctx.lineTo( b1.x, b1.y );
+            ctx.lineTo( b0.x, b0.y );
+            
+            prev.x = p.x;
+            prev.y = p.y;
+            prev.angle = angle;
+            prev.nib = nib;
+        }
+        ctx.stroke();
+        ctx.closePath();
+        this.prev = prev;
+
 	},
     
     
 	end : function(x,y){
-	    var prev = this.prev,
-	        target = this.target;
-	    target.x = x;
-	    target.y = y;
-	},  
+    },
 	
 	tick : function(){
+    },
+	
+	tick_old : function(){
         this.tickcount++;
         
         
@@ -117,7 +153,7 @@ ink.prototype = {
 	    }
 	    prev.x = x;
 	    prev.y = y;
-
+		
     },
 	
 	destroy : function(){

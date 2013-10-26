@@ -92,7 +92,7 @@ static VLMToolCollection *sharedToolCollection;
                                        @NO,
                                        @NO,
                                        @YES,
-                                       @NO,
+                                       @YES,
                                        @NO,
                                        @NO,
                                        @NO,
