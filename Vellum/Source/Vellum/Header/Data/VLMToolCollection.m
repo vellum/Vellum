@@ -133,14 +133,14 @@ static VLMToolCollection *sharedToolCollection;
 			[self.tools addObject:data];
 			if (i == 4) {
 				[data setColors:@[
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"40" Opacity:0.4f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.8f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.6f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.4f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.2f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.1f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.0f Enabled:NO Subtractive:NO],
+				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO]]];
 			}
 			else if (i == 8) {
 				[data setColors:@[
