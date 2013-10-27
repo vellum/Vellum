@@ -139,6 +139,22 @@ smudge.prototype = {
                 ctx.strokeStyle = fgcolor;
                 var step = this.step;//1.5;
                 var numsteps = 0;
+                
+                var sumb = 0,
+                    numb = dist / 0.5;
+                for (var i = 0; i < numb; i++){
+                    var pct = i / numb,
+                        localx = prev.x + dx * pct,
+                        localy = prev.y + dy * pct;
+                    var o = ctx.getImageData(localx, localy, 1, 1);
+                    //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
+                    //console.log( ( 242 - o.data[0] ) / 242 );
+                    sumb += ( 242 - o.data[0] ) / 242;
+                }
+                sumb /= numb;
+                sumb *= 0.5;
+                //console.log( sumb);
+                
                 for (var i = -currange; i <= currange; i += step) {
                     numsteps++;
                     var pct = i / currange,
@@ -150,7 +166,6 @@ smudge.prototype = {
                     var o = ctx.getImageData(localpx, localpy, 1, 1);
                     //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
                     suma += ( 242 - o.data[0] ) / 242;
-                    //console.log( 242 - o.data[0] );
 
                     var deltax, deltay;
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
@@ -165,17 +180,15 @@ smudge.prototype = {
                  
                  - average the stroke values and draw all paths in same opacity
                  - each bristle has its own thing
-                 
-                 
-                 
+                 - sample all along the draw path
                  */
                 suma /= numsteps;
-                //suma *= 0.5;
+                suma *= 0.5;
                 
-                aaaa = 0.5 * aaaa + 0.5 * suma;
+                aaaa = 0.5 * aaaa + 0.25 * sumb + 0.25 * suma;
+                if ( aaaa > 0.5 ) aaaa = 0.5;
+                
                 this.smoothed_alpha = aaaa;
-                //if ( aaaa > 0.5 ) aaaa = 0.5;
-                console.log( aaaa );
                 fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + aaaa + ')';
                 ctx.strokeStyle = fgcolor;
                 
