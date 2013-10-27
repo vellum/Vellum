@@ -118,6 +118,7 @@
         
         // set vertex point size
         CGFloat steppedWidth = prevWidth + widthDiff * t;
+        //CGFloat steppedWidth = prevWidth + widthDiff * 0.05;
         vertexBuffer[step].Size = steppedWidth*scale;
 	}
     return vertexBuffer;

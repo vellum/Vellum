@@ -47,6 +47,8 @@ ink.prototype = {
             state = VLM.state,
             ctx = this.context;
         
+        console.log(arr.length);
+        
         ctx.beginPath();
         ctx.strokeStyle = this.color;
         ctx.fillStyle = this.color;
@@ -65,28 +67,37 @@ ink.prototype = {
                 cospangle = Math.cos(pangle),
                 sinpangle = Math.sin(pangle);
 
-            nib += (p.p - nib) * 0.125;
+            var tnib = p.p;
+           if ( tnib > 5 ) tnib = 5;
+            
+            nib += (tnib - nib) * 0.25;
+            //nib = tnib;
             
             /*
             ctx.lineWidth = p.p;
             ctx.moveTo(prev.x,prev.y);
             ctx.lineTo(x, y);
              */
-            var a0 = { x: prev.x + cospangle * -prev.nib, y: prev.y + sinpangle * -prev.nib },
-                a1 = { x: prev.x + cospangle * prev.nib, y: prev.y + sinpangle * prev.nib },
-                b0 = { x: x + cosangle * -nib, y: y + sinangle * -nib },
-                b1 = { x: x + cosangle * nib, y: y + sinangle * nib };
+            
+            
+            //ctx.fillRect( x, y, 0.5, 0.5 );
+
+            var a0 = { x: prev.x + cospangle * -prev.nib/2, y: prev.y + sinpangle * -prev.nib/2 },
+            a1 = { x: prev.x + cospangle * prev.nib/2, y: prev.y + sinpangle * prev.nib/2 },
+            b0 = { x: x + cosangle * -nib/2, y: y + sinangle * -nib/2 },
+            b1 = { x: x + cosangle * nib/2, y: y + sinangle * nib/2 };
             ctx.moveTo( a0.x, a0.y );
-            ctx.lineTo( a1.x, a1.y );
-            ctx.lineTo( b1.x, b1.y );
             ctx.lineTo( b0.x, b0.y );
+            ctx.lineTo( b1.x, b1.y );
+            ctx.lineTo( a1.x, a1.y );
+
             
             prev.x = p.x;
             prev.y = p.y;
             prev.angle = angle;
             prev.nib = nib;
         }
-        ctx.stroke();
+        ctx.fill();
         ctx.closePath();
         this.prev = prev;
 

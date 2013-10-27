@@ -35,6 +35,7 @@ var VLM = VLM || {};
 	c.MODE_WASH = 9;
 	c.MODE_GENTLE_ERASE = 10;
 	c.MODE_CIRCLE_ERASE = 11;
+    c.MODE_SMUDGE = 12;
 	
 	c.BRUSH_NAME_BY_MODE = [];
 	var bnbm = c.BRUSH_NAME_BY_MODE;
@@ -47,8 +48,9 @@ var VLM = VLM || {};
 	bnbm[c.MODE_GRAPHITE] = 'graphite';
 	bnbm[c.MODE_WASH] = 'wash';
 	bnbm[c.MODE_GENTLE_ERASE] = 'softerase';
-	bnbm[c.MODE_CIRCLE_ERASE] = 'harderase';
-	
+    bnbm[c.MODE_CIRCLE_ERASE] = 'harderase';
+    bnbm[c.MODE_SMUDGE] = 'smudge';
+ 
 	c.BGCOLOR = '#f2f2e8';
 
 	// write state - container refs and data

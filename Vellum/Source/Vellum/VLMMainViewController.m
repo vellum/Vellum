@@ -67,7 +67,9 @@
 @property BOOL shouldRemoveExistingFile;
 @property CGFloat travelDistance;
 @property CGPoint previousTouchLocation;
-    
+@property CGPoint previousTouchLocationTransformed;
+@property CGFloat curPressure;
+
 - (void)handleOneFingerPan:(id)sender;
 - (void)handleTwoFingerPan:(id)sender;
 - (void)handleThreeFingerPan:(id)sender;
@@ -105,6 +107,8 @@
 @synthesize curStroke;
 @synthesize travelDistance;
 @synthesize previousTouchLocation;
+@synthesize previousTouchLocationTransformed;
+@synthesize curPressure;
     
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -300,17 +304,20 @@
 		[self.avc callJS:s];
 		s = [NSString stringWithFormat:@"setZoom( %f );", self.zoomViewController.zoomlevel];
 		[self.avc callJS:s];
-        CGFloat strokeWidth = 1;
+        CGFloat strokeWidth = 0;
         
         if ( isBezierRequired ){
             self.curStroke = [[SmoothStroke alloc] init];
+            [self setCurPressure:strokeWidth];
             [self addLineToAndRenderStroke:self.curStroke toPoint:p toWidth:strokeWidth toColor:[UIColor blackColor]];
+            [self setPreviousTouchLocationTransformed:[pgr locationInView:self.avc.view]];
         }
 		return;
 	}
 	else if ([pgr state] == UIGestureRecognizerStateEnded || [pgr state] == UIGestureRecognizerStateCancelled) {
 		NSString *s = [NSString stringWithFormat:@"endStroke(%f,%f);", p.x, p.y];
 		[self.avc callJS:s];
+        
         
         // EXPERIMENTAL FEATURE - may cause perf problems outside of iphone 5
         [self saveStateInBackground];
@@ -323,10 +330,21 @@
         CGFloat dx = cur.x-prev.x;
         CGFloat dy = cur.y-prev.y;
         CGFloat dist = sqrt(dx*dx+dy*dy);
-        CGFloat strokeWidth = dist;
+
+        
+        CGPoint curtransformed = [pgr locationInView:self.avc.view];
+        CGPoint prevX = self.previousTouchLocationTransformed;
+        CGFloat dxX = curtransformed.x-prevX.x;
+        CGFloat dyX = curtransformed.y-prevX.y;
+        CGFloat distX = sqrt(dxX*dxX+dyX*dyX);
+        [self setPreviousTouchLocationTransformed:curtransformed];
+
+        CGFloat strokeWidth = self.curPressure + (distX - self.curPressure ) * 0.25f;
+        [self setCurPressure:strokeWidth];
+
+        
         [self setPreviousTouchLocation:cur];
         [self setTravelDistance:self.travelDistance + dist];
-        
         [self addLineToAndRenderStroke:self.curStroke toPoint:p toWidth:strokeWidth toColor:[UIColor blackColor]];
         
     } else {

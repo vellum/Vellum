@@ -1,15 +1,16 @@
-function shade(){
+function smudge(){
 	this.init();
 }
 
-shade.prototype = {
+smudge.prototype = {
 	context: null,
 	target : { x:0, y:0 },
 	prev : { x:0, y:0, nib:0, angle:0 },
-	interpolation_multiplier : 0.5,
+	interpolation_multiplier : 0.25,
     distance_multiplier : 2.5,
     nib_multiplier : 0.25,
 	step : 1.5,
+    smoothed_alpha : 0,
 	
 	init : function(){
 		this.context = VLM.state.context;
@@ -36,6 +37,8 @@ shade.prototype = {
 
             }
         }
+        
+        this.smoothed_alpha = 0;
 	},
 	
 	begin : function(x,y){
@@ -47,6 +50,7 @@ shade.prototype = {
 		prev.nib = 0;
 		target.x = x;
 		target.y = y;
+        this.smoothed_alpha = 0;
 	},
 	
 	continue : function(x,y){
@@ -72,6 +76,10 @@ shade.prototype = {
             nib_multiplier = this.nib_multiplier,
             ctx = this.context;
 
+        
+        var aaaa = this.smoothed_alpha,
+            suma = 0;
+        
 		var x = prev.x + (target.x - prev.x) * interpolation_multiplier,
 	        y = prev.y + (target.y - prev.y) * interpolation_multiplier,
 	        //dx = x - prev.x,
@@ -130,12 +138,20 @@ shade.prototype = {
 
                 ctx.strokeStyle = fgcolor;
                 var step = this.step;//1.5;
+                var numsteps = 0;
                 for (var i = -currange; i <= currange; i += step) {
+                    numsteps++;
                     var pct = i / currange,
                     localx = x + cosangle * pct * currange,
                     localy = y + sinangle * pct * currange,
                     localpx = prev.x + cospangle * pct * prevrange,
                     localpy = prev.y + sinpangle * pct * prevrange;
+                    
+                    var o = ctx.getImageData(localpx, localpy, 1, 1);
+                    //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
+                    suma += ( 242 - o.data[0] ) / 242;
+                    //console.log( 242 - o.data[0] );
+
                     var deltax, deltay;
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
@@ -144,6 +160,26 @@ shade.prototype = {
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     ctx.lineTo(localx + deltax, localy + deltay);
                 }
+                /*
+                 approaches to doing this
+                 
+                 - average the stroke values and draw all paths in same opacity
+                 - each bristle has its own thing
+                 
+                 
+                 
+                 */
+                suma /= numsteps;
+                //suma *= 0.5;
+                
+                aaaa = 0.5 * aaaa + 0.5 * suma;
+                this.smoothed_alpha = aaaa;
+                //if ( aaaa > 0.5 ) aaaa = 0.5;
+                console.log( aaaa );
+                fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + aaaa + ')';
+                ctx.strokeStyle = fgcolor;
+                
+
                 ctx.stroke();
                 ctx.closePath();
             } else {

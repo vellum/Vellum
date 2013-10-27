@@ -77,6 +77,7 @@ line.prototype = {
 			for ( var j = 0; j < len; j++ ) {
 				ctx.fillRect( x + Math.random() * lw - Math.random() * lw, y + Math.random() * lw - Math.random() * lw, 0.25, 0.25);
 			}
+
 			prev.x = p.x;
 			prev.y = p.y;
 		}
