@@ -183,7 +183,7 @@ smudge.prototype = {
                     
                     ctx.lineTo(localx + deltax, localy + deltay);
                 }
-                console.log (ctx.strokeStyle );
+                //console.log (ctx.strokeStyle );
 
                 ctx.stroke();
                 ctx.closePath();
