@@ -77,13 +77,9 @@ smudge.prototype = {
             ctx = this.context;
 
         
-        var aaaa = this.smoothed_alpha,
-            suma = 0;
         
 		var x = prev.x + (target.x - prev.x) * interpolation_multiplier,
 	        y = prev.y + (target.y - prev.y) * interpolation_multiplier,
-	        //dx = x - prev.x,
-	        //dy = y - prev.y,
             dx = target.x-x,
             dy = target.y-y,
 	        dist = Math.sqrt(dx * dx + dy * dy),
@@ -92,39 +88,26 @@ smudge.prototype = {
 	        threshold = 0.001 / (zoomlevel * 1000);
         
 	    if (dist >= threshold) {
+            
 			var angle = Math.atan2(dy, dx) - Math.PI / 2,
-            curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,
-            multiplier = 1.0,
-            count = 0,
-            cosangle = Math.cos(angle),
-            sinangle = Math.sin(angle),
-            cospangle = Math.cos(prev.angle),
-            sinpangle = Math.sin(prev.angle),
-            vertexCount = 0,
-            currange = curnib * multiplier,
-            prevrange = prev.nib * multiplier,
-            fgcolor = '#000000';
-
-            
-            // overwrite fgcolor with whatever is in state
-            var col = VLM.state.color,
-            rgba = col.rgba;
-            var alpha = rgba[3];
-            
-            // transform it
-            if ( alpha > 0.75 ){
-                alpha = 1;
-            } else if ( alpha > 0.5 ){
-                alpha = 0.4;
-            } else if ( alpha > 0.25 ){
-                alpha = 0.2;
-            } else {
-                alpha = 0.1;
-            }
-            fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + alpha + ')';
+                curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,
+                multiplier = 1.0,
+                count = 0,
+                cosangle = Math.cos(angle),
+                sinangle = Math.sin(angle),
+                cospangle = Math.cos(prev.angle),
+                sinpangle = Math.sin(prev.angle),
+                vertexCount = 0,
+                currange = curnib * multiplier,
+                prevrange = prev.nib * multiplier,
+                fgcolor = '#000000',
+                col = VLM.state.color,
+                rgba = col.rgba;
 
             if (zoomlevel < 10) {
+
                 ctx.beginPath();
+                
                 if (zoomlevel < 1) {
                     ctx.lineWidth = 0.05;
                 } else {
@@ -136,45 +119,53 @@ smudge.prototype = {
 					ctx.lineWidth *= 0.5;
 				}
 
-                var step = this.step;//1.5;
-                var numsteps = 0;
-                //*
-                var sumb = 0,
-                    numb = dist / 1;
-                for (var i = 0; i < numb; i++){
-                    var pct = i / numb,
+                var step = this.step,
+                    numsteps = 0,
+                    sumsamples = 0,
+                    numsamples = dist / 1,
+                    avgsample = 0;
+                
+                for (var i = 0; i < numsamples; i++){
+
+                    var pct = i / numsamples,
                         localx = prev.x + dx * pct,
-                        localy = prev.y + dy * pct;
+                        localy = prev.y + dy * pct,
+                        shouldProceed = true;
+
+                    // bounds check
+                    if ( localx < 0 ) shouldProceed = false;
+                    else if ( localx > state.w - 3 ) shouldProceed = false;
+                    else if ( localy < 0 ) shouldProceed = false;
+                    else if ( localy > state.h - 3 ) shouldProceed = false;
                     
-                    
-                    
-                    if ( localx < 0 ) localx = 0;
-                    if ( localx > state.w - 3 ) localx = state.w - 3;
-                    if ( localy < 0 ) localy = 0;
-                    if ( localy > state.h - 3 ) localy = state.h - 3;
-                    
-                    var o = ctx.getImageData(localx, localy, 1, 1);
-                    //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
-                    //console.log( ( 242 - o.data[0] ) / 242 );
-                    /*
-                    if ( o.data[0] <= 0 || o.data[0] > 242 ){
-                        console.log( localx, localy, o.data[0] );
+                    if ( shouldProceed ){
+                        localx = Math.round( localx );
+                        localy = Math.round( localy );
+                        var o = ctx.getImageData(localx, localy, 1, 1);
+                        sumsamples += ( 242 - o.data[0] ) / 242;
                     }
-                    */
-                    
-                    sumb += ( 242 - o.data[0] ) / 242;
                 }
-                sumb /= numb + 1;
-                if ( sumb > 0.25 ) sumb = 0.25;
-                //sumb *= 0.5;
-                //console.log( sumb);
-               // */
+                
+                avgsample = sumsamples / ( numsamples + 1 );
 
-                aaaa = 0.5 * aaaa + 0.5 * sumb;
-                this.smoothed_alpha = aaaa;
-                fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba    [2] + ',' + aaaa + ')';
-                ctx.strokeStyle = fgcolor;
+                // clamp average sampled value
+                if ( avgsample > 0.25 ) avgsample = 0.25;
+                
+                // get smoothed value
+                var smoothed = this.smoothed_alpha;
+                smoothed += ( avgsample - smoothed ) * 0.25;
+                // smoothed = 0.5 * smoothed + 0.5 * avgsample;
+                
+                smoothed *= 100;
+                smoothed = Math.round( smoothed );
+                smoothed /= 100;
 
+                // store it for the next tick
+                this.smoothed_alpha = smoothed;
+
+                ctx.strokeStyle = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + smoothed + ')';
+                ctx.fillStyle = 'rgba(0,0,0,0)';
+                
                 for (var i = -currange; i <= currange; i += step) {
                     numsteps++;
                     var pct = i / currange,
@@ -183,45 +174,21 @@ smudge.prototype = {
                     localpx = prev.x + cospangle * pct * prevrange,
                     localpy = prev.y + sinpangle * pct * prevrange;
 
-                    /*
-                    var o = ctx.getImageData(localpx, localpy, 1, 1);
-                    //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
-                    console.log( o.data[0] );
-                    suma += ( 242 - o.data[0] ) / 242;
-                    */
                     var deltax, deltay;
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     ctx.moveTo(localpx + deltax, localpy + deltay);
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
+                    
                     ctx.lineTo(localx + deltax, localy + deltay);
                 }
-                /*
-                 approaches to doing this
-                 
-                 - average the stroke values and draw all paths in same opacity
-                 - each bristle has its own thing
-                 - sample all along the draw path
-                 */
-                //suma /= numsteps;
-                //suma *= 0.5;
-                
-                //aaaa = 0.5 * aaaa + 0.25 * sumb + 0.25 * suma;
-                //if ( aaaa > 0.5 ) aaaa = 0.5;
-                
-                
+                console.log (ctx.strokeStyle );
 
                 ctx.stroke();
                 ctx.closePath();
             } else {
-                ctx.beginPath();
-                ctx.lineWidth = 0.45;
-                ctx.strokeStyle = fgcolor;
-                ctx.moveTo(x, y);
-                ctx.lineTo(prev.x, prev.y);
-                ctx.stroke();
-                ctx.closePath();
+                this.smoothed_alpha = 0;
             }
             
 			prev.angle = angle;
