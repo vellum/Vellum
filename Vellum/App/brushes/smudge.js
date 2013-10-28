@@ -136,25 +136,45 @@ smudge.prototype = {
 					ctx.lineWidth *= 0.5;
 				}
 
-                ctx.strokeStyle = fgcolor;
                 var step = this.step;//1.5;
                 var numsteps = 0;
-                
+                //*
                 var sumb = 0,
-                    numb = dist / 0.5;
+                    numb = dist / 1;
                 for (var i = 0; i < numb; i++){
                     var pct = i / numb,
                         localx = prev.x + dx * pct,
                         localy = prev.y + dy * pct;
+                    
+                    
+                    
+                    if ( localx < 0 ) localx = 0;
+                    if ( localx > state.w - 3 ) localx = state.w - 3;
+                    if ( localy < 0 ) localy = 0;
+                    if ( localy > state.h - 3 ) localy = state.h - 3;
+                    
                     var o = ctx.getImageData(localx, localy, 1, 1);
                     //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
                     //console.log( ( 242 - o.data[0] ) / 242 );
+                    /*
+                    if ( o.data[0] <= 0 || o.data[0] > 242 ){
+                        console.log( localx, localy, o.data[0] );
+                    }
+                    */
+                    
                     sumb += ( 242 - o.data[0] ) / 242;
                 }
-                sumb /= numb;
-                sumb *= 0.5;
+                sumb /= numb + 1;
+                if ( sumb > 0.25 ) sumb = 0.25;
+                //sumb *= 0.5;
                 //console.log( sumb);
-                
+               // */
+
+                aaaa = 0.5 * aaaa + 0.5 * sumb;
+                this.smoothed_alpha = aaaa;
+                fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba    [2] + ',' + aaaa + ')';
+                ctx.strokeStyle = fgcolor;
+
                 for (var i = -currange; i <= currange; i += step) {
                     numsteps++;
                     var pct = i / currange,
@@ -162,11 +182,13 @@ smudge.prototype = {
                     localy = y + sinangle * pct * currange,
                     localpx = prev.x + cospangle * pct * prevrange,
                     localpy = prev.y + sinpangle * pct * prevrange;
-                    
+
+                    /*
                     var o = ctx.getImageData(localpx, localpy, 1, 1);
                     //console.log( o.data[0] + ', ' + o.data[1] + ', ' + o.data[2] + ', ' + o.data[3] );
+                    console.log( o.data[0] );
                     suma += ( 242 - o.data[0] ) / 242;
-
+                    */
                     var deltax, deltay;
                     deltax = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
                     deltay = (Math.random() > 0.5) ? Math.random() * -currange / 2 : Math.random() * currange / 2;
@@ -182,15 +204,12 @@ smudge.prototype = {
                  - each bristle has its own thing
                  - sample all along the draw path
                  */
-                suma /= numsteps;
-                suma *= 0.5;
+                //suma /= numsteps;
+                //suma *= 0.5;
                 
-                aaaa = 0.5 * aaaa + 0.25 * sumb + 0.25 * suma;
-                if ( aaaa > 0.5 ) aaaa = 0.5;
+                //aaaa = 0.5 * aaaa + 0.25 * sumb + 0.25 * suma;
+                //if ( aaaa > 0.5 ) aaaa = 0.5;
                 
-                this.smoothed_alpha = aaaa;
-                fgcolor = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + aaaa + ')';
-                ctx.strokeStyle = fgcolor;
                 
 
                 ctx.stroke();

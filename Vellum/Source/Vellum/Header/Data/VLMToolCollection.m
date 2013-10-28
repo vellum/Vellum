@@ -80,7 +80,7 @@ static VLMToolCollection *sharedToolCollection;
 		                         @1,
 		                         @1,
 		                         @1,
-		                         @1,
+		                         @0,
 		                         @7,
 		                         @7,
 		                         @5,
