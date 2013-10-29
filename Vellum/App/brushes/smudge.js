@@ -11,10 +11,11 @@ smudge.prototype = {
     nib_multiplier : 0.25,
 	step : 1.5,
     smoothed_alpha : 0,
+    smoothed_rgba : {r:0,g:0,b:0,a:0},
 	
 	init : function(){
 		this.context = VLM.state.context;
-        
+        this.smoothed_rgba = {r:0,g:0,b:0,a:0};
         var state = VLM.state;
         if ( state.isIPad ){
             if ( state.isRetina ){
@@ -102,7 +103,7 @@ smudge.prototype = {
                 prevrange = prev.nib * multiplier,
                 fgcolor = '#000000',
                 col = VLM.state.color,
-                rgba = col.rgba;
+                rgba = {r:0,g:0,b:0};
 
             if (zoomlevel < 10) {
 
@@ -142,11 +143,23 @@ smudge.prototype = {
                         localx = Math.round( localx );
                         localy = Math.round( localy );
                         var o = ctx.getImageData(localx, localy, 1, 1);
-                        sumsamples += ( 242 - o.data[0] ) / 242;
+                        if ( o.data[0] < 242 ){
+                            rgba.r += o.data[0];
+                            rgba.g += o.data[1];
+                            rgba.b += o.data[2];
+                            sumsamples += ( 242 - o.data[0] ) / 242;
+                        }
                     }
                 }
                 
                 avgsample = sumsamples / ( numsamples + 1 );
+                rgba.r /= numsamples;
+                rgba.g /= numsamples;
+                rgba.b /= numsamples;
+                
+                this.smoothed_rgba.r += ( rgba.r - this.smoothed_rgba.r ) * 0.5;
+                this.smoothed_rgba.g += ( rgba.g - this.smoothed_rgba.g ) * 0.5;
+                this.smoothed_rgba.b += ( rgba.b - this.smoothed_rgba.b ) * 0.5;
 
                 // clamp average sampled value
                 if ( avgsample > 0.25 ) avgsample = 0.25;

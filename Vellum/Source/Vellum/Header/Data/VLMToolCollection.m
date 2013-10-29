@@ -34,7 +34,10 @@ static VLMToolCollection *sharedToolCollection;
 		                  @"Graphite",
 		                  @"Shade",
 		                  @"Line",
-		                  @"Smudge",
+                          
+		                  @"Ink", // 4
+                          @"Smudge", // 5
+                          
 		                  @"Erase",
 		                  @"Scratch",
 		                  @"Soft Erase",
@@ -45,9 +48,12 @@ static VLMToolCollection *sharedToolCollection;
 		                     @YES,
 		                     @YES,
 		                     @YES,
-		                     @YES,
-		                     @YES,
-		                     @YES,
+		                     
+                             @YES, // 4
+		                     @YES, // 5
+		                     
+                             @YES,
+                             @YES,
 		                     @YES,
 		                     @YES];
         
@@ -56,6 +62,7 @@ static VLMToolCollection *sharedToolCollection;
 		                   @"VLM.constants.MODE_GRAPHITE",
 		                   @"VLM.constants.MODE_SHADE",
 		                   @"VLM.constants.MODE_LINE",
+		                   @"VLM.constants.MODE_INK",
 		                   @"VLM.constants.MODE_SMUDGE",
 		                   @"VLM.constants.MODE_ERASE",
 		                   @"VLM.constants.MODE_SCRATCH",
@@ -67,7 +74,8 @@ static VLMToolCollection *sharedToolCollection;
 		                           @NO,
 		                           @NO,
 		                           @NO,
-		                           @NO,
+		                           @NO,  //4
+		                           @YES, //5
 		                           @YES,
 		                           @YES,
 		                           @YES,
@@ -80,7 +88,8 @@ static VLMToolCollection *sharedToolCollection;
 		                         @1,
 		                         @1,
 		                         @1,
-		                         @0,
+		                         @1, // 4
+		                         @0, // 5
 		                         @7,
 		                         @7,
 		                         @5,
@@ -92,7 +101,8 @@ static VLMToolCollection *sharedToolCollection;
                                        @NO,
                                        @NO,
                                        @YES,
-                                       @NO,
+                                       @NO, // 4
+                                       @NO, // 5
                                        @NO,
                                        @NO,
                                        @NO,
@@ -132,17 +142,27 @@ static VLMToolCollection *sharedToolCollection;
             
 			[self.tools addObject:data];
 			if (i == 4) {
+                [data setColors:@[
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"40" Opacity:0.4f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f Enabled:YES Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
+			} else if (i == 5) {
 				[data setColors:@[
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.8f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.6f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.4f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.2f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.1f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.0f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO]]];
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:1.0f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.8f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.6f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.4f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.2f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.1f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.0f Enabled:NO Subtractive:YES],
+				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"." Opacity:1.0f Enabled:NO Subtractive:YES]]];
 			}
-			else if (i == 8) {
+			else if (i == 9) { // hard erase
 				[data setColors:@[
 				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
 				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],

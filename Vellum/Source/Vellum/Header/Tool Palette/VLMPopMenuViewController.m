@@ -95,26 +95,33 @@
 	}
 	else {
 		margin = 10.0f;
+        CGFloat marginhoz = margin/2.0f;
 		innermargin = 5.0f;
 		topleft = CGPointMake(0, innermargin);
         
-		CGFloat popw = winw;
-		CGFloat contentw = [tools.tools count] * (buttonsize + pad) + 2 * innermargin + 2 * margin;
-		if (contentw < popw) {
-			popw = contentw;
-		}
+        
+        CGFloat popw = winw;
+		CGFloat contentw = [tools.tools count] * (buttonsize + pad);
+        
+        
 		[self.view setFrame:CGRectMake((winw - popw) / 2.0f, HEADER_HEIGHT, popw, buttonsize + margin * 2 + innermargin * 2)];
+
 		[self.view setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
 		[self.view setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
         
 		VLMTriangleView *tri = [[VLMTriangleView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - triangleSize.width / 2, margin - triangleSize.height, triangleSize.width, triangleSize.height)];
 		[self.view addSubview:tri];
-		back = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, popw - margin * 2, innermargin * 2 + buttonsize * 1)];
-		[back setBackgroundColor:[UIColor whiteColor]];
+        
+		back = [[UIView alloc] initWithFrame:CGRectMake(margin/2, margin, winw - marginhoz*2, innermargin * 2 + buttonsize * 1)];
+        [back setBackgroundColor:[UIColor whiteColor]];
         
 		[self.view addSubview:back];
         
-		sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(margin + innermargin, back.frame.origin.y, back.frame.size.width - 2 * innermargin, back.frame.size.height)];
+		sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(
+                 marginhoz + innermargin,
+                 back.frame.origin.y,
+                 winw - 2 * marginhoz - 2 * innermargin,
+                 back.frame.size.height)];
 		[sv setContentSize:CGSizeMake(contentw - 2 * margin - 2 * innermargin, 2 * innermargin + buttonsize)];
 		[sv setBackgroundColor:[UIColor clearColor]];
 		[sv setCanCancelContentTouches:YES];
