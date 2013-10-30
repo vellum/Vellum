@@ -82,17 +82,28 @@ var setDrawingMode = function(mode) {
 		mousedown = true;
 		var ink = VLM.ink;
 		ink.continueStroke(x,y);
-		accum.x += (x - prevmouse.x);
-		accum.y += (y - prevmouse.y);
+		accum.x += Math.abs(x - prevmouse.x);
+		accum.y += Math.abs(y - prevmouse.y);
 		prevmouse.x = x;
 		prevmouse.y = y;
 	},
 
-	continueStrokeWithPoints = function(arr) {
+	continueStrokeWithPoints = function(obj) {
 		cancelQueuedSave();
 		mousedown = true;
+        
+        var arr = obj.arr,
+            last = arr[arr.length-1],
+            x = last.x,
+            y = last.y;
+        
+        accum.x += Math.abs(x - prevmouse.x);
+		accum.y += Math.abs(y - prevmouse.y);
+		prevmouse.x = x;
+		prevmouse.y = y;
+
 		var ink = VLM.ink;
-		ink.continueStroke(arr, null);
+		ink.continueStroke(obj, null);
 
 	},
 
@@ -133,13 +144,20 @@ var cancelQueuedSave = function() {
 	},
 
 	saveUndoState = function() {
+        
+        console.log('saveundostate');
+        
 		// disable undo for ipad, since glreadpixels is slow and blocks drawing operations
 		if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
 		//
+        console.log('a');
+        
 		if ( !BRIDGE.isUndoCapable ) return;
-		
+
+		console.log('b');
 		if ( accum.x + accum.y < 5 ) return;
-		
+        
+		console.log('c');
 		// FIXME: restore the accum stuff to prevent saving undo states everyt eime
 		//if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
 	
@@ -150,7 +168,7 @@ var cancelQueuedSave = function() {
 		if (elapsed < ELAPSED_THRESHOLD) {
 			return;
 		}
-	
+        console.log('d');
 		saveUndoStateGuts();
 	
 		// - - - -  this sets up a timer that calls saves sometime later - - - -
@@ -159,6 +177,9 @@ var cancelQueuedSave = function() {
 	},
 
 	saveUndoStateGuts = function() {
+        
+        console.log( 'saveundoguts' );
+        
 		var millis = Date.now(),
 			state = VLM.state,
 			w = state.w,

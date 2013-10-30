@@ -101,7 +101,7 @@ static VLMToolCollection *sharedToolCollection;
                                        @NO,
                                        @NO,
                                        @YES,
-                                       @NO, // 4
+                                       @YES, // 4
                                        @NO, // 5
                                        @NO,
                                        @NO,
