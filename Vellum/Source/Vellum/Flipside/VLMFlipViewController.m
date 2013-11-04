@@ -284,9 +284,11 @@
 	NSInteger sections = self.texts.count;
     
 	//if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    /*
     if (![AppDelegate isUndoCapable]) {
 		sections--; // omit undo slide
 	}
+    */
 	return sections;
 }
 

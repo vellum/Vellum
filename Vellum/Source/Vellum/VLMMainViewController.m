@@ -218,9 +218,9 @@
 	// only enable 3 finger undo for small screen devices
 	// to counter glreadpixels performance problems
 	//if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([AppDelegate isUndoCapable]){
+    //if ([AppDelegate isUndoCapable]){
 		[t addGestureRecognizer:threeFingerPan];
-	}
+	//}
     
 	VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
 	[poppy setDelegate:self];
@@ -408,6 +408,10 @@
 }
 
 - (void)handlePinch:(id)sender {
+    
+    [self.avc callJS: @"delayQueuedSave();"];
+    
+    
 	VLMPinchGestureRecognizer *pgr = (VLMPinchGestureRecognizer *)sender;
 	int numberOfTouches = pgr.numberOfTouches;
     

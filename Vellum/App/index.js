@@ -143,6 +143,13 @@ var cancelQueuedSave = function() {
 		}
 	},
 
+    delayQueuedSave = function(){
+        if ( timerID == null ) return;
+        clearTimeout(timerID);
+        timerID = null;
+        timerID = setTimeout(saveUndoStateGuts, 1000);
+    },
+
 	saveUndoState = function() {
         
         console.log('saveundostate');
@@ -150,14 +157,14 @@ var cancelQueuedSave = function() {
 		// disable undo for ipad, since glreadpixels is slow and blocks drawing operations
 		if (!BRIDGE) BRIDGE = new Ejecta.Bridge();
 		//
-        console.log('a');
+        //console.log('a');
         
-		if ( !BRIDGE.isUndoCapable ) return;
+		//if ( !BRIDGE.isUndoCapable ) return;
 
-		console.log('b');
+		//console.log('b');
 		if ( accum.x + accum.y < 5 ) return;
         
-		console.log('c');
+		//console.log('c');
 		// FIXME: restore the accum stuff to prevent saving undo states everyt eime
 		//if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
 	
@@ -168,12 +175,21 @@ var cancelQueuedSave = function() {
 		if (elapsed < ELAPSED_THRESHOLD) {
 			return;
 		}
-        console.log('d');
-		saveUndoStateGuts();
+        //console.log('d');
+        
+        if ( BRIDGE.isUndoCapable ) {
+            saveUndoStateGuts();
+            return;
+        } else {
+            // we're dealing with a retina ipad
+            // so set up a timer to queue a save
+            
+            // - - - -  this sets up a timer that calls saves sometime later - - - -
+            cancelQueuedSave();
+            timerID = setTimeout(saveUndoStateGuts, 1000);
+            
+        }
 	
-		// - - - -  this sets up a timer that calls saves sometime later - - - -
-		//cancelQueuedSave();
-		//timerID = setTimeout(saveUndoStateGuts, 1000);
 	},
 
 	saveUndoStateGuts = function() {
