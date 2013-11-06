@@ -365,7 +365,7 @@
             [lbl setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
             [bgd addSubview:lbl];
             
-            UISwitch *hi = [[UISwitch alloc] initWithFrame:CGRectZero];
+            UISwitch *hi = [UISwitch new];//[[UISwitch alloc] initWithFrame:CGRectZero];
             if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
                 [hi setCenter:CGPointMake(320-pad*2-10, bgd.frame.size.height/2 + bgd.frame.origin.y)];
             } else {
@@ -375,7 +375,7 @@
             UILabel *lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, bgd.frame.size.width, 35)];
             [lbl2 setBackgroundColor:[UIColor clearColor]];
             [lbl2 setTextColor:[UIColor grayColor]];
-            [lbl2 setText:@"Turning this off can make app faster."];
+            [lbl2 setText:@"Turning this off can make the app faster."];
             [lbl2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
             [lbl2 setTextAlignment:NSTextAlignmentCenter];
             [bgd addSubview:lbl2];
