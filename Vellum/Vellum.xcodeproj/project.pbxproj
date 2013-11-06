@@ -105,6 +105,10 @@
 		BD7B3B7A17C32CB0003AE3F5 /* button_plus_off_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B7617C32CB0003AE3F5 /* button_plus_off_ipad@2x.png */; };
 		BD7B3B7B17C32CB0003AE3F5 /* button_plus_on_ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B7717C32CB0003AE3F5 /* button_plus_on_ipad.png */; };
 		BD7B3B7C17C32CB0003AE3F5 /* button_plus_on_ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD7B3B7817C32CB0003AE3F5 /* button_plus_on_ipad@2x.png */; };
+		BD8B051F18294A8D00E9C683 /* button_undo_off.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B051B18294A8D00E9C683 /* button_undo_off.png */; };
+		BD8B052018294A8D00E9C683 /* button_undo_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B051C18294A8D00E9C683 /* button_undo_off@2x.png */; };
+		BD8B052118294A8D00E9C683 /* button_undo_on.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B051D18294A8D00E9C683 /* button_undo_on.png */; };
+		BD8B052218294A8D00E9C683 /* button_undo_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B051E18294A8D00E9C683 /* button_undo_on@2x.png */; };
 		BD8B234917B5C74B002463BF /* AboutIcon-home.png in Resources */ = {isa = PBXBuildFile; fileRef = BD8B234817B5C74B002463BF /* AboutIcon-home.png */; };
 		BD9192B317DAF05E008F1E5F /* libFlurry_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */; };
 		BD96EAC917BAF6340049D25F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD96EAC817BAF6340049D25F /* GameKit.framework */; };
@@ -416,6 +420,10 @@
 		BD7B3B7617C32CB0003AE3F5 /* button_plus_off_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_plus_off_ipad@2x.png"; path = "images/button_plus_off_ipad@2x.png"; sourceTree = "<group>"; };
 		BD7B3B7717C32CB0003AE3F5 /* button_plus_on_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_plus_on_ipad.png; path = images/button_plus_on_ipad.png; sourceTree = "<group>"; };
 		BD7B3B7817C32CB0003AE3F5 /* button_plus_on_ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_plus_on_ipad@2x.png"; path = "images/button_plus_on_ipad@2x.png"; sourceTree = "<group>"; };
+		BD8B051B18294A8D00E9C683 /* button_undo_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_undo_off.png; path = images/button_undo_off.png; sourceTree = "<group>"; };
+		BD8B051C18294A8D00E9C683 /* button_undo_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_undo_off@2x.png"; path = "images/button_undo_off@2x.png"; sourceTree = "<group>"; };
+		BD8B051D18294A8D00E9C683 /* button_undo_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_undo_on.png; path = images/button_undo_on.png; sourceTree = "<group>"; };
+		BD8B051E18294A8D00E9C683 /* button_undo_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "button_undo_on@2x.png"; path = "images/button_undo_on@2x.png"; sourceTree = "<group>"; };
 		BD8B234817B5C74B002463BF /* AboutIcon-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AboutIcon-home.png"; path = "images/AboutIcon-home.png"; sourceTree = "<group>"; };
 		BD9192B117DAF05E008F1E5F /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = Flurry/Flurry.h; sourceTree = "<group>"; };
 		BD9192B217DAF05E008F1E5F /* libFlurry_4.2.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry_4.2.3.a; path = Flurry/libFlurry_4.2.3.a; sourceTree = "<group>"; };
@@ -1011,6 +1019,10 @@
 				BD7B3B7617C32CB0003AE3F5 /* button_plus_off_ipad@2x.png */,
 				BD7B3B7717C32CB0003AE3F5 /* button_plus_on_ipad.png */,
 				BD7B3B7817C32CB0003AE3F5 /* button_plus_on_ipad@2x.png */,
+				BD8B051B18294A8D00E9C683 /* button_undo_off.png */,
+				BD8B051C18294A8D00E9C683 /* button_undo_off@2x.png */,
+				BD8B051D18294A8D00E9C683 /* button_undo_on.png */,
+				BD8B051E18294A8D00E9C683 /* button_undo_on@2x.png */,
 				BDEE8EEC17B2F8E800D5B3A9 /* camera.png */,
 				BDEE8EED17B2F8E800D5B3A9 /* camera@2x.png */,
 				BDEE8EEE17B2F8E800D5B3A9 /* camera~ipad.png */,
@@ -1352,6 +1364,7 @@
 				BDA37C4417BAD55700BBEB26 /* AppIcon29x29.png in Resources */,
 				BDEE8F1417B2F8E800D5B3A9 /* about-06.png in Resources */,
 				BDEE8F1517B2F8E800D5B3A9 /* about-06@2x.png in Resources */,
+				BD8B051F18294A8D00E9C683 /* button_undo_off.png in Resources */,
 				BDEE8F1617B2F8E800D5B3A9 /* about-07.png in Resources */,
 				BDEE8F1717B2F8E800D5B3A9 /* about-07@2x.png in Resources */,
 				BDEE8F1817B2F8E800D5B3A9 /* about-08.png in Resources */,
@@ -1360,6 +1373,8 @@
 				BDEE8F1B17B2F8E800D5B3A9 /* about-09@2x.png in Resources */,
 				BDEE8F1C17B2F8E800D5B3A9 /* about-10.png in Resources */,
 				BDEE8F1D17B2F8E800D5B3A9 /* about-10@2x.png in Resources */,
+				BD8B052218294A8D00E9C683 /* button_undo_on@2x.png in Resources */,
+				BD8B052118294A8D00E9C683 /* button_undo_on.png in Resources */,
 				BDEE8F1E17B2F8E800D5B3A9 /* albumcover.png in Resources */,
 				BDA37C4D17BAD5BB00BBEB26 /* Images.xcassets in Resources */,
 				BDEE8F1F17B2F8E800D5B3A9 /* albumcover@2x.png in Resources */,
@@ -1381,6 +1396,7 @@
 				BDEE8F2C17B2F8E800D5B3A9 /* camera~ipad@2x.png in Resources */,
 				BDEE8F2D17B2F8E800D5B3A9 /* circlebutton_selected.png in Resources */,
 				BDC7B9B217E27775003C869A /* AppIcon57x57.png in Resources */,
+				BD8B052018294A8D00E9C683 /* button_undo_off@2x.png in Resources */,
 				BDEE8F2E17B2F8E800D5B3A9 /* circlebutton_selected@2x.png in Resources */,
 				BDEE8F2F17B2F8E800D5B3A9 /* circlebutton.png in Resources */,
 				BDEE8F3017B2F8E800D5B3A9 /* circlebutton@2x.png in Resources */,
@@ -1578,7 +1594,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Source/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -1641,6 +1657,7 @@
 				);
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LLVM_LTO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DDEBUG";
 				PROVISIONING_PROFILE = "";
@@ -1664,6 +1681,7 @@
 				);
 				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LLVM_LTO = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

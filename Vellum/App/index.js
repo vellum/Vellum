@@ -168,16 +168,18 @@ var cancelQueuedSave = function() {
 		// FIXME: restore the accum stuff to prevent saving undo states everyt eime
 		//if (Math.sqrt(accum.x * accum.x + accum.y * accum.y) < 5) return;
 	
-		var millis = Date.now(),
-			elapsed = millis - lastundostamp,
-			ELAPSED_THRESHOLD = 1000; 
-	
-		if (elapsed < ELAPSED_THRESHOLD) {
-			return;
-		}
+		
         //console.log('d');
         
         if ( BRIDGE.isUndoCapable ) {
+            var millis = Date.now(),
+                elapsed = millis - lastundostamp,
+                ELAPSED_THRESHOLD = 1000;
+            
+            if (elapsed < ELAPSED_THRESHOLD) {
+                return;
+            }
+            
             saveUndoStateGuts();
             return;
         } else {
@@ -186,7 +188,7 @@ var cancelQueuedSave = function() {
             
             // - - - -  this sets up a timer that calls saves sometime later - - - -
             cancelQueuedSave();
-            timerID = setTimeout(saveUndoStateGuts, 1000);
+            timerID = setTimeout(saveUndoStateGuts, 1250);
             
         }
 	
@@ -223,6 +225,9 @@ var cancelQueuedSave = function() {
 	},
 
 	restoreUndoStateAtIndex = function(index_in) {
+        
+        cancelQueuedSave();
+        
 		// this state probably never occurs
 		// bail if we're already restoring pixels
 		if (isRestoringPixels) {

@@ -40,12 +40,20 @@
 @property (nonatomic, strong) UIImagePickerController *pickerController;
 @property (nonatomic, strong) UILabel *subtitlelabel;
 @property BOOL isPortrait;
-
+@property (nonatomic, strong) UIButton *undobutton;
+@property NSInteger undoCount;
+@property NSInteger undoIndex;
+@property (nonatomic, strong) UIPopoverController *undopop;
+@property (nonatomic, strong) UIButton *textbuttonundo;
+@property (nonatomic, strong) UIButton *textbuttonredo;
 - (void)setupHeadingView;
 - (void)longPress:(id)sender;
 - (void)handleCancelPopover:(id)sender;
 - (void)togglePopover;
 - (void)tapped;
+
+- (void)undoLongPressed;
+- (void)undoTapped;
 
 @end
 
@@ -68,6 +76,12 @@
 @synthesize pickerController;
 @synthesize isPortrait;
 @synthesize subtitlelabel;
+@synthesize undobutton;
+@synthesize undoCount;
+@synthesize undoIndex;
+@synthesize undopop;
+@synthesize textbuttonredo;
+@synthesize textbuttonundo;
 
 - (id)initWithHeadings:(NSArray *)headings {
 	self = [self init];
@@ -104,22 +118,40 @@
     
 	UIButton *pb;
 	UIButton *ab;
+    UIButton *ub;
+    
+    pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
+    [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
+
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
         
-        pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
-        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off"] forState:UIControlStateNormal];
-        [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on"] forState:UIControlStateHighlighted];
-
         ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - HEADER_HEIGHT, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
         [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off"] forState:UIControlStateNormal];
         [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on"] forState:UIControlStateHighlighted];
         
     } else {
         
+        /*
         pb = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 160, HEADER_HEIGHT)];
         [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_off_ipad"] forState:UIControlStateNormal];
         [pb setBackgroundImage:[UIImage imageNamed:@"button_plus_on_ipad"] forState:UIControlStateHighlighted];
+        */
+        
+        ub = [[UIButton alloc] initWithFrame:CGRectMake(60, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
+        [ub setBackgroundImage:[UIImage imageNamed:@"button_undo_off"] forState:UIControlStateNormal];
+        [ub setBackgroundImage:[UIImage imageNamed:@"button_undo_on"] forState:UIControlStateHighlighted];
+    
+        [self.view addSubview:ub];
+        [self setUndobutton:ub];
+        [self.undobutton setEnabled:NO];
+        
+        UITapGestureRecognizer *utgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(undoLongPressed)];
+        [ub addGestureRecognizer:utgr];
 
+        UILongPressGestureRecognizer *ulpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(undoLongPressed)];
+        [ub addGestureRecognizer:ulpgr];
+        
         ab = [[UIButton alloc] initWithFrame:CGRectMake(winw - 160, 0, 160, HEADER_HEIGHT)];
         [ab setBackgroundImage:[UIImage imageNamed:@"button_action_off_ipad"] forState:UIControlStateNormal];
         [ab setBackgroundImage:[UIImage imageNamed:@"button_action_on_ipad"] forState:UIControlStateHighlighted];
@@ -306,6 +338,79 @@
 	}
 }
 
+- (void)undoLongPressed{
+    if ( !self.undopop ){
+        CGSize m = CGSizeMake(160, 100);
+        
+        UIViewController *vc = [[UIViewController alloc] init];
+        [vc setContentSizeForViewInPopover:m];
+        [vc.view setBackgroundColor:[UIColor whiteColor]];
+        [vc.view setAutoresizesSubviews:NO];
+        
+        UIButton *tbundo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, m.width, m.height/2)];
+        [tbundo setBackgroundColor:[UIColor whiteColor]];
+        [tbundo setTitle:@"Undo" forState:UIControlStateNormal];
+        [tbundo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [tbundo setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateHighlighted];
+        [tbundo setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
+        [tbundo.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+        [vc.view addSubview:tbundo];
+        [self setTextbuttonundo:tbundo];
+        if (self.undoIndex>0){
+            ////NSLog(@"enable undo");
+            [tbundo setEnabled:YES];
+        } else {
+            ////NSLog(@"disable undo");
+            [tbundo setEnabled:NO];
+        }
+        UITapGestureRecognizer *tbtgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textUndoTapped)];
+        [tbundo addGestureRecognizer:tbtgr];
+        
+        
+        UIButton *tbredo = [[UIButton alloc] initWithFrame:CGRectMake(0, m.height/2, m.width, m.height/2)];
+        [tbredo setBackgroundColor:[UIColor whiteColor]];
+        [tbredo setTitle:@"Redo" forState:UIControlStateNormal];
+        [tbredo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [tbredo setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateHighlighted];
+        [tbredo setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
+        [tbredo.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+        [vc.view addSubview:tbredo];
+        [self setTextbuttonredo:tbredo];
+        
+        if (self.undoIndex >= self.undoCount-1){
+            ////NSLog(@"disable redo");
+            [tbredo setEnabled:NO];
+        } else {
+            ////NSLog(@"enable redo");
+            [tbredo setEnabled:YES];
+        }
+        UITapGestureRecognizer *tbtgr2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textRedoTapped)];
+        [tbredo addGestureRecognizer:tbtgr2];
+
+        UIPopoverController *upop = [[UIPopoverController alloc] initWithContentViewController:vc];
+        [self setUndopop:upop];
+    }
+    [self.undopop presentPopoverFromRect:self.undobutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)undoTapped{
+    //////NSLog(@"undo tap %i", self.undoIndex);
+    if (self.undoIndex > 0) {
+        [self.delegate requestUndo];
+    } else {
+        [self undoLongPressed];
+    }
+}
+
+- (void)textUndoTapped{
+    [self.delegate requestUndo];
+}
+
+- (void)textRedoTapped{
+    [self.delegate requestRedo];
+}
+
+
 #pragma mark - public ()
 - (void)togglePopover {
 	self.isPopoverVisible = !self.isPopoverVisible;
@@ -491,7 +596,7 @@
 // - selecting an image (handled)
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	//NSLog(@"%d", actionSheet.tag);
+	//////NSLog(@"%d", actionSheet.tag);
 	switch (actionSheet.tag) {
 		case ACTIONSHEET_CLEARSCREEN :
 			if (buttonIndex == 0) {
@@ -615,7 +720,7 @@
 #pragma mark - rotation
 // FIXME: shouldn't be trapping for nonaliased orientation values. proper way to do this is with UIDeviceOrientationPortrait, UIDeviceOrientation PortraitUpsideDown, etc
 - (void)didRotate:(NSNotification *)notification {
-	//NSLog(@"here: rotation detected in header");
+	//////NSLog(@"here: rotation detected in header");
     
 	BOOL isNowPortrait = self.isPortrait;
 	int type = [[UIDevice currentDevice] orientation];
@@ -640,4 +745,36 @@
 	}
 }
 
+
+#pragma mark - ()
+- (void)updateUndoIndex:(NSInteger)undoIndexIn andUndoCount:(NSInteger)undoCountIn{
+    
+    ////NSLog(@"here %i %i", undoIndexIn, undoCountIn);
+    if (!self.undobutton) return;
+    [self setUndoCount:undoCountIn];
+    [self setUndoIndex:undoIndexIn];
+    if ( undoCountIn <= 1 ){
+        [self.undobutton setEnabled:NO];
+    } else {
+        [self.undobutton setEnabled:YES];
+    }
+    if ( self.textbuttonundo){
+        if (self.undoIndex>0){
+            ////NSLog(@"enable undo");
+            [self.textbuttonundo setEnabled:YES];
+        } else {
+            ////NSLog(@"disable undo");
+            [self.textbuttonundo setEnabled:NO];
+        }
+    }
+    if ( self.textbuttonredo){
+        if (self.undoIndex >= self.undoCount-1){
+            ////NSLog(@"disable redo");
+            [self.textbuttonredo setEnabled:NO];
+        } else {
+            ////NSLog(@"enable redo");
+            [self.textbuttonredo setEnabled:YES];
+        }
+    }
+}
 @end

@@ -18,6 +18,10 @@
 - (void)screenCapture:(id)screenshotdelegate;
 - (void)showPopover;
 - (void)hidePopover;
+
+- (void)requestUndo;
+- (void)requestRedo;
+
 @end
 
 @interface VLMDrawHeaderController : UIViewController <UIActionSheetDelegate, VLMScreenShotDelegate, UIPopoverControllerDelegate>
@@ -40,5 +44,8 @@
 
 - (void)showSubtitleWithText:(NSString *)text;
 - (void)hideSubtitle;
+
+- (void)updateUndoIndex:(NSInteger)undoIndex andUndoCount:(NSInteger)undoCount;
+
 
 @end

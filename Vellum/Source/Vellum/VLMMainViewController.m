@@ -218,9 +218,9 @@
 	// only enable 3 finger undo for small screen devices
 	// to counter glreadpixels performance problems
 	//if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    //if ([AppDelegate isUndoCapable]){
+    if ([AppDelegate isUndoCapable]){
 		[t addGestureRecognizer:threeFingerPan];
-	//}
+	}
     
 	VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
 	[poppy setDelegate:self];
@@ -401,7 +401,7 @@
 	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
     
 	if (nextIndex != self.undoViewController.index) {
-		//NSLog(@"nextIndex: %d", nextIndex);
+		////NSLog(@"nextIndex: %d", nextIndex);
 		NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
 		[self.avc callJS:s];
 	}
@@ -554,11 +554,11 @@
 - (void)handleTwoFingerSingleTap:(id)sender {
 	UIView *h = self.headerController.view;
     
-	//NSLog(@"twofingertap");
+	////NSLog(@"twofingertap");
     
 	// header hidden
 	if (!h.userInteractionEnabled) {
-		//NSLog(@"\tmake header visible");
+		////NSLog(@"\tmake header visible");
 		[self.infoButton setUserInteractionEnabled:YES];
 		[h setUserInteractionEnabled:YES];
         
@@ -642,7 +642,7 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL doesFileExist = [fileManager fileExistsAtPath:filePath];
     if (doesFileExist) {
-        NSLog(@"file exists.. attempting to restore...");
+        //NSLog(@"file exists.. attempting to restore...");
         UIImage *image = [[UIImage alloc] initWithContentsOfFile:filePath];
         EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
         
@@ -669,7 +669,7 @@
         [fileManager removeItemAtPath:filePath error:nil];
     }
     else {
-        NSLog(@"prev drawing does not exist");
+        //NSLog(@"prev drawing does not exist");
     }
     
 }
@@ -698,10 +698,10 @@
 
     BOOL success = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES]; // PNG doesn't maintain orientation
     if ( success ){
-        NSLog(@"SAVE TEXTURE SUCCESS");
+        //NSLog(@"SAVE TEXTURE SUCCESS");
         
     } else {
-        NSLog(@"SAVE TEXTURE FAILED");
+        //NSLog(@"SAVE TEXTURE FAILED");
     }
 }
 
@@ -767,6 +767,27 @@
 	[Flurry logEvent:FLURRY_TOOLS_CLOSED timed:YES];
 }
 
+- (void)requestUndo{
+    NSInteger nextIndex = lastKnownUndoIndex - 1;
+	if (nextIndex < 0) nextIndex = 0;
+	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
+	if (nextIndex != self.undoViewController.index) {
+		//NSLog(@"nextIndex: %d", nextIndex);
+		NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
+		[self.avc callJS:s];
+	}
+}
+
+- (void)requestRedo{
+    NSInteger nextIndex = lastKnownUndoIndex + 1;
+	if (nextIndex < 0) nextIndex = 0;
+	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
+	if (nextIndex != self.undoViewController.index) {
+		////NSLog(@"nextIndex: %d", nextIndex);
+		NSString *s = [NSString stringWithFormat:@"restoreUndoStateAtIndex(%d);", nextIndex];
+		[self.avc callJS:s];
+	}
+}
 #pragma mark - MenuDelegate
 
 - (void)updateHeader {
@@ -816,7 +837,7 @@
 	NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, color.opacity, (color.isSubtractive) ? @"_erase":@""];
 	[Flurry logEvent:eventpath2];
     
-	//NSLog(eventpath2);
+	////NSLog(eventpath2);
 }
 
 - (void)refreshData {
@@ -861,6 +882,7 @@
 	return [self.colorMenuViewController isOpen];
 }
 
+
 #pragma mark - public () for cross js communication
 - (void)updateUndoCount:(NSInteger)count {
 	//NSLog(@"mainviewcontroller:updateundocount(%d)", count);
@@ -869,12 +891,14 @@
 
 - (void)updateUndoIndex:(NSInteger)index {
 	//NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
+    [self setLastKnownUndoIndex:index];
 	[self.undoViewController setIndex:index];
 	[self.undoViewController update];
+    [self.headerController updateUndoIndex:index andUndoCount:self.undoViewController.numStates];
 }
 
 - (void)saveStateBeforeTerminating{
-    NSLog(@"savestatebeforeterminating - requesting screenshot");
+    //NSLog(@"savestatebeforeterminating - requesting screenshot");
     
     EJJavaScriptView *jsv = (EJJavaScriptView *)self.avc.view;
     [jsv setScreenShotDelegate:self];
@@ -884,7 +908,7 @@
 
 - (void)saveStateInBackground{
 #ifdef USE_INCREMENTAL_SAVE
-    NSLog(@"SAVESTATEINBACKGROUND");
+    //NSLog(@"SAVESTATEINBACKGROUND");
     
     // NOTE: may want to have a flag that indicates that it's locked
     // to prevent this from being called while already saving
@@ -915,7 +939,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 	UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
-	//NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
+	////NSLog(@"found image picked: %@", img==nil ? @"false" : @"true" );
 	EJJavaScriptView *jsv = (EJJavaScriptView *)[self.avc view];
     
 	UIImage *padded = [self getPaddedImageForImage:img AndSize:self.view.frame.size];
@@ -1009,7 +1033,7 @@
 #pragma mark - Flipside View Controller
 
 - (void)flipsideViewControllerDidFinish:(VLMFlipViewController *)controller {
-	//NSLog(@"HERE");
+	////NSLog(@"HERE");
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 		[self dismissViewControllerAnimated:YES completion:nil];
 	}
@@ -1081,7 +1105,7 @@
 }
 
 - (void)didRotate:(NSNotification *)notification {
-	//NSLog(@"didrotate %@", notification);
+	////NSLog(@"didrotate %@", notification);
     
 	BOOL isNowPortrait = self.isPortrait;
 	int type = [[UIDevice currentDevice] orientation];
@@ -1110,7 +1134,7 @@
 
 #pragma mark - VLMScreenshotDelegate
 - (void)screenShotFound:(UIImage *)found {
-    NSLog(@"found screenshot");
+    //NSLog(@"found screenshot");
     if (self.shouldSaveInBackground){
         [self performSelectorInBackground:@selector(saveImageToDocuments:) withObject:found];
         [self setShouldSaveInBackground:NO];
@@ -1161,7 +1185,7 @@
         //CGFloat size = vertexBuffer[step].Size;
     }
     NSString *s = [NSString stringWithFormat:@"continueStrokeWithPoints({travel:%f, arr:[%@]});", self.travelDistance, points];
-    //NSLog(@"%@", s);
+    ////NSLog(@"%@", s);
     [self.avc callJS:s];
 }
     

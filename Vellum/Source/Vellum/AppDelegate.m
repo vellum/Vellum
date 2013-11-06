@@ -122,7 +122,6 @@
 #if FAT_HEADER
 	NSLog(@"fat header defined");
     
-    
 	if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
 		[[UIBarButtonItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0f, BAR_BUTTON_ITEM_VERTICAL_OFFSET) forBarMetrics:UIBarMetricsDefault];
         
