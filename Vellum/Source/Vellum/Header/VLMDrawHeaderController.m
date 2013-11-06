@@ -141,6 +141,7 @@
         ub = [[UIButton alloc] initWithFrame:CGRectMake(60, 0, HEADER_HEIGHT, HEADER_HEIGHT)];
         [ub setBackgroundImage:[UIImage imageNamed:@"button_undo_off"] forState:UIControlStateNormal];
         [ub setBackgroundImage:[UIImage imageNamed:@"button_undo_on"] forState:UIControlStateHighlighted];
+        [ub setBackgroundImage:[UIImage imageNamed:@"button_undo_on"] forState:UIControlStateDisabled];
     
         [self.view addSubview:ub];
         [self setUndobutton:ub];
