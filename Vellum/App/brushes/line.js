@@ -69,7 +69,7 @@ line.prototype = {
 
 			ctx.strokeStyle = fgcolor;
 			ctx.fillStyle = fgdecoration;
-			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 1.0    * ( scalar + 0.2 );
+			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 1.25    * ( scalar + 0.2 );
 			ctx.moveTo( prev.x, prev.y );
 			ctx.lineTo( x, y );
 
