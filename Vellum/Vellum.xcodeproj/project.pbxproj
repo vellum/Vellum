@@ -123,6 +123,8 @@
 		BDA37C4A17BAD55700BBEB26 /* AppIcon76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA37C4217BAD55700BBEB26 /* AppIcon76x76.png */; };
 		BDA37C4B17BAD55700BBEB26 /* AppIcon76x76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDA37C4317BAD55700BBEB26 /* AppIcon76x76@2x.png */; };
 		BDA37C4D17BAD5BB00BBEB26 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDA37C4C17BAD5BB00BBEB26 /* Images.xcassets */; };
+		BDB9E131182AB36000499D99 /* VLMSettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB9E130182AB36000499D99 /* VLMSettingsData.m */; };
+		BDB9E134182AD4CD00499D99 /* clear10.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB9E133182AD4CD00499D99 /* clear10.png */; };
 		BDC30B8717B4678A00018E70 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8617B4678A00018E70 /* Icon.png */; };
 		BDC30B8917B4679E00018E70 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8817B4679E00018E70 /* Icon@2x.png */; };
 		BDC30B8B17B467D100018E70 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8A17B467D100018E70 /* Default.png */; };
@@ -439,6 +441,9 @@
 		BDA37C4217BAD55700BBEB26 /* AppIcon76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon76x76.png; sourceTree = "<group>"; };
 		BDA37C4317BAD55700BBEB26 /* AppIcon76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon76x76@2x.png"; sourceTree = "<group>"; };
 		BDA37C4C17BAD5BB00BBEB26 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Vellum/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		BDB9E12F182AB36000499D99 /* VLMSettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSettingsData.h; path = Settings/VLMSettingsData.h; sourceTree = "<group>"; };
+		BDB9E130182AB36000499D99 /* VLMSettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMSettingsData.m; path = Settings/VLMSettingsData.m; sourceTree = "<group>"; };
+		BDB9E133182AD4CD00499D99 /* clear10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear10.png; path = images/clear10.png; sourceTree = "<group>"; };
 		BDC30B8617B4678A00018E70 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BDC30B8817B4679E00018E70 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BDC30B8A17B467D100018E70 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -970,6 +975,7 @@
 		BDB198471777AFF600CF145E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				BDB9E133182AD4CD00499D99 /* clear10.png */,
 				BDEE8ECD17B2F8E800D5B3A9 /* about-01.png */,
 				BDEE8ECE17B2F8E800D5B3A9 /* about-01@2x.png */,
 				BDEE8ECF17B2F8E800D5B3A9 /* about-02.png */,
@@ -1053,6 +1059,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		BDB9E132182AB36E00499D99 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BDB9E12F182AB36000499D99 /* VLMSettingsData.h */,
+				BDB9E130182AB36000499D99 /* VLMSettingsData.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		BDD593E218175A4200D016AF /* Vector */ = {
 			isa = PBXGroup;
 			children = (
@@ -1116,6 +1131,7 @@
 				BDEE8F4F17B2FD5900D5B3A9 /* AppDelegate.m */,
 				BDEE8F5017B2FD5900D5B3A9 /* EJBindingBridge.h */,
 				BDEE8F5117B2FD5900D5B3A9 /* EJBindingBridge.m */,
+				BDB9E132182AB36E00499D99 /* Settings */,
 				BDEE8F5217B2FD5900D5B3A9 /* Flipside */,
 				BDEE8F5D17B2FD5900D5B3A9 /* GestureRecco */,
 				BDEE8F6817B2FD5900D5B3A9 /* Header */,
@@ -1401,6 +1417,7 @@
 				BDEE8F2F17B2F8E800D5B3A9 /* circlebutton.png in Resources */,
 				BDEE8F3017B2F8E800D5B3A9 /* circlebutton@2x.png in Resources */,
 				BDEE8F3117B2F8E800D5B3A9 /* clear.png in Resources */,
+				BDB9E134182AD4CD00499D99 /* clear10.png in Resources */,
 				BD2BBDA217B4298D00DA3C64 /* gradient@2x.png in Resources */,
 				BDEE8F3217B2F8E800D5B3A9 /* clear50.png in Resources */,
 				BDEE8F3817B2F8E800D5B3A9 /* gray_header_background.png in Resources */,
@@ -1542,6 +1559,7 @@
 				B870BDE916F2E11A00827F01 /* EJBindingWebGLExtensions.m in Sources */,
 				B6D6E0A016F7E7B4009AB75F /* EJBindingIAPManager.m in Sources */,
 				B6D6E0A316F7E7D8009AB75F /* EJBindingIAPTransaction.m in Sources */,
+				BDB9E131182AB36000499D99 /* VLMSettingsData.m in Sources */,
 				B6D6E0A616F7E81B009AB75F /* EJBindingIAPProduct.m in Sources */,
 				B60FA92817021E0900078D20 /* EJBindingVideo.m in Sources */,
 				BDEE8F4917B2FA2400D5B3A9 /* DDPageControl.m in Sources */,

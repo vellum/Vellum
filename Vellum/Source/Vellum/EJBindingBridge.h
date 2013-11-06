@@ -13,5 +13,6 @@
 	NSInteger undoIndex;
 	BOOL isIPad;
     BOOL isUndoCapable;
+    BOOL isUndoEnabled;
 }
 @end

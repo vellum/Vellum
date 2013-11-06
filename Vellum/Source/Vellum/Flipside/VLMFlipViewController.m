@@ -71,55 +71,59 @@
 	[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
     
 	texts = @[
-           @"PAN to draw.",
-           @"TAP HEADER to toggle palette.",
-           @"TAP ELSEWHERE to toggle header.",
-           @"TAP WITH 2 FINGERS to toggle palette.",
-           @"PINCH to zoom.",
-           @"DOUBLE-TAP to reset zoom.",
-           @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
-           @"TAP SELECTED tool to toggle opacity menu.",
-           @"PAN HORIZONTALLY for erase modes.",
-           @"PAN VERTICALLY with 3 fingers to undo."];
-    
+        @"SETTINGS",
+        @"PAN to draw.",
+        @"TAP HEADER to toggle palette.",
+        @"TAP ELSEWHERE to toggle header.",
+        @"TAP WITH 2 FINGERS to toggle palette.",
+        @"PINCH to zoom.",
+        @"DOUBLE-TAP to reset zoom.",
+        @"LONG-PRESS \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing.",
+        @"TAP SELECTED tool to toggle opacity menu.",
+        @"PAN HORIZONTALLY for erase modes.",
+        @"PAN VERTICALLY with 3 fingers to undo."];
+
 	images = @[
-	        @"about-01.png",
-         @"about-02.png",
-         @"about-05.png",
-         @"about-08.png",
-         @"about-03.png",
-         @"about-04.png",
-         @"about-06.png",
-         @"about-09.png",
-         @"about-10.png",
-         @"about-07.png"];
+        @"",
+        @"about-01.png",
+        @"about-02.png",
+        @"about-05.png",
+        @"about-08.png",
+        @"about-03.png",
+        @"about-04.png",
+        @"about-06.png",
+        @"about-09.png",
+        @"about-10.png",
+        @"about-07.png"];
     
 	//if (NSClassFromString(@"NSMutableAttributedString")){
 	//if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0f) {
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")) {
 		NSArray *sctexts = @[
-                       @"PAN",
-                       @"TAP HEADER",
-                       @"TAP ELSEWHERE",
-                       @"TAP WITH 2 FINGERS",
-                       @"PINCH",
-                       @"DOUBLE-TAP",
-                       @"LONG-PRESS",
-                       @"TAP SELECTED",
-                       @"PAN HORIZONTALLY",
-                       @"PAN VERTICALLY"];
+            @"SETTINGS",
+            @"PAN",
+            @"TAP HEADER",
+            @"TAP ELSEWHERE",
+            @"TAP WITH 2 FINGERS",
+            @"PINCH",
+            @"DOUBLE-TAP",
+            @"LONG-PRESS",
+            @"TAP SELECTED",
+            @"PAN HORIZONTALLY",
+            @"PAN VERTICALLY"];
         
 		attributedtexts = @[
-                      [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Tap with 2 fingers to toggle palette."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
-                      [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
+            [[NSMutableAttributedString alloc] initWithString:@"Settings"],
+            [[NSMutableAttributedString alloc] initWithString:@"Pan to draw."],
+            [[NSMutableAttributedString alloc] initWithString:@"Tap header to toggle palette."],
+            [[NSMutableAttributedString alloc] initWithString:@"Tap elsewhere to toggle header."],
+            [[NSMutableAttributedString alloc] initWithString:@"Tap with 2 fingers to toggle palette."],
+            [[NSMutableAttributedString alloc] initWithString:@"Pinch to zoom."],
+            [[NSMutableAttributedString alloc] initWithString:@"Double-tap to reset zoom."],
+            [[NSMutableAttributedString alloc] initWithString:@"Long-press \xE2\x80\x9C+\xE2\x80\x9D to start\n from saved drawing."],
+            [[NSMutableAttributedString alloc] initWithString:@"Tap selected tool to toggle opacity menu."],
+            [[NSMutableAttributedString alloc] initWithString:@"Pan horizontally for erase modes."],
+            [[NSMutableAttributedString alloc] initWithString:@"Pan vertically with 3 fingers to undo."]];
         
         
 		for (int i = 0; i < [attributedtexts count]; i++) {
@@ -193,6 +197,7 @@
                            @"Follow @vellumapp",
                            @"Suggest Idea",
                            @"Visit vellumapp.com",
+                           @"Settings",
                            @"Gestures & Such"];
     
 	CGFloat margin = 25.0f;
@@ -232,10 +237,11 @@
         CGRect targetframe = CGRectMake(margin, vmargintop + i * (buttonheight + buttonspacing), 320 - margin * 2, buttonheight);
 		VLMAboutButton *btn = [[VLMAboutButton alloc] initWithFrame:targetframe index:i];
         
-		if (i < [buttonTitles count] - 1) {
+		if (i < [buttonTitles count] - 2) {
 			[btn setBackgroundColor:[UIColor colorWithWhite:0.0f alpha:0.2f]];
-		}
-		else {
+		} else if ( i == [buttonTitles count] - 2) {
+			[btn setBackgroundColor:[UIColor colorWithHue:26.0f / 360.0f saturation:0.8f brightness:0.95f alpha:1.0f]];
+		} else {
 			[btn setBackgroundColor:[UIColor colorWithHue:190.0f / 360.0f saturation:0.55f brightness:0.91f alpha:1.0f]];
 		}
 
@@ -328,14 +334,69 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *CellIdentifier = @"Cell";
+    static NSString *SettingCellIdentifier = @"SettingCell";
+    VLMTableViewCell *cell;
 	int ind = indexPath.section;
     
-	VLMTableViewCell *cell = (VLMTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-	if (cell == nil) {
-		cell = [[VLMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-	}
-	[cell setContentImage:images[ind]];
-	return cell;
+    if ( ind > 0 ){
+        cell = (VLMTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[VLMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        [cell setContentImage:images[ind]];
+        return cell;
+    } else {
+        cell = (VLMTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SettingCellIdentifier];
+        if ( cell == nil ) {
+            cell = [[VLMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:SettingCellIdentifier];
+
+            CGFloat pad = 25;
+            
+            
+            UIView *bgd = [[UIView alloc] initWithFrame:CGRectMake(pad, pad, 320-pad*2, 50)];
+            [bgd setBackgroundColor:[UIColor whiteColor]];
+            [bgd setUserInteractionEnabled:NO];
+            [cell addSubview:bgd];
+            
+            UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 320-20*2, 50)];
+            [lbl setBackgroundColor:[UIColor clearColor]];
+            [lbl setTextColor:[UIColor blackColor]];
+            [lbl setText:@"Undo"];
+            [lbl setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15.0f]];
+            [bgd addSubview:lbl];
+            
+            UISwitch *hi = [[UISwitch alloc] initWithFrame:CGRectZero];
+            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+                [hi setCenter:CGPointMake(320-pad*2-10, bgd.frame.size.height/2 + bgd.frame.origin.y)];
+            } else {
+                [hi setCenter:CGPointMake(320-pad*2-20, bgd.frame.size.height/2 + bgd.frame.origin.y)];
+            }
+            
+            UILabel *lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, bgd.frame.size.width, 35)];
+            [lbl2 setBackgroundColor:[UIColor clearColor]];
+            [lbl2 setTextColor:[UIColor grayColor]];
+            [lbl2 setText:@"Turning this off can make app faster."];
+            [lbl2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
+            [lbl2 setTextAlignment:NSTextAlignmentCenter];
+            [bgd addSubview:lbl2];
+
+            
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            VLMSettingsData *settings = delegate.settings;
+            [hi setOn:settings.undoEnabled];
+            [hi addTarget:self action:@selector(undoSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+            
+            [cell addSubview:hi];
+        }
+        return cell;
+    }
+    
+}
+
+- (void)undoSwitchChanged:(UISwitch *)aSwitch {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *settings = delegate.settings;
+    [settings enableUndo:aSwitch.on];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -404,6 +465,7 @@
 	UIButton *b = (UIButton *)sender;
 	int tag = b.tag;
 	NSIndexPath *ipath = [NSIndexPath indexPathForRow:0 inSection:0];
+	NSIndexPath *ipath2 = [NSIndexPath indexPathForRow:0 inSection:1];
 	UIAlertView *a;
 	BOOL hasTwitter = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
 	BOOL hasChrome = [[UIApplication sharedApplication] canOpenURL:
@@ -451,7 +513,10 @@
             [a show];
             break;
 		case 4:
-			[self.tableview scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.tableview scrollToRowAtIndexPath:ipath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            break;
+		case 5:
+            [self.tableview scrollToRowAtIndexPath:ipath2 atScrollPosition:UITableViewScrollPositionTop animated:YES];
 			break;
 	}
 }

@@ -32,15 +32,22 @@
         
         [self setBackgroundColor:[UIColor clearColor]];
         
-		UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, width, height)];
-		[placeholder setBackgroundColor:[UIColor colorWithWhite:0.8f alpha:1.0f]];
-		[self.contentView addSubview:placeholder];
+        if ( ![reuseIdentifier isEqualToString:@"SettingCell"] ){
+            UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(margin, margin, width, height)];
+            [placeholder setBackgroundColor:[UIColor colorWithWhite:0.8f alpha:1.0f]];
+            [self.contentView addSubview:placeholder];
+            
+            UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, placeholder.frame.size.width, placeholder.frame.size.height)];
+            [placeholder addSubview:iv];
+            [placeholder setUserInteractionEnabled:NO];
+            [self setContentImageView:iv];
+            //[self setUserInteractionEnabled:NO];
+        }
         
-		UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, placeholder.frame.size.width, placeholder.frame.size.height)];
-		[placeholder addSubview:iv];
-		[placeholder setUserInteractionEnabled:NO];
-		[self setContentImageView:iv];
-		[self setUserInteractionEnabled:NO];
+        UIButton *b = [[UIButton alloc] initWithFrame:CGRectMake(0,0,320,586+50)];
+        [b setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:b];
+        [self setClipsToBounds:YES];
 	}
 	return self;
 }

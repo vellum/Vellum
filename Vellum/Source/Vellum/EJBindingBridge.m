@@ -74,5 +74,18 @@ EJ_BIND_GET(isUndoCapable, ctx)
 	return JSValueMakeBoolean(ctx, retVal);
 }
 
+// isUndoEnabled
+EJ_BIND_SET(isUndoEnabled, ctx, value)
+{
+	// do nothing. not settable.
+}
+
+EJ_BIND_GET(isUndoEnabled, ctx)
+{
+	AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *data = delegate.settings;
+    NSLog(@"isundoenabled %@", data.undoEnabled?@"yes":@"no");
+	return JSValueMakeBoolean(ctx, data.undoEnabled);
+}
 
 @end

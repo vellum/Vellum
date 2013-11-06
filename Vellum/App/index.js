@@ -159,6 +159,7 @@ var cancelQueuedSave = function() {
 		//
         //console.log('a');
         
+        if (!BRIDGE.isUndoEnabled) return;
 		//if ( !BRIDGE.isUndoCapable ) return;
 
 		//console.log('b');

@@ -14,11 +14,15 @@
 @synthesize window;
 @synthesize mainViewController;
 @synthesize avc;
+@synthesize settings;
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self setSettings:[[VLMSettingsData alloc] init]];
+    
 	// Optionally set the idle timer disabled, this prevents the device from sleep when
 	// not being interacted with by touch. ie. games with motion control.
 	[application setIdleTimerDisabled:YES];

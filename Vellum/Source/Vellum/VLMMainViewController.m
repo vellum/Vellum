@@ -374,6 +374,11 @@
 }
 
 - (void)handleThreeFingerPan:(id)sender {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *data = delegate.settings;
+    if (!data.undoEnabled) return;
+    
+    
 	VLMPanGestureRecognizer *pgr = (VLMPanGestureRecognizer *)sender;
 	switch ([pgr state]) {
 		case UIGestureRecognizerStateBegan:
@@ -768,6 +773,10 @@
 }
 
 - (void)requestUndo{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *data = delegate.settings;
+    if (!data.undoEnabled) return;
+    
     NSInteger nextIndex = self.undoViewController.index - 1;//lastKnownUndoIndex - 1;
 	if (nextIndex < 0) nextIndex = 0;
 	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
@@ -779,6 +788,10 @@
 }
 
 - (void)requestRedo{
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *data = delegate.settings;
+    if (!data.undoEnabled) return;
+
     NSInteger nextIndex = self.undoViewController.index + 1;//lastKnownUndoIndex + 1;
 	if (nextIndex < 0) nextIndex = 0;
 	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
@@ -788,6 +801,7 @@
 		[self.avc callJS:s];
 	}
 }
+
 #pragma mark - MenuDelegate
 
 - (void)updateHeader {

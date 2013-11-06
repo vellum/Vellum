@@ -147,7 +147,14 @@
         [self setUndobutton:ub];
         [self.undobutton setEnabled:NO];
         
-        UITapGestureRecognizer *utgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(undoLongPressed)];
+        [self handleSettingsChange:nil]; // hide or show depending on prefs
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSettingsChange:)
+                                                     name:UNDO_SETTING_CHANGED_NOTIFICATION_NAME
+                                                   object:nil];
+        
+        
+        UITapGestureRecognizer *utgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(undoTapped)];
         [ub addGestureRecognizer:utgr];
 
         UILongPressGestureRecognizer *ulpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(undoLongPressed)];
@@ -340,6 +347,10 @@
 }
 
 - (void)undoLongPressed{
+    [self undoTapped];
+}
+
+- (void)undoTapped{
     if ( !self.undopop ){
         CGSize m = CGSizeMake(160, 100);
         
@@ -352,8 +363,9 @@
         [tbundo setBackgroundColor:[UIColor whiteColor]];
         [tbundo setTitle:@"Undo" forState:UIControlStateNormal];
         [tbundo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [tbundo setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateHighlighted];
-        [tbundo setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
+        [tbundo setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [tbundo setBackgroundImage:[UIImage imageNamed:@"clear10"] forState:UIControlStateHighlighted];
+        [tbundo setTitleColor:[UIColor colorWithWhite:0.9f alpha:1.0f] forState:UIControlStateDisabled];
         [tbundo.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
         [vc.view addSubview:tbundo];
         [self setTextbuttonundo:tbundo];
@@ -367,13 +379,13 @@
         UITapGestureRecognizer *tbtgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textUndoTapped)];
         [tbundo addGestureRecognizer:tbtgr];
         
-        
         UIButton *tbredo = [[UIButton alloc] initWithFrame:CGRectMake(0, m.height/2, m.width, m.height/2)];
         [tbredo setBackgroundColor:[UIColor whiteColor]];
         [tbredo setTitle:@"Redo" forState:UIControlStateNormal];
         [tbredo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [tbredo setTitleColor:[UIColor colorWithWhite:0.5f alpha:1.0f] forState:UIControlStateHighlighted];
-        [tbredo setTitleColor:[UIColor colorWithWhite:0.8f alpha:1.0f] forState:UIControlStateDisabled];
+        [tbredo setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [tbredo setBackgroundImage:[UIImage imageNamed:@"clear10"] forState:UIControlStateHighlighted];
+        [tbredo setTitleColor:[UIColor colorWithWhite:0.9f alpha:1.0f] forState:UIControlStateDisabled];
         [tbredo.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
         [vc.view addSubview:tbredo];
         [self setTextbuttonredo:tbredo];
@@ -387,21 +399,11 @@
         }
         UITapGestureRecognizer *tbtgr2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textRedoTapped)];
         [tbredo addGestureRecognizer:tbtgr2];
-
+        
         UIPopoverController *upop = [[UIPopoverController alloc] initWithContentViewController:vc];
         [self setUndopop:upop];
     }
-    [self.undopop presentPopoverFromRect:self.undobutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (void)undoTapped{
-    //////NSLog(@"undo tap %i", self.undoIndex);
-    if (self.undoIndex > 0) {
-        [self.delegate requestUndo];
-    } else {
-        [self undoLongPressed];
-    }
-}
+    [self.undopop presentPopoverFromRect:self.undobutton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];}
 
 - (void)textUndoTapped{
     [self.delegate requestUndo];
@@ -411,6 +413,21 @@
     [self.delegate requestRedo];
 }
 
+- (void)handleSettingsChange:(NSNotification *)notification{
+    NSLog(@"notification!");
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) return;
+        
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    VLMSettingsData *data = delegate.settings;
+    if (data.undoEnabled) {
+        [self.undobutton setEnabled:YES];
+        [self.undobutton setAlpha:1.0f];
+    } else {
+        [self.undobutton setEnabled:NO];
+        [self.undobutton setAlpha:0.0f];
+    }
+    
+}
 
 #pragma mark - public ()
 - (void)togglePopover {
