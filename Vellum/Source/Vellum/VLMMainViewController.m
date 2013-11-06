@@ -218,9 +218,9 @@
 	// only enable 3 finger undo for small screen devices
 	// to counter glreadpixels performance problems
 	//if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([AppDelegate isUndoCapable]){
+    //if ([AppDelegate isUndoCapable]){
 		[t addGestureRecognizer:threeFingerPan];
-	}
+	//}
     
 	VLMPopMenuViewController *poppy = [[VLMPopMenuViewController alloc] init];
 	[poppy setDelegate:self];
@@ -768,7 +768,7 @@
 }
 
 - (void)requestUndo{
-    NSInteger nextIndex = lastKnownUndoIndex - 1;
+    NSInteger nextIndex = self.undoViewController.index - 1;//lastKnownUndoIndex - 1;
 	if (nextIndex < 0) nextIndex = 0;
 	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
 	if (nextIndex != self.undoViewController.index) {
@@ -779,7 +779,7 @@
 }
 
 - (void)requestRedo{
-    NSInteger nextIndex = lastKnownUndoIndex + 1;
+    NSInteger nextIndex = self.undoViewController.index + 1;//lastKnownUndoIndex + 1;
 	if (nextIndex < 0) nextIndex = 0;
 	if (nextIndex > self.undoViewController.numStates - 1) nextIndex = self.undoViewController.numStates - 1;
 	if (nextIndex != self.undoViewController.index) {
@@ -891,7 +891,7 @@
 
 - (void)updateUndoIndex:(NSInteger)index {
 	//NSLog(@"mainviewcontroller:updateundoindex(%d)", index);
-    [self setLastKnownUndoIndex:index];
+    //[self setLastKnownUndoIndex:index];
 	[self.undoViewController setIndex:index];
 	[self.undoViewController update];
     [self.headerController updateUndoIndex:index andUndoCount:self.undoViewController.numStates];
