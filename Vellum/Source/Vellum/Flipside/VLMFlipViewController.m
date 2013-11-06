@@ -53,7 +53,7 @@
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
 		// Custom initialization
-		self.contentSizeForViewInPopover = CGSizeMake(320.0, 578.0);
+		self.contentSizeForViewInPopover = CGSizeMake(320.0, 578.0 + 50);
 	}
 	return self;
 }
@@ -285,9 +285,9 @@
     
 	//if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 
-    if (![AppDelegate isUndoCapable]) {
-		sections--; // omit undo slide
-	}
+    //if (![AppDelegate isUndoCapable]) {
+	//	sections--; // omit undo slide
+	//}
 
 	return sections;
 }
