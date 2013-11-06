@@ -1,0 +1,31 @@
+AUTHENTICALLY DIGITAL
+Vellum is an authentically digital drawing app. Its tools leave aliased marks, evoking a sense of digital grit.
+
+JUST THE BASICS
+There are no knobs and dials to turn. There are no colors. There is no gallery. I believe that having fewer things between you and the page deepens one's drawing experience. These tools -- Scribble, Graphite, Shade, Line, Smudge, and Erase -- feel natural, responsive, and powerful.
+
+DESIGN
+Vellum's flat, minimal design lets the UI recede into the background and puts your focus on your drawing.
+
+RETINA RESOLUTION
+This app is optimized for Retina displays. New iPad, iPhone 4, iPhone 4S, and iPhone 5 all have luxurious double resolution canvases to work within. Images will be exported at full resolution as follows:
+
+iPad 3 / 1536 x 2048
+iPhone 5 / 640 x 1536
+iPhone 4 & 4S / 640 x 960
+
+Non-retina drawings are exported at 1.5x native resolution:
+iPad 2 & iPad Mini / 1152 x 1536 
+
+GESTURES, FEATURES, & NEAT TIPS
+- Pinch to zoom. With up to 4000% magnification, you can obsess over detail. If you want. 
+- Pan with 3-fingers to undo or redo. (only on iPhone, iPad 2, and iPad Mini)
+- Tap anywhere to show/reveal the header.
+- Tap header for menu.
+- 2-Finger Tap anywhere to show/reveal menu.
+- Long Press on "+" to import an image.
+- Double-tap anywhere to reset the zoom to 100%.
+- With the tool palette open, tap the already selected tool for opacity options. Scroll horizontally for options to turn any tool into an eraser (and vice versa).
+
+CAVEATS
+- Original iPhone, iPhone 3G, iPhone 3GS, and other older devices are not supported.
