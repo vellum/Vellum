@@ -7,20 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIColor+Components.h"
 
 @interface VLMColorData : NSObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *labeltext;
-@property (nonatomic) CGFloat opacity;
+@property (nonatomic, strong) UIColor *buttoncolor;
+@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *rgbaColor;
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL isSubtractive;
-@property (nonatomic, strong) UIColor *color;
-@property (nonatomic, strong) UIColor *textColor;
 
-- (id)init;
-- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
+- (id)initWithName:(NSString *)colorname RGBA:(UIColor *)rgba PreMultipliedColor:(UIColor *)bcolor Label:(NSString *)colorlabel Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
 
-- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract TextColor:(UIColor *)labelColor;
+- (id)initWithName:(NSString *)colorname RGBA:(UIColor *)rgba PreMultipliedColor:(UIColor *)bcolor Label:(NSString *)colorlabel Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract TextColor:(UIColor *)labelColor;
 
 @end

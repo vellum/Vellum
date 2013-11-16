@@ -841,14 +841,65 @@
 		}
 	}
 	NSString *m = item.javascriptvalue;
-	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %f);", m, color.name, color.opacity];
+    
+    int numComponents = CGColorGetNumberOfComponents(color.rgbaColor.CGColor);
+    const CGFloat *cmps = CGColorGetComponents(color.rgbaColor.CGColor);
+    NSInteger r = 0;
+    NSInteger g = 0;
+    NSInteger b = 0;
+    CGFloat a = 0;
+    
+    if (numComponents == 4)
+    {
+        // rgb values + alpha
+        r = lroundf(cmps[0]*255);;
+        g = lroundf(cmps[1]*255);
+        b = lroundf(cmps[2]*255);
+        a = cmps[3];
+        
+    }else if(numComponents == 2){
+        // greyscale, set rgb to the same value + alpha
+        r = lroundf(cmps[0]*255);
+        g = lroundf(cmps[0]*255);
+        b = lroundf(cmps[0]*255);
+        a = cmps[1];
+    }
+    
+    numComponents = CGColorGetNumberOfComponents(color.buttoncolor.CGColor);
+    cmps = CGColorGetComponents(color.buttoncolor.CGColor);
+
+    NSInteger rr = 0;
+    NSInteger gg = 0;
+    NSInteger bb = 0;
+    CGFloat aa = 0;
+    
+    if (numComponents == 4)
+    {
+        // rgb values + alpha
+        rr = lroundf(cmps[0]*255);;
+        gg = lroundf(cmps[1]*255);
+        bb = lroundf(cmps[2]*255);
+        aa = cmps[3];
+        
+    }else if(numComponents == 2){
+        // greyscale, set rgb to the same value + alpha
+        rr = lroundf(cmps[0]*255);
+        gg = lroundf(cmps[0]*255);
+        bb = lroundf(cmps[0]*255);
+        aa = cmps[1];
+    }
+
+    
+    
+	NSString *s = [NSString stringWithFormat:@"setDrawingModeAndColor(%@, '%@', %i, %i, %i, %f,  %i, %i, %i, %f);", m, color.name, r, g, b, a, rr, gg, bb, aa];
+    NSLog(s);
 	[self.avc callJS:s];
     
 	NSString *name = [item.name stringByReplacingOccurrencesOfString:@" " withString:@""];
 	//NSString *eventpath = [NSString stringWithFormat:@"%@ - %@", FLURRY_PATH_MENU, name];
 	//[Flurry logEvent:eventpath];
     
-	NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, color.opacity, (color.isSubtractive) ? @"_erase":@""];
+	NSString *eventpath2 = [NSString stringWithFormat:@"%@ - %@ - %f%@", FLURRY_PATH_MENU, name, a, (color.isSubtractive) ? @"_erase":@""];
 	[Flurry logEvent:eventpath2];
     
 	////NSLog(eventpath2);

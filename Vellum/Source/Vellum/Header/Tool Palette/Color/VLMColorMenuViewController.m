@@ -89,7 +89,7 @@
             VLMColorData *color = [[data colors] objectAtIndex:i];
             NSString *text = [color labeltext];
             [circle setText:text];
-            [circle setColor:[color color]];
+            [circle setColor:[color buttoncolor]];
             [circle setTextColor:[color textColor]];
             
             xxx+=buttonsize+pad;
@@ -132,7 +132,7 @@
             VLMColorData *color = [[data colors] objectAtIndex:i];
             NSString *text = [color labeltext];
             [circle setText:text];
-            [circle setColor:[color color]];
+            [circle setColor:[color buttoncolor]];
             [circle setTextColor:[color textColor]];
         }
 

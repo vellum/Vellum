@@ -19,6 +19,7 @@ ink.prototype = {
             sat,
             lig;
         
+        /*
         // black
         if (rgba[0]==0){
             hue = 0;
@@ -30,6 +31,10 @@ ink.prototype = {
         } else {
             this.color = 'rgba(242,242,232,1)';
         }
+         */
+
+        var rgba2 = col.rgba2;
+        this.color = 'rgba(' + rgba2[0] + ',' + rgba2[1] + ',' + rgba2[2] + ',' + 1 + ')';
 	},
 
 	begin : function(x,y){

@@ -12,48 +12,35 @@
 
 @synthesize name;
 @synthesize labeltext;
-@synthesize opacity;
 @synthesize enabled;
 @synthesize isSubtractive;
-@synthesize color;
+@synthesize buttoncolor;
 @synthesize textColor;
+@synthesize rgbaColor;
 
-- (id)init {
-	if (self = [super init]) {
-		[self setName:@"black"];
-		[self setLabeltext:@"0"];
-		[self setOpacity:1];
-		[self setEnabled:YES];
-        [self setColor:[UIColor clearColor]];
-        [self setTextColor:[UIColor whiteColor]];
-	}
-	return self;
-}
 
-- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract {
-	if (self = [super init]) {
-        [self setColor:buttoncolor];
+- (id)initWithName:(NSString *)colorname RGBA:(UIColor *)rgba PreMultipliedColor:(UIColor *)bcolor Label:(NSString *)colorlabel  Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract{
+    if ( self = [super init] ){
+        [self setButtoncolor:bcolor];
 		[self setName:colorname];
 		[self setLabeltext:colorlabel];
-		[self setOpacity:coloropacity];
 		[self setEnabled:isEnabled];
 		[self setIsSubtractive:shouldSubtract];
         [self setTextColor:[UIColor whiteColor]];
-
-	}
-	return self;
+        [self setRgbaColor:rgba];
+    }
+    return self;
 }
 
-- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract TextColor:(UIColor *)labelColor{
+- (id)initWithName:(NSString *)colorname RGBA:(UIColor *)rgba PreMultipliedColor:(UIColor *)bcolor Label:(NSString *)colorlabel Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract TextColor:(UIColor *)labelColor{
     if ( self = [super init] ){
-        [self setColor:buttoncolor];
+        [self setButtoncolor:bcolor];
 		[self setName:colorname];
 		[self setLabeltext:colorlabel];
-		[self setOpacity:coloropacity];
 		[self setEnabled:isEnabled];
 		[self setIsSubtractive:shouldSubtract];
         [self setTextColor:labelColor];
-
+        [self setRgbaColor:rgba];
     }
     return self;
 }

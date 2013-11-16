@@ -24,13 +24,14 @@ var setDrawingMode = function(mode) {
 		ink.setBrush(mode);
 	},
 
-	setDrawingModeAndColor = function(mode, color, opacity){
+	setDrawingModeAndColor = function(mode, colorName, rawR, rawG, rawB, rawA, preMultipliedR, preMultipliedG, preMultipliedB, preMultipliedA){
 		
 		// set mode
 		var ink = VLM.ink,
 			s = VLM.state;
 
 		// set color
+        /*
 		if ( color == 'black' ){
 			s.color = {
 				'name' : 'black',
@@ -42,6 +43,12 @@ var setDrawingMode = function(mode) {
 				'rgba' : [242,242,232,Number(opacity)]
 			};
 		}
+        */
+        s.color = {
+            'name' : colorName,
+            'rgba' : [rawR, rawG, rawB, rawA],
+            'rgba2': [preMultipliedR, preMultipliedG, preMultipliedB, preMultipliedA]
+        };
 
 		ink.setBrush(mode);
 
