@@ -69,7 +69,12 @@ line.prototype = {
 
 			ctx.strokeStyle = fgcolor;
 			ctx.fillStyle = fgdecoration;
-			ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 1.25    * ( scalar + 0.2 );
+            
+            if (zoomlevel < 10) {
+                ctx.lineWidth = state.isIPad ? 1.5 * ( scalar + 0.2 )  : 1.25    * ( scalar + 0.2 );
+            } else {
+                ctx.lineWidth = 0.45;
+            }
 			ctx.moveTo( prev.x, prev.y );
 			ctx.lineTo( x, y );
 
