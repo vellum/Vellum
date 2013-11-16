@@ -8,7 +8,7 @@ smudge.prototype = {
 	prev : { x:0, y:0, nib:0, angle:0 },
 	interpolation_multiplier : 0.25,
     distance_multiplier : 2.5,
-    nib_multiplier : 0.25,
+    nib_multiplier : 1.0,
 	step : 1.5,
     smoothed_alpha : 0,
     smoothed_rgba : {r:0,g:0,b:0,a:0},
@@ -92,7 +92,7 @@ smudge.prototype = {
             
 			var angle = Math.atan2(dy, dx) - Math.PI / 2,
                 curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,
-                multiplier = 1.0,
+                multiplier = 1.25,
                 count = 0,
                 cosangle = Math.cos(angle),
                 sinangle = Math.sin(angle),
@@ -200,7 +200,7 @@ smudge.prototype = {
                 this.smoothed_rgba.b += ( rgba.b - this.smoothed_rgba.b ) * 0.5;
 
                 // clamp average sampled value
-                if ( avgsample > 0.25 ) avgsample = 0.25;
+                if ( avgsample > 0.5 ) avgsample = 0.5;
                 
                 // get smoothed value
                 var smoothed = this.smoothed_alpha;
@@ -214,8 +214,8 @@ smudge.prototype = {
                 // store it for the next tick
                 this.smoothed_alpha = smoothed;
                 
-                var ss = hsv.s * 0.9,
-                bb = hsv.v * 0.75;
+                var ss = hsv.s * 0.95,
+                bb = hsv.v * 0.95;
                 ttt = tinycolor('hsv(' + hsv.h + ',' + ss + ',' + bb + ')');
                 tinyrgb = ttt.toRgb();
                 ctx.strokeStyle = 'rgba(' + tinyrgb.r + ',' + tinyrgb.g + ',' + tinyrgb.b + ',' + smoothed + ')';
