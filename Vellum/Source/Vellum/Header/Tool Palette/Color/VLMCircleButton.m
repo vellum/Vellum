@@ -13,23 +13,20 @@
 
 @interface VLMCircleButton ()
 @property CGRect originalRect;
-@property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UIView *shade;
-// ios 6
+@property (nonatomic, strong) UIView *colorfield;
+@property (nonatomic, strong) UIView *borderfield;
 @property (nonatomic, strong) UILabel *label;
-// ios 5
-@property (nonatomic, strong) UILabel *labelhead;
-@property (nonatomic, strong) UILabel *labeltext;
 @property (nonatomic, strong) UIView *back;
 @end
 
 @implementation VLMCircleButton
 @synthesize originalRect;
 @synthesize shade;
+@synthesize colorfield;
+@synthesize borderfield;
 @synthesize label;
-@synthesize labelhead;
 @synthesize back;
-@synthesize image;
 
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
@@ -48,42 +45,32 @@
 		[self.back setBackgroundColor:[UIColor clearColor]];
 		[self addSubview:back];
         
-		[self setImage:[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)]];
-		[self.image setImage:[UIImage imageNamed:@"circlebutton.png"]];
-		[self.back addSubview:self.image];
-        
+        [self setBorderfield:[[UIView alloc] initWithFrame:CGRectMake(floorf((frame.size.width - 60.0f) / 2.0f), floorf((frame.size.height - 60.0f) / 2.0f), 60.0f, 60.0f)]];
+		[self.borderfield setUserInteractionEnabled:NO];
+		[self.borderfield.layer setCornerRadius:30.0f];
+		[self.borderfield setBackgroundColor:[UIColor clearColor]];
+        [self.borderfield setAlpha:0.5f];
+		[self.back addSubview:self.borderfield];
+
+		[self setColorfield:[[UIView alloc] initWithFrame:CGRectMake(floorf((frame.size.width - 50.0f) / 2.0f), floorf((frame.size.height - 50.0f) / 2.0f), 50.0f, 50.0f)]];
+		[self.colorfield setUserInteractionEnabled:NO];
+		[self.colorfield.layer setCornerRadius:25.0f];
+		[self.back addSubview:self.colorfield];
+
+
 		[self setLabel:[[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)]];
 		[self.label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
 		[self.label setTextAlignment:NSTextAlignmentCenter];
-		[self.label setTextColor:[UIColor blackColor]];
+        [self.label setTextColor:[UIColor colorWithWhite:1.0f alpha:1.0f]];
+
 		[self.label setBackgroundColor:[UIColor clearColor]];
 		[self.label setNumberOfLines:2];
 		[self.label setUserInteractionEnabled:NO];
 		[self.back addSubview:self.label];
         
-		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")) {
-		}
-		else {
-			[self setLabelhead:[[UILabel alloc] initWithFrame:CGRectMake(0, 11, frame.size.width, frame.size.height / 2.0f)]];
-			[self.labelhead setFont:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f]];
-			[self.labelhead setTextAlignment:NSTextAlignmentCenter];
-			[self.labelhead setTextColor:[UIColor blackColor]];
-			[self.labelhead setBackgroundColor:[UIColor clearColor]];
-			[self.labelhead setNumberOfLines:1];
-            
-			[self setLabeltext:[[UILabel alloc] initWithFrame:CGRectMake(0, 25, frame.size.width, frame.size.height / 2.0f)]];
-			[self.labeltext setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13.0f]];
-			[self.labeltext setTextAlignment:NSTextAlignmentCenter];
-			[self.labeltext setTextColor:[UIColor blackColor]];
-			[self.labeltext setBackgroundColor:[UIColor clearColor]];
-			[self.labeltext setNumberOfLines:1];
-            
-			[self.back addSubview:self.labeltext];
-			[self.back addSubview:self.labelhead];
-		}
         
         
-		[self setShade:[[UIView alloc] initWithFrame:CGRectMake((frame.size.width - 60.0f) / 2.0f, (frame.size.height - 60.0f) / 2.0f, 60.0f, 60.0f)]];
+		[self setShade:[[UIView alloc] initWithFrame:CGRectMake(floorf((frame.size.width - 60.0f) / 2.0f), floorf((frame.size.height - 60.0f) / 2.0f), 60.0f, 60.0f)]];
 		[self.shade setUserInteractionEnabled:NO];
 		[self.shade.layer setCornerRadius:30.0f];
 		[self.shade setBackgroundColor:[UIColor blackColor]];
@@ -157,46 +144,35 @@
 - (void)setText:(NSString *)text {
 	NSUInteger location = [text rangeOfString:@"\n" options:NSCaseInsensitiveSearch].location;
 	if (location != NSNotFound) {
-		if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") && NSClassFromString(@"NSMutableAttributedString")) {
-			NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
-			[att setAttributes:@{ NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f] } range:NSMakeRange(0, location)];
-			[self.label setAttributedText:att];
-			return;
-		}
-		else {
-			NSString *sub1 = [text substringWithRange:NSMakeRange(0, location)];
-			NSString *sub2 = [text substringWithRange:NSMakeRange(location + 1, text.length - (location + 1))];
-			[self.labelhead setText:sub1];
-			[self.labeltext setText:sub2];
-			[self.label setText:@""];
-			return;
-		}
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+        [att setAttributes:@{ NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:9.0f] } range:NSMakeRange(0, location)];
+        [self.label setAttributedText:att];
+        return;
 	}
 	[self.label setText:text];
-	if (self.labelhead == nil) return;
-	[self.labelhead setText:@""];
-	if (self.labeltext == nil) return;
-	[self.labeltext setText:@""];
 }
 
 - (void)setSelected:(BOOL)selected {
 	if (selected) {
-		[self.image setImage:[UIImage imageNamed:@"circlebutton_selected.png"]];
-		[self.label setTextColor:[UIColor whiteColor]];
-		if (self.labelhead != nil) {
-			[self.labelhead setTextColor:[UIColor whiteColor]];
-			[self.labeltext setTextColor:[UIColor whiteColor]];
-		}
+        [self.borderfield setBackgroundColor:[UIColor whiteColor]];
+        [self.borderfield setAlpha:1.0f];
 	}
 	else {
-		[self.image setImage:[UIImage imageNamed:@"circlebutton.png"]];
-		[self.label setTextColor:[UIColor blackColor]];
-		if (self.labelhead != nil) {
-			[self.labelhead setTextColor:[UIColor blackColor]];
-			[self.labeltext setTextColor:[UIColor blackColor]];
-		}
+        [self.borderfield setBackgroundColor:[UIColor blackColor]];
+        [self.borderfield setAlpha:0.1f];
 	}
 	[super setSelected:selected];
 }
 
+- (void)setHue:(CGFloat)h Saturation:(CGFloat)s Brightness:(CGFloat)b Alpha:(CGFloat)a {
+    [self.colorfield setBackgroundColor:[UIColor colorWithHue:h saturation:s brightness:b alpha:a]];
+}
+
+- (void)setColor:(UIColor *)color{
+    [self.colorfield setBackgroundColor:color];
+}
+
+- (void)setTextColor:(UIColor *)color{
+    [self.label setTextColor:color];
+}
 @end

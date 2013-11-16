@@ -55,47 +55,85 @@
 	VLMToolCollection *tools = [VLMToolCollection instance];
 	VLMToolData *data = [[tools tools] objectAtIndex:tools.selectedIndex];
 	NSInteger numbuttons = [[data colors] count];
-    
+
+    VLMScrollView *sv;
+
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+
 		[self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2 * innermargin + 5.0f, winw, buttonsize + margin * 2 + innermargin * 2)];
 		[self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+
+        sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [sv setBackgroundColor:[UIColor clearColor]];
+        [sv setCanCancelContentTouches:YES];
+        [sv setAlwaysBounceHorizontal:YES];
+        [sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [sv setContentMode:UIViewContentModeCenter];
+        [sv setShowsHorizontalScrollIndicator:NO];
+        [sv setShowsVerticalScrollIndicator:NO];
+        [sv setContentSize:CGSizeMake(innermargin * 2 + numbuttons * (buttonsize + pad), buttonsize + pad)];
+        for (int i = 0; i < numbuttons; i++) {
+            VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake(innermargin + i * (buttonsize + pad), 0, buttonsize, buttonsize)];
+            [circle setTag:i];
+            [sv addSubview:circle];
+            [buttons addObject:circle];
+            [circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+            VLMColorData *color = [[data colors] objectAtIndex:i];
+            NSString *text = [color labeltext];
+            [circle setText:text];
+            [circle setColor:[color color]];
+            [circle setTextColor:[color textColor]];
+        }
+
 	}
 	else {
-		CGFloat predictedWidth = innermargin * 2 + numbuttons * (pad + buttonsize);
+        buttonsize = 73.0f;
+        
+        NSInteger numbuttonsvisible = 8;
+		CGFloat predictedWidth = numbuttonsvisible * (pad + buttonsize);
+
 		[self.view setFrame:CGRectMake((winw - predictedWidth) / 2.0f, HEADER_HEIGHT + buttonsize + 2 * innermargin + 18.0f, predictedWidth, buttonsize + margin * 2 + innermargin * 2)];
 		[self.view setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+        [self.view setClipsToBounds:YES];
+
+        sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, predictedWidth, self.view.frame.size.height)];
+        [sv setClipsToBounds:NO];
+        [sv setPagingEnabled:YES];
+        [sv setBackgroundColor:[UIColor clearColor]];
+        [sv setCanCancelContentTouches:YES];
+        [sv setAlwaysBounceHorizontal:YES];
+        [sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        [sv setContentMode:UIViewContentModeCenter];
+        
+        [sv setShowsHorizontalScrollIndicator:NO];
+        [sv setShowsVerticalScrollIndicator:NO];
+        
+        [sv setContentSize:CGSizeMake(numbuttons * (buttonsize + pad), buttonsize + pad)];
+        
+        for (int i = 0; i < numbuttons; i++) {
+            VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake(i * (buttonsize + pad), 0, buttonsize, buttonsize)];
+            [circle setTag:i];
+            [sv addSubview:circle];
+            [buttons addObject:circle];
+            [circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+            VLMColorData *color = [[data colors] objectAtIndex:i];
+            NSString *text = [color labeltext];
+            [circle setText:text];
+            [circle setColor:[color color]];
+            [circle setTextColor:[color textColor]];
+        }
+
+
 	}
 	[self.view setContentMode:UIViewContentModeCenter];
     
     
-	VLMScrollView *sv = [[VLMScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-	[sv setContentSize:CGSizeMake(innermargin * 2 + numbuttons * (buttonsize + pad), buttonsize + pad)];
-	[sv setPagingEnabled:YES];
     
-    
-	[sv setBackgroundColor:[UIColor clearColor]];
-	[sv setCanCancelContentTouches:YES];
-	[sv setAlwaysBounceHorizontal:YES];
-	[sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-	[sv setContentMode:UIViewContentModeCenter];
-    
-	[sv setShowsHorizontalScrollIndicator:NO];
-	[sv setShowsVerticalScrollIndicator:NO];
     
 	[self setScrollview:sv];
 	[self.view addSubview:sv];
 	self.scrollview.canCancelContentTouches = YES;
     
-	for (int i = 0; i < numbuttons; i++) {
-		VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake(innermargin + i * (buttonsize + pad), 0, buttonsize + pad, buttonsize + pad)];
-		[circle setTag:i];
-		[sv addSubview:circle];
-		[buttons addObject:circle];
-		[circle addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
-		VLMColorData *color = [[data colors] objectAtIndex:i];
-		NSString *text = [color labeltext];
-		[circle setText:text];
-	}
     
 	innermargin = 10.0f;
 	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(innermargin, self.view.frame.size.height - 1, self.view.frame.size.width - innermargin * 2, 1.0f)];
@@ -282,10 +320,20 @@
 
 - (void)resetScroll {
 	//NSLog(@"resetscroll");
+    CGPoint scrollPosition = self.scrollview.contentOffset;
+    NSLog(@"pos: %f, %f", scrollPosition.x, scrollPosition.y);
+	CGFloat pad = 1;
+	CGFloat buttonsize = 74.0f;
+    
 	VLMToolCollection *tools = [VLMToolCollection instance];
-	VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
-	CGFloat page = floorf((selectedtool.selectedColorIndex * 75.0f + 75 + 3) / self.scrollview.frame.size.width);
-	[self.scrollview scrollRectToVisible:CGRectMake(page * self.scrollview.frame.size.width, 0, self.scrollview.frame.size.width, 1) animated:YES];
+    VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
+    CGFloat page = floorf((selectedtool.selectedColorIndex*(buttonsize+pad))/self.scrollview.frame.size.width);
+    CGFloat desiredOffsetX = page * (self.scrollview.frame.size.width)+1;
+    
+    if (desiredOffsetX + self.scrollview.frame.size.width > self.scrollview.contentSize.width) {
+        desiredOffsetX = self.scrollview.contentSize.width - self.scrollview.frame.size.width;
+    }
+    [self.scrollview setContentOffset:CGPointMake(desiredOffsetX, 0) animated:YES];
 }
 
 @end

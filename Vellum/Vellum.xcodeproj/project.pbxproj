@@ -738,16 +738,16 @@
 		B64CE60E166682700087CF94 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				BDD593E218175A4200D016AF /* Vector */,
 				BDEE8F4D17B2FD5900D5B3A9 /* Vellum */,
-				BDD593F618177CEF00D016AF /* UIColor Category */,
 				BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */,
 				BDA36CE3172E034A00665A50 /* DD */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
 				B64CE64F166682700087CF94 /* Prefix.pch */,
 				B64CE661166682700087CF94 /* main.m */,
+				BDD593F618177CEF00D016AF /* UIColor Category */,
 				BDE52DC817B2FF8200794512 /* UINavigationBar Category */,
+				BDD593E218175A4200D016AF /* Vector */,
 			);
 			path = Source;
 			sourceTree = "<group>";

@@ -94,8 +94,9 @@
 		[self.view addSubview:sv];
 	}
 	else {
+        buttonsize = 73.0f;
 		margin = 10.0f;
-        CGFloat marginhoz = margin/2.0f;
+        CGFloat marginhoz = 10;
 		innermargin = 5.0f;
 		topleft = CGPointMake(0, innermargin);
         
@@ -112,7 +113,7 @@
 		VLMTriangleView *tri = [[VLMTriangleView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - triangleSize.width / 2, margin - triangleSize.height, triangleSize.width, triangleSize.height)];
 		[self.view addSubview:tri];
         
-		back = [[UIView alloc] initWithFrame:CGRectMake(margin/2, margin, winw - marginhoz*2, innermargin * 2 + buttonsize * 1)];
+		back = [[UIView alloc] initWithFrame:CGRectMake(marginhoz, margin, winw - marginhoz*2, innermargin * 2 + buttonsize * 1)];
         [back setBackgroundColor:[UIColor whiteColor]];
         
 		[self.view addSubview:back];

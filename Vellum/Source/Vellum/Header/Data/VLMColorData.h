@@ -15,7 +15,12 @@
 @property (nonatomic) CGFloat opacity;
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL isSubtractive;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *textColor;
+
 - (id)init;
-- (id)initWithName:(NSString *)colorname Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
+- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract;
+
+- (id)initWithName:(NSString *)colorname Color:(UIColor *)buttoncolor Label:(NSString *)colorlabel Opacity:(CGFloat)coloropacity Enabled:(BOOL)isEnabled Subtractive:(BOOL)shouldSubtract TextColor:(UIColor *)labelColor;
 
 @end

@@ -34,10 +34,8 @@ static VLMToolCollection *sharedToolCollection;
 		                  @"Graphite",
 		                  @"Shade",
 		                  @"Line",
-                          
-		                  @"Ink", // 4
-                          @"Smudge", // 5
-                          
+		                  @"Ink",
+                          @"Smudge",
 		                  @"Erase",
 		                  @"Scratch",
 		                  @"Soft Erase",
@@ -48,10 +46,8 @@ static VLMToolCollection *sharedToolCollection;
 		                     @YES,
 		                     @YES,
 		                     @YES,
-		                     
-                             @YES, // 4
-		                     @YES, // 5
-		                     
+                             @YES,
+		                     @YES,
                              @YES,
                              @YES,
 		                     @YES,
@@ -74,8 +70,8 @@ static VLMToolCollection *sharedToolCollection;
 		                           @NO,
 		                           @NO,
 		                           @NO,
-		                           @NO,  //4
-		                           @YES, //5
+		                           @NO,
+		                           @YES,
 		                           @YES,
 		                           @YES,
 		                           @YES,
@@ -88,8 +84,8 @@ static VLMToolCollection *sharedToolCollection;
 		                         @1,
 		                         @1,
 		                         @1,
-		                         @1, // 4
-		                         @0, // 5
+		                         @1,
+		                         @0,
 		                         @7,
 		                         @7,
 		                         @5,
@@ -101,8 +97,8 @@ static VLMToolCollection *sharedToolCollection;
                                        @NO,
                                        @NO,
                                        @YES,
-                                       @YES, // 4
-                                       @NO, // 5
+                                       @YES,
+                                       @NO,
                                        @NO,
                                        @NO,
                                        @NO,
@@ -141,49 +137,62 @@ static VLMToolCollection *sharedToolCollection;
 			[data setSelectedColorIndex:sel];
             
 			[self.tools addObject:data];
-			if (i == 4) {
+            if (i==5){
                 [data setColors:@[
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"80" Opacity:0.8f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"60" Opacity:0.6f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"40" Opacity:0.4f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"20" Opacity:0.2f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"10" Opacity:0.1f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" Label:@"WHITE\n0" Opacity:0.0f Enabled:YES Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
-			} else if (i == 5) {
-				[data setColors:@[
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:1.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.8f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.6f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.4f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.2f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.1f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"." Opacity:0.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"." Opacity:1.0f Enabled:NO Subtractive:YES]]];
-			}
-			else if (i == 9) { // hard erase
-				[data setColors:@[
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"ERASE\n·" Opacity:0.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"/" Label:@"·" Opacity:0.0f Enabled:NO Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
-			}
-			else {
-				[data setColors:@[
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"BLACK\n100" Opacity:1.0f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"black" Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"ERASE\n25" Opacity:0.25f Enabled:YES Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"50" Opacity:0.5f Enabled:YES Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"75" Opacity:0.75f Enabled:YES Subtractive:YES],
-				                 [[VLMColorData alloc] initWithName:@"erase" Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES]]];
-			}
+                                  [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithWhite:0.0f alpha:1.0f] Label:@"." Opacity:1.0f Enabled:YES Subtractive:YES],
+                                  [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:80.0f/360.0f saturation:0.05f brightness:0.24f alpha:1.0f] Label:@"." Opacity:0.75f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:72.0f/360.0f saturation:0.04f brightness:0.47f alpha:1.0f] Label:@"." Opacity:0.5f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:72.0f/360.0f saturation:0.05f brightness:0.71f alpha:1.0f] Label:@"." Opacity:0.25f Enabled:NO Subtractive:NO],
+                                  
+                                  [[VLMColorData alloc] initWithName:@"white" Color:[UIColor whiteColor] Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:61.0f/360.0f saturation:0.01f brightness:0.98f alpha:1.0f] Label:@"." Opacity:0.75f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:48.0f/360.0f saturation:0.02f brightness:0.97f alpha:1.0f] Label:@"." Opacity:0.5f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:73.0f/360.0f saturation:0.04f brightness:0.96f alpha:1.0f] Label:@"." Opacity:0.25f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  
+                                  [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:12.0f/360.0f saturation:0.6f brightness:0.42f alpha:1.0f] Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.35f brightness:0.55f alpha:1.0f] Label:@"." Opacity:0.75f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:19.0f/360.0f saturation:0.21f brightness:0.68f alpha:1.0f] Label:@"." Opacity:0.5f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:31.0f/360.0f saturation:0.1f brightness:0.82f alpha:1.0f] Label:@"." Opacity:0.25f Enabled:NO Subtractive:NO],
+                                  
+                                  [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.78f brightness:0.69f alpha:1.0f] Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.52f brightness:0.76f alpha:1.0f] Label:@"." Opacity:0.75f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:15.0f/360.0f saturation:0.35f brightness:0.83f alpha:1.0f] Label:@"." Opacity:0.5f Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:22.0f/360.0f saturation:0.18f brightness:0.80f alpha:1.0f] Label:@"." Opacity:0.25f Enabled:NO Subtractive:NO],
+                                  
+                                  [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"ERASE\n25" Opacity:0.25f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Opacity:0.5f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Opacity:0.75f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Opacity:1.0f Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]]
+                                  
+                              ]];
+            } else {
+            [data setColors:@[
+                              [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithWhite:0.0f alpha:1.0f] Label:@"100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:80.0f/360.0f saturation:0.05f brightness:0.24f alpha:1.0f] Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:72.0f/360.0f saturation:0.04f brightness:0.47f alpha:1.0f] Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"black" Color:[UIColor colorWithHue:72.0f/360.0f saturation:0.05f brightness:0.71f alpha:1.0f] Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO],
+                              
+                              [[VLMColorData alloc] initWithName:@"white" Color:[UIColor whiteColor] Label:@"100" Opacity:1.0f Enabled:YES Subtractive:NO TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:61.0f/360.0f saturation:0.01f brightness:0.98f alpha:1.0f] Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:48.0f/360.0f saturation:0.02f brightness:0.97f alpha:1.0f] Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"white" Color:[UIColor colorWithHue:73.0f/360.0f saturation:0.04f brightness:0.96f alpha:1.0f] Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO TextColor:[UIColor blackColor]],
+
+                              [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:12.0f/360.0f saturation:0.6f brightness:0.42f alpha:1.0f] Label:@"100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.35f brightness:0.55f alpha:1.0f] Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:19.0f/360.0f saturation:0.21f brightness:0.68f alpha:1.0f] Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"brown" Color:[UIColor colorWithHue:31.0f/360.0f saturation:0.1f brightness:0.82f alpha:1.0f] Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO],
+                              
+                              [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.78f brightness:0.69f alpha:1.0f] Label:@"100" Opacity:1.0f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:13.0f/360.0f saturation:0.52f brightness:0.76f alpha:1.0f] Label:@"75" Opacity:0.75f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:15.0f/360.0f saturation:0.35f brightness:0.83f alpha:1.0f] Label:@"50" Opacity:0.5f Enabled:YES Subtractive:NO],
+                              [[VLMColorData alloc] initWithName:@"red" Color:[UIColor colorWithHue:22.0f/360.0f saturation:0.18f brightness:0.80f alpha:1.0f] Label:@"25" Opacity:0.25f Enabled:YES Subtractive:NO],
+                              
+                              [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"ERASE\n25" Opacity:0.25f Enabled:YES Subtractive:YES TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"50" Opacity:0.5f Enabled:YES Subtractive:YES TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"75" Opacity:0.75f Enabled:YES Subtractive:YES TextColor:[UIColor blackColor]],
+                              [[VLMColorData alloc] initWithName:@"erase" Color:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"100" Opacity:1.0f Enabled:YES Subtractive:YES TextColor:[UIColor blackColor]]
+              ]];
+            }
 		}
 		if (shouldSynchronize) {
 			[defaults synchronize];
