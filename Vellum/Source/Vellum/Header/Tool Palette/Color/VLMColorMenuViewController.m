@@ -184,18 +184,23 @@
 	[self.view setUserInteractionEnabled:YES];
     
     
-	CGFloat offx = [self.scrollview contentOffset].x;
 	CGFloat delayunit = 0.05f; //(self.scrollview.frame.size.width <= 320.0f) ? 0.1f : 0.05f;
-	int start = 0;
+	NSInteger buttonsperpage = 8;
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        buttonsperpage = 4;
+    }
+    
+    CGFloat accumdelay = 0.0f;
 	for (int i = 0; i < [self.buttons count]; i++) {
+        if (i%buttonsperpage==0){
+            CGFloat pagenum = floorf(i/buttonsperpage)+1;
+            if (pagenum*buttonsperpage<[self.buttons count]) {
+                accumdelay = 0.0f;
+            }
+        }
 		VLMCircleButton *circle = (VLMCircleButton *)[self.buttons objectAtIndex:i];
-		if (circle.frame.origin.x - offx < 0) {
-			start = i;
-			[circle showWithDelay:0];
-		}
-		else {
-			[circle showWithDelay:(i - start) * delayunit];
-		}
+        [circle showWithDelay:accumdelay];
+        accumdelay+=delayunit;
 	}
     
     
@@ -348,7 +353,7 @@
     if (desiredOffsetX + self.scrollview.frame.size.width > self.scrollview.contentSize.width) {
         desiredOffsetX = self.scrollview.contentSize.width - self.scrollview.frame.size.width;
     }
-    [self.scrollview setContentOffset:CGPointMake(desiredOffsetX, 0) animated:YES];
+    [self.scrollview setContentOffset:CGPointMake(desiredOffsetX, 0) animated:NO];
 }
 
 @end
