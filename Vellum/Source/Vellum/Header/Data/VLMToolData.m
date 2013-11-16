@@ -37,7 +37,7 @@
 	[self setSelectedColorIndex:colorIndex];
 	if (shouldSaveToDefaults) {
 		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSString *key = [NSString stringWithFormat:@"%@_colorindex", [self name]];
+		NSString *key = [NSString stringWithFormat:COLOR_INDEX_LOOKUP_KEY, [self name]];
 		[defaults setObject:[NSNumber numberWithInt:colorIndex] forKey:key];
 		[defaults synchronize];
 	}

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#define COLOR_INDEX_LOOKUP_KEY @"colorindex_for_%@"
 
 @interface VLMToolData : NSObject
 

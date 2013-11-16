@@ -86,10 +86,10 @@ static VLMToolCollection *sharedToolCollection;
 		                         @1,
 		                         @1,
 		                         @0,
-		                         @7,
-		                         @7,
-		                         @5,
-		                         @7];
+		                         @17,
+		                         @17,
+		                         @16,
+		                         @19];
 
 		
         NSArray *isBezierRequireds = @[
@@ -124,7 +124,7 @@ static VLMToolCollection *sharedToolCollection;
             [data setIsBezierRequired:[[isBezierRequireds objectAtIndex:i] boolValue]];
             
 			NSInteger sel = [[colorindices objectAtIndex:i] integerValue];
-			NSString *key = [NSString stringWithFormat:@"%@_colorindex", [data name]];
+			NSString *key = [NSString stringWithFormat:COLOR_INDEX_LOOKUP_KEY, [data name]];
 			if ([defaults objectForKey:key] == nil) {
 				//NSLog(@"writing key %@   %d", key, sel);
 				[defaults setObject:[NSNumber numberWithInt:sel] forKey:key];
