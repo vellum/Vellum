@@ -8,7 +8,7 @@ smudge.prototype = {
 	prev : { x:0, y:0, nib:0, angle:0 },
 	interpolation_multiplier : 0.25,
     distance_multiplier : 2.5,
-    nib_multiplier : 1.0,
+    nib_multiplier : 0.25,
 	step : 1.5,
     smoothed_alpha : 0,
     smoothed_rgba : {r:0,g:0,b:0,a:0},
@@ -92,7 +92,7 @@ smudge.prototype = {
             
 			var angle = Math.atan2(dy, dx) - Math.PI / 2,
                 curnib = (prev.nib + dist * distance_multiplier) * nib_multiplier,
-                multiplier = 1.25,
+                multiplier = ( state.isRetina ) ? 0.5 : 1.25,
                 count = 0,
                 cosangle = Math.cos(angle),
                 sinangle = Math.sin(angle),
@@ -150,7 +150,7 @@ smudge.prototype = {
                             tohsv = tiny.toHsv();
                         //console.log(tiny.toHsvString());
                         
-                        console.log( '*', tohsv.h, tohsv.s, tohsv.v );
+                        //console.log( '*', tohsv.h, tohsv.s, tohsv.v );
                         
                         
                         if ( tohsv.v > 0 && tohsv.v < 0.9 ){
@@ -200,7 +200,8 @@ smudge.prototype = {
                 this.smoothed_rgba.b += ( rgba.b - this.smoothed_rgba.b ) * 0.5;
 
                 // clamp average sampled value
-                if ( avgsample > 0.5 ) avgsample = 0.5;
+                var max = ( state.isRetina ) ? 0.5 : 0.5;
+                if ( avgsample > 0.5 ) avgsample = max;
                 
                 // get smoothed value
                 var smoothed = this.smoothed_alpha;
