@@ -60,6 +60,7 @@
 
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
 
+        CGFloat buttonsizeW = 79;
 		[self.view setFrame:CGRectMake(0.0f, HEADER_HEIGHT + buttonsize + 2 * innermargin + 5.0f, winw, buttonsize + margin * 2 + innermargin * 2)];
 		[self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 
@@ -71,9 +72,16 @@
         [sv setContentMode:UIViewContentModeCenter];
         [sv setShowsHorizontalScrollIndicator:NO];
         [sv setShowsVerticalScrollIndicator:NO];
-        [sv setContentSize:CGSizeMake(innermargin * 2 + numbuttons * (buttonsize + pad), buttonsize + pad)];
+        [sv setPagingEnabled:YES];
+        
+        
+        [sv setContentSize:CGSizeMake(320*5, buttonsizeW + pad)];
+        CGFloat xxx = 0.0f;
         for (int i = 0; i < numbuttons; i++) {
-            VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake(innermargin + i * (buttonsize + pad), 0, buttonsize, buttonsize)];
+            if (i%4==0) {
+                xxx+=10.0f;
+            }
+            VLMCircleButton *circle = [[VLMCircleButton alloc] initWithFrame:CGRectMake(xxx, 0, buttonsize, buttonsize)];
             [circle setTag:i];
             [sv addSubview:circle];
             [buttons addObject:circle];
@@ -83,6 +91,11 @@
             [circle setText:text];
             [circle setColor:[color color]];
             [circle setTextColor:[color textColor]];
+            
+            xxx+=buttonsize+pad;
+            if (i%4==3) {
+                xxx+=10.0f;
+            }
         }
 
 	}
@@ -324,7 +337,9 @@
     NSLog(@"pos: %f, %f", scrollPosition.x, scrollPosition.y);
 	CGFloat pad = 1;
 	CGFloat buttonsize = 74.0f;
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        buttonsize=80.0f;
+    }
 	VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     CGFloat page = floorf((selectedtool.selectedColorIndex*(buttonsize+pad))/self.scrollview.frame.size.width);
