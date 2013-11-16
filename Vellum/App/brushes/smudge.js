@@ -12,6 +12,7 @@ smudge.prototype = {
 	step : 1.5,
     smoothed_alpha : 0,
     smoothed_rgba : {r:0,g:0,b:0,a:0},
+    smoothed_hsb : {h:0,s:0,b:0},
 	
 	init : function(){
 		this.context = VLM.state.context;
@@ -52,6 +53,7 @@ smudge.prototype = {
 		target.x = x;
 		target.y = y;
         this.smoothed_alpha = 0;
+        this.smoothed_hsb = null;
 	},
 	
 	continue : function(x,y){
@@ -76,8 +78,6 @@ smudge.prototype = {
             distance_multiplier = this.distance_multiplier,
             nib_multiplier = this.nib_multiplier,
             ctx = this.context;
-
-        
         
 		var x = prev.x + (target.x - prev.x) * interpolation_multiplier,
 	        y = prev.y + (target.y - prev.y) * interpolation_multiplier,
@@ -103,7 +103,8 @@ smudge.prototype = {
                 prevrange = prev.nib * multiplier,
                 fgcolor = '#000000',
                 col = VLM.state.color,
-                rgba = {r:0,g:0,b:0};
+                rgba = {r:0,g:0,b:0},
+                hsv = {h:0,s:0,v:0};
 
             if (zoomlevel < 10) {
 
@@ -124,7 +125,9 @@ smudge.prototype = {
                     numsteps = 0,
                     sumsamples = 0,
                     numsamples = dist / 1,
-                    avgsample = 0;
+                    avgsample = 0,
+                    validsamplecount = 0;
+
                 
                 for (var i = 0; i < numsamples; i++){
 
@@ -142,12 +145,33 @@ smudge.prototype = {
                     if ( shouldProceed ){
                         localx = Math.round( localx );
                         localy = Math.round( localy );
-                        var o = ctx.getImageData(localx, localy, 1, 1);
+                        var o = ctx.getImageData(localx, localy, 1, 1),
+                            tiny = tinycolor('rgb(' + o.data[0] + ', ' + o.data[1] + ',' + o.data[2] + ')'),
+                            tohsv = tiny.toHsv();
+                        //console.log(tiny.toHsvString());
+                        
+                        console.log( '*', tohsv.h, tohsv.s, tohsv.v );
+                        
+                        
+                        if ( tohsv.v > 0 && tohsv.v < 0.9 ){
+                            //hsv.h+= tohsv.h;
+                            //hsv.s+= tohsv.s;
+                            //hsv.v+= tohsv.v;
+                            //validsamplecount++;
+                        }
+                        
                         if ( o.data[0] < 242 ){
                             rgba.r += o.data[0];
                             rgba.g += o.data[1];
                             rgba.b += o.data[2];
+                            
                             sumsamples += ( 242 - o.data[0] ) / 242;
+                            
+                            hsv.h+= tohsv.h;
+                            hsv.s+= tohsv.s;
+                            hsv.v+= tohsv.v;
+                            validsamplecount++;
+
                         }
                     }
                 }
@@ -157,6 +181,20 @@ smudge.prototype = {
                 rgba.g /= numsamples;
                 rgba.b /= numsamples;
                 
+                if (validsamplecount>0){
+                    hsv.h /= validsamplecount;
+                    hsv.s /= validsamplecount;
+                    hsv.v /= validsamplecount;
+                    
+                } else {
+                    hsv.h = 0;
+                    hsv.s = 0;
+                    hsv.v = 0;
+                }
+                
+                var ttt = tinycolor('hsv(' + hsv.h + ',' + hsv.s + ',' + hsv.v + ')'),
+                    tinyrgb = ttt.toRgb();
+                //console.log(ttt.toHsvString());
                 this.smoothed_rgba.r += ( rgba.r - this.smoothed_rgba.r ) * 0.5;
                 this.smoothed_rgba.g += ( rgba.g - this.smoothed_rgba.g ) * 0.5;
                 this.smoothed_rgba.b += ( rgba.b - this.smoothed_rgba.b ) * 0.5;
@@ -175,8 +213,13 @@ smudge.prototype = {
 
                 // store it for the next tick
                 this.smoothed_alpha = smoothed;
-
-                ctx.strokeStyle = 'rgba(' + rgba[0] + ',' + rgba[1] + ',' + rgba[2] + ',' + smoothed + ')';
+                
+                var ss = hsv.s * 0.9,
+                bb = hsv.v * 0.75;
+                ttt = tinycolor('hsv(' + hsv.h + ',' + ss + ',' + bb + ')');
+                tinyrgb = ttt.toRgb();
+                ctx.strokeStyle = 'rgba(' + tinyrgb.r + ',' + tinyrgb.g + ',' + tinyrgb.b + ',' + smoothed + ')';
+                //ctx.strokeStyle = 'rgba(' + tinyrgb.r + ',' + tinyrgb.g + ',' + tinyrgb.b + ',' + 0.25 + ')';
                 ctx.fillStyle = 'rgba(0,0,0,0)';
                 
                 for (var i = -currange; i <= currange; i += step) {
