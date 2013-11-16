@@ -148,7 +148,7 @@
 	self.scrollview.canCancelContentTouches = YES;
     
     
-	innermargin = 10.0f;
+	innermargin = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 10.0f : 0.0f;
 	UIView *line = [[UIView alloc] initWithFrame:CGRectMake(innermargin, self.view.frame.size.height - 1, self.view.frame.size.width - innermargin * 2, 1.0f)];
 	[line setBackgroundColor:[UIColor whiteColor]];
 	[line setAlpha:0.75f];
