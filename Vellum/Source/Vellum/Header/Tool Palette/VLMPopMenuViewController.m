@@ -90,7 +90,12 @@
         
 		[sv setShowsHorizontalScrollIndicator:NO];
 		[sv setShowsVerticalScrollIndicator:NO];
-        
+
+        UIView *pattern = [[UIView alloc] initWithFrame:CGRectMake(sv.frame.origin.x+innermargin, sv.frame.origin.y+innermargin, sv.frame.size.width-innermargin*2-1, sv.frame.size.height-innermargin*2)];
+        [pattern setUserInteractionEnabled:NO];
+        [pattern setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
+        [self.view addSubview:pattern];
+
 		[self.view addSubview:sv];
 	}
 	else {
@@ -129,7 +134,15 @@
 		[sv setAlwaysBounceHorizontal:YES];
 		[sv setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 		[sv setContentMode:UIViewContentModeCenter];
-		[self.view addSubview:sv];
+		
+        
+        UIView *pattern = [[UIView alloc] initWithFrame:CGRectMake(sv.frame.origin.x, sv.frame.origin.y+innermargin, sv.frame.size.width, sv.frame.size.height-innermargin*2)];
+        [pattern setUserInteractionEnabled:NO];
+        [pattern setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"subtlenet.png"]]];
+        [self.view addSubview:pattern];
+        [self.view addSubview:sv];
+        
+        
 	}
     
 	for (int i = 0; i < [tools.tools count]; i++) {
@@ -146,6 +159,12 @@
 		[sv addSubview:item];
 		[buttons addObject:item];
 		[item addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+        if (i<[tools.tools count]-1){
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(x+buttonsize, y, 1, buttonsize)];
+            [line setBackgroundColor:[UIColor whiteColor]];
+            [line setUserInteractionEnabled:NO];
+            [sv addSubview:line];
+        }
         
 		NSUInteger location = [tool.name rangeOfString:@" " options:NSCaseInsensitiveSearch].location;
 		VLMOpaButton *opa = [[VLMOpaButton alloc] initWithFrame:r];

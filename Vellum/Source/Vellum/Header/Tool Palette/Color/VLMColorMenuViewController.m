@@ -348,7 +348,7 @@
 	VLMToolCollection *tools = [VLMToolCollection instance];
     VLMToolData *selectedtool = (VLMToolData *)[[tools tools] objectAtIndex:[tools selectedIndex]];
     CGFloat page = floorf((selectedtool.selectedColorIndex*(buttonsize+pad))/self.scrollview.frame.size.width);
-    CGFloat desiredOffsetX = page * (self.scrollview.frame.size.width)+1;
+    CGFloat desiredOffsetX = page * (self.scrollview.frame.size.width);
     
     if (desiredOffsetX + self.scrollview.frame.size.width > self.scrollview.contentSize.width) {
         desiredOffsetX = self.scrollview.contentSize.width - self.scrollview.frame.size.width;
