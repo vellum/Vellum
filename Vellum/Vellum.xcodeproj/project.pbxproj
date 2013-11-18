@@ -125,6 +125,7 @@
 		BDA37C4D17BAD5BB00BBEB26 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDA37C4C17BAD5BB00BBEB26 /* Images.xcassets */; };
 		BDB9E131182AB36000499D99 /* VLMSettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = BDB9E130182AB36000499D99 /* VLMSettingsData.m */; };
 		BDB9E134182AD4CD00499D99 /* clear10.png in Resources */ = {isa = PBXBuildFile; fileRef = BDB9E133182AD4CD00499D99 /* clear10.png */; };
+		BDC15394183AA69A0069265C /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = BDC15393183AA69A0069265C /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDC30B8717B4678A00018E70 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8617B4678A00018E70 /* Icon.png */; };
 		BDC30B8917B4679E00018E70 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8817B4679E00018E70 /* Icon@2x.png */; };
 		BDC30B8B17B467D100018E70 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = BDC30B8A17B467D100018E70 /* Default.png */; };
@@ -210,7 +211,6 @@
 		BDEE8F4417B2F8E800D5B3A9 /* subtlenet.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8F0717B2F8E800D5B3A9 /* subtlenet.png */; };
 		BDEE8F4517B2F8E800D5B3A9 /* subtlenet@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8F0817B2F8E800D5B3A9 /* subtlenet@2X.png */; };
 		BDEE8F4617B2F8E800D5B3A9 /* white.png in Resources */ = {isa = PBXBuildFile; fileRef = BDEE8F0917B2F8E800D5B3A9 /* white.png */; };
-		BDEE8F4917B2FA2400D5B3A9 /* DDPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F4817B2FA2400D5B3A9 /* DDPageControl.m */; };
 		BDEE8F9717B2FD5900D5B3A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F4F17B2FD5900D5B3A9 /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		BDEE8F9817B2FD5900D5B3A9 /* EJBindingBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F5117B2FD5900D5B3A9 /* EJBindingBridge.m */; };
 		BDEE8F9917B2FD5900D5B3A9 /* VLMFlipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEE8F5417B2FD5900D5B3A9 /* VLMFlipViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -444,6 +444,8 @@
 		BDB9E12F182AB36000499D99 /* VLMSettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLMSettingsData.h; path = Settings/VLMSettingsData.h; sourceTree = "<group>"; };
 		BDB9E130182AB36000499D99 /* VLMSettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VLMSettingsData.m; path = Settings/VLMSettingsData.m; sourceTree = "<group>"; };
 		BDB9E133182AD4CD00499D99 /* clear10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear10.png; path = images/clear10.png; sourceTree = "<group>"; };
+		BDC15392183AA69A0069265C /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = Source/Appirater/Appirater.h; sourceTree = "<group>"; };
+		BDC15393183AA69A0069265C /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Appirater.m; path = Source/Appirater/Appirater.m; sourceTree = "<group>"; };
 		BDC30B8617B4678A00018E70 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		BDC30B8817B4679E00018E70 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BDC30B8A17B467D100018E70 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -538,8 +540,6 @@
 		BDEE8F0717B2F8E800D5B3A9 /* subtlenet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = subtlenet.png; path = images/subtlenet.png; sourceTree = "<group>"; };
 		BDEE8F0817B2F8E800D5B3A9 /* subtlenet@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "subtlenet@2X.png"; path = "images/subtlenet@2X.png"; sourceTree = "<group>"; };
 		BDEE8F0917B2F8E800D5B3A9 /* white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = white.png; path = images/white.png; sourceTree = "<group>"; };
-		BDEE8F4717B2FA2400D5B3A9 /* DDPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDPageControl.h; path = DD/DDPageControl.h; sourceTree = "<group>"; };
-		BDEE8F4817B2FA2400D5B3A9 /* DDPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDPageControl.m; path = DD/DDPageControl.m; sourceTree = "<group>"; };
 		BDEE8F4E17B2FD5900D5B3A9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BDEE8F4F17B2FD5900D5B3A9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		BDEE8F5017B2FD5900D5B3A9 /* EJBindingBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJBindingBridge.h; sourceTree = "<group>"; };
@@ -740,7 +740,7 @@
 			children = (
 				BDEE8F4D17B2FD5900D5B3A9 /* Vellum */,
 				BDFB2E4E1745E9F8006AF1C7 /* ALAssetsLibrary Category */,
-				BDA36CE3172E034A00665A50 /* DD */,
+				BDC1538C183A97F40069265C /* Appirater */,
 				B64CE60F166682700087CF94 /* Ejecta */,
 				B64CE652166682700087CF94 /* lib */,
 				B64CE64F166682700087CF94 /* Prefix.pch */,
@@ -963,15 +963,6 @@
 			name = WebGL;
 			sourceTree = "<group>";
 		};
-		BDA36CE3172E034A00665A50 /* DD */ = {
-			isa = PBXGroup;
-			children = (
-				BDEE8F4717B2FA2400D5B3A9 /* DDPageControl.h */,
-				BDEE8F4817B2FA2400D5B3A9 /* DDPageControl.m */,
-			);
-			name = DD;
-			sourceTree = "<group>";
-		};
 		BDB198471777AFF600CF145E /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1066,6 +1057,16 @@
 				BDB9E130182AB36000499D99 /* VLMSettingsData.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		BDC1538C183A97F40069265C /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				BDC15392183AA69A0069265C /* Appirater.h */,
+				BDC15393183AA69A0069265C /* Appirater.m */,
+			);
+			name = Appirater;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		BDD593E218175A4200D016AF /* Vector */ = {
@@ -1341,6 +1342,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -1493,6 +1495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDC15394183AA69A0069265C /* Appirater.m in Sources */,
 				BDD593EE18175AD300D016AF /* AbstractBezierPathElement.m in Sources */,
 				BDD593F018175AD300D016AF /* LineToPathElement.m in Sources */,
 				BDD593EF18175AD300D016AF /* CurveToPathElement.m in Sources */,
@@ -1562,7 +1565,6 @@
 				BDB9E131182AB36000499D99 /* VLMSettingsData.m in Sources */,
 				B6D6E0A616F7E81B009AB75F /* EJBindingIAPProduct.m in Sources */,
 				B60FA92817021E0900078D20 /* EJBindingVideo.m in Sources */,
-				BDEE8F4917B2FA2400D5B3A9 /* DDPageControl.m in Sources */,
 				BDEE8F9717B2FD5900D5B3A9 /* AppDelegate.m in Sources */,
 				BDEE8F9817B2FD5900D5B3A9 /* EJBindingBridge.m in Sources */,
 				BDEE8F9917B2FD5900D5B3A9 /* VLMFlipViewController.m in Sources */,

@@ -7,7 +7,6 @@
 //
 
 #import "VLMDrawHeaderController.h"
-#import "DDPageControl.h"
 #import "AppDelegate.h"
 #import "ALAssetsLibrary+CustomPhotoAlbum.h"
 #import "VLMActivitySaveToAlbum.h"

@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "EJAppViewController.h"
 #import "VLMSettingsData.h"
+#import "Appirater.h"
 
 @class VLMMainViewController;
 

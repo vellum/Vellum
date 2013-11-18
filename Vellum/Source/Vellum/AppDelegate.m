@@ -3,7 +3,7 @@
 #import "VLMConstants.h"
 #import "EJAppViewController.h"
 #import "Flurry.h"
-
+#import "Appirater.h"
 #define FLURRY_ENABLED 1
 
 @interface AppDelegate ()
@@ -44,9 +44,14 @@
 	[Flurry startSession:@"83417d5908b1b9c7eb727c45fdab1b3f"];
 #endif
     
-    // check if state should be restored
-    
-    
+    [Appirater setAppId:@"338779283"];
+    [Appirater setDaysUntilPrompt:10];
+    [Appirater setUsesUntilPrompt:10];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:NO];
+
+    [Appirater appLaunched:YES];
     
 	return YES;
 }
@@ -54,11 +59,9 @@
 #pragma mark -
 
 - (void)applicationWillResignActive:(UIApplication *)application{
-    //[self.mainViewController saveStateInBackground];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application{
-    //[self.mainViewController saveStateBeforeTerminating];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -66,6 +69,9 @@
     [self.mainViewController saveStateBeforeTerminating];
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application{
+    [Appirater appEnteredForeground:YES];
+}
 
 #pragma mark -
 #pragma mark appearance

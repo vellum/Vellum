@@ -18,7 +18,6 @@
 #import "VLMPopMenuViewController.h"
 #import "VLMToolCollection.h"
 #import "VLMToolData.h"
-#import "DDPageControl.h"
 #import "VLMUndoState.h"
 #import "VLMUndoViewController.h"
 #import "VLMConstants.h"
