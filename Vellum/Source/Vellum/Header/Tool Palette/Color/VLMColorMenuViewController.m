@@ -97,7 +97,11 @@
                 xxx+=10.0f;
             }
         }
-
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
 	}
 	else {
         buttonsize = 73.0f;
@@ -354,6 +358,31 @@
         desiredOffsetX = self.scrollview.contentSize.width - self.scrollview.frame.size.width;
     }
     [self.scrollview setContentOffset:CGPointMake(desiredOffsetX, 0) animated:NO];
+}
+
+- (void)didRotate:(id)sender{
+    NSLog(@"rotated");
+    
+    NSInteger type = [[UIDevice currentDevice] orientation];
+    BOOL isNowPortrait = NO;
+	if (type == 1) {
+		isNowPortrait = YES;
+	}
+	else if (type == 2) {
+		isNowPortrait = YES;
+	}
+	else if (type == 3) {
+		isNowPortrait = NO;
+	}
+	else if (type == 4) {
+		isNowPortrait = NO;
+	}
+
+    if (isNowPortrait) {
+        [self.scrollview setPagingEnabled:YES];
+    }else{
+        [self.scrollview setPagingEnabled:NO];
+    }
 }
 
 @end

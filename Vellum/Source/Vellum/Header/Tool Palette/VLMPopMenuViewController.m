@@ -97,6 +97,8 @@
         [self.view addSubview:pattern];
 
 		[self.view addSubview:sv];
+        
+        //[sv setDelegate:self];
 	}
 	else {
         buttonsize = 73.0f;
@@ -270,5 +272,32 @@
 		[self.delegate showColorMenu];
 	}
 }
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillEndDragging:(UIScrollView *)sv
+                     withVelocity:(CGPoint)velocity
+              targetContentOffset:(inout CGPoint *)targetContentOffset {
+
+    // only iphone gets this treatment
+    
+    CGFloat pad = 1;
+	CGFloat buttonsize = 74.0f;
+    CGFloat innermargin = 3.0f;
+    
+    //NSLog(@"willenddragging %f %f", targetContentOffset->x, velocity.x);
+    if (targetContentOffset->x >= sv.contentSize.width-sv.frame.size.width) return;
+    if (velocity.x==0) return;
+    if (targetContentOffset->x <= buttonsize + innermargin) return;
+    
+    
+    CGFloat x = targetContentOffset->x;
+    x -= innermargin;
+    x = floorf( x / ( buttonsize + pad ) );
+    x *= buttonsize + pad;
+    x += innermargin;
+    //NSLog(@"%f , %f", targetContentOffset->x, x );
+    targetContentOffset->x = x;
+}
+
 
 @end

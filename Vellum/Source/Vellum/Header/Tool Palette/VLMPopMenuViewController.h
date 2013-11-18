@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "VLMMainViewController.h"
 
-@interface VLMPopMenuViewController : UIViewController
+@interface VLMPopMenuViewController : UIViewController<UIScrollViewDelegate>
 @property (nonatomic, strong) id <VLMMenuDelegate> delegate;
 
 - (void)hide;
