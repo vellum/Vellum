@@ -669,7 +669,7 @@
         UIGraphicsEndImageContext();
         
         [jsv injectScreenShot:ret];
-        [self.avc callJS:@"saveUndoState();"];
+        [self.avc callJS:@"saveUndoStateGuts();"];
         
         [fileManager removeItemAtPath:filePath error:nil];
     }
