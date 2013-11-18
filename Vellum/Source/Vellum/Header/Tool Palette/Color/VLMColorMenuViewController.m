@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIView *outie;
 @property (nonatomic, strong) UIView *innie;
 @property (nonatomic) BOOL open;
+@property BOOL isPortrait;
 @end
 
 @implementation VLMColorMenuViewController
@@ -29,6 +30,7 @@
 @synthesize innie;
 @synthesize open;
 @synthesize delegate;
+@synthesize isPortrait;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,7 +42,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-    
+    [self setIsPortrait:YES];
 	buttons = [[NSMutableArray alloc] init];
     
 	[self.view setBackgroundColor:[UIColor clearColor]];
@@ -368,7 +370,7 @@
     NSLog(@"rotated");
     
     NSInteger type = [[UIDevice currentDevice] orientation];
-    BOOL isNowPortrait = NO;
+    BOOL isNowPortrait = self.isPortrait;
 	if (type == 1) {
 		isNowPortrait = YES;
 	}
@@ -382,10 +384,9 @@
 		isNowPortrait = NO;
 	}
 
-    if (isNowPortrait) {
-        [self.scrollview setPagingEnabled:YES];
-    }else{
-        [self.scrollview setPagingEnabled:NO];
+    if (isNowPortrait!=self.isPortrait) {
+        [self.scrollview setPagingEnabled:isNowPortrait];
+        [self setIsPortrait:isNowPortrait];
     }
 }
 
