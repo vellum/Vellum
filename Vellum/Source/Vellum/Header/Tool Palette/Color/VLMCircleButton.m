@@ -178,7 +178,7 @@
     
 - (void)setEnabled:(BOOL)enabled{
     [super setEnabled:enabled];
-    [self.colorfield setAlpha:enabled?1.0f:0.25f];
-    [self.label setAlpha:enabled?1.0f:0.25f];
+    //[self.colorfield setAlpha:enabled?1.0f:0.25f];
+    //[self.label setAlpha:enabled?1.0f:0.25f];
 }
 @end

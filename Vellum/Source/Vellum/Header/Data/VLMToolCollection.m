@@ -137,34 +137,38 @@ static VLMToolCollection *sharedToolCollection;
 			[data setSelectedColorIndex:sel];
             
 			[self.tools addObject:data];
+            UIColor *eee = [UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f];
             if (i==5){
                 [data setColors:@[
-                                   [[VLMColorData alloc] initWithName:@"black" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithWhite:0.0f alpha:1.0f] Label:@"." Enabled:YES Subtractive:YES],
-                                  [[VLMColorData alloc] initWithName:@"black" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:80.0f/360.0f saturation:0.05f brightness:0.24f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:72.0f/360.0f saturation:0.04f brightness:0.47f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"black" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:72.0f/360.0f saturation:0.05f brightness:0.71f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"AUTO\n." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
                                   
-                                  [[VLMColorData alloc] initWithName:@"white" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor whiteColor] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"white" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:61.0f/360.0f saturation:0.01f brightness:0.98f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"white" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:48.0f/360.0f saturation:0.02f brightness:0.97f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"white" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:73.0f/360.0f saturation:0.04f brightness:0.96f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
                                   
-                                  [[VLMColorData alloc] initWithName:@"brown" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:12.0f/360.0f saturation:0.6f brightness:0.42f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"brown" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:13.0f/360.0f saturation:0.35f brightness:0.55f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"brown" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:19.0f/360.0f saturation:0.21f brightness:0.68f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"brown" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:31.0f/360.0f saturation:0.1f brightness:0.82f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
                                   
-                                  [[VLMColorData alloc] initWithName:@"red" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:13.0f/360.0f saturation:0.78f brightness:0.69f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"red" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:13.0f/360.0f saturation:0.52f brightness:0.76f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"red" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:15.0f/360.0f saturation:0.35f brightness:0.83f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
-                                  [[VLMColorData alloc] initWithName:@"red" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:22.0f/360.0f saturation:0.18f brightness:0.80f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
                                   
-                                  [[VLMColorData alloc] initWithName:@"erase" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"erase" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"erase" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]],
-                                  [[VLMColorData alloc] initWithName:@"erase" RGBA:[UIColor colorWithHue:0.0f/360.0f saturation:0.0f brightness:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithHue:70.0f/360.0f saturation:0.05f brightness:0.95f alpha:1.0f] Label:@"." Enabled:NO Subtractive:NO TextColor:[UIColor blackColor]]
                                   
-                              ]];
+                                  
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  
+                                  
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]],
+                                  [[VLMColorData alloc] initWithName:@"smudge" RGBA:eee PreMultipliedColor:eee Label:@"." Enabled:NO Subtractive:YES TextColor:[UIColor lightGrayColor]]
+                               ]];
             } else {
             [data setColors:@[
                               [[VLMColorData alloc] initWithName:@"black" RGBA:[UIColor colorWithWhite:0.0f alpha:1.0f] PreMultipliedColor:[UIColor colorWithWhite:0.0f alpha:1.0f] Label:@"100" Enabled:YES Subtractive:NO],

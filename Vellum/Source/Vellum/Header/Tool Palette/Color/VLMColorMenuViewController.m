@@ -336,7 +336,11 @@
 		NSString *text = [color labeltext];
 		BOOL en = color.enabled;
 		[circle setText:text];
+        
+        [circle setColor:[color buttoncolor]];
+        [circle setTextColor:[color textColor]];
 		[circle setEnabled:en];
+
 	}
 }
 
