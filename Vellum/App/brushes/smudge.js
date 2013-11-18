@@ -32,7 +32,7 @@ smudge.prototype = {
             if ( state.isRetina ){
                 
             } else {
-                this.interpolation_multiplier = 0.375;
+                this.interpolation_multiplier = 0.25;//0.375;
                 this.distance_multiplier = 2.0;
                 this.nib_multiplier = 0.25;
                 this.step = 0.5;
@@ -215,8 +215,10 @@ smudge.prototype = {
                 // store it for the next tick
                 this.smoothed_alpha = smoothed;
                 
-                var ss = hsv.s * 0.95,
-                bb = hsv.v * 0.95;
+                var ss = hsv.s * 2,
+                bb = hsv.v * 0.75;
+                if ( ss > 1 ) ss = 1;
+                //ss = 1;
                 ttt = tinycolor('hsv(' + hsv.h + ',' + ss + ',' + bb + ')');
                 tinyrgb = ttt.toRgb();
                 ctx.strokeStyle = 'rgba(' + tinyrgb.r + ',' + tinyrgb.g + ',' + tinyrgb.b + ',' + smoothed + ')';
