@@ -44,9 +44,15 @@
 	[Flurry startSession:@"83417d5908b1b9c7eb727c45fdab1b3f"];
 #endif
     
+    /*
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+    */
+    
     [Appirater setAppId:@"338779283"];
-    [Appirater setDaysUntilPrompt:10];
-    [Appirater setUsesUntilPrompt:10];
+    [Appirater setDaysUntilPrompt:7];
+    [Appirater setUsesUntilPrompt:5];
     [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:2];
     [Appirater setDebug:NO];
